@@ -3,8 +3,8 @@
 ## class color 
 Cодержит следующие цвета:
 
-|               |               |               |               |               |               |               |
-| ------------- |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:| -------------:|
+|               |               |               |               |               |               |
+| ------------- |:-------------:|:-------------:|:-------------:|:-------------:| -------------:|
 ![#f0f8ff](https://via.placeholder.com/15/f0f8ff/000000?text=+) `aliceblue`  | ![#faebd7](https://via.placeholder.com/15/faebd7/000000?text=+) `antiquewhite` | ![#00ffff](https://via.placeholder.com/15/00ffff/000000?text=+) `aqua` | ![#7fffd4](https://via.placeholder.com/15/7fffd4/000000?text=+) `aquamarine` | ![#f0ffff](https://via.placeholder.com/15/f0ffff/000000?text=+) `azure` | ![#f5f5dc](https://via.placeholder.com/15/f5f5dc/000000?text=+) `beige` | ![#ffe4c4](https://via.placeholder.com/15/ffe4c4/000000?text=+) `bisque` |
 ![#000000](https://via.placeholder.com/15/000000/000000?text=+) `black`    | ![#ffebcd](https://via.placeholder.com/15/ffebcd/000000?text=+) `blanchedalmond` | ![#0000ff](https://via.placeholder.com/15/0000ff/000000?text=+) `blue` | ![#8a2be2](https://via.placeholder.com/15/8a2be2/000000?text=+) `blueviolet` | ![#a52a2a](https://via.placeholder.com/15/a52a2a/000000?text=+) `brown` | ![#deb887](https://via.placeholder.com/15/deb887/000000?text=+) `burlywood` | ![#5f9ea0](https://via.placeholder.com/15/5f9ea0/000000?text=+) `cadetblue` |
 ![#7fff00](https://via.placeholder.com/15/7fff00/000000?text=+) `chartreuse` | ![#d2691e](https://via.placeholder.com/15/d2691e/000000?text=+) `chocolate`|![#ff7f50](https://via.placeholder.com/15/ff7f50/000000?text=+) `coral` | ![#6495ed](https://via.placeholder.com/15/6495ed/000000?text=+) `cornflowerblue`|![#fff8dc](https://via.placeholder.com/15/fff8dc/000000?text=+) `cornsilk`|![#dc143c](https://via.placeholder.com/15/dc143c/000000?text=+) `crimson`|![#00ffff](https://via.placeholder.com/15/00ffff/000000?text=+) `cyan`
