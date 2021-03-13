@@ -1,14 +1,14 @@
 #include "database.hpp"
 #include "settings.hpp"
-//#include "pica.hpp"
+#include "color.hpp"
 
 
 
 const std::array<figureQestions,N> questionFigure = 
-{
-	figureQestions{L"How many circles are there in the drawing?"       ,circle},
-	figureQestions{L"How many triangles are there in the drawing?",triangle}
-}	;
+  {
+    figureQestions{L"How many circles are there in the drawing?"       ,circle},
+    figureQestions{L"How many triangles are there in the drawing?",triangle}
+  }	;
 
 
 
@@ -17,10 +17,10 @@ const std::array<figureQestions,N> questionFigure =
 
 
 const std::vector<pica> flower = {
-    // type   r   x0 y0   x1y1 x2y2   FillColor               outlineColor       OutlineThickness    angle
-  {circle, 30, 148,125, 0,0, 0,0, sf::Color(255, 96, 114), sf::Color(0,0,0), Settings::THICKNESS,   2.0f, 0, 0 },
-  {circle, 30, 21,20,   0,0, 0,0, sf::Color(107, 177, 0), sf::Color(0,0,0),  Settings::THICKNESS,   2.0f, 0, 0 },
-  {circle, 30, 148,20,  0,0, 0,0, sf::Color(107, 177, 0), sf::Color(0,0,0),  Settings::THICKNESS,   2.0f, 0, 0 },
+  // type   r   x0 y0   x1y1 x2y2   FillColor               outlineColor       OutlineThickness    angle
+  {circle, 30, 148,125, 0,0, 0,0, color::aqua, sf::Color(0,0,0), Settings::THICKNESS,   2.0f, 0, 0 },
+  {circle, 30, 21,20,   0,0, 0,0, color::red, sf::Color(0,0,0),  Settings::THICKNESS,   2.0f, 0, 0 },
+  {circle, 30, 148,20,  0,0, 0,0, color::coral, sf::Color(0,0,0),  Settings::THICKNESS,   2.0f, 0, 0 },
   {circle, 30, 18,125,  0,0, 0,0, sf::Color(181, 72, 213), sf::Color(0,0,0), Settings::THICKNESS,   2.0f, 0, 0 },
   {circle, 45, 70,57,   0,0, 0,0, sf::Color(255, 220, 156), sf::Color(0,0,0),Settings::THICKNESS,   2.0f, 0, 0 },
   

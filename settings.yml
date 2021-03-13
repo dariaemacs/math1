@@ -1,0 +1,7 @@
+game:
+    width: 1280
+    height: 752
+    fps: 60
+    
+font: "resources/fonts/standard.ttf"
+image: "resources/images/"

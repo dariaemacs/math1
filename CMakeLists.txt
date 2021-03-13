@@ -1,11 +1,13 @@
 cmake_minimum_required(VERSION 3.16)
 
-project (maths)
+project (maths1)
 
 set (CMAKE_CXX_STANDARD 20)
 set (CMAKE_CXX_STANDARD_REQUIRED True)
 
-set (MATHS_SRCS src/main.cpp src/settings.cpp src/window.cpp src/database.cpp)
+file(GLOB MATHS_SRCS
+     "src/*.cpp"
+)
 
 include_directories(include)
 
