@@ -5,10 +5,10 @@
 
 enum types {
 
-    square = 4, //êâàäðàò
-    circle = 0, //êðóã
-    rectangle = 40, //ïðÿìîóãîëüíèê
-    triangle = 3, //òðåóãîëüíèê ïî òðåì âåðøèíàì
+    square = 4, 
+    circle = 0, 
+    rectangle = 40, 
+    triangle = 3, 
 
 };
 

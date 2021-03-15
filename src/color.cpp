@@ -1,4 +1,5 @@
-#include "../include/color.hpp"
+//#include "../include/color.hpp"
+#include "color.hpp"
 #include <iostream>
 
 const sf::Color color::aliceblue = sf::Color(0xf0f8ffff); // 240,248,255

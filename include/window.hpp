@@ -53,10 +53,10 @@ public: SimpleImage(const std::vector<pica> & fig, int paddingleft);
 
 
 class TextFrameBase {
-  int size;//ðàçìåð øðèôòà
+  int size;
   std::string question;
   sf::Text text;
-  sf::Font font;//øðèôò
+  sf::Font font;
 public: 
    
   TextFrameBase(int size,int) ;
@@ -71,11 +71,11 @@ class Window {
   
 
 
-  int width;  //øèðèíà 
-  int height; //âûñîòà ýêðàíà 
+  int width;  
+  int height; 
   double coef;
   int space;
-  int number; //íîìåð âîïðîñà
+  int number; 
 
 
 
@@ -83,14 +83,14 @@ class Window {
   
 protected:
   TextFrameBase textFrame;
-  bool checkandnextQuest();//ïðîâåðÿåò íàâåäåíà ëè ìûøü (ïðè ùåë÷êå) íà êíîïêó "äàëåå"
-  std::shared_ptr<sf::RenderWindow> window; //ñàì ýêðàí
+  bool checkandnextQuest();
+  std::shared_ptr<sf::RenderWindow> window; 
   sf::Texture CheckButtonTexture;
   sf::Sprite CheckButtonSprite;
   sf::RectangleShape List;
 
 
-  bool readyforCheck; //âîïðîñ ãîòîâ, ÷òîáû åãî ïðîâåðèòü (êíîïêà "äàëåå" ñèíÿÿ)
+  bool readyforCheck; 
 public:
 
   
@@ -101,7 +101,7 @@ public:
 
 
 
-class QuestType1: public Window { //êëàññà îïèñûâàåò âîïðîñ êíîïêè + ôèãóðêè 
+class QuestType1: public Window { 
    
   SimpleImage img1;
   SimpleImage img2;

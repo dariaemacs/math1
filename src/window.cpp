@@ -362,8 +362,10 @@ QuestType1::QuestType1(int w, int h, int questNumber, const std::vector<pica>& f
     //    window->draw(Buttons.getButtons()[i]);
 
 
-    Flower flower;
-    flower.draw(window);
+    //Flower flower;
+    //flower.draw(window);
+    Tree tree;
+    tree.draw(window);
     window->display();
   }
 }

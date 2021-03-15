@@ -98,7 +98,7 @@ public:
   }
 
   void set_size(float width, float height){
-    rectangle->setSize(sf::Vector2(width, height));
+    rectangle->setSize(sf::Vector2f(width, height));
   }
   
   void settings(){
@@ -108,6 +108,27 @@ public:
 
 private:
   std::unique_ptr<sf::RectangleShape> rectangle;
+};
+
+
+class Tree {
+public:
+    Tree();
+    ~Tree() {}
+    void draw(std::shared_ptr<sf::RenderWindow>& window);
+
+private:
+    Circle circle1;
+    Circle circle2;
+    Circle circle3;
+    Circle circle4;
+    Circle center_circle;
+
+    Triangle triangle1;
+    Triangle triangle2;
+    Triangle triangle3;
+
+    Rectangle rectangle;
 };
 
 class Flower{
@@ -126,8 +147,10 @@ private:
 
   Triangle triangle1;
   Triangle triangle2;
-
+  Triangle triangle3;
   Rectangle rectangle;
 };
+
+
 
 #endif // FIGURES_HPP
