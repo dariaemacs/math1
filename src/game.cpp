@@ -6,17 +6,17 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/VideoMode.hpp>
 
-Game::Game(const YAML::Node& config)
+Game::Game()//const YAML::Node& config)
   : window(std::make_unique<sf::RenderWindow> (sf::VideoMode(1024, 752), "Математика 1 класс")),
     player(150)
 {
-    settings = std::make_unique<settings_t> (settings_t{
-      .area_width = config["game"]["width"].as<float>(),
-      .area_height = config["game"]["height"].as<float>(),
-      .fps = config["game"]["fps"].as<unsigned int>(),
-      .font_path = config["font"].as<std::string>(),
-      .image_path = config["image"].as<std::string>()
-    });
+    // settings = std::make_unique<settings_t> (settings_t{
+    //   .area_width = config["game"]["width"].as<float>(),
+    //   .area_height = config["game"]["height"].as<float>(),
+    //   .fps = config["game"]["fps"].as<unsigned int>(),
+    //   .font_path = config["font"].as<std::string>(),
+    //   .image_path = config["image"].as<std::string>()
+    // });
 
     //  window = std::make_unique<sf::RenderWindow> (VideoMode(settings->area_width, settings->area_height), "Математика 1 класс");
   

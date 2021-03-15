@@ -11,7 +11,7 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 
-#include <yaml-cpp/yaml.h>
+//#include <yaml-cpp/yaml.h>
 
 struct settings_t {
   float area_width;
@@ -56,7 +56,7 @@ private:
   void set_icon();
 
 public:
-  Game(const YAML::Node& config);
+  Game();//const YAML::Node& config);
   void run();
 
 

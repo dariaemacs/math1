@@ -8,7 +8,7 @@
 int main(){
   std::string filename {"settings.yml"};
   try{
-    YAML::Node config = YAML::LoadFile(filename);
+    //    YAML::Node config = YAML::LoadFile(filename);
 
 
     int width = 1000;// sf::VideoMode::getDesktopMode().width;
@@ -18,8 +18,8 @@ int main(){
 
     // Game game(config);
     // game.run();
-  }catch(const YAML::Exception& exc){
-    std::cerr << "EXCEPTION [" << exc.msg << "]" << std::endl;
+    // }catch(const YAML::Exception& exc){
+   // std::cerr << "EXCEPTION [" << exc.msg << "]" << std::endl;
   }catch(const std::exception& exc){
     std::cerr << "EXCEPTION [" << exc.what() << "]" << std::endl;
   }

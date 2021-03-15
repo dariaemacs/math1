@@ -35,4 +35,5 @@ find_package(SFML 2.5.1 COMPONENTS graphics window system REQUIRED)
 
 add_executable (${PROJECT_NAME} ${MATHS_SRCS})
 
-target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-system sfml-window X11 Xrandr Xcursor yaml-cpp)
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-system sfml-window X11 Xrandr Xcursor)
+# yaml-cpp)
