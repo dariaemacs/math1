@@ -6,6 +6,8 @@
 
 #include <memory>
 
+
+
 class Circle{
 public:
   Circle()
@@ -108,6 +110,30 @@ public:
 
 private:
   std::unique_ptr<sf::RectangleShape> rectangle;
+};
+
+
+class Plane 
+{
+public:
+    Plane();
+    ~Plane() {}
+    void draw(std::shared_ptr<sf::RenderWindow>& window);
+
+private:
+    Circle circle1;
+    Circle circle2;
+    Circle circle3;
+
+
+    Triangle triangle1;
+    Triangle triangle2;
+    Triangle triangle3;
+    Triangle triangle4;
+
+    Rectangle rectangle1;
+    Rectangle rectangle2;
+    Rectangle rectangle3;
 };
 
 

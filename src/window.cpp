@@ -220,7 +220,7 @@ Window::Window(int w, int h, int numberQuest)
   coef = xcoef > ycoef ? xcoef : ycoef;
 
 
-  //êíîïêà ïðîâåðèòü îòâåò è ñëåäóþùèé..
+
 
   std::string CheckButtonPictureFileName = "resources/images/arrow_disable.png";
   CheckButtonTexture.loadFromFile(CheckButtonPictureFileName);
@@ -362,10 +362,12 @@ QuestType1::QuestType1(int w, int h, int questNumber, const std::vector<pica>& f
     //    window->draw(Buttons.getButtons()[i]);
 
 
+    Plane plane;
+    plane.draw(window);
     //Flower flower;
     //flower.draw(window);
-    Tree tree;
-    tree.draw(window);
+    //Tree tree;
+    //tree.draw(window);
     window->display();
   }
 }

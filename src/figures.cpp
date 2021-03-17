@@ -1,5 +1,89 @@
 #include "figures.hpp"
 
+
+
+
+//Flower::Flower() {
+//    circle1.set_radius(30);
+//    circle2.set_radius(30);
+//    circle3.set_radius(30);
+//    circle4.set_radius(30);
+//
+//    center_circle.set_radius(45);
+//
+//    circle1.set_coords(142, 125);
+//    circle2.set_coords(24, 24);
+//    circle3.set_coords(144, 22);
+//    circle4.set_coords(28, 125);
+//
+//    center_circle.set_coords(70, 57);
+//
+//    circle1.set_color(color::aqua);
+//    circle2.set_color(color::red);
+//    circle3.set_color(color::blue);
+//    circle4.set_color(color::green);
+//
+//    center_circle.set_color(color::coral);
+//    int step = 25;
+//    int step2 = 15;
+//    triangle1.set_coords(0.0f + step, 230.0f, 80.0f + step, 230.0f, 40.0f + step, 260.0f);
+//    triangle1.set_color(color::lime);
+//
+//    triangle2.set_coords(140.0f - step2, 230.0f, 220.0f - step2, 230.0f, 180.0f - step2, 260.0f);
+//    triangle2.set_color(color::lime);
+//
+//    rectangle.set_coords(110, 149);
+//    rectangle.set_color(color::lightskyblue);
+//    rectangle.set_size(10, 180);
+//}
+
+void Plane::draw(std::shared_ptr<sf::RenderWindow>& window) {
+    triangle1.draw(window);
+    triangle2.draw(window);
+    triangle3.draw(window);
+    triangle4.draw(window);
+    rectangle1.draw(window);
+    rectangle2.draw(window);
+    rectangle3.draw(window);
+    circle1.draw(window);
+    circle2.draw(window);
+    circle3.draw(window);
+
+}
+ Plane::Plane() {
+     circle1.set_radius(15);
+     circle2.set_radius(15);
+     circle3.set_radius(15);
+
+     circle1.set_color(color::aqua);
+     circle2.set_color(color::aqua);
+     circle3.set_color(color::aqua);
+
+     circle1.set_coords(155, 145);
+     circle2.set_coords(115, 145);
+     circle3.set_coords(75, 145);
+
+     
+     int x = 120;
+     int y = 50;
+
+      triangle1.set_coords(361-x, 30+y, 393-x, 30+y, 378-x, 96.0f+y);
+      triangle2.set_coords(361-x, 230, 393-x, 230, 378-x, 164.0f);
+      triangle3.set_coords(253 , 155.0f, 195, 130, 195, 194.0f);
+      triangle4.set_coords(0, 90, 58, 90, 58,195);
+
+     rectangle1.set_coords(60, 129);
+     rectangle1.set_color(color::lightskyblue);
+     rectangle1.set_size(132, 65);
+
+     rectangle2.set_coords(145, 0);
+     rectangle2.set_size(20, 126);
+     rectangle3.set_coords(145, 197);
+     rectangle3.set_size(20, 126);
+
+
+}
+
 Flower::Flower(){
   circle1.set_radius(30);
   circle2.set_radius(30);
@@ -8,10 +92,10 @@ Flower::Flower(){
   
   center_circle.set_radius(45);
   
-  circle1.set_coords(148, 125);
-  circle2.set_coords(21, 20);
-  circle3.set_coords(148, 20);
-  circle4.set_coords(18, 125);
+  circle1.set_coords(142, 125);
+  circle2.set_coords(24, 24);
+  circle3.set_coords(144, 22);
+  circle4.set_coords(28, 125);
   
   center_circle.set_coords(70,57);
   
@@ -21,14 +105,15 @@ Flower::Flower(){
   circle4.set_color(color::green);
   
   center_circle.set_color(color::coral);
-  
-  triangle1.set_coords(0.0f, 230.0f, 80.0f, 230.0f, 40.0f,260.0f);
+  int step = 25;
+  int step2 = 15;
+  triangle1.set_coords(0.0f+ step, 230.0f, 80.0f+ step, 230.0f, 40.0f+ step,260.0f);
   triangle1.set_color(color::lime);
   
-  triangle2.set_coords(140.0f,230.0f,220.0f,230.0f,180.0f,260.0f);
+  triangle2.set_coords(140.0f - step2,230.0f,220.0f- step2,230.0f,180.0f- step2,260.0f);
   triangle2.set_color(color::lime);
   
-  rectangle.set_coords(105, 160);
+  rectangle.set_coords(110, 149);
   rectangle.set_color(color::lightskyblue);
   rectangle.set_size(10, 180);
 }
