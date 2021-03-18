@@ -137,6 +137,27 @@ private:
 };
 
 
+class Car
+{
+public:
+    Car();
+    ~Car() {}
+    void draw(std::shared_ptr<sf::RenderWindow>& window);
+
+private:
+    Circle circle1;
+    Circle circle2;
+    Circle circle3;
+    Circle circle4;
+    Circle circle5;
+    Triangle triangle1;
+    Triangle triangle2;
+    Rectangle rectangle1;
+    Rectangle rectangle2;
+    Rectangle rectangle3;
+};
+
+
 class Tree {
 public:
     Tree();
