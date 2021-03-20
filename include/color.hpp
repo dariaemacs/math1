@@ -152,5 +152,5 @@ struct color{
   static const sf::Color yellow; // 0xffff00ff 55,255,0
   static const sf::Color yellowgreen; // 0x9acd32ff 54,205,50 
 };
-
+//std::vector<const sf::Color*> wheels  ;
 #endif // COLOR_HPP

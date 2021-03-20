@@ -1,41 +1,10 @@
 #include "figures.hpp"
+#include <ctime>
 
+std::vector<const sf::Color*> wheels = { &color::aliceblue, &color::skyblue, &color::salmon };
 
+std::vector<const sf::Color*> roof = { &color::red, &color::purple, &color::salmon };
 
-
-//Flower::Flower() {
-//    circle1.set_radius(30);
-//    circle2.set_radius(30);
-//    circle3.set_radius(30);
-//    circle4.set_radius(30);
-//
-//    center_circle.set_radius(45);
-//
-//    circle1.set_coords(142, 125);
-//    circle2.set_coords(24, 24);
-//    circle3.set_coords(144, 22);
-//    circle4.set_coords(28, 125);
-//
-//    center_circle.set_coords(70, 57);
-//
-//    circle1.set_color(color::aqua);
-//    circle2.set_color(color::red);
-//    circle3.set_color(color::blue);
-//    circle4.set_color(color::green);
-//
-//    center_circle.set_color(color::coral);
-//    int step = 25;
-//    int step2 = 15;
-//    triangle1.set_coords(0.0f + step, 230.0f, 80.0f + step, 230.0f, 40.0f + step, 260.0f);
-//    triangle1.set_color(color::lime);
-//
-//    triangle2.set_coords(140.0f - step2, 230.0f, 220.0f - step2, 230.0f, 180.0f - step2, 260.0f);
-//    triangle2.set_color(color::lime);
-//
-//    rectangle.set_coords(110, 149);
-//    rectangle.set_color(color::lightskyblue);
-//    rectangle.set_size(10, 180);
-//}
 
 void Car::draw(std::shared_ptr<sf::RenderWindow>& window) {
     rectangle1.draw(window);
@@ -52,14 +21,26 @@ void Car::draw(std::shared_ptr<sf::RenderWindow>& window) {
 }
 
 Car::Car() {
+    srand((unsigned int)time(NULL));
+    static int indexColor1 = rand() % wheels.size();
+    static int indexColor2 = rand() % wheels.size();
     circle1.set_radius(35);
     circle2.set_radius(35);
     circle3.set_radius(15);
     circle4.set_radius(15);
 
-    circle1.set_color(color::aqua);
-    circle2.set_color(color::aqua);
+    //int colorwheelsSize = sizeof(wheels) / sizeof(wheels*);
+
+   
+    circle1.set_color(*wheels[indexColor1]);
+    circle2.set_color(*wheels[indexColor1]);
     
+
+    srand((unsigned int)time(NULL));
+    
+    circle3.set_color(*wheels[indexColor2]);
+    circle4.set_color(*wheels[indexColor2]);
+
     circle1.set_coords(190, 145);
     circle2.set_coords(20, 145);
     circle3.set_coords(210, 165);
@@ -74,6 +55,8 @@ Car::Car() {
     triangle2.set_coords(260, 91, 260, 121, 230, 91);
     rectangle3.set_coords(160, 59);
     rectangle3.set_size(30, 30);
+
+
 
 
 
@@ -171,6 +154,48 @@ void Flower::draw(std::shared_ptr<sf::RenderWindow>& window) {
   triangle2.draw(window);
   
   rectangle.draw(window);
+}
+
+Tower::Tower() {
+    static int indexColor = rand() % roof.size();
+    triangle1.set_coords(17,88,62,42,113 ,88);
+    int x = 14;
+    triangle2.set_coords(112+x, 88, 157+x, 42, 208+x, 88);
+    x = 124;
+    triangle3.set_coords(112 + x, 88, 157 + x, 42, 208 + x, 88);
+
+    circle1.set_coords(145, 110);
+    circle1.set_radius(30);
+
+    rectangle1.set_coords(20, 90);
+    rectangle1.set_size(90, 110);
+    rectangle1.set_color(color::lightskyblue);
+
+    rectangle2.set_coords(130, 90);
+    rectangle2.set_size(90, 110);
+    rectangle2.set_color(color::lightskyblue);
+
+    rectangle3.set_coords(240, 90);
+    rectangle3.set_size(90, 110);
+    rectangle3.set_color(color::lightskyblue);
+    srand((unsigned int)time(NULL));
+    triangle1.set_color(*wheels[indexColor]);
+    triangle2.set_color(*wheels[indexColor]);
+    triangle3.set_color(*wheels[indexColor]);
+
+};
+void Tower::draw(std::shared_ptr<sf::RenderWindow>& window) {
+    triangle1.draw(window);
+    triangle2.draw(window);
+    triangle3.draw(window);
+
+     rectangle1.draw(window);
+     rectangle2.draw(window);
+     rectangle3.draw(window);
+
+    circle1.draw(window);
+    
+    
 }
 
 

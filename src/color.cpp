@@ -149,3 +149,11 @@ const sf::Color color::white = sf::Color(0xffffffff); // 255,255,255
 const sf::Color color::whitesmoke = sf::Color(0xf5f5f5ff); // 245,245,245
 const sf::Color color::yellow = sf::Color(0xffff00ff); // 55,255,0
 const sf::Color color::yellowgreen = sf::Color(0x9acd32ff); // 54,205,50 
+
+
+
+
+//const sf::Color* wheels[] = { &color::aliceblue, &color::skyblue, &color::salmon };
+
+
+	

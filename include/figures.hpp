@@ -136,6 +136,24 @@ private:
     Rectangle rectangle3;
 };
 
+class Tower
+{
+private:
+    Triangle triangle1;
+    Triangle triangle2;
+    Triangle triangle3;
+
+    Rectangle rectangle1;
+    Rectangle rectangle2;
+    Rectangle rectangle3;
+
+    Circle circle1;
+
+public:
+    Tower();
+    ~Tower() {}
+    void draw(std::shared_ptr<sf::RenderWindow>& window);
+};
 
 class Car
 {
