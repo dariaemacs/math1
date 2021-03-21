@@ -7,6 +7,18 @@
 #include <memory>
 
 
+struct Rotation {
+    const float PI = 3.14159265;
+    float cosGradus(double alpha)
+    {
+        return cos(alpha * PI / 180);
+    }
+    float sinGradus(double alpha)
+    {
+        return sin(alpha * PI / 180);
+    }
+};
+
 
 class Circle{
 public:
@@ -34,7 +46,9 @@ public:
     circle->setOutlineThickness(2);
     circle->setOutlineColor(color::black);
   }
-
+  void rotate(float angle) {
+      circle->rotate(angle);
+  }
   void set_radius(float r) {
     circle->setRadius(r);
   }
@@ -61,6 +75,10 @@ public:
     triangle->setFillColor(c);
   }
 
+  void rotate(float angle ) {
+      triangle->rotate(angle);
+  }
+
   void set_coords(float x0, float y0, float x1, float y1, float x2, float y2){
     triangle->setPoint(0, sf::Vector2f(x0+25, y0+150));
     triangle->setPoint(1, sf::Vector2f(x1+25, y1+150));
@@ -77,8 +95,8 @@ private:
 };
 
 
-class Rectangle{
-public:
+class Rectangle : private Rotation {
+    public:
   Rectangle()
     : rectangle{std::make_unique<sf::RectangleShape>()}
   {
@@ -91,15 +109,43 @@ public:
     window->draw(*rectangle);
   }
 
+  void rotateCoord(int& x, int& y, int angle) {
+      int xCenter = 0;
+      int yCenter = 0;
+      //        result.x = (x - x0) * cosGradus(angle) - (y - y0) * sinGradus(angle) + x0;
+      //        result.y = (x - x0) * sinGradus(angle) + (y - y0) * cosGradus(angle) + y0;
+
+
+      int Newx = ((x- xCenter) * cosGradus(angle) - (y-yCenter ) * sinGradus(angle))-x;
+      int Newy = ((x - xCenter) * sinGradus(angle) + (y-yCenter) * cosGradus(angle)) - y;
+
+
+   x = Newx;
+     y = Newy;
+  }
+
+  void rotate(float angle) {
+      this->angle = angle;
+      rectangle->rotate(angle);
+      rotateCoord(x, y, angle);
+      set_coords(x, y);
+      
+    }
+
+
   void set_color(sf::Color c){
     rectangle->setFillColor(c);
   }
 
-  void set_coords(float x, float y){
+  void set_coords(float x0, float y0){
+      x = x0 + 25;
+      y = y0 + 150;
     rectangle->setPosition(x+25, y+150);
   }
 
   void set_size(float width, float height){
+      w = width;
+      h = height;
     rectangle->setSize(sf::Vector2f(width, height));
   }
   
@@ -109,6 +155,12 @@ public:
   }
 
 private:
+    int x;
+    int y;
+    float angle;
+    int w;
+    int h;
+
   std::unique_ptr<sf::RectangleShape> rectangle;
 };
 
@@ -154,6 +206,31 @@ public:
     ~Tower() {}
     void draw(std::shared_ptr<sf::RenderWindow>& window);
 };
+
+class Butterfly
+{
+private:
+    Triangle triangle1;
+    Triangle triangle2;
+    Triangle triangle3;
+
+    Rectangle rectangle1;
+    Rectangle rectangle2;
+    Rectangle rectangle3;
+    Rectangle rectangle4;
+    Rectangle rectangle5;
+    sf::Texture T;
+
+    Circle circle1;
+    Circle circle2;
+    Circle circle3;
+
+public:
+    Butterfly();
+    ~Butterfly() {}
+    void draw(std::shared_ptr<sf::RenderWindow>& window);
+};
+
 
 class Car
 {

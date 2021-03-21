@@ -1,9 +1,16 @@
 #include "figures.hpp"
 #include <ctime>
 
+
 std::vector<const sf::Color*> wheels = { &color::aliceblue, &color::skyblue, &color::salmon };
 
 std::vector<const sf::Color*> roof = { &color::red, &color::purple, &color::salmon };
+
+
+
+
+
+
 
 
 void Car::draw(std::shared_ptr<sf::RenderWindow>& window) {
@@ -248,4 +255,75 @@ void Tree::draw(std::shared_ptr<sf::RenderWindow>& window) {
     triangle3.draw(window);
 
     rectangle.draw(window);
+}
+
+
+
+Butterfly::Butterfly() {
+    
+
+
+   
+    rectangle1.set_coords(65, -50);
+    rectangle1.set_color(color::lightskyblue);
+    rectangle1.set_size(40, 150);
+    
+   
+    //rectangle1.rotate(a);
+
+
+    rectangle2.set_coords(75, -10);
+    rectangle2.set_color(color::lightskyblue);
+    rectangle2.set_size(20, 15);
+    //rectangle2.rotate(a);
+
+    rectangle3.set_coords(75, 20);
+    rectangle3.set_color(color::lightskyblue);
+    rectangle3.set_size(20, 15);
+    //rectangle3.rotate(a);
+    rectangle4.set_coords(75, 50);
+    rectangle4.set_color(color::lightskyblue);
+    rectangle4.set_size(20, 15);
+    //rectangle4.rotate(a);
+    rectangle5.set_coords(75, 102);
+    rectangle5.set_color(color::lightskyblue);
+    rectangle5.set_size(20, 15);
+    //rectangle5.rotate(a);
+
+
+
+    triangle1.set_coords(0, 0+ 58, 88, 175,  0,280);
+    triangle2.set_coords(215, 0+ 58, 132, 175, 215, 280);
+    //triangle1.rotate(30);
+    //triangle2.rotate(30);
+
+    circle1.set_coords(83, 40);
+    circle1.set_radius(28);
+    //circle1.rotate(30);
+
+    circle2.set_coords(10, 140);
+    circle2.set_radius(22);
+    //circle2.rotate(30);
+    circle3.set_coords(157, 140);
+    circle3.set_radius(22);
+    //circle3.rotate(30);
+    triangle3.set_coords(95, 21, 125, 21, 110,36);
+    //triangle3.rotate(30);
+}
+
+void Butterfly::draw(std::shared_ptr<sf::RenderWindow>& window) {
+
+    triangle1.draw(window);
+    triangle2.draw(window);
+    triangle3.draw(window);
+
+    rectangle1.draw(window);
+    rectangle2.draw(window);
+    rectangle3.draw(window);
+    rectangle4.draw(window);
+    rectangle5.draw(window);
+
+    circle1.draw(window);
+    circle2.draw(window);
+    circle3.draw(window);
 }

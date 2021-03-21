@@ -361,7 +361,7 @@ QuestType1::QuestType1(int w, int h, int questNumber, const std::vector<pica>& f
     window->draw(CheckButtonSprite);
     //    window->draw(Buttons.getButtons()[i]);
 
-    Car tower;
+    Butterfly tower;
     
     tower.draw(window);
     //Flower flower;
