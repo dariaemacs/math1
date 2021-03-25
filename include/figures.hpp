@@ -34,6 +34,8 @@ public:
     window->draw(*circle);
   }
 
+  sf::CircleShape getCircle() { return *circle; }
+
   void set_color(sf::Color c){
     circle->setFillColor(c);
   }
@@ -70,6 +72,7 @@ public:
   void draw(std::shared_ptr<sf::RenderWindow>& window){
     window->draw(*triangle);
   }
+  sf::ConvexShape getTriangle() { return *triangle; }
 
   void set_color(sf::Color c){
     triangle->setFillColor(c);
@@ -95,7 +98,7 @@ private:
 };
 
 
-class Rectangle : private Rotation {
+class Rectangle  {
     public:
   Rectangle()
     : rectangle{std::make_unique<sf::RectangleShape>()}
@@ -109,28 +112,9 @@ class Rectangle : private Rotation {
     window->draw(*rectangle);
   }
 
-  void rotateCoord(int& x, int& y, int angle) {
-      int xCenter = 0;
-      int yCenter = 0;
-      //        result.x = (x - x0) * cosGradus(angle) - (y - y0) * sinGradus(angle) + x0;
-      //        result.y = (x - x0) * sinGradus(angle) + (y - y0) * cosGradus(angle) + y0;
+  sf::RectangleShape getRectangle() { return *rectangle; }
 
 
-      int Newx = ((x- xCenter) * cosGradus(angle) - (y-yCenter ) * sinGradus(angle))-x;
-      int Newy = ((x - xCenter) * sinGradus(angle) + (y-yCenter) * cosGradus(angle)) - y;
-
-
-   x = Newx;
-     y = Newy;
-  }
-
-  void rotate(float angle) {
-      this->angle = angle;
-      rectangle->rotate(angle);
-      rotateCoord(x, y, angle);
-      set_coords(x, y);
-      
-    }
 
 
   void set_color(sf::Color c){
@@ -155,6 +139,7 @@ class Rectangle : private Rotation {
   }
 
 private:
+   
     int x;
     int y;
     float angle;
@@ -213,7 +198,8 @@ private:
     Triangle triangle1;
     Triangle triangle2;
     Triangle triangle3;
-
+    Triangle triangle4;
+    Triangle triangle5;
     Rectangle rectangle1;
     Rectangle rectangle2;
     Rectangle rectangle3;
@@ -224,7 +210,10 @@ private:
     Circle circle1;
     Circle circle2;
     Circle circle3;
-
+    sf::Texture texture;
+    sf::RenderTexture renderTexture;
+    const sf::Texture& texture1 = renderTexture.getTexture();
+    sf::Sprite sprite;
 public:
     Butterfly();
     ~Butterfly() {}

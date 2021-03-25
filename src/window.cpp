@@ -319,7 +319,7 @@ QuestType1::QuestType1(int w, int h, int questNumber, const std::vector<pica>& f
       time_since_last_click = clock.restart();
       sf::Int32 milli = time_since_last_click.asMilliseconds();
       milli = milli;
-      if (readyforCheck && checkandnextQuest()) {//íàæàòà êíîïêà äàëåå
+      if (readyforCheck && checkandnextQuest()) {
         if (check())  textFrame.settext("Good");   else  textFrame.settext("Not good"); 
       }
       if (milli > ELAPSED_TIME) {
