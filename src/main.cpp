@@ -12,8 +12,8 @@ int main(){
         //    YAML::Node config = YAML::LoadFile(filename);
 
 
-        int width = 1000;// sf::VideoMode::getDesktopMode().width;
-        int height = 800;//sf::VideoMode::getDesktopMode().height;
+        int width = sf::VideoMode::getDesktopMode().width;
+        int height = sf::VideoMode::getDesktopMode().height;
         srand(time(0));
         QuestType1 q(width, height, 1 - (rand() % 2), tree, tree, 17);
 

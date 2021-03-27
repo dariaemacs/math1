@@ -9,6 +9,7 @@
 #include <vector>
 #include "settings.hpp"
 #include <SFML/Graphics.hpp>
+#include <SFML/OpenGL.hpp>
 #include "database.hpp"
 #include <fstream>
 #include <locale>
@@ -234,15 +235,17 @@ Window::Window(int w, int h, int numberQuest)
   List.setPosition(0, 0);
   List.setFillColor(sf::Color::White);
   sf::Clock clock;
-  //sf::Time time_since_last_click = sf::Time::Zero;
+  
+  sf::ContextSettings settings(0,0,8);
+  
 
   if (!first) {
-    window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), "Game");//, sf::Style::Fullscreen);
+    window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), "Game", sf::Style::Default, settings);//, sf::Style::Fullscreen);
     window->setFramerateLimit(Settings::FPS);
 
     first = true;
   }
-
+  
 }
 
 
@@ -342,6 +345,7 @@ QuestType1::QuestType1(int w, int h, int questNumber, const std::vector<pica>& f
     // std::vector<sf::ConvexShape> G1 = img1.GetTriangleFigure();
     // for (int i = 0; i < tQTY1; i++)
     //   window->draw(G1[i]);
+    /*
     std::vector<sf::CircleShape>& C2 = img2.GetCircle();
         
     for (int i = 0; i < cQTY2; i++)
@@ -359,9 +363,10 @@ QuestType1::QuestType1(int w, int h, int questNumber, const std::vector<pica>& f
     for (int i = 0; i < Buttons.getButtonCount(); i++)
       window->draw(*B[i]);
     window->draw(CheckButtonSprite);
+    */
     //    window->draw(Buttons.getButtons()[i]);
 
-    Butterfly tower;
+    Butterfly tower(w,h);
     
     tower.draw(window);
     //Flower flower;

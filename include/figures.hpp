@@ -41,11 +41,11 @@ public:
   }
 
   void set_coords(float x, float y){
-    circle->setPosition(x+25, y+150);
+    circle->setPosition(x, y);
   }
 
   void settings(){
-    circle->setOutlineThickness(2);
+    circle->setOutlineThickness(1);
     circle->setOutlineColor(color::black);
   }
   void rotate(float angle) {
@@ -83,9 +83,9 @@ public:
   }
 
   void set_coords(float x0, float y0, float x1, float y1, float x2, float y2){
-    triangle->setPoint(0, sf::Vector2f(x0+25, y0+150));
-    triangle->setPoint(1, sf::Vector2f(x1+25, y1+150));
-    triangle->setPoint(2, sf::Vector2f(x2+25, y2+150));
+    triangle->setPoint(0, sf::Vector2f(x0, y0));
+    triangle->setPoint(1, sf::Vector2f(x1, y1));
+    triangle->setPoint(2, sf::Vector2f(x2, y2));
   }
 
   void settings(){
@@ -122,9 +122,9 @@ class Rectangle  {
   }
 
   void set_coords(float x0, float y0){
-      x = x0 + 25;
-      y = y0 + 150;
-    rectangle->setPosition(x+25, y+150);
+      x = x0 ;
+      y = y0 ;
+    rectangle->setPosition(x, y);
   }
 
   void set_size(float width, float height){
@@ -185,6 +185,8 @@ private:
     Rectangle rectangle3;
 
     Circle circle1;
+    int maxX;//координаты спрайта
+    int maxY;
 
 public:
     Tower();
@@ -210,12 +212,27 @@ private:
     Circle circle1;
     Circle circle2;
     Circle circle3;
+    Circle circle4;
+    Circle circle5;
+
+
     sf::Texture texture;
     sf::RenderTexture renderTexture;
     const sf::Texture& texture1 = renderTexture.getTexture();
     sf::Sprite sprite;
+    int widthScreen;
+    int heightScreen;
+
+    int widthSprite ; 
+    int heightSprite;
+    int  moveSpriteX;
+    int  moveSpriteY;
+    float  Xfactor; //
+    float  Yfactor;
+
+
 public:
-    Butterfly();
+    Butterfly(int w, int h);
     ~Butterfly() {}
     void draw(std::shared_ptr<sf::RenderWindow>& window);
 };
