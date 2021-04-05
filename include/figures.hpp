@@ -5,20 +5,29 @@
 #include "color.hpp"
 
 #include <memory>
+const float koeff = 0.5;
 
 
-struct Rotation {
-    const float PI = 3.14159265;
-    float cosGradus(double alpha)
-    {
-        return cos(alpha * PI / 180);
-    }
-    float sinGradus(double alpha)
-    {
-        return sin(alpha * PI / 180);
-    }
+//struct Rotation {
+//    const float PI = 3.14159265;
+//    float cosGradus(double alpha)
+//    {
+//        return cos(alpha * PI / 180);
+//    }
+//    float sinGradus(double alpha)
+//    {
+//        return sin(alpha * PI / 180);
+//    }
+//};
+struct FrameFigure {
+    int xmin;
+    int xmax;
+
+    int ymin;
+    int ymax;
+
+
 };
-
 
 class Circle{
 public:
@@ -41,7 +50,7 @@ public:
   }
 
   void set_coords(float x, float y){
-    circle->setPosition(x, y);
+    circle->setPosition(x* koeff, y* koeff);
   }
 
   void settings(){
@@ -52,7 +61,7 @@ public:
       circle->rotate(angle);
   }
   void set_radius(float r) {
-    circle->setRadius(r);
+    circle->setRadius(r* koeff);
   }
 
 private:
@@ -83,9 +92,9 @@ public:
   }
 
   void set_coords(float x0, float y0, float x1, float y1, float x2, float y2){
-    triangle->setPoint(0, sf::Vector2f(x0, y0));
-    triangle->setPoint(1, sf::Vector2f(x1, y1));
-    triangle->setPoint(2, sf::Vector2f(x2, y2));
+    triangle->setPoint(0, sf::Vector2f(x0* koeff, y0* koeff));
+    triangle->setPoint(1, sf::Vector2f(x1* koeff, y1* koeff));
+    triangle->setPoint(2, sf::Vector2f(x2* koeff, y2* koeff));
   }
 
   void settings(){
@@ -124,13 +133,13 @@ class Rectangle  {
   void set_coords(float x0, float y0){
       x = x0 ;
       y = y0 ;
-    rectangle->setPosition(x, y);
+    rectangle->setPosition(x* koeff, y* koeff);
   }
 
   void set_size(float width, float height){
       w = width;
       h = height;
-    rectangle->setSize(sf::Vector2f(width, height));
+    rectangle->setSize(sf::Vector2f(width* koeff, height* koeff));
   }
   
   void settings(){
@@ -150,7 +159,7 @@ private:
 };
 
 
-class Plane 
+class Plane : private FrameFigure
 {
 public:
     Plane();
@@ -173,7 +182,7 @@ private:
     Rectangle rectangle3;
 };
 
-class Tower
+class Tower:private FrameFigure
 {
 private:
     Triangle triangle1;
@@ -194,7 +203,7 @@ public:
     void draw(std::shared_ptr<sf::RenderWindow>& window);
 };
 
-class Butterfly
+class Butterfly :private FrameFigure
 {
 private:
     Triangle triangle1;
@@ -232,13 +241,13 @@ private:
 
 
 public:
-    Butterfly(int w, int h);
+    Butterfly();
     ~Butterfly() {}
     void draw(std::shared_ptr<sf::RenderWindow>& window);
 };
 
 
-class Car
+class Car :private FrameFigure
 {
 public:
     Car();
@@ -259,7 +268,7 @@ private:
 };
 
 
-class Tree {
+class Tree :private FrameFigure {
 public:
     Tree();
     ~Tree() {}
@@ -279,7 +288,7 @@ private:
     Rectangle rectangle;
 };
 
-class Flower{
+class Flower :private FrameFigure {
 public:
   Flower();
   ~Flower(){}

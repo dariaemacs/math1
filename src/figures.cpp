@@ -8,7 +8,7 @@ std::vector<const sf::Color*> wheels = { &color::aliceblue, &color::skyblue, &co
 std::vector<const sf::Color*> roof = { &color::red, &color::purple, &color::salmon };
 
 
-
+//#define koeff 0.5
 
 
 
@@ -49,10 +49,10 @@ Car::Car() {
     circle3.set_color(*wheels[indexColor2]);
     circle4.set_color(*wheels[indexColor2]);
 
-    circle1.set_coords(190, 145);
-    circle2.set_coords(20, 145);
-    circle3.set_coords(210, 165);
-    circle4.set_coords(39, 165);
+    circle1.set_coords(190, 142);
+    circle2.set_coords(20, 142);
+    circle3.set_coords(210, 162);
+    circle4.set_coords(39, 162);
     circle5.set_coords(162, 60);
     rectangle1.set_coords(70, 41);
     rectangle1.set_size(120, 60);
@@ -260,87 +260,65 @@ void Tree::draw(std::shared_ptr<sf::RenderWindow>& window) {
 
 
 
-Butterfly::Butterfly(int w, int h) {
-    widthScreen=w ;
-    heightScreen = h;
-    srand(time(NULL));
+Butterfly::Butterfly() {
+    xmin = 8;
+    xmax = 416;
+    ymin = 2;
+    ymax = 303;
+    //int  widthFigure = xmax - xmin;
+    //int  heightFigure = ymax - ymin;
 
-    static int angle = rand() % 90;
+
                 
-   
-    int x = 101;
-    int y = 37;
-    int y1 = 150;
-    int x1 = 26;
-  
-    rectangle1.set_coords(x1+65+x, -50+y+y1);
+    rectangle1.set_coords(192, 137);
+    
     rectangle1.set_color(color::lightskyblue);
     rectangle1.set_size(40, 150);
-    rectangle2.set_coords(x1 + 75+x, -10 +y + y1);
+    rectangle2.set_coords(202, 177);
     rectangle2.set_color(color::lightskyblue);
-    rectangle2.set_size(20, 15 );
-    rectangle3.set_coords(x1 + 75+x, 20 +y + y1);
+    rectangle2.set_size(20, 15);
+    rectangle3.set_coords(202, 207);
     rectangle3.set_color(color::lightskyblue);
     rectangle3.set_size(20, 15);
-    rectangle4.set_coords(x1 + 75 + x, 50+y + y1);
+    rectangle4.set_coords(202, 237);
     rectangle4.set_color(color::lightskyblue);
     rectangle4.set_size(20, 15);
-    rectangle5.set_coords(x1 + 75 + x, 102 +y + y1);
+    rectangle5.set_coords(202, 288);
     rectangle5.set_color(color::green);
     rectangle5.set_size(20, 15);
-    heightSprite = 102 + y + y1+20;
 
-    triangle1.set_coords(-93 + x, -35+y , 86 + x, 140+y,  -89 + x,95+y );
+
+    heightSprite = 309;
+
+    triangle1.set_coords(8, 2, 192, 177,  12,132);
 
     
-    widthSprite = 325+x;
-    triangle2.set_coords(315 + x,  -35+y , 137 + x, 140+y, 310 + x, 95+y);//**
+    widthSprite = 426;
+    triangle2.set_coords(416,  2 , 234, 177, 395, 132);
 
 
-    triangle4.set_coords(290 + x, 115+y, 137 + x, 143+y, 310 + x, 255+y);
-   triangle5.set_coords(-65+ x, 115+y, 85 + x, 143+y, -85 + x, 255+y);
+    triangle4.set_coords(391, 152, 234, 180, 411, 292);
+   triangle5.set_coords(36, 152, 191, 180, 16, 292);
 
-    circle1.set_coords(83 + x, 40 +y);
+    circle1.set_coords(184, 80);
     circle1.set_radius(28);
 
 
-    circle2.set_coords(-25 +x, 140+y );
+    circle2.set_coords(76, 177 );
     circle2.set_radius(22);
 
-    circle3.set_coords(210 + x, 140+y );
+    circle3.set_coords(311, 177 );
     circle3.set_radius(22);
 
-    circle4.set_coords( -70+x, 50+y);
+    circle4.set_coords( 31, 87);
     circle4.set_radius(22);
 
-    circle5.set_coords(240 + x, 50+y);
+    circle5.set_coords(341, 87);
     circle5.set_radius(22);
 
-    triangle3.set_coords(95 + x, 21+y , 125 + x, 21+y , 110 + x,36+y );
-     //Xfactor =(float)widthScreen/2.0/ (float)widthSprite;
-     Xfactor = (float)heightScreen / 2.9 / (float)heightSprite;
-    if (!renderTexture.create(widthSprite , heightSprite ))
-    {
-
-    }
-    renderTexture.clear(sf::Color::Green);
-    
-
-    renderTexture.display();
-    texture.setSmooth(true);
-    renderTexture.setSmooth(true);
-    sprite.setTexture(texture1);
+    triangle3.set_coords(196, 58, 226, 58 ,211,79 );
 
 
-
-    sprite.scale(Xfactor, Xfactor);
-    sprite.rotate(angle);
-    //sprite.move(moveSpriteX, moveSpriteY);
-    //sprite.move(-moveSpriteX, -moveSpriteY);
-    float test = cos((90 - angle) * PI / 180);
-    moveSpriteX= abs(Xfactor*heightSprite*cos((90 - angle) * PI / 180));
-    
-    sprite.move(moveSpriteX, moveSpriteY);
 
 
 
@@ -350,26 +328,26 @@ Butterfly::Butterfly(int w, int h) {
 
 void Butterfly::draw(std::shared_ptr<sf::RenderWindow>& window) {
 
+    circle1.draw(window);
 
 
+   triangle4.draw(window);
+   triangle5.draw(window);
+   rectangle1.draw(window);
+   rectangle2.draw(window);
+   rectangle3.draw(window);
+   rectangle4.draw(window);
+   rectangle5.draw(window);
+   triangle1.draw(window);
+   triangle2.draw(window);
+   triangle3.draw(window);
+   circle1.draw(window);
+   circle2.draw(window);
+   circle3.draw(window);
+   circle4.draw(window);
+   circle5.draw(window);
 
-    renderTexture.draw(triangle4.getTriangle());
-    renderTexture.draw(triangle5.getTriangle());
-    renderTexture.draw(rectangle1.getRectangle());
-    renderTexture.draw(rectangle2.getRectangle());
-    renderTexture.draw(rectangle3.getRectangle());
-    renderTexture.draw(rectangle4.getRectangle());
-    renderTexture.draw(rectangle5.getRectangle());
-    renderTexture.draw(triangle1.getTriangle());
-    renderTexture.draw(triangle2.getTriangle());
-    renderTexture.draw(triangle3.getTriangle());
-    renderTexture.draw(circle1.getCircle());
-    renderTexture.draw(circle2.getCircle());
-    renderTexture.draw(circle3.getCircle());
-    renderTexture.draw(circle4.getCircle());
-    renderTexture.draw(circle5.getCircle());
 
-
-    renderTexture.display();
-    window->draw(sprite);
+    
+   // window->draw(sprite);
 }
