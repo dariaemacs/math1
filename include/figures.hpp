@@ -17,6 +17,9 @@ protected:
     int ymax;
     float koef=1;
     std::shared_ptr<sf::RenderWindow>& window;
+    int margin_left=0;
+    int margin_top = 0;
+
 
 public:
     FrameFigure(std::shared_ptr<sf::RenderWindow>& w) : window(w) {}
@@ -26,6 +29,10 @@ public:
     int getxmax() { return xmax; }
     int getymin() { return ymin; }
     int getymax() { return ymax; }
+    int getmargin_top() { 
+        return margin_top; 
+    }
+    int getmargin_left() { return margin_left; }
 
  
 
@@ -55,7 +62,7 @@ public:
   }
 
   void set_coords(float x, float y){
-    circle->setPosition(x* owner->getkoef()-(owner->getxmin()   *owner->getkoef()) , y* owner->getkoef()-(owner->getymin() * owner->getkoef()));
+    circle->setPosition((x* owner->getkoef()-(owner->getxmin()   *owner->getkoef()))+ owner->getmargin_left(), (y* owner->getkoef()-(owner->getymin() * owner->getkoef())) + owner->getmargin_top());
   }
 
   void settings(){
@@ -98,9 +105,9 @@ public:
   }
 
   void set_coords(float x0, float y0, float x1, float y1, float x2, float y2){
-    triangle->setPoint(0, sf::Vector2f(x0* owner->getkoef() - (owner->getxmin() * owner->getkoef()), y0* owner->getkoef() - (owner->getymin() * owner->getkoef())));
-    triangle->setPoint(1, sf::Vector2f(x1* owner->getkoef() - (owner->getxmin() * owner->getkoef()), y1* owner->getkoef() - (owner->getymin() * owner->getkoef())));
-    triangle->setPoint(2, sf::Vector2f(x2* owner->getkoef() - (owner->getxmin() * owner->getkoef()), y2* owner->getkoef() - (owner->getymin() * owner->getkoef())));
+    triangle->setPoint(0, sf::Vector2f((x0* owner->getkoef() - (owner->getxmin() * owner->getkoef())) + owner->getmargin_left(),(y0* owner->getkoef() - (owner->getymin() * owner->getkoef()))+ owner->getmargin_top()));
+    triangle->setPoint(1, sf::Vector2f((x1* owner->getkoef() - (owner->getxmin() * owner->getkoef())) + owner->getmargin_left(),(y1* owner->getkoef() - (owner->getymin() * owner->getkoef()))+ owner->getmargin_top()));
+    triangle->setPoint(2, sf::Vector2f((x2* owner->getkoef() - (owner->getxmin() * owner->getkoef())) + owner->getmargin_left(),(y2* owner->getkoef() - (owner->getymin() * owner->getkoef()))+ owner->getmargin_top()));
   }
 
   void settings(){
@@ -141,7 +148,7 @@ class Rectangle  {
   void set_coords(float x0, float y0){
       x = x0 ;
       y = y0 ;
-    rectangle->setPosition(x* owner->getkoef() - (owner->getxmin() * owner->getkoef()), y* owner->getkoef() - (owner->getymin() * owner->getkoef()));
+    rectangle->setPosition((x* owner->getkoef() - (owner->getxmin() * owner->getkoef()))+ owner->getmargin_left(), (y* owner->getkoef() - (owner->getymin() * owner->getkoef())) + owner->getmargin_top());
   }
 
   void set_size(float width, float height){

@@ -13,7 +13,7 @@ int main(){
 
 
 
-       //int width = sf::VideoMode::getDesktopMode().width;int height = sf::VideoMode::getDesktopMode().height;
+       int width = sf::VideoMode::getDesktopMode().width;int height = sf::VideoMode::getDesktopMode().height;
 
         //int width   = 640;int height = 360;
         //int width = 854;int height = 480;
@@ -23,7 +23,7 @@ int main(){
         //int width = 2048;int height = 1152;
         //int width = 2560;int height =1440;
       // int width = 1440;int height = 900;
-      int width = 1536; int height = 960;
+      //int width = 1536; int height = 960;
       //int width = 1680; int height = 1050;
       //int width = 1920 ; int height = 1200 ;
       //int width = 96; int height = 132;

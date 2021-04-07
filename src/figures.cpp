@@ -24,6 +24,9 @@ void FrameFigure::calcKoeff() {
             frameHeightNew = (getymax() - getymin()) * koef;
             frameWidthNew = (getxmax() - getxmin()) * koef;
         }
+     margin_left = (window->getSize().x/2 - frameWidthNew) / 2;
+     margin_top = window->getSize().y / 3 ;
+
 }
 
 
