@@ -11,10 +11,23 @@ std::vector<const sf::Color*> roof = { &color::red, &color::purple, &color::salm
 //#define koeff 0.5
 
 
+void FrameFigure::calcKoeff() {
+    float step = 0;
+    float frameWidth = getxmax() - getxmin();
+    float frameHeight = getymax() - getymin();
+    float frameWidthNew = window->getSize().x / 2;
+    int winHeigt = window->getSize().y;
+    koef = frameWidthNew / frameWidth;
+    float frameHeightNew = (getymax() - getymin()) * koef;
+     while (frameHeightNew > winHeigt / 2) {
+            koef = koef - 0.01;
+            frameHeightNew = (getymax() - getymin()) * koef;
+            frameWidthNew = (getxmax() - getxmin()) * koef;
+        }
+}
 
 
-
-void Car::draw(std::shared_ptr<sf::RenderWindow>& window) {
+void Car::draw() {
     rectangle1.draw(window);
     rectangle2.draw(window);
     rectangle3.draw(window);
@@ -28,7 +41,29 @@ void Car::draw(std::shared_ptr<sf::RenderWindow>& window) {
 
 }
 
-Car::Car() {
+Car::Car(std::shared_ptr<sf::RenderWindow>& win):
+circle1(this),
+circle2(this),
+circle3(this),
+circle4(this),
+circle5(this),
+triangle1(this),
+triangle2(this),
+rectangle1(this),
+rectangle2(this),
+rectangle3(this),
+FrameFigure(win)
+
+{
+
+    xmin = 10;
+    xmax = 260;
+    ymin = 0;
+    ymax = 200;
+
+
+    calcKoeff();
+
     srand((unsigned int)time(NULL));
     static int indexColor1 = rand() % wheels.size();
     static int indexColor2 = rand() % wheels.size();
@@ -38,7 +73,7 @@ Car::Car() {
     circle4.set_radius(15);
 
     //int colorwheelsSize = sizeof(wheels) / sizeof(wheels*);
-
+    int y = 41;
    
     circle1.set_color(*wheels[indexColor1]);
     circle2.set_color(*wheels[indexColor1]);
@@ -49,19 +84,19 @@ Car::Car() {
     circle3.set_color(*wheels[indexColor2]);
     circle4.set_color(*wheels[indexColor2]);
 
-    circle1.set_coords(190, 142);
-    circle2.set_coords(20, 142);
-    circle3.set_coords(210, 162);
-    circle4.set_coords(39, 162);
-    circle5.set_coords(162, 60);
-    rectangle1.set_coords(70, 41);
+    circle1.set_coords(190, 101);
+    circle2.set_coords(20, 101);
+    circle3.set_coords(210, 121);
+    circle4.set_coords(39, 121);
+    circle5.set_coords(162, 19);
+    rectangle1.set_coords(70, 0);
     rectangle1.set_size(120, 60);
     circle5.set_radius(13);
-    rectangle2.set_coords(10, 91);
+    rectangle2.set_coords(10, 50);
     rectangle2.set_size(250, 50);
-    triangle1.set_coords(10, 91, 40, 91, 10, 121);
-    triangle2.set_coords(260, 91, 260, 121, 230, 91);
-    rectangle3.set_coords(160, 59);
+    triangle1.set_coords(10, 50, 40, 50, 10, 80);
+    triangle2.set_coords(260, 50, 260, 80, 230, 50);
+    rectangle3.set_coords(160, 18);
     rectangle3.set_size(30, 30);
 
 
@@ -70,7 +105,7 @@ Car::Car() {
 
 }
 
-void Plane::draw(std::shared_ptr<sf::RenderWindow>& window) {
+void Plane::draw() {
     triangle1.draw(window);
     triangle2.draw(window);
     triangle3.draw(window);
@@ -83,7 +118,32 @@ void Plane::draw(std::shared_ptr<sf::RenderWindow>& window) {
     circle3.draw(window);
 
 }
- Plane::Plane() {
+ Plane::Plane(std::shared_ptr<sf::RenderWindow>& win) :
+
+ circle1(this),
+ circle2(this),
+ circle3(this),
+
+
+ triangle1(this),
+ triangle2(this),
+ triangle3(this),
+ triangle4(this),
+ rectangle1(this),
+ rectangle2(this),
+ rectangle3(this),
+     FrameFigure(win)
+ 
+ {
+
+     xmin = 0;
+     xmax = 280;
+     ymin = 0;
+     ymax = 370;
+
+
+     calcKoeff();
+
      circle1.set_radius(15);
      circle2.set_radius(15);
      circle3.set_radius(15);
@@ -116,7 +176,28 @@ void Plane::draw(std::shared_ptr<sf::RenderWindow>& window) {
 
 }
 
-Flower::Flower(){
+Flower::Flower(std::shared_ptr<sf::RenderWindow>& win)
+    :circle1(this),
+    circle2(this),
+    circle3(this),
+    circle4(this),
+    center_circle(this),
+
+    triangle1(this),
+    triangle2(this),
+    triangle3(this),
+    rectangle(this),
+    FrameFigure(win)
+{
+
+    xmin = 0;
+    xmax = 190;
+    ymin = 0;
+    ymax = 320;
+
+
+    calcKoeff();
+
   circle1.set_radius(30);
   circle2.set_radius(30);
   circle3.set_radius(30);
@@ -150,7 +231,7 @@ Flower::Flower(){
   rectangle.set_size(10, 180);
 }
 
-void Flower::draw(std::shared_ptr<sf::RenderWindow>& window) {
+void Flower::draw() {
   circle1.draw(window);
   circle2.draw(window);
   circle3.draw(window);
@@ -164,26 +245,47 @@ void Flower::draw(std::shared_ptr<sf::RenderWindow>& window) {
   rectangle.draw(window);
 }
 
-Tower::Tower() {
-    static int indexColor = rand() % roof.size();
-    triangle1.set_coords(17,88,62,42,113 ,88);
-    int x = 14;
-    triangle2.set_coords(112+x, 88, 157+x, 42, 208+x, 88);
-    x = 124;
-    triangle3.set_coords(112 + x, 88, 157 + x, 42, 208 + x, 88);
+Tower::Tower(std::shared_ptr<sf::RenderWindow>& win):
+    triangle1(this),
+triangle2(this),
+triangle3(this),
+ rectangle1(this),
+ rectangle2(this),
+ rectangle3(this),
+circle1(this), 
+FrameFigure(win)
+{
+    int y = -40;
+    int x = -15;
+    
+    xmin = 0;
+    xmax = 330;
+    ymin = 0;
+    ymax = 160;
 
-    circle1.set_coords(145, 110);
+
+    calcKoeff();
+
+    static int indexColor = rand() % roof.size();
+    triangle1.set_coords(17+x,88+ y,62 + x,42+ y,113 + x,88+ y);
+    
+    //triangle2.set_coords(112+x, 88, 157+x, 42, 208+x, 88);
+    triangle2.set_coords(126 + x, 88+ y, 171 + x, 42+ y, 222 + x, 88+ y);
+    
+    triangle3.set_coords(236 + x, 88 + y, 281 + x, 42 + y, 332 + x, 88 + y);
+
+    circle1.set_coords(145 + x, 110 + y);
     circle1.set_radius(30);
 
-    rectangle1.set_coords(20, 90);
+    rectangle1.set_coords(20 + x, 90 + y);
     rectangle1.set_size(90, 110);
     rectangle1.set_color(color::lightskyblue);
 
-    rectangle2.set_coords(130, 90);
+    rectangle2.set_coords(130 + x, 90 + y);
     rectangle2.set_size(90, 110);
     rectangle2.set_color(color::lightskyblue);
 
-    rectangle3.set_coords(240, 90);
+    rectangle3.set_coords(240 + x, 90 + y);
     rectangle3.set_size(90, 110);
     rectangle3.set_color(color::lightskyblue);
     srand((unsigned int)time(NULL));
@@ -192,7 +294,7 @@ Tower::Tower() {
     triangle3.set_color(*wheels[indexColor]);
 
 };
-void Tower::draw(std::shared_ptr<sf::RenderWindow>& window) {
+void Tower::draw() {
     triangle1.draw(window);
     triangle2.draw(window);
     triangle3.draw(window);
@@ -207,7 +309,27 @@ void Tower::draw(std::shared_ptr<sf::RenderWindow>& window) {
 }
 
 
-Tree::Tree() {
+Tree::Tree(std::shared_ptr<sf::RenderWindow>& win):
+    circle1(this),
+    circle2(this),
+    circle3(this),
+    circle4(this),
+    center_circle(this),
+    triangle1(this), 
+    triangle2(this), 
+    triangle3(this), 
+    rectangle(this),
+    FrameFigure(win)
+{
+
+    xmin = 0;
+    xmax = 360;
+    ymin = 0;
+    ymax = 264;
+
+
+    calcKoeff();
+
     circle1.set_radius(15);
     circle2.set_radius(15);
     circle3.set_radius(15);
@@ -243,7 +365,7 @@ Tree::Tree() {
     rectangle.set_size(10, 60);
 }
 
-void Tree::draw(std::shared_ptr<sf::RenderWindow>& window) {
+void Tree::draw() {
     circle1.draw(window);
     circle2.draw(window);
     circle3.draw(window);
@@ -260,15 +382,32 @@ void Tree::draw(std::shared_ptr<sf::RenderWindow>& window) {
 
 
 
-Butterfly::Butterfly() {
+Butterfly::Butterfly(std::shared_ptr<sf::RenderWindow>& win) :
+    triangle1(this),
+    triangle2(this),
+    triangle3(this),
+    triangle4(this),
+    triangle5(this),
+    rectangle1(this),
+    rectangle2(this),
+    rectangle3(this),
+    rectangle4(this),
+    rectangle5(this),
+    circle1(this),
+    circle2(this),
+    circle3(this),
+    circle4(this),
+    circle5(this),
+    FrameFigure(win)
+{
+    //window = win;
     xmin = 8;
     xmax = 416;
     ymin = 2;
     ymax = 303;
-    //int  widthFigure = xmax - xmin;
-    //int  heightFigure = ymax - ymin;
 
 
+    calcKoeff();
                 
     rectangle1.set_coords(192, 137);
     
@@ -326,7 +465,7 @@ Butterfly::Butterfly() {
 
 }
 
-void Butterfly::draw(std::shared_ptr<sf::RenderWindow>& window) {
+void Butterfly::draw() {
 
     circle1.draw(window);
 
@@ -349,5 +488,5 @@ void Butterfly::draw(std::shared_ptr<sf::RenderWindow>& window) {
 
 
     
-   // window->draw(sprite);
+
 }

@@ -31,18 +31,7 @@ const std::vector<pica> flower = {
   {rectangle,0,105,160,0,0,0,0,sf::Color(42, 170, 205) , sf::Color(0,0,0) ,Settings::THICKNESS,   0,10,180}
 };
 
-//const std::vector<pica> tree = {
-//  {circle, 1000,15,155,0,0,0,0,sf::Color(255, 96, 114) , sf::Color(0,0,0) ,Settings::THICKNESS,   2.0f, 0,0 },
-//  {circle, 10,245,155,0,0,0,0,sf::Color(107, 177, 0) , sf::Color(0,0,0) ,Settings::THICKNESS,   2.0f, 0,0 },
-//  {circle, 10,-45,224,0,0,0,0,sf::Color(107, 177, 0) , sf::Color(0,0,0) ,Settings::THICKNESS,   2.0f, 0,0},
-//  {circle,10,315,224,0,0,0,0,sf::Color(181, 72, 213) , sf::Color(0,0,0) ,Settings::THICKNESS,   2.0f, 0,0 },
-//  {circle,10,131,10,0,0,0,0,sf::Color(255, 220, 156) , sf::Color(0,0,0) ,Settings::THICKNESS,   2.0f, 0,0 },
-//  
-//  {triangle,10,0.0f  ,150.0f + 60.0f,290.0f  ,150.0f + 60.0f,145.50f ,90.0f + 60.0f, sf::Color(60, 255, 5) , sf::Color(0,0,0) ,Settings::THICKNESS, 0,0,0},
-//  {triangle,10,50.0f ,80.0f + 60.0f,230.0f  ,80.0f + 60.0f,140.0f   ,30.0f + 60.0f, sf::Color(60, 255, 5) , sf::Color(0,0,0) ,Settings::THICKNESS, 0,0,0},
-//  {triangle,10,80.0f ,23.0f + 60.0f,200.0f  ,23.0f + 60.0f,140.0f   ,0.0f + 40.0f, sf::Color(60, 255, 5) , sf::Color(0,0,0) ,Settings::THICKNESS, 0,0,0},
-//  {rectangle,0,137,100,0,0,0,0,sf::Color(42, 170, 205) , sf::Color(0,0,0) ,Settings::THICKNESS,   0,10,180}
-//};
+
 
 const std::vector<pica> tree = {
 

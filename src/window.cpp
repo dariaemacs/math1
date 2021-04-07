@@ -333,46 +333,12 @@ QuestType1::QuestType1(int w, int h, int questNumber, const std::vector<pica>& f
       }
     }
 
-    // for (int i = 0; i < cQTY1; i++)
-    //   window->draw(C1[i]);
-    // std::vector<sf::RectangleShape>& R1 = img1.GetRectangleFigure();
 
 
-    // for (int i = 0; i < rQTY1; i++)
-    //   window->draw(R1[i]);
-
-      
-    // std::vector<sf::ConvexShape> G1 = img1.GetTriangleFigure();
-    // for (int i = 0; i < tQTY1; i++)
-    //   window->draw(G1[i]);
-    /*
-    std::vector<sf::CircleShape>& C2 = img2.GetCircle();
-        
-    for (int i = 0; i < cQTY2; i++)
-      window->draw(C2[i]);
-       
-    std::vector<sf::RectangleShape>& R2 = img2.GetRectangleFigure();
-    for (int i = 0; i < rQTY2; i++)
-      window->draw(R2[i]);
-    int tQTY2 = img2.getGetTriangleFigureQTY();
-    std::vector<sf::ConvexShape> G2 = img2.GetTriangleFigure();
-    for (int i = 0; i < tQTY2; i++)
-      window->draw(G2[i]);
-
-    std::vector<std::unique_ptr<sf::Sprite>>& B = Buttons.getButtons();
-    for (int i = 0; i < Buttons.getButtonCount(); i++)
-      window->draw(*B[i]);
-    window->draw(CheckButtonSprite);
-    */
-    //    window->draw(Buttons.getButtons()[i]);
-
-    Butterfly tower;
+    Flower tower(window);
     
-    tower.draw(window);
-    //Flower flower;
-    //flower.draw(window);
-    //Tree tree;
-    //tree.draw(window);
+    tower.draw();
+
     window->display();
   }
 }

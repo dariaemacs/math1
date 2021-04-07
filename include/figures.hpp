@@ -5,34 +5,39 @@
 #include "color.hpp"
 
 #include <memory>
-const float koeff = 0.5;
+//const float koeff = 1;
 
 
-//struct Rotation {
-//    const float PI = 3.14159265;
-//    float cosGradus(double alpha)
-//    {
-//        return cos(alpha * PI / 180);
-//    }
-//    float sinGradus(double alpha)
-//    {
-//        return sin(alpha * PI / 180);
-//    }
-//};
-struct FrameFigure {
+
+class FrameFigure {
+protected:
     int xmin;
     int xmax;
-
     int ymin;
     int ymax;
+    float koef=1;
+    std::shared_ptr<sf::RenderWindow>& window;
 
+public:
+    FrameFigure(std::shared_ptr<sf::RenderWindow>& w) : window(w) {}
+    void calcKoeff();
+    float getkoef() { return koef; }
+    int getxmin() { return xmin; }
+    int getxmax() { return xmax; }
+    int getymin() { return ymin; }
+    int getymax() { return ymax; }
+
+ 
 
 };
 
+
+
+
 class Circle{
 public:
-  Circle()
-    : circle{std::make_unique<sf::CircleShape>()}
+  Circle(FrameFigure* owner ): owner(owner)
+    , circle{std::make_unique<sf::CircleShape>()}
   {
     settings();
   }
@@ -50,7 +55,7 @@ public:
   }
 
   void set_coords(float x, float y){
-    circle->setPosition(x* koeff, y* koeff);
+    circle->setPosition(x* owner->getkoef()-(owner->getxmin()   *owner->getkoef()) , y* owner->getkoef()-(owner->getymin() * owner->getkoef()));
   }
 
   void settings(){
@@ -61,17 +66,18 @@ public:
       circle->rotate(angle);
   }
   void set_radius(float r) {
-    circle->setRadius(r* koeff);
+    circle->setRadius(r* owner->getkoef());
   }
 
 private:
+    FrameFigure* owner;
   std::unique_ptr<sf::CircleShape> circle;
 };
 
 class Triangle{
 public:
-  Triangle()
-    : triangle{std::make_unique<sf::ConvexShape>(3)}
+  Triangle(FrameFigure* owner): owner(owner),
+    triangle{std::make_unique<sf::ConvexShape>(3)}
   {
     settings();
   }
@@ -92,9 +98,9 @@ public:
   }
 
   void set_coords(float x0, float y0, float x1, float y1, float x2, float y2){
-    triangle->setPoint(0, sf::Vector2f(x0* koeff, y0* koeff));
-    triangle->setPoint(1, sf::Vector2f(x1* koeff, y1* koeff));
-    triangle->setPoint(2, sf::Vector2f(x2* koeff, y2* koeff));
+    triangle->setPoint(0, sf::Vector2f(x0* owner->getkoef() - (owner->getxmin() * owner->getkoef()), y0* owner->getkoef() - (owner->getymin() * owner->getkoef())));
+    triangle->setPoint(1, sf::Vector2f(x1* owner->getkoef() - (owner->getxmin() * owner->getkoef()), y1* owner->getkoef() - (owner->getymin() * owner->getkoef())));
+    triangle->setPoint(2, sf::Vector2f(x2* owner->getkoef() - (owner->getxmin() * owner->getkoef()), y2* owner->getkoef() - (owner->getymin() * owner->getkoef())));
   }
 
   void settings(){
@@ -103,14 +109,16 @@ public:
   }
 
 private:
+   FrameFigure* owner;
+
   std::unique_ptr<sf::ConvexShape> triangle;
 };
 
 
 class Rectangle  {
     public:
-  Rectangle()
-    : rectangle{std::make_unique<sf::RectangleShape>()}
+  Rectangle(FrameFigure* owner)
+    :owner(owner), rectangle{std::make_unique<sf::RectangleShape>()}
   {
     settings();
   }
@@ -133,13 +141,13 @@ class Rectangle  {
   void set_coords(float x0, float y0){
       x = x0 ;
       y = y0 ;
-    rectangle->setPosition(x* koeff, y* koeff);
+    rectangle->setPosition(x* owner->getkoef() - (owner->getxmin() * owner->getkoef()), y* owner->getkoef() - (owner->getymin() * owner->getkoef()));
   }
 
   void set_size(float width, float height){
       w = width;
       h = height;
-    rectangle->setSize(sf::Vector2f(width* koeff, height* koeff));
+    rectangle->setSize(sf::Vector2f(width* owner->getkoef(), height* owner->getkoef()));
   }
   
   void settings(){
@@ -154,17 +162,17 @@ private:
     float angle;
     int w;
     int h;
-
+    FrameFigure* owner;
   std::unique_ptr<sf::RectangleShape> rectangle;
 };
 
-
-class Plane : private FrameFigure
+/**/
+class Plane : public FrameFigure
 {
 public:
-    Plane();
+    Plane(std::shared_ptr<sf::RenderWindow>& window);
     ~Plane() {}
-    void draw(std::shared_ptr<sf::RenderWindow>& window);
+    void draw();
 
 private:
     Circle circle1;
@@ -182,7 +190,7 @@ private:
     Rectangle rectangle3;
 };
 
-class Tower:private FrameFigure
+class Tower:public FrameFigure
 {
 private:
     Triangle triangle1;
@@ -198,12 +206,12 @@ private:
     int maxY;
 
 public:
-    Tower();
+    Tower(std::shared_ptr<sf::RenderWindow>& window);
     ~Tower() {}
-    void draw(std::shared_ptr<sf::RenderWindow>& window);
+    void draw();
 };
 
-class Butterfly :private FrameFigure
+class Butterfly :public FrameFigure
 {
 private:
     Triangle triangle1;
@@ -216,7 +224,7 @@ private:
     Rectangle rectangle3;
     Rectangle rectangle4;
     Rectangle rectangle5;
-    sf::Texture T;
+
 
     Circle circle1;
     Circle circle2;
@@ -241,18 +249,18 @@ private:
 
 
 public:
-    Butterfly();
+    Butterfly(std::shared_ptr<sf::RenderWindow>& window);
     ~Butterfly() {}
-    void draw(std::shared_ptr<sf::RenderWindow>& window);
+    void draw();
 };
 
 
-class Car :private FrameFigure
+class Car :public FrameFigure
 {
 public:
-    Car();
+    Car(std::shared_ptr<sf::RenderWindow>& window);
     ~Car() {}
-    void draw(std::shared_ptr<sf::RenderWindow>& window);
+    void draw();
 
 private:
     Circle circle1;
@@ -268,11 +276,11 @@ private:
 };
 
 
-class Tree :private FrameFigure {
+class Tree :public FrameFigure {
 public:
-    Tree();
+    Tree(std::shared_ptr<sf::RenderWindow>& window);
     ~Tree() {}
-    void draw(std::shared_ptr<sf::RenderWindow>& window);
+    void draw();
 
 private:
     Circle circle1;
@@ -288,12 +296,12 @@ private:
     Rectangle rectangle;
 };
 
-class Flower :private FrameFigure {
+class Flower :public FrameFigure {
 public:
-  Flower();
+    Flower(std::shared_ptr<sf::RenderWindow>& window);
   ~Flower(){}
 
-  void draw(std::shared_ptr<sf::RenderWindow>& window);
+  void draw();
 
 private:
   Circle circle1;
