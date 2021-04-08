@@ -16,6 +16,8 @@ const std::array<figureQestions,N> questionFigure =
 
 
 
+
+
 const std::vector<pica> flower = {
   // type   r   x0 y0   x1y1 x2y2   FillColor               outlineColor       OutlineThickness    angle
   {circle, 30, 148,125, 0,0, 0,0, color::aqua, sf::Color(0,0,0), Settings::THICKNESS,   2.0f, 0, 0 },

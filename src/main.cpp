@@ -37,7 +37,8 @@ int main(){
 
 
         srand(time(0));
-        QuestType1 q(width, height, 1 - (rand() % 2), tree, tree, 17);
+        //QuestType1 q(width, height, 1 - (rand() % 2), tree, tree, 17);
+        //QuestType1 q2(width, height, 1 - (rand() % 2), tree, tree, 17);
 
         // Game game(config);
         // game.run();

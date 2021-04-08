@@ -3,6 +3,7 @@
 
 #include "settings.hpp"
 #include "pica.hpp"
+#include "figures.hpp"
 
 #include <iostream>
 #include <memory>
@@ -103,13 +104,12 @@ public:
 
 class QuestType1: public Window { 
    
-  SimpleImage img1;
-  SimpleImage img2;
+
   NumberButtons Buttons;
   int questNumber;
   bool check();
 public:
-  QuestType1(int w, int h, int questNumber, const std::vector<pica>& fig1, const std::vector<pica>& fig2, int qtyButtons);
+    QuestType1::QuestType1(int w, int h, int questNumber, int fig1, int fig2, int qtyButtons);
     
 };
 

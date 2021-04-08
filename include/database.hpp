@@ -3,6 +3,7 @@
 #include <vector>
 #include <array>
 #include "pica.hpp"
+#include "figures.hpp"
 
 struct figureQestions {
 	
@@ -16,7 +17,7 @@ const float FPS = 30.0f;
 
 
 extern const std::array<figureQestions, N> questionFigure;
-extern const std::vector<pica> flower;
+extern const std::vector<FrameFigure> figures;
 extern const std::vector<pica> tree;
 
 #endif //DATABASE_H

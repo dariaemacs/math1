@@ -23,8 +23,8 @@ void FrameFigure::calcKoeff() {
             frameHeightNew = (getymax() - getymin()) * koef;
             frameWidthNew = (getxmax() - getxmin()) * koef;
         }
-     margin_left = window->getSize().y;
-     width_last_figure = frameWidthNew;
+     margin_left = width_last_figure * window->getSize().x / 2 + abs((window->getSize().x / 2   - frameWidthNew ) / 2);
+     width_last_figure = 1;
      float f = window->getSize().y / 3;
      margin_top = (window->getSize().y - frameHeightNew)/2;
 

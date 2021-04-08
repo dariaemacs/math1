@@ -1,6 +1,6 @@
 #include "window.hpp"
 #include "database.hpp"
-#include "figures.hpp"
+//#include "figures.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -239,12 +239,12 @@ Window::Window(int w, int h, int numberQuest)
   sf::ContextSettings settings(0,0,8);
   
 
-  if (!first) {
+  //if (!first) {
     window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), "Game", sf::Style::Default, settings);//, sf::Style::Fullscreen);
     window->setFramerateLimit(Settings::FPS);
 
-    first = true;
-  }
+//    first = true;
+//  }
   
 }
 
@@ -286,22 +286,22 @@ bool Window::checkandnextQuest() {
   return false;
 }
 
-QuestType1::QuestType1(int w, int h, int questNumber, const std::vector<pica>& fig1, const std::vector<pica>& fig2, int qtyButtons) :
+QuestType1::QuestType1(int w, int h, int questNumber, int fig1, int fig2, int qtyButtons) :
   Window(w, h, questNumber),
-  img1(fig1, 30), img2(fig2, Settings::IMGPADDINGLEFT),
   Buttons(qtyButtons, h),
   questNumber(questNumber)
 {
   sf::Clock clock;
   sf::Time time_since_last_click = sf::Time::Zero;
     
-  int cQTY1 = img1.getCircleBaseFigureQTY();
-  int rQTY1 = img1.getRectangleFigureQTY();
-  int tQTY1 = img1.getGetTriangleFigureQTY();
-  int cQTY2 = img2.getCircleBaseFigureQTY();
-  int rQTY2 = img2.getRectangleFigureQTY();
-  Flower flower(window);
-  Car car(window);
+
+  const std::vector<FrameFigure*> figures =
+  {
+      new Car(window)
+  };
+  Car test(window);
+  figures[0].
+  
 
   while (window->isOpen()) {
     sf::Event event;
@@ -316,7 +316,7 @@ QuestType1::QuestType1(int w, int h, int questNumber, const std::vector<pica>& f
 
 
     
-    std::vector<sf::CircleShape>& C1 = img1.GetCircle();
+    //std::vector<sf::CircleShape>& C1 = img1.GetCircle();
 
         
 
@@ -335,9 +335,10 @@ QuestType1::QuestType1(int w, int h, int questNumber, const std::vector<pica>& f
 
       }
     }
+    //test
+    figa1.
 
-    flower.draw();
-    car.draw();
+    figa2.draw();
 
 
 

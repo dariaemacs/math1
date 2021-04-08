@@ -23,6 +23,7 @@ protected:
 
 
 public:
+    //FrameFigure() {}
     FrameFigure(std::shared_ptr<sf::RenderWindow>& w) : window(w) { 
         //number_of_figure_on_screen = number_of_figure_on_screen==0?1:6;
     
@@ -309,7 +310,7 @@ private:
 
 class Flower :public FrameFigure {
 public:
-    Flower(std::shared_ptr<sf::RenderWindow>& window);
+    Flower(std::shared_ptr<sf::RenderWindow>&   );
   ~Flower(){}
 
   void draw();
