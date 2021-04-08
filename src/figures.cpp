@@ -7,8 +7,7 @@ std::vector<const sf::Color*> wheels = { &color::aliceblue, &color::skyblue, &co
 
 std::vector<const sf::Color*> roof = { &color::red, &color::purple, &color::salmon };
 
-
-//#define koeff 0.5
+ int FrameFigure::width_last_figure = 0;
 
 
 void FrameFigure::calcKoeff() {
@@ -24,8 +23,10 @@ void FrameFigure::calcKoeff() {
             frameHeightNew = (getymax() - getymin()) * koef;
             frameWidthNew = (getxmax() - getxmin()) * koef;
         }
-     margin_left = (window->getSize().x/2 - frameWidthNew) / 2;
-     margin_top = window->getSize().y / 3 ;
+     margin_left = window->getSize().y;
+     width_last_figure = frameWidthNew;
+     float f = window->getSize().y / 3;
+     margin_top = (window->getSize().y - frameHeightNew)/2;
 
 }
 

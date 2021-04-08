@@ -1,3 +1,3 @@
 git add --all 
-git commit -m 'resize' 
+git commit -m 'last' 
 git push -u 

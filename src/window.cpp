@@ -300,6 +300,9 @@ QuestType1::QuestType1(int w, int h, int questNumber, const std::vector<pica>& f
   int tQTY1 = img1.getGetTriangleFigureQTY();
   int cQTY2 = img2.getCircleBaseFigureQTY();
   int rQTY2 = img2.getRectangleFigureQTY();
+  Flower flower(window);
+  Car car(window);
+
   while (window->isOpen()) {
     sf::Event event;
     while (window->pollEvent(event)) {
@@ -333,11 +336,11 @@ QuestType1::QuestType1(int w, int h, int questNumber, const std::vector<pica>& f
       }
     }
 
+    flower.draw();
+    car.draw();
 
 
-    Flower tower(window);
-    
-    tower.draw();
+
 
     window->display();
   }

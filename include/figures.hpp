@@ -11,18 +11,22 @@
 
 class FrameFigure {
 protected:
+    static int width_last_figure  ;
     int xmin;
     int xmax;
     int ymin;
     int ymax;
     float koef=1;
     std::shared_ptr<sf::RenderWindow>& window;
-    int margin_left=0;
+    int margin_left;
     int margin_top = 0;
 
 
 public:
-    FrameFigure(std::shared_ptr<sf::RenderWindow>& w) : window(w) {}
+    FrameFigure(std::shared_ptr<sf::RenderWindow>& w) : window(w) { 
+        //number_of_figure_on_screen = number_of_figure_on_screen==0?1:6;
+    
+    }
     void calcKoeff();
     float getkoef() { return koef; }
     int getxmin() { return xmin; }
