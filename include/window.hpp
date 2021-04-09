@@ -109,7 +109,7 @@ class QuestType1: public Window {
   int questNumber;
   bool check();
 public:
-    QuestType1::QuestType1(int w, int h, int questNumber, int fig1, int fig2, int qtyButtons);
+    QuestType1(int w, int h, int questNumber, int fig1, int fig2, int qtyButtons);
     
 };
 

@@ -250,20 +250,20 @@ Window::Window(int w, int h, int numberQuest)
 
 
 bool QuestType1::check() {
-  switch (questionFigure[questNumber].key)
-    {
-    case circle:
-      if ((img1.getCircleBaseFigureQTY() + img2.getCircleBaseFigureQTY()) == Buttons.GetButtonsClickID() + 1)
-        return true;
-      break;
-    case triangle:
-      if ((img1.getGetTriangleFigureQTY() + img2.getGetTriangleFigureQTY()) == Buttons.GetButtonsClickID() + 1)
-        return true;
-      break;
-    case square:
-    default:
-      break;
-    }
+  //switch (questionFigure[questNumber].key)
+  //  {
+  //  case circle:
+  //    if ((img1.getCircleBaseFigureQTY() + img2.getCircleBaseFigureQTY()) == Buttons.GetButtonsClickID() + 1)
+  //      return true;
+  //    break;
+  //  case triangle:
+  //    if ((img1.getGetTriangleFigureQTY() + img2.getGetTriangleFigureQTY()) == Buttons.GetButtonsClickID() + 1)
+  //      return true;
+  //    break;
+  //  case square:
+  //  default:
+  //    break;
+  //  }
 
 
 
@@ -293,15 +293,26 @@ QuestType1::QuestType1(int w, int h, int questNumber, int fig1, int fig2, int qt
 {
   sf::Clock clock;
   sf::Time time_since_last_click = sf::Time::Zero;
-    
-
+  FrameFigure::resetnumber_of_figure();
+      //FrameFigure::width_last_figure = 0;
   const std::vector<FrameFigure*> figures =
   {
-      new Car(window)
+      new Car(window), 
+      new Flower(window),
+      new Tree(window),
+      new Butterfly(window),
+      new Plane(window),
+      new Tower(window),
   };
-  Car test(window);
-  figures[0].
-  
+
+ 
+  window->clear();
+  window->draw(List);
+  window->draw(textFrame.gettext());
+  figures[fig1]->draw();
+  figures[fig2]->draw();
+
+  window->display();
 
   while (window->isOpen()) {
     sf::Event event;
@@ -310,13 +321,10 @@ QuestType1::QuestType1(int w, int h, int questNumber, int fig1, int fig2, int qt
         window->close();
       }
     }
-    window->clear();
-    window->draw(List);
-    window->draw(textFrame.gettext());
 
 
     
-    //std::vector<sf::CircleShape>& C1 = img1.GetCircle();
+
 
         
 
@@ -335,14 +343,11 @@ QuestType1::QuestType1(int w, int h, int questNumber, int fig1, int fig2, int qt
 
       }
     }
-    //test
-    figa1.
-
-    figa2.draw();
 
 
 
 
-    window->display();
+
+
   }
 }

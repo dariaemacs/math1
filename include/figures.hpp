@@ -11,7 +11,8 @@
 
 class FrameFigure {
 protected:
-    static int width_last_figure  ;
+    static char number_of_figure;      //0,1
+    
     int xmin;
     int xmax;
     int ymin;
@@ -25,9 +26,10 @@ protected:
 public:
     //FrameFigure() {}
     FrameFigure(std::shared_ptr<sf::RenderWindow>& w) : window(w) { 
-        //number_of_figure_on_screen = number_of_figure_on_screen==0?1:6;
+       
     
     }
+    static void resetnumber_of_figure() { number_of_figure = 0; }
     void calcKoeff();
     float getkoef() { return koef; }
     int getxmin() { return xmin; }
@@ -39,7 +41,7 @@ public:
     }
     int getmargin_left() { return margin_left; }
 
- 
+    virtual void draw() {}
 
 };
 
@@ -184,7 +186,7 @@ class Plane : public FrameFigure
 public:
     Plane(std::shared_ptr<sf::RenderWindow>& window);
     ~Plane() {}
-    void draw();
+    virtual void draw();
 
 private:
     Circle circle1;
@@ -220,7 +222,7 @@ private:
 public:
     Tower(std::shared_ptr<sf::RenderWindow>& window);
     ~Tower() {}
-    void draw();
+    virtual void draw();
 };
 
 class Butterfly :public FrameFigure
@@ -263,7 +265,7 @@ private:
 public:
     Butterfly(std::shared_ptr<sf::RenderWindow>& window);
     ~Butterfly() {}
-    void draw();
+    virtual void draw();
 };
 
 
@@ -272,7 +274,7 @@ class Car :public FrameFigure
 public:
     Car(std::shared_ptr<sf::RenderWindow>& window);
     ~Car() {}
-    void draw();
+    virtual void draw();
 
 private:
     Circle circle1;
@@ -313,7 +315,7 @@ public:
     Flower(std::shared_ptr<sf::RenderWindow>&   );
   ~Flower(){}
 
-  void draw();
+  virtual void draw();
 
 private:
   Circle circle1;
