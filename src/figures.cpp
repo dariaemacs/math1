@@ -3,9 +3,160 @@
 #include <ctime>
 
 #define PI 3.14159265
-std::vector<const sf::Color*> wheels = { &color::aliceblue, &color::skyblue, &color::salmon };
+//std::vector<const sf::Color*> wheels = { &color::aliceblue, &color::skyblue, &color::salmon };
 
-std::vector<const sf::Color*> roof = { &color::red, &color::purple, &color::salmon };
+std::vector<const sf::Color*> Colors = { 
+&color::aliceblue                ,
+&color::antiquewhite             ,
+&color::aqua                     ,
+&color::aquamarine               ,
+&color::azure                    ,
+&color::beige                    ,
+&color::bisque                   ,
+&color::black                    ,
+&color::blanchedalmond           ,
+&color::blue                     ,
+&color::blueviolet               ,
+&color::brown                    ,
+&color::burlywood                ,
+&color::cadetblue                ,
+&color::chartreuse               ,
+&color::chocolate                ,
+&color::coral                    ,
+&color::cornflowerblue           ,
+&color::cornsilk                 ,
+&color::crimson                  ,
+&color::cyan                     ,
+&color::darkblue                 ,
+&color::darkcyan                 ,
+&color::darkgoldenrod            ,
+&color::darkgray                 ,
+&color::darkgreen                ,
+&color::darkgrey                 ,
+&color::darkkhaki                ,
+&color::darkmagenta              ,
+&color::darkolivegreen           ,
+&color::darkorange               ,
+&color::darkorchid               ,
+&color::darkred                  ,
+&color::darksalmon               ,
+&color::darkseagreen             ,
+&color::darkslateblue            ,
+&color::darkslategray            ,
+&color::darkslategrey            ,
+&color::darkturquoise            ,
+&color::darkviolet               ,
+&color::deeppink                 ,
+&color::deepskyblue              ,
+&color::dimgray                  ,
+&color::dimgrey                  ,
+&color::dodgerblue               ,
+&color::firebrick                ,
+&color::floralwhite              ,
+&color::forestgreen              ,
+&color::fuchsia                  ,
+&color::gainsboro                ,
+&color::ghostwhite               ,
+&color::gold                     ,
+&color::goldenrod                ,
+&color::gray                     ,
+&color::green                    ,
+&color::greenyellow              ,
+&color::grey                     ,
+&color::honeydew                 ,
+&color::hotpink                  ,
+&color::indianred                ,
+&color::indigo                   ,
+&color::ivory                    ,
+&color::khaki                    ,
+&color::lavender                 ,
+&color::lavenderblush            ,
+&color::lawngreen                ,
+&color::lemonchiffon             ,
+&color::lightblue                ,
+&color::lightcoral               ,
+&color::lightcyan                ,
+&color::lightgoldenrodyellow     ,
+&color::lightgray                ,
+&color::lightgreen               ,
+&color::lightgrey                ,
+&color::lightpink                ,
+&color::lightsalmon              ,
+&color::lightseagreen            ,
+&color::lightskyblue             ,
+&color::lightslategray           ,
+&color::lightslategrey           ,
+&color::lightsteelblue           ,
+&color::lightyellow              ,
+&color::lime                     ,
+&color::limegreen                ,
+&color::linen                    ,
+&color::magenta                  ,
+&color::maroon                   ,
+&color::mediumaquamarine         ,
+&color::mediumblue               ,
+&color::mediumorchid             ,
+&color::mediumpurple             ,
+&color::mediumseagreen           ,
+&color::mediumslateblue          ,
+&color::mediumspringgreen        ,
+&color::mediumturquoise          ,
+&color::mediumvioletred          ,
+&color::midnightblue             ,
+&color::mintcream                ,
+&color::mistyrose                ,
+&color::moccasin                 ,
+&color::navajowhite              ,
+&color::navy                     ,
+&color::oldlace                  ,
+&color::olive                    ,
+&color::olivedrab                ,
+&color::orange                   ,
+&color::orangered                ,
+&color::orchid                   ,
+&color::palegoldenrod            ,
+&color::palegreen                ,
+&color::paleturquoise            ,
+&color::palevioletred            ,
+&color::papayawhip               ,
+&color::peachpuff                ,
+&color::peru                     ,
+&color::pink                     ,
+&color::plum                     ,
+&color::powderblue               ,
+&color::purple                   ,
+&color::red                      ,
+&color::rosybrown                ,
+&color::royalblue                ,
+&color::saddlebrown              ,
+&color::salmon                   ,
+&color::sandybrown               ,
+&color::seagreen                 ,
+&color::seashell                 ,
+&color::sienna                   ,
+&color::silver                   ,
+&color::skyblue                  ,
+&color::slateblue                ,
+&color::slategray                ,
+&color::slategrey                ,
+&color::snow                     ,
+&color::springgreen              ,
+&color::steelblue                ,
+&color::tan                      ,
+&color::teal                     ,
+&color::thistle                  ,
+&color::tomato                   ,
+&color::turquoise                ,
+&color::violet                   ,
+&color::wheat                    ,
+&color::white                    ,
+&color::whitesmoke               ,
+&color::yellow                   ,
+&color::yellowgreen              ,
+
+
+
+};
 
 char FrameFigure::number_of_figure = 0;
 
@@ -36,8 +187,15 @@ void Car::draw() {
     calcKoeff();
 
     srand((unsigned int)time(NULL));
-    static int indexColor1 = rand() % wheels.size();
-    static int indexColor2 = rand() % wheels.size();
+    int indexColor1 = rand() % Colors.size();
+    int indexColor2 = rand() % Colors.size();
+    int indexColor3 = rand() % Colors.size();
+    int indexColor4 = rand() % Colors.size();
+    int indexColor5 = rand() % Colors.size();
+    int indexColor6 = rand() % Colors.size();
+    int indexColor7 = rand() % Colors.size();
+    int indexColor8 = rand() % Colors.size();
+    //int indexColor9 = rand() % Colors.size();
     circle1.set_radius(35);
     circle2.set_radius(35);
     circle3.set_radius(15);
@@ -46,14 +204,28 @@ void Car::draw() {
     //int colorwheelsSize = sizeof(wheels) / sizeof(wheels*);
     int y = 41;
 
-    circle1.set_color(*wheels[indexColor1]);
-    circle2.set_color(*wheels[indexColor1]);
+    circle1.set_color(*Colors[indexColor1]);
+    circle2.set_color(*Colors[indexColor1]);
 
 
     srand((unsigned int)time(NULL));
 
-    circle3.set_color(*wheels[indexColor2]);
-    circle4.set_color(*wheels[indexColor2]);
+    circle3.set_color(*Colors[indexColor2]);
+    circle4.set_color(*Colors[indexColor2]);
+
+
+    rectangle1.set_color(*Colors[indexColor3]);
+    rectangle2.set_color(*Colors[indexColor4]);
+    rectangle3.set_color(*Colors[indexColor5]);
+    
+    circle1.set_color(*Colors[indexColor1]);
+    circle2.set_color(*Colors[indexColor1]);
+    circle3.set_color(*Colors[indexColor2]);
+    circle4.set_color(*Colors[indexColor2]);
+
+    circle5.set_color(*Colors[indexColor6]);
+    triangle1.set_color(*Colors[indexColor7]);
+    triangle2.set_color(*Colors[indexColor8]);
 
     circle1.set_coords(190, 101);
     circle2.set_coords(20, 101);
@@ -107,13 +279,22 @@ FrameFigure(win)
 void Plane::draw() {
     calcKoeff();
 
+    int indexColor1 = rand() % Colors.size();
+    int indexColor2 = rand() % Colors.size();
+    int indexColor3 = rand() % Colors.size();
+    int indexColor4 = rand() % Colors.size();
+    int indexColor5 = rand() % Colors.size();
+    int indexColor6 = rand() % Colors.size();
+    int indexColor7 = rand() % Colors.size();
+    int indexColor8 = rand() % Colors.size();
+
     circle1.set_radius(15);
     circle2.set_radius(15);
     circle3.set_radius(15);
 
-    circle1.set_color(color::aqua);
-    circle2.set_color(color::aqua);
-    circle3.set_color(color::aqua);
+    circle1.set_color(*Colors[indexColor1]);
+    circle2.set_color(*Colors[indexColor1]);
+    circle3.set_color(*Colors[indexColor1]);
 
     circle1.set_coords(155, 145);
     circle2.set_coords(115, 145);
@@ -135,6 +316,16 @@ void Plane::draw() {
     rectangle2.set_size(20, 126);
     rectangle3.set_coords(145, 197);
     rectangle3.set_size(20, 126);
+
+
+    triangle1.set_color(*Colors[indexColor2]);
+    triangle2.set_color(*Colors[indexColor3]);
+    triangle3.set_color(*Colors[indexColor4]);
+    triangle4.set_color(*Colors[indexColor5]);
+    rectangle1.set_color(*Colors[indexColor6]);
+    rectangle2.set_color(*Colors[indexColor7]);
+    rectangle3.set_color(*Colors[indexColor8]);
+
 
 
     triangle1.draw(window);
@@ -235,6 +426,30 @@ void Flower::draw() {
     rectangle.set_color(color::lightskyblue);
     rectangle.set_size(10, 180);
 
+    int indexColor1 = rand() % Colors.size();
+    int indexColor2 = rand() % Colors.size();
+    int indexColor3 = rand() % Colors.size();
+    int indexColor4 = rand() % Colors.size();
+    int indexColor5 = rand() % Colors.size();
+    int indexColor6 = rand() % Colors.size();
+    int indexColor7 = rand() % Colors.size();
+    int indexColor8 = rand() % Colors.size();
+    int indexColor9 = rand() % Colors.size();
+
+
+    circle1.set_color(*Colors[indexColor1]);
+    circle2.set_color(*Colors[indexColor2]);
+    circle3.set_color(*Colors[indexColor3]);
+    circle4.set_color(*Colors[indexColor4]);
+
+    center_circle.set_color(*Colors[indexColor5]);
+    
+    triangle1.set_color(*Colors[indexColor6]);
+    triangle2.set_color(*Colors[indexColor7]);
+
+    rectangle.set_color(*Colors[indexColor8]);
+
+
   circle1.draw(window);
   circle2.draw(window);
   circle3.draw(window);
@@ -271,10 +486,20 @@ FrameFigure(win)
 void Tower::draw() {
 
     calcKoeff();
+
+    int indexColor1 = rand() % Colors.size();
+    int indexColor2 = rand() % Colors.size();
+    int indexColor3 = rand() % Colors.size();
+    int indexColor4 = rand() % Colors.size();
+    int indexColor5 = rand() % Colors.size();
+    int indexColor6 = rand() % Colors.size();
+    int indexColor7 = rand() % Colors.size();
+    int indexColor8 = rand() % Colors.size();
+    int indexColor9 = rand() % Colors.size();
+
     int y = -40;
     int x = -15;
-    static int indexColor = rand() % roof.size();
-    triangle1.set_coords(17 + x, 88 + y, 62 + x, 42 + y, 113 + x, 88 + y);
+         triangle1.set_coords(17 + x, 88 + y, 62 + x, 42 + y, 113 + x, 88 + y);
 
     //triangle2.set_coords(112+x, 88, 157+x, 42, 208+x, 88);
     triangle2.set_coords(126 + x, 88 + y, 171 + x, 42 + y, 222 + x, 88 + y);
@@ -296,10 +521,17 @@ void Tower::draw() {
     rectangle3.set_size(90, 110);
     rectangle3.set_color(color::lightskyblue);
     srand((unsigned int)time(NULL));
-    triangle1.set_color(*wheels[indexColor]);
-    triangle2.set_color(*wheels[indexColor]);
-    triangle3.set_color(*wheels[indexColor]);
 
+
+    triangle1.set_color(*Colors[indexColor1]);
+    triangle2.set_color(*Colors[indexColor2]);
+    triangle3.set_color(*Colors[indexColor3]);
+
+    rectangle1.set_color(*Colors[indexColor4]);
+    rectangle2.set_color(*Colors[indexColor5]);
+    rectangle3.set_color(*Colors[indexColor6]);
+
+    circle1.set_color(*Colors[indexColor8]);
 
 
     triangle1.draw(window);
@@ -340,6 +572,16 @@ Tree::Tree(std::shared_ptr<sf::RenderWindow>& win):
 
 void Tree::draw() {
 
+    int indexColor1 = rand() % Colors.size();
+    int indexColor2 = rand() % Colors.size();
+    int indexColor3 = rand() % Colors.size();
+    int indexColor4 = rand() % Colors.size();
+    int indexColor5 = rand() % Colors.size();
+    int indexColor6 = rand() % Colors.size();
+    int indexColor7 = rand() % Colors.size();
+    int indexColor8 = rand() % Colors.size();
+    int indexColor9 = rand() % Colors.size();
+
     calcKoeff();
 
     circle1.set_radius(15);
@@ -353,13 +595,9 @@ void Tree::draw() {
     circle2.set_coords(285, 142);
     circle3.set_coords(325, 197);
     circle4.set_coords(3, 197);
-    //int h = 40;
+
     center_circle.set_coords(170, 0);
 
-    circle1.set_color(color::aqua);
-    circle2.set_color(color::red);
-    circle3.set_color(color::blue);
-    circle4.set_color(color::green);
 
     center_circle.set_color(color::red);
 
@@ -375,6 +613,11 @@ void Tree::draw() {
     rectangle.set_coords(178, 195);
     rectangle.set_color(color::lightskyblue);
     rectangle.set_size(10, 60);
+
+    circle1.set_color(*Colors[indexColor1]);
+        circle2.set_color(*Colors[indexColor2]);
+        circle3.set_color(*Colors[indexColor3]);
+        circle4.set_color(*Colors[indexColor4]);
 
     circle1.draw(window);
     circle2.draw(window);
@@ -431,6 +674,23 @@ void Butterfly::draw() {
 
     calcKoeff();
 
+    int indexColor1 = rand() % Colors.size();
+    int indexColor2 = rand() % Colors.size();
+    int indexColor3 = rand() % Colors.size();
+    int indexColor4 = rand() % Colors.size();
+    int indexColor5 = rand() % Colors.size();
+    int indexColor6 = rand() % Colors.size();
+    int indexColor7 = rand() % Colors.size();
+    int indexColor8 = rand() % Colors.size();
+    int indexColor9 = rand() % Colors.size();
+    int indexColor10 = rand() % Colors.size();
+    int indexColor11 = rand() % Colors.size();
+    int indexColor12 = rand() % Colors.size();
+    int indexColor13 = rand() % Colors.size();
+    int indexColor14 = rand() % Colors.size();
+    int indexColor15 = rand() % Colors.size();
+    int indexColor16 = rand() % Colors.size();
+
     rectangle1.set_coords(192, 137);
 
     rectangle1.set_color(color::lightskyblue);
@@ -479,9 +739,24 @@ void Butterfly::draw() {
 
     triangle3.set_coords(196, 58, 226, 58, 211, 79);
 
-    circle1.draw(window);
+    circle1.set_color(*Colors[indexColor1]);
+    triangle4.set_color(*Colors[indexColor2]);
+    triangle5.set_color(*Colors[indexColor3]);
+    rectangle1.set_color(*Colors[indexColor4]);
+    rectangle2.set_color(*Colors[indexColor5]);
+    rectangle3.set_color(*Colors[indexColor6]);
+    rectangle4.set_color(*Colors[indexColor7]);
+    rectangle5.set_color(*Colors[indexColor8]);
+    triangle1.set_color(*Colors[indexColor9]);
+    triangle2.set_color(*Colors[indexColor10]);
+    triangle3.set_color(*Colors[indexColor11]);
+    circle1.set_color(*Colors[indexColor12]);
+    circle2.set_color(*Colors[indexColor13]);
+    circle3.set_color(*Colors[indexColor14]);
+    circle4.set_color(*Colors[indexColor15]);
+    circle5.set_color(*Colors[indexColor16]);
 
-
+   circle1.draw(window);
    triangle4.draw(window);
    triangle5.draw(window);
    rectangle1.draw(window);

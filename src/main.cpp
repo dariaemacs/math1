@@ -19,7 +19,7 @@ int main(){
       //int width = 854;int height = 480;
       //int width = 1280;int height = 720;
       // int width = 1600;int height = 900;
-      //int width = 1920;int height = 1080;
+     // int width = 1920;int height = 1080;
       //int width = 2048;int height = 1152;
       //int width = 2560;int height =1440;
       // int width = 1440;int height = 900;
