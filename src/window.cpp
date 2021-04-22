@@ -72,6 +72,7 @@ NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
   this->ButtonCount = ButtonCount;
   using namespace std;
   int ButtonMarginTop = 0;
+  //float h = 
   //ofstream fout;
   //  fout.open("out.txt");
 
@@ -113,7 +114,7 @@ NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
       sprite->setScale(Settings::ButtonFactor, Settings::ButtonFactor);
     
       const sf::IntRect& rect = sprite->getTextureRect();
-      ButtonMarginTop = windowheight - (10+2*(rect.height * Settings::ButtonFactor));
+      ButtonMarginTop = windowheight - (10+2*(rect.height *  Settings::ButtonFactor));
       //fout<< "i="<<i <<" " <<ButtonMarginTop<< std::endl;
       sprite->move(100 * i, ButtonMarginTop);
       MyTexture.emplace_back(std::move(txt));
@@ -150,52 +151,51 @@ NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
 
 
 
-SimpleImage::SimpleImage(const std::vector<pica>& fig, int paddingleft) {
-  //(*fig)[0]
-  CircleBaseFigureQTY = 0; RectangleFigureQTY = 0; TriangleBaseFigureQTY = 0;
-
-
-  for (size_t i = 0; i < fig.size(); ++i)
-    {
-      switch (fig[i].type)
-        {
-        case circle:  CircleBaseFigure.emplace_back(sf::CircleShape(fig[i].r)); CircleBaseFigureQTY++;
-          CircleBaseFigure.back().move(fig[i].x0 + paddingleft, fig[i].y0 + Settings::TEXTFRAMHEIGHT);
-          CircleBaseFigure.back().setFillColor(fig[i].FillColor);
-          CircleBaseFigure.back().setOutlineColor(fig[i].outlineColor);
-          CircleBaseFigure.back().setOutlineThickness(fig[i].OutlineThickness);
-          CircleBaseFigure.back().rotate(fig[i].angle);
-          break;
-
-        case triangle:  TriangleFigure.emplace_back(sf::ConvexShape(3)); TriangleBaseFigureQTY++;
-          TriangleFigure.back().setPoint(0, sf::Vector2f(fig[i].x0, fig[i].y0));
-          TriangleFigure.back().setPoint(1, sf::Vector2f(fig[i].x1, fig[i].y1));
-          TriangleFigure.back().setPoint(2, sf::Vector2f(fig[i].x2, fig[i].y2));
-          TriangleFigure.back().setFillColor(fig[i].FillColor);
-          TriangleFigure.back().setOutlineColor(fig[i].outlineColor);
-          TriangleFigure.back().setOutlineThickness(fig[i].OutlineThickness);
-          TriangleFigure.back().move(paddingleft, Settings::TEXTFRAMHEIGHT);
-          break;
-
-        case rectangle:  RectangleFigure.emplace_back(sf::RectangleShape(sf::Vector2f(fig[i].width, fig[i].height))); RectangleFigureQTY++;
-          RectangleFigure.back().move(fig[i].x0 + paddingleft, fig[i].y0 + Settings::TEXTFRAMHEIGHT);
-          //RectangleFigure.back().move(fig[i].x + paddingleft, fig[i].y + Settings::TEXTFRAMHEIGHT);
-          RectangleFigure.back().setFillColor(fig[i].FillColor);
-          RectangleFigure.back().setOutlineColor(fig[i].outlineColor);
-          RectangleFigure.back().setOutlineThickness(fig[i].OutlineThickness);
-
-          RectangleFigure.back().rotate(fig[i].angle);
-          break;
-
-
-        default:
-          break;
-        }
-
-
-    }
-
-}
+//SimpleImage::SimpleImage(const std::vector<pica>& fig, int paddingleft) {
+//
+//  CircleBaseFigureQTY = 0; RectangleFigureQTY = 0; TriangleBaseFigureQTY = 0;
+//
+//
+//  for (size_t i = 0; i < fig.size(); ++i)
+//    {
+//      switch (fig[i].type)
+//        {
+//        case circle:  CircleBaseFigure.emplace_back(sf::CircleShape(fig[i].r)); CircleBaseFigureQTY++;
+//          CircleBaseFigure.back().move(fig[i].x0 + paddingleft, fig[i].y0 + Settings::TEXTFRAMHEIGHT);
+//          CircleBaseFigure.back().setFillColor(fig[i].FillColor);
+//          CircleBaseFigure.back().setOutlineColor(fig[i].outlineColor);
+//          CircleBaseFigure.back().setOutlineThickness(fig[i].OutlineThickness);
+//          CircleBaseFigure.back().rotate(fig[i].angle);
+//          break;
+//
+//        case triangle:  TriangleFigure.emplace_back(sf::ConvexShape(3)); TriangleBaseFigureQTY++;
+//          TriangleFigure.back().setPoint(0, sf::Vector2f(fig[i].x0, fig[i].y0));
+//          TriangleFigure.back().setPoint(1, sf::Vector2f(fig[i].x1, fig[i].y1));
+//          TriangleFigure.back().setPoint(2, sf::Vector2f(fig[i].x2, fig[i].y2));
+//          TriangleFigure.back().setFillColor(fig[i].FillColor);
+//          TriangleFigure.back().setOutlineColor(fig[i].outlineColor);
+//          TriangleFigure.back().setOutlineThickness(fig[i].OutlineThickness);
+//          TriangleFigure.back().move(paddingleft, Settings::TEXTFRAMHEIGHT);
+//          break;
+//
+//        case rectangle:  RectangleFigure.emplace_back(sf::RectangleShape(sf::Vector2f(fig[i].width, fig[i].height))); RectangleFigureQTY++;
+//          RectangleFigure.back().move(fig[i].x0 + paddingleft, fig[i].y0 + Settings::TEXTFRAMHEIGHT);         
+//          RectangleFigure.back().setFillColor(fig[i].FillColor);
+//          RectangleFigure.back().setOutlineColor(fig[i].outlineColor);
+//          RectangleFigure.back().setOutlineThickness(fig[i].OutlineThickness);
+//
+//          RectangleFigure.back().rotate(fig[i].angle);
+//          break;
+//
+//
+//        default:
+//          break;
+//        }
+//
+//
+//    }
+//
+//}
 
 
 TextFrameBase::TextFrameBase(int s, int quest) {
@@ -311,39 +311,42 @@ QuestType1::QuestType1(int w, int h, int questNumber, int fig1, int fig2, int qt
   window->draw(textFrame.gettext());
   figures[fig1]->draw();
   figures[fig2]->draw();
+  for (int bc = 0 ;bc< Buttons.getButtonCount() ; bc++)
+  window->draw(*Buttons.getButtons()[bc]);
 
+  //window->draw(Buttons.getButtons());
   window->display();
 
   while (window->isOpen()) {
     sf::Event event;
     while (window->pollEvent(event)) {
-      if (event.type == sf::Event::Closed) {
-        window->close();
-      }
+        if (event.type == sf::Event::Closed) {
+            window->close();
+        }
+
+
+
+
+
+
+
+
+        //button click: 
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            time_since_last_click = clock.restart();
+            sf::Int32 milli = time_since_last_click.asMilliseconds();
+            milli = milli;
+            if (readyforCheck && checkandnextQuest()) {
+                if (check())  textFrame.settext("Good");   else  textFrame.settext("Not good");
+            }
+            if (milli > ELAPSED_TIME) {
+
+                milli = milli;
+                if (Buttons.click(window)) { CheckButtonTexture.loadFromFile("resources/images/arrow_down.png"); readyforCheck = true; }
+
+            }
+        }
     }
-
-
-    
-
-
-        
-
-    //button click: 
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-      time_since_last_click = clock.restart();
-      sf::Int32 milli = time_since_last_click.asMilliseconds();
-      milli = milli;
-      if (readyforCheck && checkandnextQuest()) {
-        if (check())  textFrame.settext("Good");   else  textFrame.settext("Not good"); 
-      }
-      if (milli > ELAPSED_TIME) {
-
-        milli = milli;
-        if (Buttons.click(window)) { CheckButtonTexture.loadFromFile("resources/images/arrow_down.png"); readyforCheck = true; }
-
-      }
-    }
-
 
 
 

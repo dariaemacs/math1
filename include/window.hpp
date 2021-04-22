@@ -42,7 +42,8 @@ class SimpleImage {
   int RectangleFigureQTY;
   int TriangleBaseFigureQTY;
 
-public: SimpleImage(const std::vector<pica> & fig, int paddingleft);
+public: 
+   
   int getCircleBaseFigureQTY() { return CircleBaseFigureQTY; }
   int getRectangleFigureQTY()  { return RectangleFigureQTY; }
   int getGetTriangleFigureQTY() { return TriangleBaseFigureQTY; }
@@ -96,8 +97,8 @@ public:
 
   
   Window(int w, int h, int questNumber);
-
-      
+  //friend NumberButtons;
+  
 };
 
 
