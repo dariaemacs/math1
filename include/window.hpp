@@ -73,8 +73,8 @@ class Window {
   
 
 
-  int width;  
-  int height; 
+  static int width;  
+  static int height; 
   double coef;
   int space;
   int number; 
@@ -97,7 +97,7 @@ public:
 
   
   Window(int w, int h, int questNumber);
-  //friend NumberButtons;
+  friend NumberButtons;
   
 };
 
@@ -110,7 +110,7 @@ class QuestType1: public Window {
   int questNumber;
   bool check();
 public:
-    QuestType1(int w, int h, int questNumber, int fig1, int fig2, int qtyButtons);
+    QuestType1(int w, int h, int questNumber, int qtyButtons);
     
 };
 

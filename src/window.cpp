@@ -17,7 +17,10 @@
 
 bool Window::first = false;
 extern const int ELAPSED_TIME;
-//extern const std::array<figureQestions, N> questionFigure;
+
+
+int Window::width=0;
+int Window::height=0;
 
 
 std::wstring get_wstr(int i) {
@@ -71,26 +74,35 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
 NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
   this->ButtonCount = ButtonCount;
   using namespace std;
-  int ButtonMarginTop = 0;
-  //float h = 
-  //ofstream fout;
-  //  fout.open("out.txt");
+  int ButtonSlideHeght = Window::height / 3;
+
+  
+
+  //ButtonSlideHeght =  Window::height / 3;
+
+
+  int ButtonSlideWidth = Window::width * 2 / 3;
+  int ButtonSize = 0;
 
 
   if (ButtonCount<11) {
-    //fout<< "test"<<  std::endl;
-  
+      //one row of button 
+      ButtonSize = ButtonSlideWidth / ButtonCount - 4;
+      while (ButtonSize + 10 > ButtonSlideHeght)  ButtonSize--;
+      
+      static int ButtonMarginTop = (Window::height - ButtonSize)-5;
+
     for (int i = 0; i < ButtonCount; i++) {
       std::string fileName = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
       std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
       txt->loadFromFile(fileName);
-
+      static sf::Vector2u PICTURESIZE = txt->getSize();
       std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
       sprite->setTexture(*txt.get());
-      sprite->setScale(Settings::ButtonFactor, Settings::ButtonFactor);
+      sprite->setScale( (float)ButtonSize/ PICTURESIZE.y, (float)ButtonSize/ PICTURESIZE.y);
     
       const sf::IntRect& rect = sprite->getTextureRect();
-      ButtonMarginTop = windowheight - (rect.height * Settings::ButtonFactor);
+      //ButtonMarginTop = windowheight - (rect.height * Settings::ButtonFactor);
       sprite->move(100 * i, ButtonMarginTop);
       MyTexture.emplace_back(std::move(txt));
       Buttons.emplace_back(std::move(sprite));
@@ -98,10 +110,15 @@ NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
     }
   }
   else {
+      //two rows of button 
     int ButtonCountString1LastIndex = 10;
     int ButtonCountString2FirstIndex = ButtonCountString1LastIndex ;
     int ButtonCountString2LastIndex = ButtonCount ;
-    
+    ButtonSize = ButtonSlideWidth / ButtonCount ;
+    while (ButtonSize + 10 > ButtonSlideHeght)  ButtonSize--;
+
+    ButtonSize/=2;
+
     int i=0;
     for (i = 0; i < ButtonCountString1LastIndex; i++) {
       std::string fileName = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
@@ -114,9 +131,9 @@ NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
       sprite->setScale(Settings::ButtonFactor, Settings::ButtonFactor);
     
       const sf::IntRect& rect = sprite->getTextureRect();
-      ButtonMarginTop = windowheight - (10+2*(rect.height *  Settings::ButtonFactor));
+      //static int ButtonMarginTop = windowheight - (10+2*(rect.height *  Settings::ButtonFactor));
       //fout<< "i="<<i <<" " <<ButtonMarginTop<< std::endl;
-      sprite->move(100 * i, ButtonMarginTop);
+      //sprite->move(100 * i, ButtonMarginTop);
       MyTexture.emplace_back(std::move(txt));
       Buttons.emplace_back(std::move(sprite));
     }
@@ -133,11 +150,11 @@ NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
       sprite->setScale(Settings::ButtonFactor, Settings::ButtonFactor);
     
       const sf::IntRect& rect = sprite->getTextureRect();
-      ButtonMarginTop = windowheight - (10+(rect.height * Settings::ButtonFactor));
+      //ButtonMarginTop = windowheight - (10+(rect.height * Settings::ButtonFactor));
 
   
   
-      sprite->move(100 * c++, ButtonMarginTop);
+      //sprite->move(100 * c++, ButtonMarginTop);
       MyTexture.emplace_back(std::move(txt));
       Buttons.emplace_back(std::move(sprite));
       //fout<< "i="<<i <<" " <<ButtonMarginTop<< std::endl;
@@ -151,51 +168,6 @@ NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
 
 
 
-//SimpleImage::SimpleImage(const std::vector<pica>& fig, int paddingleft) {
-//
-//  CircleBaseFigureQTY = 0; RectangleFigureQTY = 0; TriangleBaseFigureQTY = 0;
-//
-//
-//  for (size_t i = 0; i < fig.size(); ++i)
-//    {
-//      switch (fig[i].type)
-//        {
-//        case circle:  CircleBaseFigure.emplace_back(sf::CircleShape(fig[i].r)); CircleBaseFigureQTY++;
-//          CircleBaseFigure.back().move(fig[i].x0 + paddingleft, fig[i].y0 + Settings::TEXTFRAMHEIGHT);
-//          CircleBaseFigure.back().setFillColor(fig[i].FillColor);
-//          CircleBaseFigure.back().setOutlineColor(fig[i].outlineColor);
-//          CircleBaseFigure.back().setOutlineThickness(fig[i].OutlineThickness);
-//          CircleBaseFigure.back().rotate(fig[i].angle);
-//          break;
-//
-//        case triangle:  TriangleFigure.emplace_back(sf::ConvexShape(3)); TriangleBaseFigureQTY++;
-//          TriangleFigure.back().setPoint(0, sf::Vector2f(fig[i].x0, fig[i].y0));
-//          TriangleFigure.back().setPoint(1, sf::Vector2f(fig[i].x1, fig[i].y1));
-//          TriangleFigure.back().setPoint(2, sf::Vector2f(fig[i].x2, fig[i].y2));
-//          TriangleFigure.back().setFillColor(fig[i].FillColor);
-//          TriangleFigure.back().setOutlineColor(fig[i].outlineColor);
-//          TriangleFigure.back().setOutlineThickness(fig[i].OutlineThickness);
-//          TriangleFigure.back().move(paddingleft, Settings::TEXTFRAMHEIGHT);
-//          break;
-//
-//        case rectangle:  RectangleFigure.emplace_back(sf::RectangleShape(sf::Vector2f(fig[i].width, fig[i].height))); RectangleFigureQTY++;
-//          RectangleFigure.back().move(fig[i].x0 + paddingleft, fig[i].y0 + Settings::TEXTFRAMHEIGHT);         
-//          RectangleFigure.back().setFillColor(fig[i].FillColor);
-//          RectangleFigure.back().setOutlineColor(fig[i].outlineColor);
-//          RectangleFigure.back().setOutlineThickness(fig[i].OutlineThickness);
-//
-//          RectangleFigure.back().rotate(fig[i].angle);
-//          break;
-//
-//
-//        default:
-//          break;
-//        }
-//
-//
-//    }
-//
-//}
 
 
 TextFrameBase::TextFrameBase(int s, int quest) {
@@ -212,13 +184,12 @@ TextFrameBase::TextFrameBase(int s, int quest) {
 
 
 Window::Window(int w, int h, int numberQuest)
-  : width(w), height(h),
+  : 
     textFrame(Settings::QUESTFONTSIZE, numberQuest) {
+    width = w;
+    height = h;
 
 
-  double xcoef = width / Settings::WIDTH;
-  double ycoef = height / Settings::HEIGHT;
-  coef = xcoef > ycoef ? xcoef : ycoef;
 
 
 
@@ -240,7 +211,7 @@ Window::Window(int w, int h, int numberQuest)
   
 
   //if (!first) {
-    window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), "Game", sf::Style::Default, settings);//, sf::Style::Fullscreen);
+  window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), "Game");//,  sf::Style::Fullscreen);
     window->setFramerateLimit(Settings::FPS);
 
 //    first = true;
@@ -286,7 +257,7 @@ bool Window::checkandnextQuest() {
   return false;
 }
 
-QuestType1::QuestType1(int w, int h, int questNumber, int fig1, int fig2, int qtyButtons) :
+QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
   Window(w, h, questNumber),
   Buttons(qtyButtons, h),
   questNumber(questNumber)
@@ -294,7 +265,8 @@ QuestType1::QuestType1(int w, int h, int questNumber, int fig1, int fig2, int qt
   sf::Clock clock;
   sf::Time time_since_last_click = sf::Time::Zero;
   FrameFigure::resetnumber_of_figure();
-      //FrameFigure::width_last_figure = 0;
+    
+  
   const std::vector<FrameFigure*> figures =
   {
       new Car(window), 
@@ -304,6 +276,11 @@ QuestType1::QuestType1(int w, int h, int questNumber, int fig1, int fig2, int qt
       new Plane(window),
       new Tower(window),
   };
+
+  int fig1 = (rand() % figures.size());
+  int fig2 = 0;
+  while ((fig2 = (rand() % figures.size()))==fig1);
+
 
  
   window->clear();
