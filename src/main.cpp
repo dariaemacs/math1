@@ -15,12 +15,12 @@ int main(){
 
       // int width = sf::VideoMode::getDesktopMode().width;int height = sf::VideoMode::getDesktopMode().height;
 
-      int width   = 640;int height = 360;
+      //int width   = 640;int height = 360;
       //int width = 854;int height = 480;
       //int width = 1280;int height = 720;
       // int width = 1600;int height = 900;
      // int width = 1920;int height = 1080;
-      //int width = 2048;int height = 1152;
+      int width = 2048;int height = 1152;
       //int width = 2560;int height =1440;
       // int width = 1440;int height = 900;
       //int width = 1536; int height = 960;
@@ -40,7 +40,7 @@ int main(){
         //QuestType1 q1(width, height, 1 - (rand() % 2), 0, 1, 17);
         //QuestType1 q2(width, height, 1 - (rand() % 2), 2, 3, 17);
       //  int width = 640; int height = 360;
-        QuestType1 q1(width, height, 1 - (rand() % 2), 5);
+        QuestType1 q1(width, height, 1 - (rand() % 2), 12);
         /*QuestType1 q2(width, height, 1 - (rand() % 2), 0, 1, 17);
         QuestType1 q3(width, height, 1 - (rand() % 2), 0, 2, 17);
         QuestType1 q4(width, height, 1 - (rand() % 2), 0, 3, 17);

@@ -42,8 +42,8 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
     const sf::IntRect& rect = Buttons[i]->getTextureRect();
     int x0 = position.x;
     int y0 = position.y;
-    int x1 = x0 + rect.width * Settings::ButtonFactor;
-    int y1 = y0 + rect.height * Settings::ButtonFactor;
+    int x1 = x0 + rect.width;
+    int y1 = y0 + rect.height ;
 
 
 
@@ -69,6 +69,7 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
 
   }
   return false;
+
 }
 
 NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
@@ -83,15 +84,20 @@ NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
 
   int ButtonSlideWidth = Window::width * 2 / 3;
   int ButtonSize = 0;
+  int marginLeft = 0;
+  int step = 0;
 
 
-  if (ButtonCount<11) {
+
       //one row of button 
-      ButtonSize = ButtonSlideWidth / ButtonCount - 4;
+  
+      ButtonSize = ButtonSlideWidth / ButtonCount ;
+      step = ButtonSize / 4;
+      ButtonSize = ButtonSize - step;
       while (ButtonSize + 10 > ButtonSlideHeght)  ButtonSize--;
       
-      static int ButtonMarginTop = (Window::height - ButtonSize)-5;
-
+      int ButtonMarginTop = (Window::height - ButtonSize)-5;
+      if (ButtonCount > 10) ButtonMarginTop = Window::height - (ButtonSize * 2 + step);
     for (int i = 0; i < ButtonCount; i++) {
       std::string fileName = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
       std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
@@ -103,65 +109,18 @@ NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
     
       const sf::IntRect& rect = sprite->getTextureRect();
       //ButtonMarginTop = windowheight - (rect.height * Settings::ButtonFactor);
-      sprite->move(100 * i, ButtonMarginTop);
+      
+      sprite->move(marginLeft, ButtonMarginTop);
+      marginLeft = marginLeft + ButtonSize + step  ;
+      if (i % 10 == 0 && i > 0) {
+          ButtonMarginTop = ButtonMarginTop + ButtonSize + step; marginLeft= 0;
+      }
       MyTexture.emplace_back(std::move(txt));
       Buttons.emplace_back(std::move(sprite));
     
     }
-  }
-  else {
-      //two rows of button 
-    int ButtonCountString1LastIndex = 10;
-    int ButtonCountString2FirstIndex = ButtonCountString1LastIndex ;
-    int ButtonCountString2LastIndex = ButtonCount ;
-    ButtonSize = ButtonSlideWidth / ButtonCount ;
-    while (ButtonSize + 10 > ButtonSlideHeght)  ButtonSize--;
-
-    ButtonSize/=2;
-
-    int i=0;
-    for (i = 0; i < ButtonCountString1LastIndex; i++) {
-      std::string fileName = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
-      std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
-      txt->loadFromFile(fileName);
-    
-      //fout<< "ButtonCountString2="<<ButtonCountString2 << std::endl;
-      std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
-      sprite->setTexture(*txt.get());
-      sprite->setScale(Settings::ButtonFactor, Settings::ButtonFactor);
-    
-      const sf::IntRect& rect = sprite->getTextureRect();
-      //static int ButtonMarginTop = windowheight - (10+2*(rect.height *  Settings::ButtonFactor));
-      //fout<< "i="<<i <<" " <<ButtonMarginTop<< std::endl;
-      //sprite->move(100 * i, ButtonMarginTop);
-      MyTexture.emplace_back(std::move(txt));
-      Buttons.emplace_back(std::move(sprite));
-    }
-    //string #2
-    int c = 0 ;
-    for (int i =  ButtonCountString2FirstIndex; i < ButtonCountString2LastIndex; i++) {
-      std::string fileName = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
-      std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
-      txt->loadFromFile(fileName);
-    
-      //fout<< "ButtonCountString2="<<ButtonCountString2 << std::endl;
-      std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
-      sprite->setTexture(*txt.get());
-      sprite->setScale(Settings::ButtonFactor, Settings::ButtonFactor);
-    
-      const sf::IntRect& rect = sprite->getTextureRect();
-      //ButtonMarginTop = windowheight - (10+(rect.height * Settings::ButtonFactor));
-
+ 
   
-  
-      //sprite->move(100 * c++, ButtonMarginTop);
-      MyTexture.emplace_back(std::move(txt));
-      Buttons.emplace_back(std::move(sprite));
-      //fout<< "i="<<i <<" " <<ButtonMarginTop<< std::endl;
-    }
-
-  
-  }
   //fout.close();  
 }
 
@@ -221,20 +180,20 @@ Window::Window(int w, int h, int numberQuest)
 
 
 bool QuestType1::check() {
-  //switch (questionFigure[questNumber].key)
-  //  {
-  //  case circle:
-  //    if ((img1.getCircleBaseFigureQTY() + img2.getCircleBaseFigureQTY()) == Buttons.GetButtonsClickID() + 1)
-  //      return true;
-  //    break;
-  //  case triangle:
-  //    if ((img1.getGetTriangleFigureQTY() + img2.getGetTriangleFigureQTY()) == Buttons.GetButtonsClickID() + 1)
-  //      return true;
-  //    break;
-  //  case square:
-  //  default:
-  //    break;
-  //  }
+  switch (questionFigure[questNumber].key)
+    {
+    case circle:
+      if (5+10 == Buttons.GetButtonsClickID() + 1)
+        return true;
+      break;
+    case triangle:
+      if (67+90 == Buttons.GetButtonsClickID() + 1)
+        return true;
+      break;
+    case square:
+    default:
+      break;
+    }
 
 
 
@@ -291,7 +250,7 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
   for (int bc = 0 ;bc< Buttons.getButtonCount() ; bc++)
   window->draw(*Buttons.getButtons()[bc]);
 
-  //window->draw(Buttons.getButtons());
+
   window->display();
 
   while (window->isOpen()) {
@@ -300,13 +259,6 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
         if (event.type == sf::Event::Closed) {
             window->close();
         }
-
-
-
-
-
-
-
 
         //button click: 
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
