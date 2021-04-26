@@ -9,41 +9,41 @@
 
 
 
-class FrameFigure {
-protected:
-    static char number_of_figure;      //0,1
+    class FrameFigure {
+    protected:
+        static char number_of_figure;      //0,1
     
-    int xmin;
-    int xmax;
-    int ymin;
-    int ymax;
-    float koef=1;
-    std::shared_ptr<sf::RenderWindow>& window;
-    int margin_left;
-    int margin_top = 0;
+        int xmin;
+        int xmax;
+        int ymin;
+        int ymax;
+        float koef=1;
+        std::shared_ptr<sf::RenderWindow>& window;
+        int margin_left;
+        int margin_top = 0;
 
 
-public:
-    //FrameFigure() {}
-    FrameFigure(std::shared_ptr<sf::RenderWindow>& w) : window(w) { 
+    public:
+        //FrameFigure() {}
+        FrameFigure(std::shared_ptr<sf::RenderWindow>& w) : window(w) { 
        
     
-    }
-    static void resetnumber_of_figure() { number_of_figure = 0; }
-    void calcKoeff();
-    float getkoef() { return koef; }
-    int getxmin() { return xmin; }
-    int getxmax() { return xmax; }
-    int getymin() { return ymin; }
-    int getymax() { return ymax; }
-    int getmargin_top() { 
-        return margin_top; 
-    }
-    int getmargin_left() { return margin_left; }
+        }
+        static void resetnumber_of_figure() { number_of_figure = 0; }
+        void calcKoeff();
+        float getkoef() { return koef; }
+        int getxmin() { return xmin; }
+        int getxmax() { return xmax; }
+        int getymin() { return ymin; }
+        int getymax() { return ymax; }
+        int getmargin_top() { 
+            return margin_top; 
+        }
+        int getmargin_left() { return margin_left; }
 
-    virtual void draw() {}
+        virtual void draw() {}
 
-};
+    };
 
 
 

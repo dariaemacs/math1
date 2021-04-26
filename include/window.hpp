@@ -13,7 +13,7 @@
 
 class NumberButtons {
   int ButtonCount;
-       
+  float scale;
   std::vector<std::shared_ptr<sf::Texture>> MyTexture;
   std::vector<std::unique_ptr<sf::Sprite>> Buttons;
   int ButtonPressID=-1;

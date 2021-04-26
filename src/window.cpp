@@ -42,8 +42,8 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
     const sf::IntRect& rect = Buttons[i]->getTextureRect();
     int x0 = position.x;
     int y0 = position.y;
-    int x1 = x0 + rect.width;
-    int y1 = y0 + rect.height ;
+    int x1 = x0 + rect.width* scale;
+    int y1 = y0 + rect.height * scale;
 
 
 
@@ -51,6 +51,7 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
     x1 = x1;
     if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
       std::string fileName = "";
+      std::cout << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
       /*sf::Texture CheckButtonTexture;
         sf::Sprite CheckButtonSprite;*/
 
@@ -62,6 +63,9 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
       ButtonPressID = i;
 
       MyTexture[i]->loadFromFile(fileName);
+      
+          //w->draw(*Buttons[i]);
+          //w->display();
       return true;
 
     }
@@ -98,6 +102,7 @@ NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
       
       int ButtonMarginTop = (Window::height - ButtonSize)-5;
       if (ButtonCount > 10) ButtonMarginTop = Window::height - (ButtonSize * 2 + step);
+     
     for (int i = 0; i < ButtonCount; i++) {
       std::string fileName = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
       std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
@@ -105,7 +110,8 @@ NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
       static sf::Vector2u PICTURESIZE = txt->getSize();
       std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
       sprite->setTexture(*txt.get());
-      sprite->setScale( (float)ButtonSize/ PICTURESIZE.y, (float)ButtonSize/ PICTURESIZE.y);
+      scale = (float)ButtonSize / PICTURESIZE.y;
+      sprite->setScale(scale, scale);
     
       const sf::IntRect& rect = sprite->getTextureRect();
       //ButtonMarginTop = windowheight - (rect.height * Settings::ButtonFactor);
@@ -173,8 +179,7 @@ Window::Window(int w, int h, int numberQuest)
   window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), "Game");//,  sf::Style::Fullscreen);
     window->setFramerateLimit(Settings::FPS);
 
-//    first = true;
-//  }
+
   
 }
 
@@ -238,20 +243,8 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
 
   int fig1 = (rand() % figures.size());
   int fig2 = 0;
-  while ((fig2 = (rand() % figures.size()))==fig1);
+  while ((fig2 = (rand() % figures.size())) == fig1);
 
-
- 
-  window->clear();
-  window->draw(List);
-  window->draw(textFrame.gettext());
-  figures[fig1]->draw();
-  figures[fig2]->draw();
-  for (int bc = 0 ;bc< Buttons.getButtonCount() ; bc++)
-  window->draw(*Buttons.getButtons()[bc]);
-
-
-  window->display();
 
   while (window->isOpen()) {
     sf::Event event;
@@ -275,8 +268,28 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
 
             }
         }
+
+
+       
+    
     }
 
+
+    
+    window->clear();
+    window->draw(List);
+    window->draw(textFrame.gettext());
+    for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
+        window->draw(*Buttons.getButtons()[bc]);
+
+    figures[fig1]->draw();
+    figures[fig2]->draw();
+
+    window->display();
+
+
+
+    
 
 
 
