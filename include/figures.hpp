@@ -21,12 +21,12 @@
         std::shared_ptr<sf::RenderWindow>& window;
         int margin_left;
         int margin_top = 0;
-
+        bool alreadyDraw = false;
 
     public:
         //FrameFigure() {}
-        FrameFigure(std::shared_ptr<sf::RenderWindow>& w) : window(w) { 
-       
+        FrameFigure(std::shared_ptr<sf::RenderWindow>& w) : window(w), alreadyDraw(false){
+            alreadyDraw = alreadyDraw;
     
         }
         static void resetnumber_of_figure() { number_of_figure = 0; }
