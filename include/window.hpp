@@ -108,7 +108,7 @@ class QuestType1: public Window {
 
   NumberButtons Buttons;
   int questNumber;
-  bool check();
+  bool check(int,int,int);
 public:
     QuestType1(int w, int h, int questNumber, int qtyButtons);
     

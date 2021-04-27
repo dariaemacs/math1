@@ -52,8 +52,8 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
     if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
       std::string fileName = "";
       std::cout << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
-      /*sf::Texture CheckButtonTexture;
-        sf::Sprite CheckButtonSprite;*/
+      sf::Texture CheckButtonTexture;
+        sf::Sprite CheckButtonSprite(CheckButtonTexture);
 
       if (ButtonPressID >= 0) {
         fileName = "resources/images/digit" + std::to_string(ButtonPressID + 1) + ".jpg";
@@ -184,18 +184,22 @@ Window::Window(int w, int h, int numberQuest)
 }
 
 
-bool QuestType1::check() {
+bool QuestType1::check(int c,int t, int r ) {
   switch (questionFigure[questNumber].key)
     {
     case circle:
-      if (5+10 == Buttons.GetButtonsClickID() + 1)
+        
+      if (c == Buttons.GetButtonsClickID() + 1)
         return true;
       break;
     case triangle:
-      if (67+90 == Buttons.GetButtonsClickID() + 1)
+      if (t  == Buttons.GetButtonsClickID() + 1)
         return true;
       break;
     case square:
+        if (r == Buttons.GetButtonsClickID() + 1)
+            return true;
+        break;
     default:
       break;
     }
@@ -229,7 +233,8 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
   sf::Clock clock;
   sf::Time time_since_last_click = sf::Time::Zero;
   FrameFigure::resetnumber_of_figure();
-    
+  CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png"); 
+  CheckButtonSprite.setTexture(CheckButtonTexture);
   
   const std::vector<FrameFigure*> figures =
   {
@@ -244,6 +249,10 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
   int fig1 = (rand() % figures.size());
   int fig2 = 0;
   while ((fig2 = (rand() % figures.size())) == fig1);
+ 
+  int rectengleQTY = figures[fig1]->getrectengleQTY() + figures[fig2]->getrectengleQTY();
+  int triangleQTY = figures[fig1]->gettriangleQTY() + figures[fig2]->gettriangleQTY();
+  int circleQTY = figures[fig1]->getcircleQTY()+ figures[fig2]->getcircleQTY();
 
 
   while (window->isOpen()) {
@@ -259,12 +268,15 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
             sf::Int32 milli = time_since_last_click.asMilliseconds();
             milli = milli;
             if (readyforCheck && checkandnextQuest()) {
-                if (check())  textFrame.settext("Good");   else  textFrame.settext("Not good");
+                if (check(circleQTY, triangleQTY, rectengleQTY))  textFrame.settext("Good");   else  textFrame.settext("Not good");
             }
             if (milli > ELAPSED_TIME) {
 
                 milli = milli;
-                if (Buttons.click(window)) { CheckButtonTexture.loadFromFile("resources/images/arrow_down.png"); readyforCheck = true; }
+                if (Buttons.click(window)) { 
+                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                }
 
             }
         }
@@ -274,17 +286,19 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
     
     }
 
-
+    //CheckButtonTexture.de;
+    
     
     window->clear();
+    
     window->draw(List);
     window->draw(textFrame.gettext());
     for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
         window->draw(*Buttons.getButtons()[bc]);
-
+    
     figures[fig1]->draw();
     figures[fig2]->draw();
-
+    window->draw(CheckButtonSprite);
     window->display();
 
 

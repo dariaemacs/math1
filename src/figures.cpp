@@ -159,6 +159,7 @@ std::vector<const sf::Color*> Colors = {
 };
 
 char FrameFigure::number_of_figure = 0;
+int Circle::QTY = 0;
 
 
 void FrameFigure::calcKoeff() {
@@ -268,7 +269,7 @@ triangle2(this),
 rectangle1(this),
 rectangle2(this),
 rectangle3(this),
-FrameFigure(win)
+FrameFigure(win,0,0,0)
 
 {
 
@@ -360,7 +361,7 @@ void Plane::draw() {
  rectangle1(this),
  rectangle2(this),
  rectangle3(this),
-     FrameFigure(win)
+     FrameFigure(win,0,0,0)
  
  {
 
@@ -384,7 +385,7 @@ Flower::Flower(std::shared_ptr<sf::RenderWindow>& win)
     triangle2(this),
     triangle3(this),
     rectangle(this),
-    FrameFigure(win)
+    FrameFigure(win,0,0,0)
 {
 
     xmin = 0;
@@ -477,7 +478,7 @@ triangle3(this),
  rectangle2(this),
  rectangle3(this),
 circle1(this), 
-FrameFigure(win)
+FrameFigure(win,0,0,0)
 {
 
     
@@ -564,7 +565,7 @@ Tree::Tree(std::shared_ptr<sf::RenderWindow>& win):
     triangle2(this), 
     triangle3(this), 
     rectangle(this),
-    FrameFigure(win)
+    FrameFigure(win,0,0,0)
 {
 
     xmin = 0;
@@ -657,7 +658,7 @@ Butterfly::Butterfly(std::shared_ptr<sf::RenderWindow>& win) :
     circle3(this),
     circle4(this),
     circle5(this),
-    FrameFigure(win)
+    FrameFigure(win,0,0,0)
 {
     //window = win;
     xmin = 8;

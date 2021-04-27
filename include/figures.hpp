@@ -22,16 +22,33 @@
         int margin_left;
         int margin_top = 0;
         bool alreadyDraw = false;
+        int circleQTY;
+        int triangleQTY;
+        int rectengleQTY;
+
+
 
     public:
         //FrameFigure() {}
-        FrameFigure(std::shared_ptr<sf::RenderWindow>& w) : window(w), alreadyDraw(false){
+        FrameFigure(std::shared_ptr<sf::RenderWindow>& w, int c,int t, int r) : window(w), alreadyDraw(false),
+            circleQTY(c),
+            triangleQTY(t),
+            rectengleQTY(r)
+        {
             alreadyDraw = alreadyDraw;
     
         }
         static void resetnumber_of_figure() { number_of_figure = 0; }
         void calcKoeff();
+        void circleQTYinc() { circleQTY++; }
+        void triangleQTYinc() { triangleQTY++; }
+        void rectengleQTYinc() { rectengleQTY++; }
         float getkoef() { return koef; }
+
+        int getrectengleQTY() { return rectengleQTY; }
+        int gettriangleQTY()  { return triangleQTY; }
+        int getcircleQTY()       { return circleQTY; }
+
         int getxmin() { return xmin; }
         int getxmax() { return xmax; }
         int getymin() { return ymin; }
@@ -50,19 +67,26 @@
 
 class Circle{
 public:
+    static int getcircleQTY() { return QTY; }
   Circle(FrameFigure* owner ): owner(owner)
     , circle{std::make_unique<sf::CircleShape>()}
   {
+      owner->circleQTYinc();
     settings();
+    
   }
   
   ~Circle(){}
 
   void draw(std::shared_ptr<sf::RenderWindow>& window){
+      
     window->draw(*circle);
   }
 
-  sf::CircleShape getCircle() { return *circle; }
+  sf::CircleShape getCircle() { 
+      return *circle; 
+  
+  }
 
   void set_color(sf::Color c){
     circle->setFillColor(c);
@@ -84,6 +108,7 @@ public:
   }
 
 private:
+    static int QTY;
     FrameFigure* owner;
   std::unique_ptr<sf::CircleShape> circle;
 };
@@ -93,6 +118,7 @@ public:
   Triangle(FrameFigure* owner): owner(owner),
     triangle{std::make_unique<sf::ConvexShape>(3)}
   {
+      owner->triangleQTYinc();
     settings();
   }
   
@@ -134,6 +160,8 @@ class Rectangle  {
   Rectangle(FrameFigure* owner)
     :owner(owner), rectangle{std::make_unique<sf::RectangleShape>()}
   {
+      
+      owner->rectengleQTYinc();
     settings();
   }
   
