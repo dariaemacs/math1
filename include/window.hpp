@@ -28,6 +28,7 @@ public:
   std::vector<std::unique_ptr<sf::Sprite>>& getButtons() { return Buttons; }
   bool  click(std::shared_ptr<sf::RenderWindow>&);
   int getButtonCount() { return ButtonCount; }
+  std::vector<std::shared_ptr<sf::Texture>> getButtonTexture() { return MyTexture; }
   int GetButtonsClickID() { return ButtonPressID; }
 };
 
@@ -108,7 +109,7 @@ class QuestType1: public Window {
 
   NumberButtons Buttons;
   int questNumber;
-  bool check(int,int,int);
+  int check(int,int,int);
 public:
     QuestType1(int w, int h, int questNumber, int qtyButtons);
     

@@ -6,9 +6,9 @@
 
 const std::array<figureQestions,N> questionFigure = 
   {
-    figureQestions{L"Сколько кружков на рисунках вы видете ?"       ,circle},
-    //figureQestions{L"How many circles are there in the drawing?"       ,circle},
-    figureQestions{L"Сколько треугольников на рисунке вы видите ",triangle}
+    figureQestions{L"Сколько кружков на рисунках вы видете ? "       ,circle},
+    figureQestions{L"Сколько прямоугольников на рисунках вы видите ? ",rectangle},
+    figureQestions{L"Сколько треугольников на рисунках вы видите ? ",triangle}
   }	;
 
 

@@ -184,21 +184,21 @@ Window::Window(int w, int h, int numberQuest)
 }
 
 
-bool QuestType1::check(int c,int t, int r ) {
+int QuestType1::check(int c,int t, int r ) {
   switch (questionFigure[questNumber].key)
     {
     case circle:
         
-      if (c == Buttons.GetButtonsClickID() + 1)
-        return true;
+        if (c == Buttons.GetButtonsClickID() + 1)
+            return -1; else  return c;
       break;
     case triangle:
       if (t  == Buttons.GetButtonsClickID() + 1)
-        return true;
+          return -1; else  return t;
       break;
-    case square:
+    case rectangle:
         if (r == Buttons.GetButtonsClickID() + 1)
-            return true;
+            return -1; else  return r;
         break;
     default:
       break;
@@ -206,7 +206,7 @@ bool QuestType1::check(int c,int t, int r ) {
 
 
 
-  return false;
+  return -1;
 }
 
 bool Window::checkandnextQuest() {
@@ -268,7 +268,19 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
             sf::Int32 milli = time_since_last_click.asMilliseconds();
             milli = milli;
             if (readyforCheck && checkandnextQuest()) {
-                if (check(circleQTY, triangleQTY, rectengleQTY))  textFrame.settext("Good");   else  textFrame.settext("Not good");
+                int rightfigurCount = check(circleQTY, triangleQTY, rectengleQTY);
+                if (rightfigurCount < 0)  textFrame.settext("Good");   else {
+                    textFrame.settext("Not good");
+
+                    Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
+                        "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
+
+                   Buttons.getButtonTexture()[rightfigurCount-1]->loadFromFile(
+                            "resources/images/digit" + std::to_string(rightfigurCount ) + "_right.jpg"
+                    );
+                    
+                }
+
             }
             if (milli > ELAPSED_TIME) {
 

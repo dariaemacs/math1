@@ -11,7 +11,7 @@ struct figureQestions {
 	types key;
 };
 
-constexpr int N = 2;
+constexpr int N = 3; //Question count
 const int ELAPSED_TIME = 20;
 const float FPS = 30.0f;
 

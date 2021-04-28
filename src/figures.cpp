@@ -383,7 +383,7 @@ Flower::Flower(std::shared_ptr<sf::RenderWindow>& win)
 
     triangle1(this),
     triangle2(this),
-    triangle3(this),
+    //triangle3(this),
     rectangle(this),
     FrameFigure(win,0,0,0)
 {

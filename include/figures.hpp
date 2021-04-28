@@ -354,7 +354,7 @@ private:
 
   Triangle triangle1;
   Triangle triangle2;
-  Triangle triangle3;
+  //Triangle triangle3;
   Rectangle rectangle;
 };
 
