@@ -15,7 +15,7 @@
 #include <locale>
 
 
-bool Window::first = false;
+//bool Window::first = false;
 extern const int ELAPSED_TIME;
 
 
@@ -68,7 +68,7 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
           //w->display();
       return true;
 
-    }
+    } else std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
     //Buttons = Buttons.get()+1;
 
   }
@@ -81,14 +81,14 @@ void NumberButtons::CalcucateCoordinate() {
     using namespace std;
     int ButtonSlideHeght = Window::height - margin_top;
     int step = 0;
-    int marginLeft = 0;
-    //if (ButtonCount < 11) {
-      //one row button
-    //int margin_top =  Window::height - ButtonSlideHeght;
-    int  ButtonSize = Window::width / ButtonCount;
-    ButtonSize = (Window::width / ButtonCount) * 2 / 3;
-    step = ButtonSize / 3;
+    
+
+    int  ButtonSize = Window::width / 11;
+    ButtonSize = (Window::width / 11) * 2 / 3;
+    step = ButtonSize / 5;
+  
     while (ButtonSize + 10 > ButtonSlideHeght / 2) ButtonSize--;
+    int marginLeft = Window::width - 11 * (ButtonSize + step);
     for (int i = 0; i < ButtonCount; i++) {
         std::string fileName = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
         std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
@@ -98,11 +98,11 @@ void NumberButtons::CalcucateCoordinate() {
         sprite->setTexture(*txt.get());
         scale = (float)ButtonSize / PICTURESIZE.y;
         sprite->setScale(scale, scale);
-        marginLeft = marginLeft + ButtonSize + step;
+        
         sprite->move(marginLeft, margin_top);
         if (i % 10 == 0 && i > 0) {
-            margin_top = margin_top + ButtonSize+ step - 10; marginLeft = 0;
-        }
+            margin_top = margin_top + ButtonSize+ step - 15; marginLeft = Window::width - 11 * (ButtonSize + step);
+        } else marginLeft = marginLeft + ButtonSize + step;
         MyTexture.emplace_back(std::move(txt));
         Buttons.emplace_back(std::move(sprite));
     };
@@ -127,10 +127,11 @@ TextFrameBase::TextFrameBase(int s, int quest) {
 
 
 Window::Window(int w, int h, int numberQuest)
-  : 
+  : first(true),
     textFrame(Settings::QUESTFONTSIZE, numberQuest) {
     width = w;
     height = h;
+    
 
 
 
@@ -157,6 +158,8 @@ Window::Window(int w, int h, int numberQuest)
   std::string comment = std::string("Game "  )+ std::to_string(w) + "x" + std::to_string(h);
   window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), comment);//,  sf::Style::Fullscreen);
     window->setFramerateLimit(Settings::FPS);
+
+    //window->~RenderWindow();
 
 
   
@@ -209,8 +212,7 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
   Buttons(qtyButtons),
   questNumber(questNumber)
 {
-  sf::Clock clock;
-  sf::Time time_since_last_click = sf::Time::Zero;
+    bool first = true;
   FrameFigure::resetnumber_of_figure();
   CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png"); 
   CheckButtonSprite.setTexture(CheckButtonTexture);
@@ -233,19 +235,22 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
   int triangleQTY = figures[fig1]->gettriangleQTY() + figures[fig2]->gettriangleQTY();
   int circleQTY = figures[fig1]->getcircleQTY()+ figures[fig2]->getcircleQTY();
 
-
+  sf::Event event;
   while (window->isOpen()) {
-    sf::Event event;
+    
+    //std::cout << "yyy" << std::endl;
     while (window->pollEvent(event)) {
+        
         if (event.type == sf::Event::Closed) {
+            std::cout << "yyy888" << std::endl;
             window->close();
+            
         }
-
+        
         //button click: 
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            time_since_last_click = clock.restart();
-            sf::Int32 milli = time_since_last_click.asMilliseconds();
-            milli = milli;
+            std::cout << "yyy1234" << std::endl;
+            std::cout << "yyy111" << std::endl;
             if (readyforCheck && checkandnextQuest()) {
                 int rightfigurCount = check(circleQTY, triangleQTY, rectengleQTY);
                 if (rightfigurCount < 0)  textFrame.settext("Good");   else {
@@ -254,55 +259,53 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
                     Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                         "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
-                   Buttons.getButtonTexture()[rightfigurCount-1]->loadFromFile(
-                            "resources/images/digit" + std::to_string(rightfigurCount ) + "_right.jpg"
+                    Buttons.getButtonTexture()[rightfigurCount - 1]->loadFromFile(
+                        "resources/images/digit" + std::to_string(rightfigurCount) + "_right.jpg"
                     );
-                    
+
                 }
 
             }
-            if (milli > ELAPSED_TIME) {
 
-                milli = milli;
-                if (Buttons.click(window)) { 
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
-                }
+            if (Buttons.click(window)) {
+                std::cout << "test" << std::endl;
+                CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                CheckButtonSprite.setTexture(CheckButtonTexture);
+               
 
             }
         }
 
 
-       
-    
+
+
+
+
+        //CheckButtonTexture.de;
+
+
+        window->clear();
+
+        window->draw(List);
+        window->draw(textFrame.gettext());
+
+
+        figures[fig1]->draw();
+        figures[fig2]->draw();
+
+        int margintopSlideButton =
+            (
+            (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
+                ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());
+        Buttons.setMargin_top(margintopSlideButton + 10);
+        if (first) Buttons.CalcucateCoordinate(); first = false;
+       for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
+            window->draw(*Buttons.getButtons()[bc]);
+        window->draw(CheckButtonSprite);
+
+        window->display();
+
     }
-
-    //CheckButtonTexture.de;
-    
-    
-    window->clear();
-    
-    window->draw(List);
-    window->draw(textFrame.gettext());
-
-    
-    figures[fig1]->draw();
-    figures[fig2]->draw();
-
-    int margintopSlideButton =
-        (
-        (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()*figures[fig2]->getkoef() ? figures[fig1]->getymax()* figures[fig1]->getkoef() : figures[fig2]->getymax()* figures[fig2]->getkoef()) 
-            //-
-            //(figures[fig1]->getymin() * figures[fig1]->getkoef() < figures[fig2]->getymin() * figures[fig2]->getkoef() ? figures[fig1]->getymin()* figures[fig1]->getkoef() : figures[fig2]->getymin()* figures[fig2]->getkoef())
-            )+ (figures[fig1]->getmargin_top()> figures[fig2]->getmargin_top()? figures[fig1]->getmargin_top(): figures[fig2]->getmargin_top());
-    Buttons.setMargin_top(margintopSlideButton+10);
-    Buttons.CalcucateCoordinate();
-    for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
-        window->draw(*Buttons.getButtons()[bc]);
-    window->draw(CheckButtonSprite);
-    window->display();
-
-
 
     
 

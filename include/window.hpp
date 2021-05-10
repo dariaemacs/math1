@@ -74,7 +74,7 @@ public:
 
 
 class Window {
-  static bool first;
+   bool first;
   
 
 
@@ -102,6 +102,9 @@ public:
 
   
   Window(int w, int h, int questNumber);
+  ~Window() {
+      int yyy = 0;
+  }
   friend NumberButtons;
   
 };
@@ -116,7 +119,7 @@ class QuestType1: public Window {
   int check(int,int,int);
 public:
     QuestType1(int w, int h, int questNumber, int qtyButtons);
-    
+    //~QuestType1();
 };
 
 

@@ -15,84 +15,86 @@ int main(){
 
       // int width = sf::VideoMode::getDesktopMode().width;int height = sf::VideoMode::getDesktopMode().height;
         int width = 1024; int height = 600;
+        width = 2048; height = 1080;
         srand(time(0));
-        QuestType1 q1(width, height, (rand() % 3), 12);
+        QuestType1 q1(width, height, (rand() % 3),20);
+        
 
         width = 1024; height = 768;
       srand(time(0));
-      QuestType1 q2(width, height, (rand() % 3), 12);
+      QuestType1 q2(width, height, (rand() % 3), 5);
 
       width = 1152; height = 864;
       srand(time(0));
-      QuestType1 q3(width, height, (rand() % 3), 12);
+      QuestType1 q3(width, height, (rand() % 3), 20);
 
       width = 1200; height = 600;
        srand(time(0));
-       QuestType1 q4(width, height, (rand() % 3), 12);
+       QuestType1 q4(width, height, (rand() % 3), 20);
 
        width = 1280; height = 720;
       srand(time(0));
-      QuestType1 q5(width, height, (rand() % 3), 12);
+      QuestType1 q5(width, height, (rand() % 3), 20);
 
       width = 1280; height = 768;
       srand(time(0));
-      QuestType1 q6(width, height, (rand() % 3), 12);
+      QuestType1 q6(width, height, (rand() % 3), 20);
 
       width = 1280; height = 1024;
       srand(time(0));
-      QuestType1 q7(width, height, (rand() % 3), 12);
+      QuestType1 q7(width, height, (rand() % 3), 20);
 
       width = 1408; height = 1152;
        srand(time(0));
-       QuestType1 q8(width, height, (rand() % 3), 12);
+       QuestType1 q8(width, height, (rand() % 3), 20);
 
        width = 1440; height = 900;
       srand(time(0));
-      QuestType1 q9(width, height, (rand() % 3), 12);
+      QuestType1 q9(width, height, (rand() % 3), 20);
 
       width = 1400; height = 1050;
       srand(time(0));
-      QuestType1 q10(width, height, (rand() % 3), 12);
+      QuestType1 q10(width, height, (rand() % 3), 20);
 
       width = 1440; height = 1080;
       srand(time(0));
-      QuestType1 q11(width, height, (rand() % 3), 12);
+      QuestType1 q11(width, height, (rand() % 3), 20);
 
       width = 1536; height = 960;
       srand(time(0));
-      QuestType1 q12(width, height, (rand() % 3), 12);
+      QuestType1 q12(width, height, (rand() % 3), 20);
 
       width = 1536; height = 1024;
         srand(time(0));
-        QuestType1 q13(width, height, (rand() % 3), 12);
+        QuestType1 q13(width, height, (rand() % 3), 20);
 
         width = 1600; height = 900;
        srand(time(0));
-       QuestType1 q14(width, height, (rand() % 3), 12);
+       QuestType1 q14(width, height, (rand() % 3), 20);
 
        width = 1600; height = 1024;
         srand(time(0));
-        QuestType1 q15(width, height, (rand() % 3), 12);
+        QuestType1 q15(width, height, (rand() % 3), 20);
 
         width = 1600; height = 1200;
         srand(time(0));
-        QuestType1 q16(width, height, (rand() % 3), 12);
+        QuestType1 q16(width, height, (rand() % 3), 20);
 
         width = 1680; height = 1050;
         srand(time(0));
-        QuestType1 q17(width, height, (rand() % 3), 12);
+        QuestType1 q17(width, height, (rand() % 3), 20);
 
         width = 1920; height = 1080;
         srand(time(0));
-        QuestType1 q18(width, height, (rand() % 3), 12);
+        QuestType1 q18(width, height, (rand() % 3), 20);
 
         width = 1920; height = 1200;
         srand(time(0));
-        QuestType1 q19(width, height, (rand() % 3), 12);
+        QuestType1 q19(width, height, (rand() % 3), 20);
 
         width = 2048; height = 1080;
             srand(time(0));
-        QuestType1 q20(width, height, (rand() % 3), 12);
+        QuestType1 q20(width, height, (rand() % 3), 20);
 
         //QuestType1 q1(width, height, 1 - (rand() % 2), 0, 1, 17);
         //QuestType1 q2(width, height, 1 - (rand() % 3), 2, 3, 17);
