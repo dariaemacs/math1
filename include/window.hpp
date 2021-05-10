@@ -17,14 +17,18 @@ class NumberButtons {
   std::vector<std::shared_ptr<sf::Texture>> MyTexture;
   std::vector<std::unique_ptr<sf::Sprite>> Buttons;
   int ButtonPressID=-1;
-
+  int margin_top;
          
   bool touched  {false};
   bool pressed  {false};
   bool released {true};
         
 public:
-  NumberButtons(int qtyButton, int windowheight);
+  NumberButtons(int qtyButton);
+  void CalcucateCoordinate();
+  void setMargin_top(int margin) { 
+      margin_top = margin; 
+  }
   std::vector<std::unique_ptr<sf::Sprite>>& getButtons() { return Buttons; }
   bool  click(std::shared_ptr<sf::RenderWindow>&);
   int getButtonCount() { return ButtonCount; }

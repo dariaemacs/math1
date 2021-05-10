@@ -43,19 +43,30 @@
         void circleQTYinc() { circleQTY++; }
         void triangleQTYinc() { triangleQTY++; }
         void rectengleQTYinc() { rectengleQTY++; }
-        float getkoef() { return koef; }
+        float getkoef() { 
+            return koef; 
+        }
 
         int getrectengleQTY() { return rectengleQTY; }
         int gettriangleQTY()  { return triangleQTY; }
         int getcircleQTY()       { return circleQTY; }
 
-        int getxmin() { return xmin; }
-        int getxmax() { return xmax; }
-        int getymin() { return ymin; }
-        int getymax() { return ymax; }
+        int getxmin() { 
+            return xmin; 
+        }
+        int getxmax() { 
+            return xmax; 
+        }
+        int getymin() { 
+            return ymin; 
+        }
+        int getymax() { 
+            return ymax; 
+        }
         int getmargin_top() { 
             return margin_top; 
         }
+        //int getheght() { return ymax - ymin; }
         int getmargin_left() { return margin_left; }
 
         virtual void draw() {}

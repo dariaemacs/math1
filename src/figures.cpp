@@ -391,7 +391,7 @@ Flower::Flower(std::shared_ptr<sf::RenderWindow>& win)
     xmin = 0;
     xmax = 190;
     ymin = 0;
-    ymax = 320;
+    ymax = 239; //320
 
    
  
@@ -400,7 +400,7 @@ Flower::Flower(std::shared_ptr<sf::RenderWindow>& win)
 void Flower::draw() {
     if (!alreadyDraw) {
         calcKoeff();
-
+        int y = -40;
         circle1.set_radius(30);
         circle2.set_radius(30);
         circle3.set_radius(30);
@@ -408,12 +408,12 @@ void Flower::draw() {
 
         center_circle.set_radius(45);
 
-        circle1.set_coords(142, 125);
-        circle2.set_coords(24, 24);
-        circle3.set_coords(144, 22);
-        circle4.set_coords(28, 125);
+        circle1.set_coords(142, 125+ y);
+        circle2.set_coords(24, 24 + y);
+        circle3.set_coords(144, 22 + y);
+        circle4.set_coords(28, 125 + y);
 
-        center_circle.set_coords(70, 57);
+        center_circle.set_coords(70, 57 + y);
 
         circle1.set_color(color::aqua);
         circle2.set_color(color::red);
@@ -423,15 +423,15 @@ void Flower::draw() {
         center_circle.set_color(color::coral);
         int step = 25;
         int step2 = 15;
-        triangle1.set_coords(25, 230.0f, 105, 230.0f, 65, 260.0f);
+        triangle1.set_coords(25, 230.0f + y, 105, 230.0f + y, 65, 260.0f + y);
         triangle1.set_color(color::lime);
 
-        triangle2.set_coords(125, 230.0f, 205, 230.0f, 165, 260.0f);
+        triangle2.set_coords(125, 230.0f + y, 205, 230.0f + y, 165, 260.0f + y);
         triangle2.set_color(color::lime);
 
-        rectangle.set_coords(110, 149);
+        rectangle.set_coords(110, 149 + y);
         rectangle.set_color(color::lightskyblue);
-        rectangle.set_size(10, 180);
+        rectangle.set_size(10, 130);
 
         int indexColor1 = rand() % Colors.size();
         int indexColor2 = rand() % Colors.size();

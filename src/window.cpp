@@ -76,60 +76,38 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
 
 }
 
-NumberButtons::NumberButtons(int ButtonCount, int windowheight) {
-  this->ButtonCount = ButtonCount;
-  using namespace std;
-  int ButtonSlideHeght = Window::height / 3;
-
-  
-
-  //ButtonSlideHeght =  Window::height / 3;
-
-
-  int ButtonSlideWidth = Window::width * 2 / 3;
-  int ButtonSize = 0;
-  int marginLeft = 0;
-  int step = 0;
-
-
-
-      //one row of button 
-  
-      ButtonSize = ButtonSlideWidth / ButtonCount ;
-      step = ButtonSize / 4;
-      ButtonSize = ButtonSize - step;
-      while (ButtonSize + 10 > ButtonSlideHeght)  ButtonSize--;
-      
-      int ButtonMarginTop = (Window::height - ButtonSize)-5;
-      if (ButtonCount > 10) ButtonMarginTop = Window::height - (ButtonSize * 2 + step);
-     
+NumberButtons::NumberButtons(int BC):ButtonCount(BC){}
+void NumberButtons::CalcucateCoordinate() {
+    using namespace std;
+    int ButtonSlideHeght = Window::height - margin_top;
+    int step = 0;
+    int marginLeft = 0;
+    //if (ButtonCount < 11) {
+      //one row button
+    //int margin_top =  Window::height - ButtonSlideHeght;
+    int  ButtonSize = Window::width / ButtonCount;
+    ButtonSize = (Window::width / ButtonCount) * 2 / 3;
+    step = ButtonSize / 3;
+    while (ButtonSize + 10 > ButtonSlideHeght / 2) ButtonSize--;
     for (int i = 0; i < ButtonCount; i++) {
-      std::string fileName = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
-      std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
-      txt->loadFromFile(fileName);
-      static sf::Vector2u PICTURESIZE = txt->getSize();
-      std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
-      sprite->setTexture(*txt.get());
-      scale = (float)ButtonSize / PICTURESIZE.y;
-      sprite->setScale(scale, scale);
-    
-      const sf::IntRect& rect = sprite->getTextureRect();
-      //ButtonMarginTop = windowheight - (rect.height * Settings::ButtonFactor);
-      
-      sprite->move(marginLeft, ButtonMarginTop);
-      marginLeft = marginLeft + ButtonSize + step  ;
-      if (i % 10 == 0 && i > 0) {
-          ButtonMarginTop = ButtonMarginTop + ButtonSize + step; marginLeft= 0;
-      }
-      MyTexture.emplace_back(std::move(txt));
-      Buttons.emplace_back(std::move(sprite));
-    
-    }
- 
-  
-  //fout.close();  
-}
+        std::string fileName = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
+        std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
+        txt->loadFromFile(fileName);
+        static sf::Vector2u PICTURESIZE = txt->getSize();
+        std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
+        sprite->setTexture(*txt.get());
+        scale = (float)ButtonSize / PICTURESIZE.y;
+        sprite->setScale(scale, scale);
+        marginLeft = marginLeft + ButtonSize + step;
+        sprite->move(marginLeft, margin_top);
+        if (i % 10 == 0 && i > 0) {
+            margin_top = margin_top + ButtonSize+ step - 10; marginLeft = 0;
+        }
+        MyTexture.emplace_back(std::move(txt));
+        Buttons.emplace_back(std::move(sprite));
+    };
 
+}
 
 
 
@@ -176,7 +154,8 @@ Window::Window(int w, int h, int numberQuest)
   
 
   //if (!first) {
-  window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), "Game");//,  sf::Style::Fullscreen);
+  std::string comment = std::string("Game "  )+ std::to_string(w) + "x" + std::to_string(h);
+  window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), comment);//,  sf::Style::Fullscreen);
     window->setFramerateLimit(Settings::FPS);
 
 
@@ -227,7 +206,7 @@ bool Window::checkandnextQuest() {
 
 QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
   Window(w, h, questNumber),
-  Buttons(qtyButtons, h),
+  Buttons(qtyButtons),
   questNumber(questNumber)
 {
   sf::Clock clock;
@@ -305,11 +284,21 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
     
     window->draw(List);
     window->draw(textFrame.gettext());
-    for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
-        window->draw(*Buttons.getButtons()[bc]);
+
     
     figures[fig1]->draw();
     figures[fig2]->draw();
+
+    int margintopSlideButton =
+        (
+        (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()*figures[fig2]->getkoef() ? figures[fig1]->getymax()* figures[fig1]->getkoef() : figures[fig2]->getymax()* figures[fig2]->getkoef()) 
+            //-
+            //(figures[fig1]->getymin() * figures[fig1]->getkoef() < figures[fig2]->getymin() * figures[fig2]->getkoef() ? figures[fig1]->getymin()* figures[fig1]->getkoef() : figures[fig2]->getymin()* figures[fig2]->getkoef())
+            )+ (figures[fig1]->getmargin_top()> figures[fig2]->getmargin_top()? figures[fig1]->getmargin_top(): figures[fig2]->getmargin_top());
+    Buttons.setMargin_top(margintopSlideButton+10);
+    Buttons.CalcucateCoordinate();
+    for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
+        window->draw(*Buttons.getButtons()[bc]);
     window->draw(CheckButtonSprite);
     window->display();
 
