@@ -15,14 +15,14 @@ int main(){
 
       // int width = sf::VideoMode::getDesktopMode().width;int height = sf::VideoMode::getDesktopMode().height;
         int width = 1024; int height = 600;
-        //width = 2048; height = 1080;
+ 
         srand(time(0));
         QuestType1 q1(width, height, (rand() % 3),20);
         
 
         width = 1024; height = 768;
       srand(time(0));
-      QuestType1 q2(width, height, (rand() % 3), 5);
+      QuestType1 q2(width, height, (rand() % 3), 21);
 
       width = 1152; height = 864;
       srand(time(0));

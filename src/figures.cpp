@@ -171,13 +171,18 @@ void FrameFigure::calcKoeff() {
     int winHeigt = window->getSize().y;
     koef = frameWidthNew / frameWidth;
     float frameHeightNew = (getymax() - getymin()) * koef;
-     while (frameHeightNew > winHeigt / 2) {
+     while (frameHeightNew > winHeigt / 2 ) {
             koef = koef - 0.01;
             frameHeightNew = (getymax() - getymin()) * koef;
             frameWidthNew = (getxmax() - getxmin()) * koef;
         }
-     margin_left = number_of_figure++ * window->getSize().x / 2 + abs((window->getSize().x / 2   - frameWidthNew ) / 2);
-     //number_of_figure = 1;
+     
+     
+     margin_left = number_of_figure++ * window->getSize().x / 2 + abs((window->getSize().x / 2 - frameWidthNew) / 2);
+     if (margin_left < 10) margin_left = 10; //left picture
+     if (margin_left + frameWidthNew > window->getSize().y) margin_left-=10; //left picture
+     std::cout << "margin_left=" << margin_left <<  std::endl;
+
      float f = window->getSize().y / 3;
      margin_top = (window->getSize().y - frameHeightNew)/2;
 

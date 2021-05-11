@@ -67,6 +67,7 @@ class TextFrameBase {
 public: 
    
   TextFrameBase(int size,int , int,int) ;
+  TextFrameBase(int size);
   sf::Text gettext(){ return text; }
   void settext(std::string a) { text.setString(a); }
 
@@ -95,7 +96,7 @@ protected:
   sf::Texture CheckButtonTexture;
   sf::Sprite CheckButtonSprite;
   sf::RectangleShape List;
-
+  TextFrameBase QuestComment;
 
   bool readyforCheck; 
 public:
