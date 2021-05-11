@@ -66,7 +66,7 @@ class TextFrameBase {
   sf::Font font;
 public: 
    
-  TextFrameBase(int size,int) ;
+  TextFrameBase(int size,int , int,int) ;
   sf::Text gettext(){ return text; }
   void settext(std::string a) { text.setString(a); }
 
@@ -106,6 +106,7 @@ public:
       int yyy = 0;
   }
   friend NumberButtons;
+  friend TextFrameBase;
   
 };
 

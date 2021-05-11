@@ -15,7 +15,7 @@ int main(){
 
       // int width = sf::VideoMode::getDesktopMode().width;int height = sf::VideoMode::getDesktopMode().height;
         int width = 1024; int height = 600;
-        width = 2048; height = 1080;
+        //width = 2048; height = 1080;
         srand(time(0));
         QuestType1 q1(width, height, (rand() % 3),20);
         

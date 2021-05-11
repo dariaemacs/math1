@@ -113,7 +113,7 @@ void NumberButtons::CalcucateCoordinate() {
 
 
 
-TextFrameBase::TextFrameBase(int s, int quest) {
+TextFrameBase::TextFrameBase(int s, int quest, int w,  int h) {
   size = s;
 
   font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
@@ -122,13 +122,21 @@ TextFrameBase::TextFrameBase(int s, int quest) {
   text.setString(get_wstr(quest));
   //  text.setStyle(sf::Text::Bold);
   text.setPosition(Settings::PADDING, Settings::PADDING);
+  int tmp1 = text.getLocalBounds().width;
+  int tmp2 = text.getLocalBounds().height;
+  while (text.getLocalBounds().width > w*18/19 || text.getLocalBounds().height > h)
+  {
+      float w = text.getLocalBounds().width;
+      text.setCharacterSize(size--);
+  }
+
 }
 
 
 
 Window::Window(int w, int h, int numberQuest)
   : first(true),
-    textFrame(Settings::QUESTFONTSIZE, numberQuest) {
+    textFrame(Settings::QUESTFONTSIZE, numberQuest,w,h) {
     width = w;
     height = h;
     
