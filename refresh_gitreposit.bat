@@ -1,3 +1,3 @@
 git add --all 
-git commit -m 'last_modify' 
+git commit -m 'almost_ok' 
 git push -u 
