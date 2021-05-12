@@ -1,5 +1,4 @@
 #include "window.hpp"
-#include "database.hpp"
 //#include "figures.hpp"
 
 #include <iostream>
@@ -77,6 +76,21 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
 }
 
 NumberButtons::NumberButtons(int BC):ButtonCount(BC){}
+void TextFrameBase::CalcucateCoordinate(const int w, const int h) {
+    
+    std::cout << w << "x" << h << std::endl;
+    size = 50;
+    text.setCharacterSize(size);
+    int width = text.getLocalBounds().width; int height = text.getLocalBounds().height;
+    while (width  > w || height > h)
+    {  
+        text.setCharacterSize(size--);
+        width = text.getLocalBounds().width;
+        height = text.getLocalBounds().height;
+    }
+}
+
+
 void NumberButtons::CalcucateCoordinate() {
     using namespace std;
     int ButtonSlideHeght = Window::height - margin_top;
@@ -88,7 +102,7 @@ void NumberButtons::CalcucateCoordinate() {
     step = ButtonSize / 5;
   
     while (ButtonSize + 10 > ButtonSlideHeght / 2) ButtonSize--;
-    int marginLeft = Window::width - 11 * (ButtonSize + step);
+    margin_left = Window::width - 11 * (ButtonSize + step);
     for (int i = 0; i < ButtonCount; i++) {
         //std::cout << "here2" << std::endl;
         std::string fileName = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
@@ -100,10 +114,10 @@ void NumberButtons::CalcucateCoordinate() {
         scale = (float)ButtonSize / PICTURESIZE.y;
         sprite->setScale(scale, scale);
         
-        sprite->move(marginLeft, margin_top);
+        sprite->move(margin_left, margin_top);
         if (i % 10 == 0 && i > 0) {
-            margin_top = margin_top + ButtonSize+ step - 15; marginLeft = Window::width - 11 * (ButtonSize + step);
-        } else marginLeft = marginLeft + ButtonSize + step;
+            margin_top = margin_top + ButtonSize+ step - 15; margin_left = Window::width - 11 * (ButtonSize + step);
+        } else margin_left = margin_left + ButtonSize + step;
         MyTexture.emplace_back(std::move(txt));
         Buttons.emplace_back(std::move(sprite));
     };
@@ -111,46 +125,42 @@ void NumberButtons::CalcucateCoordinate() {
 }
 
 
-
-
-
-TextFrameBase::TextFrameBase(int s, int quest, int w,  int h) {
-  size = s;
-
-  font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-  text = sf::Text("", font, s);
-  text.setFillColor(sf::Color::Black);
-  text.setString(get_wstr(quest));
-  //  text.setStyle(sf::Text::Bold);
-  text.setPosition(Settings::PADDING, Settings::PADDING);
-  while (text.getLocalBounds().width > w*18/19 || text.getLocalBounds().height > h)
-  {
-      float w = text.getLocalBounds().width;
-      text.setCharacterSize(size--);
-  }
-
-}
-TextFrameBase::TextFrameBase(int s) {
+TextFrameBase::TextFrameBase(int s, char):size(s) { //delegate
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
     text = sf::Text("", font, s);
     text.setFillColor(sf::Color::Black);
+    text.setPosition(Settings::PADDING, Settings::PADDING);
 }
+
+TextFrameBase::TextFrameBase(int s, std::wstring str, int w, int h) :TextFrameBase(s, 'c') {
+    text.setString(str);
+    
+}
+
+void TextFrameBase::setmargin_top(int m) {
+    sf::Vector2f pos = text.getPosition();
+    text.setPosition(pos.x, m);
+}
+
+TextFrameBase::TextFrameBase(int s, int quest, int w,  int h) 
+    :TextFrameBase(s, 'c'){
+  
+  text.setString(get_wstr(quest));
+  //  text.setStyle(sf::Text::Bold);
+
+  CalcucateCoordinate(w * 18 / 19, h);
+  
+}
+
 
 
 Window::Window(int w, int h, int numberQuest)
   : first(true),
-    textFrame(Settings::QUESTFONTSIZE, numberQuest,w,h),
-    QuestComment()
+    textFrame(Settings::QUESTFONTSIZE, numberQuest,w,h),   
+    QuestComment(Settings::QUESTFONTSIZE, CommentsDic[0] , w , h)
 {
     width = w;
     height = h;
-    
-
-
-
-
-
-
   std::string CheckButtonPictureFileName = "resources/images/arrow_disable.png";
   CheckButtonTexture.loadFromFile(CheckButtonPictureFileName);
   CheckButtonSprite.setTexture(CheckButtonTexture);
@@ -226,6 +236,7 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
   questNumber(questNumber)
 {
     bool first = true;
+    int margintopSlideButton = 0;
   FrameFigure::resetnumber_of_figure();
   CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png"); 
   CheckButtonSprite.setTexture(CheckButtonTexture);
@@ -297,24 +308,32 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
 
 
           window->clear();
-
+          
           window->draw(List);
           window->draw(textFrame.gettext());
+          window->draw(QuestComment.gettext());
+          window->draw(CheckButtonSprite);
+
+         
 
 
           figures[fig1]->draw();
           figures[fig2]->draw();
           if (first) {
-              int margintopSlideButton =
+               margintopSlideButton =
                   (
                   (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
                       ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());
               Buttons.setMargin_top(margintopSlideButton + 10);
               Buttons.CalcucateCoordinate(); first = false;
+              QuestComment.setmargin_top(margintopSlideButton);
+              QuestComment.CalcucateCoordinate(w - Buttons.getMarginLeft(), h - Buttons.getMarginTop());
+              
           }
           for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
               window->draw(*Buttons.getButtons()[bc]);
-          window->draw(CheckButtonSprite);
+
+          
 
           window->display();
 

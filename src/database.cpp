@@ -12,7 +12,10 @@ const std::array<figureQestions,N> questionFigure =
   }	;
 
 
-
+const std::wstring CommentsDic[] =
+{
+    {L"Выбери ответ" }
+};
 
 
 

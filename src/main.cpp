@@ -13,21 +13,21 @@ int main(){
 
 
 
-      // int width = sf::VideoMode::getDesktopMode().width;int height = sf::VideoMode::getDesktopMode().height;
+        /*
         int width = 1024; int height = 600;
  
         srand(time(0));
         QuestType1 q1(width, height, (rand() % 3),20);
-        
+      */
 
-        width = 1024; height = 768;
+        int width = 1024;  int height = 768;
       srand(time(0));
       QuestType1 q2(width, height, (rand() % 3), 21);
-
+      /*
       width = 1152; height = 864;
       srand(time(0));
       QuestType1 q3(width, height, (rand() % 3), 20);
-
+      
       width = 1200; height = 600;
        srand(time(0));
        QuestType1 q4(width, height, (rand() % 3), 20);
@@ -35,7 +35,7 @@ int main(){
        width = 1280; height = 720;
       srand(time(0));
       QuestType1 q5(width, height, (rand() % 3), 20);
-
+      
       width = 1280; height = 768;
       srand(time(0));
       QuestType1 q6(width, height, (rand() % 3), 20);
@@ -94,7 +94,7 @@ int main(){
 
         width = 2048; height = 1080;
             srand(time(0));
-        QuestType1 q20(width, height, (rand() % 3), 20);
+        QuestType1 q20(width, height, (rand() % 3), 20);*/
 
         //QuestType1 q1(width, height, 1 - (rand() % 2), 0, 1, 17);
         //QuestType1 q2(width, height, 1 - (rand() % 3), 2, 3, 17);

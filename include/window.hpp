@@ -18,6 +18,7 @@ class NumberButtons {
   std::vector<std::unique_ptr<sf::Sprite>> Buttons;
   int ButtonPressID=-1;
   int margin_top;
+  int margin_left;
          
   bool touched  {false};
   bool pressed  {false};
@@ -34,6 +35,8 @@ public:
   int getButtonCount() { return ButtonCount; }
   std::vector<std::shared_ptr<sf::Texture>> getButtonTexture() { return MyTexture; }
   int GetButtonsClickID() { return ButtonPressID; }
+  int getMarginTop() { return margin_top; }
+  int getMarginLeft() { return margin_left; }
 };
 
 
@@ -65,14 +68,15 @@ class TextFrameBase {
   sf::Text text;
   sf::Font font;
 public: 
-   
-  TextFrameBase(int size,int , int,int) ;
-  TextFrameBase(int size);
+  TextFrameBase(int ,char); //delegate
+  TextFrameBase(int ,int , int,int) ;
+  TextFrameBase(int s, std::wstring str, int w, int h);
   sf::Text gettext(){ return text; }
-  void settext(std::string a) { text.setString(a); }
+  void settext(std::string a) { text.setString(a);}
+  void setmargin_top(int m);
+  void CalcucateCoordinate(int, int);
 
 };
-
 
 class Window {
    bool first;
