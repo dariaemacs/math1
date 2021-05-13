@@ -14,7 +14,7 @@
 #include <locale>
 
 
-//bool Window::first = false;
+int QuestType1::QTY = 1;
 extern const int ELAPSED_TIME;
 
 
@@ -261,17 +261,18 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
 
   sf::Event event;
   while (window->isOpen()) {
-      
+     
     //std::cout << "yyy" << std::endl;
+    
       while (window->pollEvent(event)) {
-          std::cout << "here12345" << std::endl;
+         
           if (event.type == sf::Event::Closed) {
 
               window->close();
 
           }
 
-          //button click: 
+          
           if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
               if (readyforCheck && checkandnextQuest()) {
@@ -304,37 +305,49 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
       }
 
 
-          //CheckButtonTexture.de;
-
-
-          window->clear();
-          
+      
+      
+      window->clear(); 
+      
           window->draw(List);
-          window->draw(textFrame.gettext());
+          
+          window->draw(textFrame.gettext());      
+        
           window->draw(QuestComment.gettext());
+     
           window->draw(CheckButtonSprite);
-
+        
          
 
-
+          //std::cout << "zzzzzzzzzzzzzzzzzzzzzz" << std::endl;
           figures[fig1]->draw();
           figures[fig2]->draw();
+          if (first) std::cout << "*QTY=" << QTY++ << std::endl;
           if (first) {
+              
                margintopSlideButton =
                   (
+
                   (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
                       ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());
               Buttons.setMargin_top(margintopSlideButton + 10);
+              
               Buttons.CalcucateCoordinate(); first = false;
+              
               QuestComment.setmargin_top(margintopSlideButton);
+              
+              std::cout << "**QTY=" << QTY - 1 << std::endl;
               QuestComment.CalcucateCoordinate(w - Buttons.getMarginLeft(), h - Buttons.getMarginTop());
+              std::cout << "***QTY=" << QTY - 1 << std::endl;
               
           }
+          
+
           for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
               window->draw(*Buttons.getButtons()[bc]);
 
           
-
+          if (first) std::cout << "display" << std::endl;
           window->display();
 
       
@@ -346,3 +359,133 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
 
   }
 }
+
+
+QuestType1::QuestType1(int fig1, int fig2,int w, int h, int questNumber, int qtyButtons) :
+    Window(w, h, questNumber),
+    Buttons(qtyButtons),
+    questNumber(questNumber)
+{
+    bool first = true;
+    int margintopSlideButton = 0;
+    FrameFigure::resetnumber_of_figure();
+    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    CheckButtonSprite.setTexture(CheckButtonTexture);
+    std::cout << fig1 << "," << fig2 << std::endl;
+    const std::vector<FrameFigure*> figures =
+    {
+        new Car(window),
+        new Flower(window),
+        new Tree(window),
+        new Butterfly(window),
+        new Plane(window),
+        new Tower(window),
+    };
+
+    
+
+    int rectengleQTY = figures[fig1]->getrectengleQTY() + figures[fig2]->getrectengleQTY();
+    int triangleQTY = figures[fig1]->gettriangleQTY() + figures[fig2]->gettriangleQTY();
+    int circleQTY = figures[fig1]->getcircleQTY() + figures[fig2]->getcircleQTY();
+
+    sf::Event event;
+    while (window->isOpen()) {
+
+        //std::cout << "yyy" << std::endl;
+
+        while (window->pollEvent(event)) {
+
+            if (event.type == sf::Event::Closed) {
+
+                window->close();
+
+            }
+
+
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+                if (readyforCheck && checkandnextQuest()) {
+                    int rightfigurCount = check(circleQTY, triangleQTY, rectengleQTY);
+                    if (rightfigurCount < 0)  textFrame.settext("Good");   else {
+                        textFrame.settext("Not good");
+
+                        Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
+                            "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
+
+                        Buttons.getButtonTexture()[rightfigurCount - 1]->loadFromFile(
+                            "resources/images/digit" + std::to_string(rightfigurCount) + "_right.jpg"
+                        );
+
+                    }
+
+                }
+
+                if (Buttons.click(window)) {
+
+                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);
+
+
+                }
+            }
+
+
+
+        }
+
+
+
+
+        window->clear();
+
+        window->draw(List);
+
+        window->draw(textFrame.gettext());
+
+        window->draw(QuestComment.gettext());
+
+        window->draw(CheckButtonSprite);
+
+
+
+        //std::cout << "zzzzzzzzzzzzzzzzzzzzzz" << std::endl;
+        figures[fig1]->draw();
+        figures[fig2]->draw();
+        if (first) std::cout << "*QTY=" << QTY++ << std::endl;
+        if (first) {
+
+            margintopSlideButton =
+                (
+
+                (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
+                    ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());
+            Buttons.setMargin_top(margintopSlideButton + 10);
+
+            Buttons.CalcucateCoordinate(); first = false;
+
+            QuestComment.setmargin_top(margintopSlideButton);
+
+            std::cout << "**QTY=" << QTY - 1 << std::endl;
+            QuestComment.CalcucateCoordinate(w - Buttons.getMarginLeft(), h - Buttons.getMarginTop());
+            std::cout << "***QTY=" << QTY - 1 << std::endl;
+
+        }
+
+
+        for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
+            window->draw(*Buttons.getButtons()[bc]);
+
+
+        if (first) std::cout << "display" << std::endl;
+        window->display();
+
+
+
+
+
+
+
+
+    }
+}
+

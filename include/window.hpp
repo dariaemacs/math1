@@ -119,12 +119,13 @@ public:
 
 class QuestType1: public Window { 
    
-
+    static int QTY;
   NumberButtons Buttons;
   int questNumber;
   int check(int,int,int);
 public:
     QuestType1(int w, int h, int questNumber, int qtyButtons);
+    QuestType1(int fig1, int fig2,  int w, int h, int questNumber, int qtyButtons);
     //~QuestType1();
 };
 

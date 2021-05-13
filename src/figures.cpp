@@ -169,23 +169,33 @@ void FrameFigure::calcKoeff() {
     float frameHeight = getymax() - getymin();
     float frameWidthNew = window->getSize().x / 2;
     int winHeigt = window->getSize().y;
+    int winWidth = window->getSize().x;
     koef = frameWidthNew / frameWidth;
     float frameHeightNew = (getymax() - getymin()) * koef;
-     while (frameHeightNew > winHeigt / 2 ) {
+     while (frameHeightNew > winHeigt / 3 || frameWidth > winWidth/2) {
             koef = koef - 0.01;
-            frameHeightNew = (getymax() - getymin()) * koef;
-            frameWidthNew = (getxmax() - getxmin()) * koef;
-        }
-     
-     
-     margin_left = number_of_figure++ * window->getSize().x / 2 + abs((window->getSize().x / 2 - frameWidthNew) / 2);
-     if (margin_left < 10) margin_left = 10; //left picture
-     if (margin_left + frameWidthNew > window->getSize().y) margin_left-=10; //left picture
-     std::cout << "margin_left=" << margin_left <<  std::endl;
+            frameHeightNew = frameWidth * koef;
+            frameWidthNew = frameHeight * koef;
+       }
+     margin_left = number_of_figure * winWidth / 2 + abs((winWidth / 2 - frameWidthNew) / 2);
+     margin_top = winHeigt / 3;
 
-     float f = window->getSize().y / 3;
-     margin_top = (window->getSize().y - frameHeightNew)/2;
+     std::cout << "picture size :" << frameWidthNew <<"x" << frameWidthNew  << std::endl;
 
+     //int fw = (number_of_figure == 0 ? frameWidth / 2 : frameWidth);
+     //margin_left = number_of_figure * window->getSize().x / 2 + abs((window->getSize().x / 2 - frameWidthNew ) / 2);
+     //while (margin_left + frameWidthNew > fw) {
+     //    koef = koef - 0.01;
+     //    frameWidthNew = (getxmax() - getxmin()) * koef;
+     //    if (margin_left < 10) margin_left = 10; //left picture
+     //    if (margin_left + frameWidthNew* koef > window->getSize().y) margin_left -= 10; //left picture
+     //    koef = koef - 0.01;
+     //}
+     ////std::cout << "margin_left=" << margin_left <<  std::endl;
+
+     //float f = window->getSize().y / 3;
+     //margin_top = (window->getSize().y - frameHeightNew)/2;
+     number_of_figure++;
 }
 
 
@@ -574,7 +584,7 @@ Tree::Tree(std::shared_ptr<sf::RenderWindow>& win):
 {
 
     xmin = 0;
-    xmax = 360;
+    xmax = 340;
     ymin = 0;
     ymax = 264;
 
