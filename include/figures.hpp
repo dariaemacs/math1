@@ -104,6 +104,7 @@ public:
   }
 
   void set_coords(float x, float y){
+      int ggg = owner->getmargin_left();
     circle->setPosition((x* owner->getkoef()-(owner->getxmin()   *owner->getkoef()))+ owner->getmargin_left(), (y* owner->getkoef()-(owner->getymin() * owner->getkoef())) + owner->getmargin_top());
   }
 

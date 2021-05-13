@@ -33,7 +33,7 @@ public:
   std::vector<std::unique_ptr<sf::Sprite>>& getButtons() { return Buttons; }
   bool  click(std::shared_ptr<sf::RenderWindow>&);
   int getButtonCount() { return ButtonCount; }
-  std::vector<std::shared_ptr<sf::Texture>> getButtonTexture() { return MyTexture; }
+  std::vector<std::shared_ptr<sf::Texture>>& getButtonTexture() { return MyTexture; }
   int GetButtonsClickID() { return ButtonPressID; }
   int getMarginTop() { return margin_top; }
   int getMarginLeft() { return margin_left; }

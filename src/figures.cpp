@@ -172,11 +172,12 @@ void FrameFigure::calcKoeff() {
     int winWidth = window->getSize().x;
     koef = frameWidthNew / frameWidth;
     float frameHeightNew = (getymax() - getymin()) * koef;
-     while (frameHeightNew > winHeigt / 3 || frameWidth > winWidth/2) {
-            koef = koef - 0.01;
-            frameHeightNew = frameWidth * koef;
-            frameWidthNew = frameHeight * koef;
-       }
+    do  {
+        koef = koef - 0.01;
+        frameHeightNew = frameWidth * koef;
+        frameWidthNew = frameHeight * koef;
+    } while (frameHeightNew > winHeigt / 3 || frameWidth > winWidth / 2);
+     
      margin_left = number_of_figure * winWidth / 2 + abs((winWidth / 2 - frameWidthNew) / 2);
      margin_top = winHeigt / 3;
 
@@ -196,6 +197,9 @@ void FrameFigure::calcKoeff() {
      //float f = window->getSize().y / 3;
      //margin_top = (window->getSize().y - frameHeightNew)/2;
      number_of_figure++;
+    /*koef = 1;
+    margin_left = 0;
+    margin_top = 0; */
 }
 
 
@@ -404,9 +408,9 @@ Flower::Flower(std::shared_ptr<sf::RenderWindow>& win)
 {
 
     xmin = 0;
-    xmax = 190;
+    xmax = 243;
     ymin = 0;
-    ymax = 239; //320
+    ymax = 264;
 
    
  
@@ -415,20 +419,23 @@ Flower::Flower(std::shared_ptr<sf::RenderWindow>& win)
 void Flower::draw() {
     if (!alreadyDraw) {
         calcKoeff();
-        int y = -40;
-        circle1.set_radius(30);
-        circle2.set_radius(30);
-        circle3.set_radius(30);
-        circle4.set_radius(30);
+        int y = 20;
+        int x = -55;
+        circle1.set_radius(23);
+        circle2.set_radius(23);
+        circle3.set_radius(23);
+        circle4.set_radius(23);
 
         center_circle.set_radius(45);
+        int step = 15;
+        circle2.set_coords(25 - x + step, 0 + step);
 
-        circle1.set_coords(142, 125+ y);
-        circle2.set_coords(24, 24 + y);
-        circle3.set_coords(144, 22 + y);
-        circle4.set_coords(28, 125 + y);
+        circle1.set_coords(130 - x + step, 0 + step);
+        
+        circle3.set_coords(25 - x + step, 90 + step);
+        circle4.set_coords(130 - x + step, 90 + step);
 
-        center_circle.set_coords(70, 57 + y);
+        center_circle.set_coords(70-x, 17+y);
 
         circle1.set_color(color::aqua);
         circle2.set_color(color::red);
@@ -436,17 +443,17 @@ void Flower::draw() {
         circle4.set_color(color::green);
 
         center_circle.set_color(color::coral);
-        int step = 25;
-        int step2 = 15;
-        triangle1.set_coords(25, 230.0f + y, 105, 230.0f + y, 65, 260.0f + y);
+   
+        int step2 = -40;
+        triangle1.set_coords(25-x, 190+y+ step2, 105-x,190+y + step2, 65-x,220+y + step2);
         triangle1.set_color(color::lime);
 
-        triangle2.set_coords(125, 230.0f + y, 205, 230.0f + y, 165, 260.0f + y);
+        triangle2.set_coords(125-x, 190+y + step2, 205-x, 190+y + step2, 165-x, 220+y + step2);
         triangle2.set_color(color::lime);
 
-        rectangle.set_coords(110, 149 + y);
+        rectangle.set_coords(110-x, 109+y);
         rectangle.set_color(color::lightskyblue);
-        rectangle.set_size(10, 130);
+        rectangle.set_size(10, 80);
 
         int indexColor1 = rand() % Colors.size();
         int indexColor2 = rand() % Colors.size();

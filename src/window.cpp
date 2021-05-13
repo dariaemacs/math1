@@ -150,6 +150,8 @@ TextFrameBase::TextFrameBase(int s, int quest, int w,  int h)
 
   CalcucateCoordinate(w * 18 / 19, h);
   
+
+
 }
 
 
@@ -342,10 +344,12 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
               
           }
           
-
-          for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
+          std::cout << "***QTY=" << QTY - 1 << std::endl;
+          for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
+              std::cout << "draw button #" << bc << std::endl;
               window->draw(*Buttons.getButtons()[bc]);
-
+          }
+          std::cout << "***QTY=" << QTY - 1 << std::endl;
           
           if (first) std::cout << "display" << std::endl;
           window->display();
@@ -403,7 +407,7 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h, int questNumber, int qty
 
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-
+                if (first) std::cout << "display" << std::endl;
                 if (readyforCheck && checkandnextQuest()) {
                     int rightfigurCount = check(circleQTY, triangleQTY, rectengleQTY);
                     if (rightfigurCount < 0)  textFrame.settext("Good");   else {
@@ -460,23 +464,25 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h, int questNumber, int qty
                 (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
                     ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());
             Buttons.setMargin_top(margintopSlideButton + 10);
-
+      
             Buttons.CalcucateCoordinate(); first = false;
 
             QuestComment.setmargin_top(margintopSlideButton);
 
-            std::cout << "**QTY=" << QTY - 1 << std::endl;
+        
             QuestComment.CalcucateCoordinate(w - Buttons.getMarginLeft(), h - Buttons.getMarginTop());
-            std::cout << "***QTY=" << QTY - 1 << std::endl;
+        
 
         }
 
-
-        for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
+        
+        for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
+       
             window->draw(*Buttons.getButtons()[bc]);
+        }
 
 
-        if (first) std::cout << "display" << std::endl;
+  
         window->display();
 
 
