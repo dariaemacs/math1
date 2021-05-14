@@ -176,7 +176,7 @@ void FrameFigure::calcKoeff() {
         koef = koef - 0.01;
         frameHeightNew = frameWidth * koef;
         frameWidthNew = frameHeight * koef;
-    } while (frameHeightNew > winHeigt / 3 || frameWidth > winWidth / 2);
+    } while (frameHeightNew > (int)((float)winHeigt / 2.8) || frameWidth > winWidth / 2);
      
      margin_left = number_of_figure * winWidth / 2 + abs((winWidth / 2 - frameWidthNew) / 2);
      margin_top = winHeigt / 3;
