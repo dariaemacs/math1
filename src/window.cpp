@@ -347,12 +347,12 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
               QuestComment.CalcucateCoordinate(w - Buttons.getMarginLeft(),  Buttons.getMarginTop() );
           }
 
-          //std::cout << "***QTY=" << QTY - 1 << std::endl;
+     
           for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
               std::cout << "draw button #" << bc << std::endl;
               window->draw(*Buttons.getButtons()[bc]);
           }
-          //std::cout << "***QTY=" << QTY - 1 << std::endl;
+     
           
           if (first) std::cout << "display" << std::endl;
           window->display();
@@ -416,7 +416,7 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h, int questNumber, int qty
         
         figures[fig1]->draw();
         figures[fig2]->draw();
-        if (first) std::cout << "*QTY=" << QTY++ << std::endl;
+        //if (first) std::cout << "*QTY=" << QTY++ << std::endl;
         if (first) {
 
             margintopSlideButton =
@@ -464,7 +464,8 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h, int questNumber, int qty
                     
                     if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
                         QuestComment.settext(CommentsDic[1]);
-                        QuestComment.CalcucateCoordinate(w - Buttons.getMarginLeft(), h - Buttons.getMarginTop());
+                        
+                 
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
@@ -473,6 +474,7 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h, int questNumber, int qty
                         );
 
                     }
+                    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
 
                 }
 
