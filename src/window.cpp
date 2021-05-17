@@ -463,7 +463,7 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h, int questNumber, int qty
                     int rightfigurCount = check(circleQTY, triangleQTY, rectengleQTY);
                     
                     if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
-                        QuestComment.settext(CommentsDic[1]);
+                        QuestComment.settext(CommentsDic[2]);
                         
                  
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
