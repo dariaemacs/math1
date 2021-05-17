@@ -84,7 +84,7 @@ void TextFrameBase::CalcucateCoordinate(const int w, const int h) {
     int width = text.getLocalBounds().width; int height = text.getLocalBounds().height;
     while (width  > w || height > h)
     {  
-        if (size > 0) text.setCharacterSize(size--); else return;
+        if (size > 0) text.setCharacterSize(size--); else return; 
         width = text.getLocalBounds().width;
         height = text.getLocalBounds().height;
     }
@@ -95,16 +95,18 @@ void NumberButtons::CalcucateCoordinate() {
     using namespace std;
     int ButtonSlideHeght = Window::height - margin_top;
     int step = 0;
-    
+  
 
-    int  ButtonSize = Window::width / 11;
-    ButtonSize = (Window::width / 11) * 2 / 3;
-    
+    int  ButtonSize = (Window::width / 11) * 2 / 3;
+    height = ButtonSize;
   
     while (ButtonSize + 10 > ButtonSlideHeght / 2) ButtonSize--;
     step = ButtonSize / 5;
     if (ButtonCount > 10) margin_top = Window::height - (ButtonSize + step) * 2; else margin_top = Window::height - (ButtonSize + step);
     margin_left = Window::width - 11 * (ButtonSize + step);
+    int margin_left_button = margin_left;
+    int margin_top_button = margin_top;
+    //heght = 
     for (int i = 0; i < ButtonCount; i++) {
         //std::cout << "here2" << std::endl;
         std::string fileName = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
@@ -116,13 +118,14 @@ void NumberButtons::CalcucateCoordinate() {
         scale = (float)ButtonSize / PICTURESIZE.y;
         sprite->setScale(scale, scale);
         
-        sprite->move(margin_left, margin_top);
+        sprite->move(margin_left_button, margin_top_button);
         if (i % 10 == 0 && i > 0) {
-            margin_top = margin_top + ButtonSize+ step - 15; margin_left = Window::width - 11 * (ButtonSize + step);
-        } else margin_left = margin_left + ButtonSize + step;
+            margin_top_button = margin_top_button + ButtonSize+ step - 15; margin_left_button = Window::width - 11 * (ButtonSize + step);
+        } else margin_left_button = margin_left_button + ButtonSize + step;
         MyTexture.emplace_back(std::move(txt));
         Buttons.emplace_back(std::move(sprite));
     };
+    margin_left += -10;
 
 }
 
@@ -134,8 +137,10 @@ TextFrameBase::TextFrameBase(int s, char):size(s) { //delegate
     text.setPosition(Settings::PADDING, Settings::PADDING);
 }
 
-TextFrameBase::TextFrameBase(int s, std::wstring str, int w, int h) :TextFrameBase(s, 'c') {
-    text.setString(str);
+TextFrameBase::TextFrameBase(int s, std::wstring str, int w1, int h1) :TextFrameBase(s, 'c') {
+    w= w1;
+    h = h1;
+    text.setString(str); 
     
 }
 
@@ -283,8 +288,8 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
 
               if (readyforCheck && checkandnextQuest()) {
                   int rightfigurCount = check(circleQTY, triangleQTY, rectengleQTY);
-                  if (rightfigurCount < 0)  textFrame.settext("Good");   else {
-                      textFrame.settext("Not good");
+                  if (rightfigurCount < 0)  textFrame.settext(CommentsDic[1]);   else {
+                      textFrame.settext(CommentsDic[1]);
 
                       Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                           "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
@@ -328,7 +333,7 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
           
           figures[fig1]->draw();
           figures[fig2]->draw();
-          if (first) std::cout << "*QTY=" << QTY++ << std::endl;
+          //if (first) std::cout << "*QTY=" << QTY++ << std::endl;
           if (first) {
               
                margintopSlideButton =
@@ -336,25 +341,18 @@ QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
 
                   (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
                       ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());
-              Buttons.setMargin_top(margintopSlideButton + 10);
-              
+              Buttons.setMargin_top(margintopSlideButton + 10);             
               Buttons.CalcucateCoordinate(); first = false;
-              
-              
-              
-              std::cout << "**QTY=" << QTY - 1 << std::endl;
-              QuestComment.CalcucateCoordinate(w - Buttons.getMarginLeft(), h - Buttons.getMarginTop());
-              QuestComment.setmargin_top(Buttons.getMarginTop());
-              std::cout << "***QTY=" << QTY - 1 << std::endl;
-              
+              QuestComment.setmargin_top(Buttons.getHeight());
+              QuestComment.CalcucateCoordinate(w - Buttons.getMarginLeft(),  Buttons.getMarginTop() );
           }
-          
-          std::cout << "***QTY=" << QTY - 1 << std::endl;
+
+          //std::cout << "***QTY=" << QTY - 1 << std::endl;
           for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
               std::cout << "draw button #" << bc << std::endl;
               window->draw(*Buttons.getButtons()[bc]);
           }
-          std::cout << "***QTY=" << QTY - 1 << std::endl;
+          //std::cout << "***QTY=" << QTY - 1 << std::endl;
           
           if (first) std::cout << "display" << std::endl;
           window->display();
@@ -430,10 +428,10 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h, int questNumber, int qty
       
             Buttons.CalcucateCoordinate(); first = false;
 
-            QuestComment.setmargin_top(margintopSlideButton);
+            QuestComment.setmargin_top(h-Buttons.getHeight());
 
         
-            QuestComment.CalcucateCoordinate(w - Buttons.getMarginLeft(), h - Buttons.getMarginTop());
+            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() ,  Buttons.getMarginTop());
         
 
         }
@@ -464,9 +462,9 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h, int questNumber, int qty
                 if (readyforCheck && checkandnextQuest()) {
                     int rightfigurCount = check(circleQTY, triangleQTY, rectengleQTY);
                     
-                    if (rightfigurCount < 0)  textFrame.settext("Good");   else {
-                        textFrame.settext("Not good");
-
+                    if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
+                        QuestComment.settext(CommentsDic[1]);
+                        QuestComment.CalcucateCoordinate(w - Buttons.getMarginLeft(), h - Buttons.getMarginTop());
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 

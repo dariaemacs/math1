@@ -13,14 +13,14 @@ int main(){
 
 
 
-        /*
+       
         int width = 1024; int height = 600;
  
-        srand(time(0));
-        QuestType1 q1(width, height, (rand() % 3),20);
-      */
-        /*
-        int width = 1024; int height = 600;
+    /*    srand(time(0));
+
+     
+       
+         width = 1024;  height = 600;
         QuestType1(1, 0, width, height, (rand() % 3), 21);
         QuestType1(2, 0, width, height, (rand() % 3), 21);
         QuestType1(3, 0, width, height, (rand() % 3), 21);
@@ -32,14 +32,14 @@ int main(){
         QuestType1(3, 0, width, height, (rand() % 3), 21);
         QuestType1(4, 0, width, height, (rand() % 3), 21);
         QuestType1(5, 0, width, height, (rand() % 3), 21);*/
-        int width = 1152; int height = 864;
-    //  QuestType1(1, 0, width, height, (rand() % 3), 20);
-    //  QuestType1(2, 0, width, height, (rand() % 3), 20);
-    //  QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        width = 1152; height = 864;
+     QuestType1(1, 0, width, height, (rand() % 3), 20);
+     QuestType1(2, 0, width, height, (rand() % 3), 20);
+     QuestType1(3, 0, width, height, (rand() % 3), 20);
+       QuestType1(4, 0, width, height, (rand() % 3), 20);
+       QuestType1(5, 0, width, height, (rand() % 3), 20);
         width = 1200; height = 600;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
+           QuestType1(1, 0, width, height, (rand() % 3), 20);
         QuestType1(2, 0, width, height, (rand() % 3), 20);
         QuestType1(3, 0, width, height, (rand() % 3), 20);
         QuestType1(4, 0, width, height, (rand() % 3), 20);
@@ -51,11 +51,12 @@ int main(){
         QuestType1(4, 0, width, height, (rand() % 3), 20);
         QuestType1(5, 0, width, height, (rand() % 3), 20);
         width = 1280; height = 768;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+      QuestType1(1, 0, width, height, (rand() % 3), 20);
+      QuestType1(2, 0, width, height, (rand() % 3), 20);
+      QuestType1(3, 0, width, height, (rand() % 3), 20);
+      QuestType1(4, 0, width, height, (rand() % 3), 20);
+      
+      QuestType1(5, 0, width, height, (rand() % 3), 20);
         width = 1280; height = 1024;
         QuestType1(1, 0, width, height, (rand() % 3), 20);
         QuestType1(2, 0, width, height, (rand() % 3), 20);
@@ -140,7 +141,7 @@ int main(){
         QuestType1(3, 0, width, height, (rand() % 3), 20);
         QuestType1(4, 0, width, height, (rand() % 3), 20);
         QuestType1(5, 0, width, height, (rand() % 3), 20);
-
+      
 
         
 

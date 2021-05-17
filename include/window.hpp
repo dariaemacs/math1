@@ -19,6 +19,9 @@ class NumberButtons {
   int ButtonPressID=-1;
   int margin_top;
   int margin_left;
+  int height;
+  int width;
+
          
   bool touched  {false};
   bool pressed  {false};
@@ -35,8 +38,16 @@ public:
   int getButtonCount() { return ButtonCount; }
   std::vector<std::shared_ptr<sf::Texture>>& getButtonTexture() { return MyTexture; }
   int GetButtonsClickID() { return ButtonPressID; }
-  int getMarginTop() { return margin_top; }
-  int getMarginLeft() { return margin_left; }
+  int getMarginTop() {
+      return margin_top; 
+  }
+  int getHeight() {
+      return height;
+  }
+
+  int getMarginLeft() { 
+      return margin_left; 
+  }
 };
 
 
@@ -63,16 +74,20 @@ public:
 
 
 class TextFrameBase {
-  int size;
-  std::string question;
+  
+  std::wstring question;
   sf::Text text;
   sf::Font font;
+//protected:
+  int size;
+  int w;
+  int h;
 public: 
   TextFrameBase(int ,char); //delegate
   TextFrameBase(int ,int , int,int) ;
   TextFrameBase(int s, std::wstring str, int w, int h);
   sf::Text gettext(){ return text; }
-  void settext(std::string a) { text.setString(a);}
+  void settext(std::wstring a) { text.setString(a);}
   void setmargin_top(int m);
   void CalcucateCoordinate(int, int);
 

@@ -14,7 +14,9 @@ const std::array<figureQestions,N> questionFigure =
 
 const std::wstring CommentsDic[] =
 {
-    {L"Выбери ответ" }
+    {L"Выбери ответ" },
+    {L"Верно. Молодец, +1 балл" }
+
 };
 
 
