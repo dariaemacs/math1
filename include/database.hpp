@@ -13,7 +13,7 @@ struct figureQestions {
 
 extern const std::wstring CommentsDic[];
 
-constexpr int N = 3; //Question count
+constexpr int N = 7; //Question count
 const int ELAPSED_TIME = 20;
 const float FPS = 30.0f;
 

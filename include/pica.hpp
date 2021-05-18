@@ -4,11 +4,12 @@
 #include <SFML/Graphics.hpp>
 
 enum types {
-
+    
     square = 4, 
     circle = 0, 
     rectangle = 40, 
     triangle = 3, 
+    calc = -1
 
 };
 
