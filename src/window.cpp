@@ -164,7 +164,8 @@ TextFrameBase::TextFrameBase(int s, int quest, int w,  int h)
 
 
 Window::Window(int w, int h, int numberQuest)
-  : readyforCheck(false),
+  :  questNumber(numberQuest),
+   readyforCheck(false),
     first(true),
     textFrame(Settings::QUESTFONTSIZE, numberQuest,w,h),   
     QuestComment(Settings::QUESTFONTSIZE, CommentsDic[0] , w , h)
@@ -240,145 +241,17 @@ bool Window::checkandnextQuest() {
   return false;
 }
 
-QuestType1::QuestType1(int w, int h, int questNumber, int qtyButtons) :
+QuestType1::QuestType1(int w, int h,  int qtyButtons) :
     
-  Window(w, h, questNumber),
-  Buttons(qtyButtons),
-  questNumber(questNumber)
-{
-    bool first = true;
-    int margintopSlideButton = 0;
-  FrameFigure::resetnumber_of_figure();
-  CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png"); 
-  CheckButtonSprite.setTexture(CheckButtonTexture);
-  
-  const std::vector<FrameFigure*> figures =
-  {
-      new Car(window), 
-      new Flower(window),
-      new Tree(window),
-      new Butterfly(window),
-      new Plane(window),
-      new Tower(window),
-  };
-
-  int fig1 = (rand() % figures.size());
-  int fig2 = 0;
-  while ((fig2 = (rand() % figures.size())) == fig1);
- 
-  int rectengleQTY = figures[fig1]->getrectengleQTY() + figures[fig2]->getrectengleQTY();
-  int triangleQTY = figures[fig1]->gettriangleQTY() + figures[fig2]->gettriangleQTY();
-  int circleQTY = figures[fig1]->getcircleQTY()+ figures[fig2]->getcircleQTY();
-
-  sf::Event event;
-  while (window->isOpen()) {
-     
-    //std::cout << "yyy" << std::endl;
-    
-      while (window->pollEvent(event)) {
-         
-          if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed ) {
-
-              window->close();
-
-          }
-
-          
-          if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-
-              if (readyforCheck && checkandnextQuest()) {
-                  int rightfigurCount = check(circleQTY, triangleQTY, rectengleQTY);
-                  if (rightfigurCount < 0)  textFrame.settext(CommentsDic[1]);   else {
-                      textFrame.settext(CommentsDic[1]);
-
-                      Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
-                          "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
-
-                      Buttons.getButtonTexture()[rightfigurCount - 1]->loadFromFile(
-                          "resources/images/digit" + std::to_string(rightfigurCount) + "_right.jpg"
-                      );
-
-                  }
-
-              }
-
-              if (Buttons.click(window)) {
-
-                  CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                  CheckButtonSprite.setTexture(CheckButtonTexture);
-
-
-              }
-          }
-
-
-
-      }
-
-
-      
-      
-      window->clear(); 
-      
-          window->draw(List);
-          
-          window->draw(textFrame.gettext());      
-        
-          window->draw(QuestComment.gettext());
-     
-          window->draw(CheckButtonSprite);
-        
-         
-
-          
-          figures[fig1]->draw();
-          figures[fig2]->draw();
-          //if (first) std::cout << "*QTY=" << QTY++ << std::endl;
-          if (first) {
-              
-               margintopSlideButton =
-                  (
-
-                  (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
-                      ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());
-              Buttons.setMargin_top(margintopSlideButton + 10);             
-              Buttons.CalcucateCoordinate(); first = false;
-              QuestComment.setmargin_top(Buttons.getHeight());
-              QuestComment.CalcucateCoordinate(w - Buttons.getMarginLeft(),  Buttons.getMarginTop() );
-          }
-
-     
-          for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
-              std::cout << "draw button #" << bc << std::endl;
-              window->draw(*Buttons.getButtons()[bc]);
-          }
-     
-          
-          if (first) std::cout << "display" << std::endl;
-          window->display();
-
-      
-
-    
-
-
-
-
-  }
-}
-
-
-QuestType1::QuestType1(int fig1, int fig2,int w, int h, int questNumber, int qtyButtons) :
-    Window(w, h, questNumber),
-    Buttons(qtyButtons),
-    questNumber(questNumber)
+  Window(w, h, (rand() % 3)),
+  Buttons(qtyButtons)
 {
     bool first = true;
     int margintopSlideButton = 0;
     FrameFigure::resetnumber_of_figure();
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
-    std::cout << fig1 << "," << fig2 << std::endl;
+
     const std::vector<FrameFigure*> figures =
     {
         new Car(window),
@@ -388,6 +261,146 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h, int questNumber, int qty
         new Plane(window),
         new Tower(window),
     };
+
+    int fig1 = (rand() % figures.size());
+    int fig2 = 0;
+    while ((fig2 = (rand() % figures.size())) == fig1);
+
+    int rectengleQTY = figures[fig1]->getrectengleQTY() + figures[fig2]->getrectengleQTY();
+    int triangleQTY = figures[fig1]->gettriangleQTY() + figures[fig2]->gettriangleQTY();
+    int circleQTY = figures[fig1]->getcircleQTY() + figures[fig2]->getcircleQTY();
+    sf::Event event;
+    while (window->isOpen()) {
+        window->clear();
+        window->draw(List);
+        figures[fig1]->draw();
+        figures[fig2]->draw();
+        if (first) {
+            margintopSlideButton =
+                (
+                (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
+                    ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());
+            Buttons.setMargin_top(margintopSlideButton + 10);
+            Buttons.CalcucateCoordinate(); first = false;
+            QuestComment.setmargin_top(h - Buttons.getHeight());
+            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+        }
+        window->draw(QuestComment.gettext());
+        window->draw(textFrame.gettext());
+        window->draw(CheckButtonSprite);
+        for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
+            window->draw(*Buttons.getButtons()[bc]);
+        }
+        window->display();
+        while (window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window->close();
+            }
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                if (readyforCheck && checkandnextQuest()) {
+                    int rightfigurCount = check(circleQTY, triangleQTY, rectengleQTY);
+                    if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
+                        QuestComment.settext(CommentsDic[2]);
+                        Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
+                            "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
+
+                        Buttons.getButtonTexture()[rightfigurCount - 1]->loadFromFile(
+                            "resources/images/digit" + std::to_string(rightfigurCount) + "_right.jpg"
+                        );
+                    }
+                    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+                }
+                if (Buttons.click(window)) {
+                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                }
+            }
+        }
+    }
+}
+
+QuestType2::QuestType2( int w, int h,  int qtyButtons):
+    Window(w, h, ((rand() % 3+3))),
+    Buttons(qtyButtons)
+   {
+    std::cout << "rand() % 3="<<rand() % 3 <<std::endl ;
+
+    bool first = true;
+    int margintopSlideButton = 0;
+    FrameFigure::resetnumber_of_figure();
+    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    CheckButtonSprite.setTexture(CheckButtonTexture);
+
+
+
+    int N = (rand() % 20);
+    int M = 0;
+    while ((M = (rand() % 20)+1) > N);
+
+
+    sf::Event event;
+    while (window->isOpen()) {
+        window->clear();
+        window->draw(List);
+        figures[fig1]->draw();
+        figures[fig2]->draw();
+        if (first) {
+            margintopSlideButton =
+                (
+                (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
+                    ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());
+            Buttons.setMargin_top(margintopSlideButton + 10);
+            Buttons.CalcucateCoordinate(); first = false;
+            QuestComment.setmargin_top(h - Buttons.getHeight());
+            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+        }
+        window->draw(QuestComment.gettext());
+        window->draw(textFrame.gettext());
+        window->draw(CheckButtonSprite);
+        for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
+            window->draw(*Buttons.getButtons()[bc]);
+        }
+        window->display();
+        while (window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window->close();
+            }
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                if (readyforCheck && checkandnextQuest()) {
+                    int rightfigurCount = check(0, 0, 0);
+                    if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
+                        QuestComment.settext(CommentsDic[2]);
+                        Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
+                            "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
+
+                        Buttons.getButtonTexture()[rightfigurCount - 1]->loadFromFile(
+                            "resources/images/digit" + std::to_string(rightfigurCount) + "_right.jpg"
+                        );
+                    }
+                    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+                }
+                if (Buttons.click(window)) {
+                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                }
+            }
+        }
+    }
+
+
+}
+
+QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
+    Window(w, h, (rand() % 3)),
+    Buttons(qtyButtons)
+{
+    bool first = true;
+    int margintopSlideButton = 0;
+    FrameFigure::resetnumber_of_figure();
+    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    CheckButtonSprite.setTexture(CheckButtonTexture);
+    std::cout << fig1 << "," << fig2 << std::endl;
+
 
     
 

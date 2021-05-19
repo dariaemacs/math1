@@ -9,7 +9,14 @@ enum types {
     circle = 0, 
     rectangle = 40, 
     triangle = 3, 
+    seashell =5,
+    berry = 6,
+    mashroom = 7,
+    fish = 8,
+    butterfly = 9,
+    bycicle = 10,
     calc = -1
+
 
 };
 

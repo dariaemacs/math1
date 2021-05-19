@@ -97,7 +97,7 @@ class Window {
    bool first;
   
 
-
+  
   static int width;  
   static int height; 
   double coef;
@@ -109,6 +109,7 @@ class Window {
 
   
 protected:
+    int questNumber;
   TextFrameBase textFrame;
   bool checkandnextQuest();
   std::shared_ptr<sf::RenderWindow> window; 
@@ -136,17 +137,27 @@ class QuestType1: public Window {
    
     static int QTY;
   NumberButtons Buttons;
-  int questNumber;
+
   int check(int,int,int);
 public:
-    QuestType1(int w, int h, int questNumber, int qtyButtons);
-    QuestType1(int fig1, int fig2,  int w, int h, int questNumber, int qtyButtons);
+    QuestType1(int w, int h,  int qtyButtons);
+    QuestType1(int fig1, int fig2,  int w, int h,  int qtyButtons);
     //~QuestType1();
 };
 
 
 class QuestionBase {
   TextFrameBase txt;
+};
+
+class QuestType2 : public Window {
+
+    static int QTY;
+    NumberButtons Buttons;   
+    int check(int, int, int);
+public:
+    QuestType2(int w, int h,  int qtyButtons);
+
 };
 
 
