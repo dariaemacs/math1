@@ -1,5 +1,5 @@
 #include "window.hpp"
-//#include "figures.hpp"
+
 
 #include <iostream>
 #include <sstream>
@@ -76,6 +76,10 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
 }
 
 NumberButtons::NumberButtons(int BC):ButtonCount(BC){}
+
+void TextFrameBase::setWidth(int) {
+    //text.se
+}
 void TextFrameBase::CalcucateCoordinate(const int w, const int h) {
     
     
@@ -161,11 +165,29 @@ TextFrameBase::TextFrameBase(int s, int quest, int w,  int h)
 
 }
 
+void TextFrameBase::setN_M(int N, int M) {
+    
+    
+    size_t posn;
+    std::wstring question = text.getString();
 
+    std::wstring replaceFrom = L"N";
+    std::wstring replaceTo = std::to_wstring(N);
+    posn = question.find(replaceFrom);
+    question.replace(posn, replaceFrom.length(), replaceTo);
+
+
+    replaceFrom = L"M";
+    replaceTo = std::to_wstring(M);
+    posn = question.find(replaceFrom);
+    question.replace(posn, replaceFrom.length(), replaceTo);
+    text.setString(question);
+
+}
 
 Window::Window(int w, int h, int numberQuest)
   :  questNumber(numberQuest),
-   readyforCheck(false),
+    readyforCheck(false),
     first(true),
     textFrame(Settings::QUESTFONTSIZE, numberQuest,w,h),   
     QuestComment(Settings::QUESTFONTSIZE, CommentsDic[0] , w , h)
@@ -327,7 +349,7 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
 
     bool first = true;
     int margintopSlideButton = 0;
-    FrameFigure::resetnumber_of_figure();
+   
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
 
@@ -336,19 +358,18 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
     int N = (rand() % 20);
     int M = 0;
     while ((M = (rand() % 20)+1) > N);
+   textFrame.setN_M(N, M);
 
-
-    sf::Event event;
+   sf::Event event;
     while (window->isOpen()) {
         window->clear();
         window->draw(List);
-        figures[fig1]->draw();
-        figures[fig2]->draw();
+
         if (first) {
-            margintopSlideButton =
+      /*      margintopSlideButton =
                 (
                 (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
-                    ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());
+                    ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());*/
             Buttons.setMargin_top(margintopSlideButton + 10);
             Buttons.CalcucateCoordinate(); first = false;
             QuestComment.setmargin_top(h - Buttons.getHeight());
@@ -367,7 +388,7 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
             }
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 if (readyforCheck && checkandnextQuest()) {
-                    int rightfigurCount = check(0, 0, 0);
+                    int rightfigurCount = 0;
                     if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
                         QuestComment.settext(CommentsDic[2]);
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
@@ -401,7 +422,15 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
     CheckButtonSprite.setTexture(CheckButtonTexture);
     std::cout << fig1 << "," << fig2 << std::endl;
 
-
+    const std::vector<FrameFigure*> figures =
+    {
+        new Car(window),
+        new Flower(window),
+        new Tree(window),
+        new Butterfly(window),
+        new Plane(window),
+        new Tower(window),
+    };
     
 
     int rectengleQTY = figures[fig1]->getrectengleQTY() + figures[fig2]->getrectengleQTY();

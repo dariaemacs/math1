@@ -86,10 +86,15 @@ public:
   TextFrameBase(int ,char); //delegate
   TextFrameBase(int ,int , int,int) ;
   TextFrameBase(int s, std::wstring str, int w, int h);
-  sf::Text gettext(){ return text; }
+  sf::Text gettext(){ 
+      return text; 
+  }
   void settext(std::wstring a) { text.setString(a);}
   void setmargin_top(int m);
   void CalcucateCoordinate(int, int);
+  void setWidth(int);
+  void setN_M(int,int);
+
 
 };
 
@@ -154,7 +159,7 @@ class QuestType2 : public Window {
 
     static int QTY;
     NumberButtons Buttons;   
-    int check(int, int, int);
+    //int check(int, int, int);
 public:
     QuestType2(int w, int h,  int qtyButtons);
 
