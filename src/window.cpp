@@ -155,7 +155,7 @@ void TextFrameBase::setmargin_top(int m) {
 
 TextFrameBase::TextFrameBase(int s, int quest, int w,  int h) 
     :TextFrameBase(s, 'c'){
-  
+    questionNumber = quest;
   text.setString(get_wstr(quest));
   //  text.setStyle(sf::Text::Bold);
 
@@ -182,6 +182,16 @@ void TextFrameBase::setN_M(int N, int M) {
     posn = question.find(replaceFrom);
     question.replace(posn, replaceFrom.length(), replaceTo);
     text.setString(question);
+  
+    for (int x = 0; x<X - 1;x++) {
+        replaceFrom = phrasestoReplace[questionNumber - beginQuestion2Index][x].find;
+        replaceTo = phrasestoReplace[questionNumber - beginQuestion2Index][x].replace;
+        posn = question.find(replaceFrom);
+        if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
+        
+    }
+    
+        text.setString(question);
 
 }
 
@@ -345,7 +355,7 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
     Window(w, h, ((rand() % 3+3))),
     Buttons(qtyButtons)
    {
-    std::cout << "rand() % 3="<<rand() % 3 <<std::endl ;
+    //std::cout << "rand() % 3="<<rand() % 3 <<std::endl ;
 
     bool first = true;
     int margintopSlideButton = 0;
@@ -357,7 +367,10 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
 
     int N = (rand() % 20);
     int M = 0;
-    while ((M = (rand() % 20)+1) > N);
+    while ((M = (rand() % 20) + 1) >= N) {
+        N = (rand() % 20);
+        std::cout << M << " " << N << std::endl;
+    }
    textFrame.setN_M(N, M);
 
    sf::Event event;

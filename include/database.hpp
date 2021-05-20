@@ -14,8 +14,10 @@ struct figureQestions {
 extern const std::wstring CommentsDic[];
 
 constexpr int N = 9; 
-constexpr int X = 6; 
-constexpr int Y = 5;
+constexpr int X = 5; 
+constexpr int Y = 6;
+
+constexpr int beginQuestion2Index = 3;
 
 const int ELAPSED_TIME = 20;
 const float FPS = 30.0f;
@@ -29,7 +31,7 @@ extern const std::vector<pica> tree;
 extern const std::vector<std::string> iconsFilename;
 extern const std::vector<FrameFigure*> figures;
 
-struct prasetoReplace {
+struct phrasetoReplace {
 	std::wstring find;
 	std::wstring replace;
 };
@@ -37,7 +39,7 @@ struct prasetoReplace {
 //prasetoReplace OOO[] = { { L"SDF",L"cvcv" },{ L"SDF",L"cvcv" } };
 //const std::array <std::array<int, X>, Y> INT0 = { { L"SDF",L"cvcv" },{ L"SDF",L"cvcv" } };
 
-extern const std::array <std::array<prasetoReplace, X>,Y> aaa;
+extern const std::array <std::array<phrasetoReplace, X>,Y> phrasestoReplace;
 //extern const std::array <std::array<int, X>, Y> INT0;
 
 #endif //DATABASE_H

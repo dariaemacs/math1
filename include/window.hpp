@@ -75,13 +75,16 @@ public:
 
 class TextFrameBase {
   
-  std::wstring question;
+
   sf::Text text;
   sf::Font font;
 //protected:
   int size;
   int w;
   int h;
+protected: 
+    int questionNumber;
+
 public: 
   TextFrameBase(int ,char); //delegate
   TextFrameBase(int ,int , int,int) ;
@@ -94,6 +97,7 @@ public:
   void CalcucateCoordinate(int, int);
   void setWidth(int);
   void setN_M(int,int);
+  void setquestionNumber(int qn) { questionNumber=qn; }
 
 
 };
