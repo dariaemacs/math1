@@ -75,7 +75,7 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
 
 }
 
-NumberButtons::NumberButtons(int BC):ButtonCount(BC){}
+NumberButtons::NumberButtons(int BC):ButtonCount(BC), pictureFilename(""){}
 
 void TextFrameBase::setWidth(int) {
     //text.se
@@ -94,16 +94,14 @@ void TextFrameBase::CalcucateCoordinate(const int w, const int h) {
     }
 }
 
+PicturetoVeiw::PicturetoVeiw() :NumberButtons(0), pictureFilename(""){};
 
 void NumberButtons::CalcucateCoordinate() {
     using namespace std;
     int ButtonSlideHeght = Window::height - margin_top;
     int step = 0;
-  
-
     int  ButtonSize = (Window::width / 11) * 2 / 3;
-    height = ButtonSize;
-  
+    height = ButtonSize; 
     while (ButtonSize + 10 > ButtonSlideHeght / 2) ButtonSize--;
     step = ButtonSize / 5;
     if (ButtonCount > 10) margin_top = Window::height - (ButtonSize + step) * 2; else margin_top = Window::height - (ButtonSize + step);
@@ -113,9 +111,9 @@ void NumberButtons::CalcucateCoordinate() {
     //heght = 
     for (int i = 0; i < ButtonCount; i++) {
         //std::cout << "here2" << std::endl;
-        std::string fileName = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
+        if (pictureFilename=="") pictureFilename = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
         std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
-        txt->loadFromFile(fileName);
+        txt->loadFromFile(pictureFilename);
         static sf::Vector2u PICTURESIZE = txt->getSize();
         std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
         sprite->setTexture(*txt.get());
@@ -353,7 +351,8 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
 
 QuestType2::QuestType2( int w, int h,  int qtyButtons):
     Window(w, h, ((rand() % 3+3))),
-    Buttons(qtyButtons)
+    Buttons(qtyButtons),
+    Picture()
    {
     //std::cout << "rand() % 3="<<rand() % 3 <<std::endl ;
 
@@ -362,28 +361,22 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
    
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
-
-
-
     int N = (rand() % 20);
     int M = 0;
     while ((M = (rand() % 20) + 1) >= N) {
         N = (rand() % 20);
-        std::cout << M << " " << N << std::endl;
+        //std::cout << M << " " << N << std::endl;
     }
    textFrame.setN_M(N, M);
-
+   Picture.setButtonCount(N + M);
+   Picture.setpictureFilename("resources/images/berry.png");
+   Picture.CalcucateCoordinate();
    sf::Event event;
     while (window->isOpen()) {
         window->clear();
         window->draw(List);
 
-        if (first) {
-      /*      margintopSlideButton =
-                (
-                (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
-                    ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());*/
-            Buttons.setMargin_top(margintopSlideButton + 10);
+        if (first) {           
             Buttons.CalcucateCoordinate(); first = false;
             QuestComment.setmargin_top(h - Buttons.getHeight());
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
@@ -391,9 +384,11 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
         window->draw(CheckButtonSprite);
-        for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
+        for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
             window->draw(*Buttons.getButtons()[bc]);
-        }
+        for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
+            window->draw(*Picture.getButtons()[bc]);
+
         window->display();
         while (window->pollEvent(event)) {
             if (event.type == sf::Event::Closed) {

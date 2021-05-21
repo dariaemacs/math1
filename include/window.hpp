@@ -12,6 +12,7 @@
 #include <SFML/Graphics.hpp>
 
 class NumberButtons {
+    std::string  pictureFilename;
   int ButtonCount;
   float scale;
   std::vector<std::shared_ptr<sf::Texture>> MyTexture;
@@ -33,6 +34,8 @@ public:
   void setMargin_top(int margin) { 
       margin_top = margin; 
   }
+  void setButtonCount(int bc) { ButtonCount = bc; }
+  void setpictureFilename(std::string fn) { pictureFilename = fn; }
   std::vector<std::unique_ptr<sf::Sprite>>& getButtons() { return Buttons; }
   bool  click(std::shared_ptr<sf::RenderWindow>&);
   int getButtonCount() { return ButtonCount; }
@@ -159,10 +162,18 @@ class QuestionBase {
   TextFrameBase txt;
 };
 
+class PicturetoVeiw : public NumberButtons {
+ std::string pictureFilename;
+public:
+
+    PicturetoVeiw();
+};
+
 class QuestType2 : public Window {
 
     static int QTY;
     NumberButtons Buttons;   
+    PicturetoVeiw Picture;
     //int check(int, int, int);
 public:
     QuestType2(int w, int h,  int qtyButtons);
