@@ -14,12 +14,11 @@
 #include <locale>
 
 
-int QuestType1::QTY = 1;
+//int QuestType1::QTY = 1;
 extern const int ELAPSED_TIME;
 
 
-int Window::width=0;
-int Window::height=0;
+
 
 
 std::wstring get_wstr(int i) {
@@ -34,11 +33,54 @@ std::wstring get_wstr(int i) {
   return ws;
 }
 
-bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
+void PicturetoVeiw::CalcucateCoordinate( ) {
+    using namespace std;
+    int ButtonSlideHeght = WindowLink.getHeight()   - margin_top;
+    int step = 0;
+    int  ButtonSize = (WindowLink.getWidth() / 11) * 2 / 3;
+    height = ButtonSize;
+    while (ButtonSize + 10 > ButtonSlideHeght / 2) ButtonSize--;
+    step = ButtonSize / 5;
+    if (ButtonCount > 10) margin_top = WindowLink.getHeight() - (ButtonSize + step) * 2; else margin_top = WindowLink.getHeight() - (ButtonSize + step);
+    margin_left = WindowLink.getWidth() - 11 * (ButtonSize + step);
+    int margin_left_button = margin_left;
+    int margin_top_button = margin_top;
+    //heght = 
+    for (int i = 0; i < ButtonCount; i++) {
+        //std::cout << "here2" << std::endl;
+        std::string pictureFilename = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
+        //if (pictureFilename == "") std::string pictureFilename = picaFilename;
+
+        std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
+        txt->loadFromFile(pictureFilename);
+        static sf::Vector2u PICTURESIZE = txt->getSize();
+        std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
+        sprite->setTexture(*txt.get());
+        scale = (float)ButtonSize / PICTURESIZE.y;
+        sprite->setScale(scale, scale);
+
+        sprite->move(margin_left_button, margin_top_button);
+        if (i % 10 == 0 && i > 0) {
+            margin_top_button = margin_top_button + ButtonSize + step - 15; margin_left_button = WindowLink.getWidth() - 11 * (ButtonSize + step);
+        }
+        else margin_left_button = margin_left_button + ButtonSize + step;
+        MyTexture.emplace_back(std::move(txt));
+        ButtonsList.emplace_back(std::move(sprite));
+    };
+    margin_left += -10;
+
+
+}
+
+bool Buttons::click(std::shared_ptr<sf::RenderWindow>& w) {
   //    int x, y, width, height;
+
+
+
+
   for (int i = 0; i < ButtonCount; ++i) {
-    const sf::Vector2f& position = Buttons[i]->getPosition();
-    const sf::IntRect& rect = Buttons[i]->getTextureRect();
+    const sf::Vector2f& position = ButtonsList[i]->getPosition();
+    const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
     int x0 = position.x;
     int y0 = position.y;
     int x1 = x0 + rect.width* scale;
@@ -74,8 +116,8 @@ bool NumberButtons::click(std::shared_ptr<sf::RenderWindow>& w) {
   return false;
 
 }
+Buttons::Buttons( int qtyButton, Window& w) :WindowLink(w), ButtonCount(qtyButton){}
 
-NumberButtons::NumberButtons(int BC):ButtonCount(BC), pictureFilename(""){}
 
 void TextFrameBase::setWidth(int) {
     //text.se
@@ -94,24 +136,26 @@ void TextFrameBase::CalcucateCoordinate(const int w, const int h) {
     }
 }
 
-PicturetoVeiw::PicturetoVeiw() :NumberButtons(0), pictureFilename(""){};
-
-void NumberButtons::CalcucateCoordinate() {
+PicturetoVeiw::PicturetoVeiw(QuestType2& qtl, std::string fn) : Buttons(0, qtl), pictureFilename(fn){};
+//PicturetoVeiw(QuestType2&, std::string)
+void Buttons::CalcucateCoordinate() {
     using namespace std;
-    int ButtonSlideHeght = Window::height - margin_top;
+    int ButtonSlideHeght = WindowLink.getHeight() - margin_top;
     int step = 0;
-    int  ButtonSize = (Window::width / 11) * 2 / 3;
+    int  ButtonSize = (WindowLink.getWidth() / 11) * 2 / 3;
     height = ButtonSize; 
     while (ButtonSize + 10 > ButtonSlideHeght / 2) ButtonSize--;
     step = ButtonSize / 5;
-    if (ButtonCount > 10) margin_top = Window::height - (ButtonSize + step) * 2; else margin_top = Window::height - (ButtonSize + step);
-    margin_left = Window::width - 11 * (ButtonSize + step);
+    if (ButtonCount > 10) margin_top = WindowLink.getHeight() - (ButtonSize + step) * 2; else margin_top = WindowLink.getHeight() - (ButtonSize + step);
+    margin_left = WindowLink.getWidth() - 11 * (ButtonSize + step);
     int margin_left_button = margin_left;
     int margin_top_button = margin_top;
     //heght = 
     for (int i = 0; i < ButtonCount; i++) {
         //std::cout << "here2" << std::endl;
-        if (pictureFilename=="") pictureFilename = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
+        std::string pictureFilename = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
+        //if (pictureFilename == "") std::string pictureFilename = picaFilename;
+            
         std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
         txt->loadFromFile(pictureFilename);
         static sf::Vector2u PICTURESIZE = txt->getSize();
@@ -122,10 +166,10 @@ void NumberButtons::CalcucateCoordinate() {
         
         sprite->move(margin_left_button, margin_top_button);
         if (i % 10 == 0 && i > 0) {
-            margin_top_button = margin_top_button + ButtonSize+ step - 15; margin_left_button = Window::width - 11 * (ButtonSize + step);
+            margin_top_button = margin_top_button + ButtonSize+ step - 15; margin_left_button = WindowLink.getWidth() - 11 * (ButtonSize + step);
         } else margin_left_button = margin_left_button + ButtonSize + step;
         MyTexture.emplace_back(std::move(txt));
-        Buttons.emplace_back(std::move(sprite));
+        ButtonsList.emplace_back(std::move(sprite));
     };
     margin_left += -10;
 
@@ -274,7 +318,7 @@ bool Window::checkandnextQuest() {
 QuestType1::QuestType1(int w, int h,  int qtyButtons) :
     
   Window(w, h, (rand() % 3)),
-  Buttons(qtyButtons)
+  Buttons(qtyButtons,*this)
 {
     bool first = true;
     int margintopSlideButton = 0;
@@ -351,8 +395,8 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
 
 QuestType2::QuestType2( int w, int h,  int qtyButtons):
     Window(w, h, ((rand() % 3+3))),
-    Buttons(qtyButtons),
-    Picture()
+    Buttons(qtyButtons,*this),
+    Picture(*this)
    {
     //std::cout << "rand() % 3="<<rand() % 3 <<std::endl ;
 
@@ -361,16 +405,20 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
    
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
+    
     int N = (rand() % 20);
     int M = 0;
     while ((M = (rand() % 20) + 1) >= N) {
         N = (rand() % 20);
-        //std::cout << M << " " << N << std::endl;
+        
     }
    textFrame.setN_M(N, M);
-   Picture.setButtonCount(N + M);
+   Picture.setButtonCount(N-1);
    Picture.setpictureFilename("resources/images/berry.png");
+   Picture.setMargin_top(50);
    Picture.CalcucateCoordinate();
+   
+   
    sf::Event event;
     while (window->isOpen()) {
         window->clear();
@@ -378,16 +426,35 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
 
         if (first) {           
             Buttons.CalcucateCoordinate(); first = false;
+            
             QuestComment.setmargin_top(h - Buttons.getHeight());
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+            //Buttons.setMargin_top(100);
+
+            Buttons.CalcucateCoordinate(); first = false;
+
+            QuestComment.setmargin_top(h - Buttons.getHeight());
+
+
+            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+
+
+            
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
         window->draw(CheckButtonSprite);
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
+        {
             window->draw(*Buttons.getButtons()[bc]);
-        for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
+            std::cout << "bc =" << bc << std::endl;
+        }
+       
+        for (int bc = 0; bc < Picture.getButtonCount(); bc++) {
+            std::cout << "I am here " << bc<< std::endl;
             window->draw(*Picture.getButtons()[bc]);
+        }
+
 
         window->display();
         while (window->pollEvent(event)) {
@@ -421,7 +488,7 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
 
 QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
     Window(w, h, (rand() % 3)),
-    Buttons(qtyButtons)
+    Buttons(qtyButtons,*this)
 {
     bool first = true;
     int margintopSlideButton = 0;

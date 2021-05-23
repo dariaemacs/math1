@@ -11,32 +11,37 @@
 
 #include <SFML/Graphics.hpp>
 
-class NumberButtons {
-    std::string  pictureFilename;
-  int ButtonCount;
-  float scale;
-  std::vector<std::shared_ptr<sf::Texture>> MyTexture;
-  std::vector<std::unique_ptr<sf::Sprite>> Buttons;
-  int ButtonPressID=-1;
-  int margin_top;
-  int margin_left;
-  int height;
-  int width;
+class Window;
 
-         
-  bool touched  {false};
-  bool pressed  {false};
-  bool released {true};
+
+
+class Buttons {
+  bool touched{ false };
+  bool pressed{ false };
+  bool released{ true };
+
+protected:
+    Window& WindowLink;
+    float scale;
+    int ButtonCount;
+    int ButtonPressID = -1;
+    int margin_top;
+    int margin_left;
+    int height;
+    int width;
+    std::vector<std::shared_ptr<sf::Texture>> MyTexture;
+    std::vector<std::unique_ptr<sf::Sprite>> ButtonsList;
         
 public:
-  NumberButtons(int qtyButton);
+  Buttons(int , Window&);
   void CalcucateCoordinate();
   void setMargin_top(int margin) { 
       margin_top = margin; 
   }
-  void setButtonCount(int bc) { ButtonCount = bc; }
-  void setpictureFilename(std::string fn) { pictureFilename = fn; }
-  std::vector<std::unique_ptr<sf::Sprite>>& getButtons() { return Buttons; }
+
+  std::vector<std::unique_ptr<sf::Sprite>>& getButtons() { return 
+      ButtonsList;
+  }
   bool  click(std::shared_ptr<sf::RenderWindow>&);
   int getButtonCount() { return ButtonCount; }
   std::vector<std::shared_ptr<sf::Texture>>& getButtonTexture() { return MyTexture; }
@@ -110,8 +115,8 @@ class Window {
   
 
   
-  static int width;  
-  static int height; 
+   int width;  
+   int height; 
   double coef;
   int space;
   int number; 
@@ -135,10 +140,12 @@ public:
 
   
   Window(int w, int h, int questNumber);
+  int getWidth() { return width; }
+  int getHeight() { return height; }
   ~Window() {
       int yyy = 0;
   }
-  friend NumberButtons;
+  friend Buttons;
   friend TextFrameBase;
   
 };
@@ -147,8 +154,8 @@ public:
 
 class QuestType1: public Window { 
    
-    static int QTY;
-  NumberButtons Buttons;
+
+  Buttons Buttons;
 
   int check(int,int,int);
 public:
@@ -162,23 +169,31 @@ class QuestionBase {
   TextFrameBase txt;
 };
 
-class PicturetoVeiw : public NumberButtons {
- std::string pictureFilename;
+class QuestType2;
+class PicturetoVeiw : public Buttons {
+    std::string pictureFilename;
+    
 public:
-
-    PicturetoVeiw();
+    PicturetoVeiw(Window& w) :  Buttons(0, w) {}
+    PicturetoVeiw(QuestType2&, std::string);
+    void CalcucateCoordinate();
+    void setButtonCount(int bc) { ButtonCount = bc; }
+    void setpictureFilename(std::string fn) { pictureFilename = fn; }
 };
+
 
 class QuestType2 : public Window {
 
-    static int QTY;
-    NumberButtons Buttons;   
+    //int QTY;
+    Buttons Buttons;   
     PicturetoVeiw Picture;
+
     //int check(int, int, int);
 public:
     QuestType2(int w, int h,  int qtyButtons);
 
 };
+
 
 
 #endif // WINDOW_HPP
