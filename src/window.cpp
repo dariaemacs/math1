@@ -32,7 +32,9 @@ std::wstring get_wstr(int i) {
 
   return ws;
 }
-
+int TextFrameBase::getHeight() {
+    return text.getLocalBounds().height;
+}
 void PicturetoVeiw::CalcucateCoordinate( ) {
     using namespace std;
     int ButtonSlideHeght = WindowLink.getHeight()   - margin_top;
@@ -41,16 +43,12 @@ void PicturetoVeiw::CalcucateCoordinate( ) {
     height = ButtonSize;
     while (ButtonSize + 10 > ButtonSlideHeght / 2) ButtonSize--;
     step = ButtonSize / 5;
-    if (ButtonCount > 10) margin_top = WindowLink.getHeight() - (ButtonSize + step) * 2; else margin_top = WindowLink.getHeight() - (ButtonSize + step);
-    margin_left = WindowLink.getWidth() - 11 * (ButtonSize + step);
+    //if (ButtonCount > 10) margin_top = WindowLink.getHeight() - (ButtonSize + step) * 2; else margin_top = WindowLink.getHeight() - (ButtonSize + step);
+    //margin_left = WindowLink.getWidth() - 11 * (ButtonSize + step);
     int margin_left_button = margin_left;
     int margin_top_button = margin_top;
     //heght = 
     for (int i = 0; i < ButtonCount; i++) {
-        //std::cout << "here2" << std::endl;
-        std::string pictureFilename = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
-        //if (pictureFilename == "") std::string pictureFilename = picaFilename;
-
         std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
         txt->loadFromFile(pictureFilename);
         static sf::Vector2u PICTURESIZE = txt->getSize();
@@ -413,9 +411,10 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
         
     }
    textFrame.setN_M(N, M);
-   Picture.setButtonCount(N-1);
+   Picture.setButtonCount(N);
    Picture.setpictureFilename("resources/images/berry.png");
-   Picture.setMargin_top(50);
+   Picture.setMargin_left(10);
+   Picture.setMargin_top(textFrame.getHeight()*2);
    Picture.CalcucateCoordinate();
    
    
@@ -447,11 +446,11 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
         {
             window->draw(*Buttons.getButtons()[bc]);
-            std::cout << "bc =" << bc << std::endl;
+            
         }
        
         for (int bc = 0; bc < Picture.getButtonCount(); bc++) {
-            std::cout << "I am here " << bc<< std::endl;
+            
             window->draw(*Picture.getButtons()[bc]);
         }
 

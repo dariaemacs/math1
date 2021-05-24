@@ -39,6 +39,10 @@ public:
       margin_top = margin; 
   }
 
+  void setMargin_left(int margin) {
+      margin_left = margin;
+  }
+
   std::vector<std::unique_ptr<sf::Sprite>>& getButtons() { return 
       ButtonsList;
   }
@@ -46,6 +50,7 @@ public:
   int getButtonCount() { return ButtonCount; }
   std::vector<std::shared_ptr<sf::Texture>>& getButtonTexture() { return MyTexture; }
   int GetButtonsClickID() { return ButtonPressID; }
+
   int getMarginTop() {
       return margin_top; 
   }
@@ -104,6 +109,7 @@ public:
   void setmargin_top(int m);
   void CalcucateCoordinate(int, int);
   void setWidth(int);
+  int getHeight();
   void setN_M(int,int);
   void setquestionNumber(int qn) { questionNumber=qn; }
 

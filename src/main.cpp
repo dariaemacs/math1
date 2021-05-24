@@ -33,7 +33,7 @@ int main() {
             QuestType1(4, 0, width, height, (rand() % 3), 21);
             QuestType1(5, 0, width, height, (rand() % 3), 21);*/
         width = 1152; height = 864;
-        QuestType1(1, 0, width, height, 20);
+        //QuestType1(1, 0, width, height, 20);
         
         QuestType2( width, height,  5);
         QuestType2(width, height, 8);
