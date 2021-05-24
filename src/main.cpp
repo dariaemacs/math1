@@ -17,152 +17,143 @@ int main() {
 
         int width = 1024; int height = 600;
 
-        /*    srand(time(0));
-
+           srand(time(0));
+           QuestType2(width, height, 5);
 
              width = 1024;  height = 600;
-            QuestType1(1, 0, width, height, (rand() % 3), 21);
-            QuestType1(2, 0, width, height, (rand() % 3), 21);
-            QuestType1(3, 0, width, height, (rand() % 3), 21);
-            QuestType1(4, 0, width, height, (rand() % 3), 21);
-            QuestType1(5, 0, width, height, (rand() % 3), 21);
-            width = 1024; height = 768;
-            QuestType1(1, 0, width, height, (rand() % 3), 21);
-            QuestType1(2, 0, width, height, (rand() % 3), 21);
-            QuestType1(3, 0, width, height, (rand() % 3), 21);
-            QuestType1(4, 0, width, height, (rand() % 3), 21);
-            QuestType1(5, 0, width, height, (rand() % 3), 21);*/
+             QuestType2(width, height, 5);
         width = 1152; height = 864;
-        //QuestType1(1, 0, width, height, 20);
-        
-        QuestType2( width, height,  5);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
         QuestType2(width, height, 8);
         QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType2(width, height, 20);
 
 
 
 
 
-        /*QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+
+        
         width = 1200; height = 600;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+        
         width = 1280; height = 720;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
-        width = 1280; height = 768;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
 
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        width = 1280; height = 768;
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1280; height = 1024;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1408; height = 1152;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1440; height = 900;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1400; height = 1050;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1440; height = 1080;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1536; height = 960;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1536; height = 1024;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1600; height = 900;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1600; height = 1024;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1600; height = 1200;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1680; height = 1050;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1920; height = 1080;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 1920; height = 1200;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
         width = 2048; height = 1080;
-        QuestType1(1, 0, width, height, (rand() % 3), 20);
-        QuestType1(2, 0, width, height, (rand() % 3), 20);
-        QuestType1(3, 0, width, height, (rand() % 3), 20);
-        QuestType1(4, 0, width, height, (rand() % 3), 20);
-        QuestType1(5, 0, width, height, (rand() % 3), 20);*/
+        QuestType2(width, height, 5);
+        QuestType2(width, height, 15);
+        QuestType2(width, height, 6);
+        QuestType2(width, height, 8);
+        QuestType2(width, height, 20);
+
 
 
 

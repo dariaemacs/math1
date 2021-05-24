@@ -169,7 +169,7 @@ void Buttons::CalcucateCoordinate() {
         MyTexture.emplace_back(std::move(txt));
         ButtonsList.emplace_back(std::move(sprite));
     };
-    margin_left += -10;
+    //margin_left += -10;
 
 }
 
@@ -392,12 +392,13 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
 }
 
 QuestType2::QuestType2( int w, int h,  int qtyButtons):
-    Window(w, h, ((rand() % 3+3))),
+  
+    Window(w, h,  ((rand() % 3+3))),
     Buttons(qtyButtons,*this),
     Picture(*this)
    {
     //std::cout << "rand() % 3="<<rand() % 3 <<std::endl ;
-
+    
     bool first = true;
     int margintopSlideButton = 0;
    
@@ -412,7 +413,8 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
     }
    textFrame.setN_M(N, M);
    Picture.setButtonCount(N);
-   Picture.setpictureFilename("resources/images/berry.png");
+   //std::cout<< getQuestNumber() + 3<<std::endl;
+   Picture.setpictureFilename("resources/images/"+filenamesforPicaQuest2[getQuestNumber()-3]+".png");
    Picture.setMargin_left(10);
    Picture.setMargin_top(textFrame.getHeight()*2);
    Picture.CalcucateCoordinate();
@@ -427,15 +429,12 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
             Buttons.CalcucateCoordinate(); first = false;
             
             QuestComment.setmargin_top(h - Buttons.getHeight());
-            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft()-10, Buttons.getHeight());
             //Buttons.setMargin_top(100);
 
             Buttons.CalcucateCoordinate(); first = false;
 
-            QuestComment.setmargin_top(h - Buttons.getHeight());
 
-
-            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
 
 
             
@@ -457,7 +456,7 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
 
         window->display();
         while (window->pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
+            if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
                 window->close();
             }
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -472,7 +471,7 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
                             "resources/images/digit" + std::to_string(rightfigurCount) + "_right.jpg"
                         );
                     }
-                    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+                    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft()-10, Buttons.getMarginTop());
                 }
                 if (Buttons.click(window)) {
                     CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
@@ -482,7 +481,7 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
         }
     }
 
-
+    srand(time(0));
 }
 
 QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :

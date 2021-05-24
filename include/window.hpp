@@ -132,7 +132,7 @@ class Window {
 
   
 protected:
-    int questNumber;
+  int questNumber;
   TextFrameBase textFrame;
   bool checkandnextQuest();
   std::shared_ptr<sf::RenderWindow> window; 
@@ -148,6 +148,7 @@ public:
   Window(int w, int h, int questNumber);
   int getWidth() { return width; }
   int getHeight() { return height; }
+  int getQuestNumber(){ return questNumber; }
   ~Window() {
       int yyy = 0;
   }

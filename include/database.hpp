@@ -9,7 +9,10 @@ struct figureQestions {
 	
 	std::wstring questionText;
 	types key;
+	
 };
+
+
 
 extern const std::wstring CommentsDic[];
 
@@ -40,7 +43,7 @@ struct phrasetoReplace {
 //const std::array <std::array<int, X>, Y> INT0 = { { L"SDF",L"cvcv" },{ L"SDF",L"cvcv" } };
 
 extern const std::array <std::array<phrasetoReplace, X>,Y> phrasestoReplace;
-//extern const std::array <std::array<int, X>, Y> INT0;
+extern const std::vector<std::string> filenamesforPicaQuest2 ;
 
 #endif //DATABASE_H
 

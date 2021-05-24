@@ -19,7 +19,9 @@ const std::array<figureQestions,N> questionFigure =
 
 
 
-
+extern const std::vector<std::string> filenamesforPicaQuest2 = { std::string("shell"),std::string("berry"),std::string("mushroom"),std::string("fish"),
+std::string("butterfly"),std::string("coin")
+};
 
 
 const std::array <std::array<phrasetoReplace, X>, Y> phrasestoReplace= {
