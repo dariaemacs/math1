@@ -23,11 +23,14 @@ int main() {
              width = 1024;  height = 600;
              QuestType2(width, height, 5);
         width = 1152; height = 864;
+        srand(time(0));
         QuestType2(width, height, 5);
+        srand(time(0));
         QuestType2(width, height, 15);
-        QuestType2(width, height, 6);
-        QuestType2(width, height, 8);
-        QuestType2(width, height, 20);
+        srand(time(0));
+        QuestType2(width, height, 6); srand(time(0));
+        QuestType2(width, height, 8); srand(time(0));
+        QuestType2(width, height, 20); srand(time(0));
 
 
 
@@ -36,25 +39,25 @@ int main() {
 
         
         width = 1200; height = 600;
-        QuestType2(width, height, 5);
-        QuestType2(width, height, 15);
-        QuestType2(width, height, 6);
-        QuestType2(width, height, 8);
-        QuestType2(width, height, 20);
+        QuestType2(width, height, 5); srand(time(0));
+        QuestType2(width, height, 15); srand(time(0));
+        QuestType2(width, height, 6); srand(time(0));
+        QuestType2(width, height, 8); srand(time(0));
+        QuestType2(width, height, 20); srand(time(0));
         
         width = 1280; height = 720;
-        QuestType2(width, height, 5);
-        QuestType2(width, height, 15);
-        QuestType2(width, height, 6);
-        QuestType2(width, height, 8);
-        QuestType2(width, height, 20);
+        QuestType2(width, height, 5); srand(time(0));
+        QuestType2(width, height, 15); srand(time(0));
+        QuestType2(width, height, 6); srand(time(0));
+        QuestType2(width, height, 8); srand(time(0));
+        QuestType2(width, height, 20); srand(time(0));
 
         width = 1280; height = 768;
-        QuestType2(width, height, 5);
-        QuestType2(width, height, 15);
-        QuestType2(width, height, 6);
-        QuestType2(width, height, 8);
-        QuestType2(width, height, 20);
+        QuestType2(width, height, 5); srand(time(0));
+        QuestType2(width, height, 15); srand(time(0));
+        QuestType2(width, height, 6); srand(time(0));
+        QuestType2(width, height, 8); srand(time(0));
+        QuestType2(width, height, 20); srand(time(0));
 
         width = 1280; height = 1024;
         QuestType2(width, height, 5);

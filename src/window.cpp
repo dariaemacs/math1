@@ -51,7 +51,11 @@ void PicturetoVeiw::CalcucateCoordinate( ) {
     for (int i = 0; i < ButtonCount; i++) {
         std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
         txt->loadFromFile(pictureFilename);
-        static sf::Vector2u PICTURESIZE = txt->getSize();
+        sf::Vector2u PICTURESIZE = txt->getSize();
+        //std::cout << "xxx" << std::endl;
+        if (PICTURESIZE.x != PICTURESIZE.y) txt->loadFromFile(pictureFilename, sf::IntRect(0, 0 , (int)PICTURESIZE.x/2, PICTURESIZE.y) );
+ 
+
         std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
         sprite->setTexture(*txt.get());
         scale = (float)ButtonSize / PICTURESIZE.y;
@@ -393,7 +397,7 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
 
 QuestType2::QuestType2( int w, int h,  int qtyButtons):
   
-    Window(w, h,  ((rand() % 3+3))),
+    Window(w, h,  ((rand() % 5+3))),
     Buttons(qtyButtons,*this),
     Picture(*this)
    {
@@ -404,16 +408,15 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
    
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
-    
+    std::cout << "getQuestNumber**=" << getQuestNumber() << std::endl;
     int N = (rand() % 20);
     int M = 0;
     while ((M = (rand() % 20) + 1) >= N) {
-        N = (rand() % 20);
-        
+        N = (rand() % 20);        
     }
    textFrame.setN_M(N, M);
    Picture.setButtonCount(N);
-   //std::cout<< getQuestNumber() + 3<<std::endl;
+   
    Picture.setpictureFilename("resources/images/"+filenamesforPicaQuest2[getQuestNumber()-3]+".png");
    Picture.setMargin_left(10);
    Picture.setMargin_top(textFrame.getHeight()*2);
