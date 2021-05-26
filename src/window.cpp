@@ -17,18 +17,27 @@
 //int QuestType1::QTY = 1;
 extern const int ELAPSED_TIME;
 
+/*
+template <size_t N>
+std::wstring get_wstr(const std::array<figureQestions, N>& arr, int questvariantIndex){
+    std::stringstream ss;
+    ss << 1 << ". ";
+    std::string str = ss.str();
 
+    std::wstring ws(str.begin(), str.end());
+    ws += arr[questvariantIndex].questionText.c_str();
 
+    return ws;
+}
+*/
 
-
-std::wstring get_wstr(int i) {
+std::wstring get_wstr(int questvariantIndex) {
   std::stringstream ss;
-  //ss << (i + 1) << ". ";
   ss << 1 << ". ";
   std::string str = ss.str();
 
   std::wstring ws(str.begin(), str.end());
-  ws += questionFigure[i].questionText.c_str();
+  ws += question1Figure[questvariantIndex].questionText.c_str();
 
   return ws;
 }
@@ -277,7 +286,7 @@ Window::Window(int w, int h, int numberQuest)
 
 
 int QuestType1::check(int c,int t, int r ) {
-  switch (questionFigure[questNumber].key)
+  switch (question1Figure[questNumber].key)
     {
     case circle:
         
@@ -397,7 +406,7 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
 
 QuestType2::QuestType2( int w, int h,  int qtyButtons):
   
-    Window(w, h,  ((rand() % 5+3))),
+    Window(w, h,  ((rand() % 5))),
     Buttons(qtyButtons,*this),
     Picture(*this)
    {
@@ -417,7 +426,7 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
    textFrame.setN_M(N, M);
    Picture.setButtonCount(N);
    
-   Picture.setpictureFilename("resources/images/"+filenamesforPicaQuest2[getQuestNumber()-3]+".png");
+   Picture.setpictureFilename("resources/images/"+filenamesforPicaQuest2[getQuestNumber()]+".png");
    Picture.setMargin_left(10);
    Picture.setMargin_top(textFrame.getHeight()*2);
    Picture.CalcucateCoordinate();
