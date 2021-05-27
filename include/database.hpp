@@ -29,9 +29,10 @@ const float FPS = 30.0f;
 
 
 
-extern const std::array<figureQestions, N1> question1Figure;
-extern const std::array<figureQestions, N2> question2Figure;
+extern const figureQestions question1Figure[];
+extern const figureQestions question2Figure[];
 
+extern const figureQestions* qestionarrayList[];
 
 
 extern const std::vector<pica> tree;

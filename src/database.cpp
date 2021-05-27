@@ -3,22 +3,23 @@
 #include "color.hpp"
 #include "window.hpp"
 
-const std::array<figureQestions,N1> question1Figure = 
+extern const figureQestions question1Figure[] =
   {
     figureQestions{L"Сколько кружков на рисунках вы видете ? "       ,circle},
     figureQestions{L"Сколько прямоугольников на рисунках вы видите ? ",rectangle},
     figureQestions{L"Сколько треугольников на рисунках вы видите ? ",triangle},    
   }	;
-const std::array<figureQestions, N2> question2Figure =
+extern const figureQestions question2Figure[] =
 {
 figureQestions{ L"Лена хочет подарить родным N ракушек. Ей осталось \nнайти M ракушек . Сколько ракушек Лена уже нашла ?",seashell },
 figureQestions{ L"В корзине было N ягод клубники. После того , как Игорь съел \nнесколько ягод, осталось M. Сколько ягод съел Игорь ?",berry },
 figureQestions{ L"Ване нужно найти N грибов. Ему осталось найти M грибов. \nСколько грибов он уже нашел ?",mashroom },
 figureQestions{ L"Паша и Люба поймали N рыбок. Паша поймал M рыбок. \nСколько рыбок поймала Люба?",fish },
-figureQestions{ L"Наташе нужно раскрасить N бабочек. Она раскрасила \nN бабочек. Сколько бабочек осталось раскрасить? ",butterfly },
+figureQestions{ L"Наташе нужно раскрасить N бабочек. Она раскрасила \n M бабочек. Сколько бабочек осталось раскрасить? ",butterfly },
 figureQestions{ L"Саша хочет купить велосипед. Он стоит N рублей, \nсейчас у Саши в копилке M рублей. Сколько  еще рублей нужно Саше, \nчтобы хватило на велосипед?",bycicle }
 };
 
+extern const figureQestions* qestionarrayList[] = { question1Figure ,question2Figure };
 
 extern const std::array<std::string, N2> filenamesforPicaQuest2 = { std::string("shell"),std::string("berry"),std::string("mushroom"),std::string("fish"),
 std::string("butterfly"),std::string("coin")

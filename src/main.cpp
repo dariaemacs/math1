@@ -9,6 +9,7 @@ using namespace sf; // подключаем пространство имен sf
 
 int main() {
     std::string filename{ "settings.yml" };
+    //int Window::ordQuestNumber = 0;
     try {
 
 
@@ -18,6 +19,7 @@ int main() {
         int width = 1024; int height = 600;
 
            srand(time(0));
+           QuestType1(width, height, (rand() % 3));
            QuestType2(width, height, 5);
 
              width = 1024;  height = 600;

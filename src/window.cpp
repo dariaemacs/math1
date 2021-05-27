@@ -31,13 +31,13 @@ std::wstring get_wstr(const std::array<figureQestions, N>& arr, int questvariant
 }
 */
 
-std::wstring get_wstr(int questvariantIndex) {
+std::wstring get_wstr(int questvariantIndex,int ordNumber) {
   std::stringstream ss;
   ss << 1 << ". ";
   std::string str = ss.str();
 
   std::wstring ws(str.begin(), str.end());
-  ws += question1Figure[questvariantIndex].questionText.c_str();
+  ws += qestionarrayList[ordNumber][questvariantIndex].questionText.c_str();
 
   return ws;
 }
@@ -46,10 +46,12 @@ int TextFrameBase::getHeight() {
 }
 void PicturetoVeiw::CalcucateCoordinate( ) {
     using namespace std;
+   
     int ButtonSlideHeght = WindowLink.getHeight()   - margin_top;
     int step = 0;
     int  ButtonSize = (WindowLink.getWidth() / 11) * 2 / 3;
     height = ButtonSize;
+    
     while (ButtonSize + 10 > ButtonSlideHeght / 2) ButtonSize--;
     step = ButtonSize / 5;
     //if (ButtonCount > 10) margin_top = WindowLink.getHeight() - (ButtonSize + step) * 2; else margin_top = WindowLink.getHeight() - (ButtonSize + step);
@@ -187,14 +189,14 @@ void Buttons::CalcucateCoordinate() {
 }
 
 
-TextFrameBase::TextFrameBase(int s, char):size(s) { //delegate
+TextFrameBase::TextFrameBase(int s, Window& winLink,char ):size(s), WindowLink(winLink) { //delegate
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
     text = sf::Text("", font, s);
     text.setFillColor(sf::Color::Black);
     text.setPosition(Settings::PADDING, Settings::PADDING);
 }
 
-TextFrameBase::TextFrameBase(int s, std::wstring str, int w1, int h1) :TextFrameBase(s, 'c') {
+TextFrameBase::TextFrameBase(int s, std::wstring str, int w1, int h1, Window& winLink) :TextFrameBase(s, winLink, 'c') {
     w= w1;
     h = h1;
     text.setString(str); 
@@ -206,11 +208,11 @@ void TextFrameBase::setmargin_top(int m) {
     text.setPosition(pos.x, m);
 }
 
-TextFrameBase::TextFrameBase(int s, int quest, int w,  int h) 
-    :TextFrameBase(s, 'c'){
+TextFrameBase::TextFrameBase(int s, int quest, int w,  int h, Window& winLink)
+    :TextFrameBase(s,  winLink,'c'){
     questionNumber = quest;
-  text.setString(get_wstr(quest));
-  //  text.setStyle(sf::Text::Bold);
+  text.setString(get_wstr(quest, winLink.getordQuestNumber()));
+
 
   CalcucateCoordinate(w * 18 / 19, h);
   
@@ -227,18 +229,18 @@ void TextFrameBase::setN_M(int N, int M) {
     std::wstring replaceFrom = L"N";
     std::wstring replaceTo = std::to_wstring(N);
     posn = question.find(replaceFrom);
-    question.replace(posn, replaceFrom.length(), replaceTo);
-
+    if (posn < question.length()) question.replace(posn, replaceFrom.length(), replaceTo);
+    
 
     replaceFrom = L"M";
     replaceTo = std::to_wstring(M);
     posn = question.find(replaceFrom);
-    question.replace(posn, replaceFrom.length(), replaceTo);
+    if (posn < question.length()) question.replace(posn, replaceFrom.length(), replaceTo);
     text.setString(question);
-  
+    std::cout << questionNumber << " "<< beginQuestion2Index << std::endl;
     for (int x = 0; x<X - 1;x++) {
-        replaceFrom = phrasestoReplace[questionNumber - beginQuestion2Index][x].find;
-        replaceTo = phrasestoReplace[questionNumber - beginQuestion2Index][x].replace;
+        replaceFrom = phrasestoReplace[questionNumber][x].find;
+        replaceTo = phrasestoReplace[questionNumber ][x].replace;
         posn = question.find(replaceFrom);
         if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
         
@@ -248,13 +250,16 @@ void TextFrameBase::setN_M(int N, int M) {
 
 }
 
-Window::Window(int w, int h, int numberQuest)
-  :  questNumber(numberQuest),
+Window::Window(int w, int h, int numberQuest,int ord)
+  :  
+    ordQuestNumber(ord),
+    questNumber(numberQuest),
     readyforCheck(false),
     first(true),
-    textFrame(Settings::QUESTFONTSIZE, numberQuest,w,h),   
-    QuestComment(Settings::QUESTFONTSIZE, CommentsDic[0] , w , h)
+    textFrame(Settings::QUESTFONTSIZE, numberQuest,w,h,*this),   
+    QuestComment(Settings::QUESTFONTSIZE, CommentsDic[0] , w , h,*this)
 {
+
     width = w;
     height = h;
   std::string CheckButtonPictureFileName = "resources/images/arrow_disable.png";
@@ -277,7 +282,7 @@ Window::Window(int w, int h, int numberQuest)
   std::string comment = std::string("Game "  )+ std::to_string(w) + "x" + std::to_string(h);
   window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), comment);//,  sf::Style::Fullscreen);
     window->setFramerateLimit(Settings::FPS);
-
+    std::cout<<"Check point" << std::endl;
     //window->~RenderWindow();
 
 
@@ -328,7 +333,7 @@ bool Window::checkandnextQuest() {
 
 QuestType1::QuestType1(int w, int h,  int qtyButtons) :
     
-  Window(w, h, (rand() % 3)),
+  Window(w, h, (rand() % 3),0),
   Buttons(qtyButtons,*this)
 {
     bool first = true;
@@ -405,32 +410,36 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
 }
 
 QuestType2::QuestType2( int w, int h,  int qtyButtons):
-  
-    Window(w, h,  ((rand() % 5))),
+    
+    Window(w, h,  ((rand() % 5)),1),
     Buttons(qtyButtons,*this),
     Picture(*this)
    {
-    //std::cout << "rand() % 3="<<rand() % 3 <<std::endl ;
-    
+    //std::cout << "QuestType2" <<std::endl ;
+   
     bool first = true;
     int margintopSlideButton = 0;
    
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
-    std::cout << "getQuestNumber**=" << getQuestNumber() << std::endl;
+    
+    
     int N = (rand() % 20);
     int M = 0;
     while ((M = (rand() % 20) + 1) >= N) {
         N = (rand() % 20);        
     }
+
    textFrame.setN_M(N, M);
    Picture.setButtonCount(N);
-   
+ 
    Picture.setpictureFilename("resources/images/"+filenamesforPicaQuest2[getQuestNumber()]+".png");
    Picture.setMargin_left(10);
    Picture.setMargin_top(textFrame.getHeight()*2);
+
    Picture.CalcucateCoordinate();
-   
+
+
    
    sf::Event event;
     while (window->isOpen()) {
@@ -471,6 +480,7 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
                 window->close();
             }
+           
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 if (readyforCheck && checkandnextQuest()) {
                     int rightfigurCount = 0;
@@ -497,7 +507,7 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
 }
 
 QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
-    Window(w, h, (rand() % 3)),
+    Window(w, h, (rand() % 3),0),
     Buttons(qtyButtons,*this)
 {
     bool first = true;

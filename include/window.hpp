@@ -91,20 +91,21 @@ class TextFrameBase {
 
   sf::Text text;
   sf::Font font;
-//protected:
   int size;
   int w;
   int h;
+  Window& WindowLink;
 protected: 
     int questionNumber;
 
 public: 
-  TextFrameBase(int ,char); //delegate
-  TextFrameBase(int ,int , int,int) ;
-  TextFrameBase(int s, std::wstring str, int w, int h);
+  TextFrameBase(int ,  Window& w ,char); //delegate
+  TextFrameBase(int ,int , int,int, Window& ) ;
+  TextFrameBase(int s, std::wstring str, int w, int h, Window&);
   sf::Text gettext(){ 
       return text; 
   }
+ // void setwinLink(Window &w) { WindowLink = w; }
   void settext(std::wstring a) { text.setString(a);}
   void setmargin_top(int m);
   void CalcucateCoordinate(int, int);
@@ -126,12 +127,13 @@ class Window {
   double coef;
   int space;
   int number; 
-
-
+  int ordQuestNumber;
+  
 
 
   
 protected:
+    
   int questNumber;
   TextFrameBase textFrame;
   bool checkandnextQuest();
@@ -143,12 +145,13 @@ protected:
 
   bool readyforCheck; 
 public:
-
+    friend  std::wstring get_wstr(int questvariantIndex);
   
-  Window(int w, int h, int questNumber);
+  Window(int w, int h, int questNumber, int);
   int getWidth() { return width; }
   int getHeight() { return height; }
   int getQuestNumber(){ return questNumber; }
+  int getordQuestNumber() { return ordQuestNumber; }
   ~Window() {
       int yyy = 0;
   }
@@ -203,4 +206,4 @@ public:
 
 
 
-#endif // WINDOW_HPP
+#endif 
