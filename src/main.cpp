@@ -19,7 +19,7 @@ int main() {
         int width = 1024; int height = 600;
 
            srand(time(0));
-           QuestType1(width, height, (rand() % 3));
+           QuestType1(width, height, 20);
            QuestType2(width, height, 5);
 
              width = 1024;  height = 600;

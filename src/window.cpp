@@ -46,42 +46,87 @@ int TextFrameBase::getHeight() {
 }
 void PicturetoVeiw::CalcucateCoordinate( ) {
     using namespace std;
-   
-    int ButtonSlideHeght = WindowLink.getHeight()   - margin_top;
-    int step = 0;
-    int  ButtonSize = (WindowLink.getWidth() / 11) * 2 / 3;
-    height = ButtonSize;
+    sf::Texture tmp;
+
+    int button_margin_left = 0;
+    tmp.loadFromFile(pictureFilename);
+    sf::Vector2u PICTURESIZE = tmp.getSize();
+    if (PICTURESIZE.x > PICTURESIZE.y && PICTURESIZE.x / PICTURESIZE.y >= 2)  PICTURESIZE.x /=  2;
+    int ButtonSlideHeght = WindowLink.getHeight() / 3;
     
-    while (ButtonSize + 10 > ButtonSlideHeght / 2) ButtonSize--;
-    step = ButtonSize / 5;
-    //if (ButtonCount > 10) margin_top = WindowLink.getHeight() - (ButtonSize + step) * 2; else margin_top = WindowLink.getHeight() - (ButtonSize + step);
-    //margin_left = WindowLink.getWidth() - 11 * (ButtonSize + step);
-    int margin_left_button = margin_left;
-    int margin_top_button = margin_top;
-    //heght = 
-    for (int i = 0; i < ButtonCount; i++) {
-        std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
-        txt->loadFromFile(pictureFilename);
-        sf::Vector2u PICTURESIZE = txt->getSize();
-        //std::cout << "xxx" << std::endl;
-        if (PICTURESIZE.x != PICTURESIZE.y) txt->loadFromFile(pictureFilename, sf::IntRect(0, 0 , (int)PICTURESIZE.x/2, PICTURESIZE.y) );
- 
+    int PICTURESIZE_W = PICTURESIZE.x;
+    int PICTURESIZE_H = PICTURESIZE.y;
+    //std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
+    float koeffx = PICTURESIZE_W / (PICTURESIZE_W - 5);
 
-        std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
-        sprite->setTexture(*txt.get());
-        scale = (float)ButtonSize / PICTURESIZE.y;
-        sprite->setScale(scale, scale);
+    if (ButtonCount < 7)  // 1 row of pictures
+    {
+        do {
+            koeffx = koeffx - 0.01;
+            PICTURESIZE_W = PICTURESIZE.x * koeffx;
+            PICTURESIZE_H = PICTURESIZE.y * koeffx;
+            //std::cout << "k=" << koeffx << std::endl;
+            //std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
+        } while (((PICTURESIZE_W * round(ButtonCount ) + round((ButtonCount)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
 
-        sprite->move(margin_left_button, margin_top_button);
-        if (i % 10 == 0 && i > 0) {
-            margin_top_button = margin_top_button + ButtonSize + step - 15; margin_left_button = WindowLink.getWidth() - 11 * (ButtonSize + step);
+        for (int i = 0; i < ButtonCount; i++) {
+            std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
+            txt->loadFromFile(pictureFilename, sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
+            sprite->setTexture(*txt.get());
+            sprite->setScale(koeffx, koeffx);
+            sprite->move(button_margin_left, ButtonSlideHeght);
+            button_margin_left = button_margin_left + 5 + PICTURESIZE.x* koeffx;
+            MyTexture.emplace_back(std::move(txt));
+            ButtonsList.emplace_back(std::move(sprite));
         }
-        else margin_left_button = margin_left_button + ButtonSize + step;
-        MyTexture.emplace_back(std::move(txt));
-        ButtonsList.emplace_back(std::move(sprite));
-    };
-    margin_left += -10;
+    }
+    else
+    {
+        std::cout<<"here"<<std::endl;
+        //2 rows
+        
+        int PICTURESIZE_W = PICTURESIZE.x;
+        int PICTURESIZE_H = PICTURESIZE.y;
+        //std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
+        float koeffx = PICTURESIZE_W  / (PICTURESIZE_W - 5);
 
+        do {
+            koeffx = koeffx - 0.01;
+            PICTURESIZE_W = PICTURESIZE.x * koeffx;
+            PICTURESIZE_H = PICTURESIZE.y * koeffx;
+            //std::cout << "k=" << koeffx << std::endl;
+            //std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
+        } while (((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount ) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
+
+        //std::cout <<"k=" << koeffx << std::endl;
+        //std::cout << "1:" <<PICTURESIZE_W <<"x"<< PICTURESIZE_H << std::endl;
+        //std::cout << "2:" <<PICTURESIZE.x * koeffx  << "x" << PICTURESIZE.y * koeffx << std::endl;
+        for (int i = 0; i < ButtonCount; i++) {
+            std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
+            txt->loadFromFile(pictureFilename, sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
+            sprite->setTexture(*txt.get());
+            //std::cout << "k=" << koeffx << std::endl;
+            sprite->setScale(koeffx, koeffx);
+            sprite->move(button_margin_left, ButtonSlideHeght);
+            button_margin_left = button_margin_left + 5 + PICTURESIZE.x* koeffx;
+            MyTexture.emplace_back(std::move(txt));
+            ButtonsList.emplace_back(std::move(sprite));
+            if (i+1 == (int)(ButtonCount / 2)) {
+                button_margin_left = 0; ButtonSlideHeght = ButtonSlideHeght + PICTURESIZE.x * koeffx + 5;
+            }
+
+        }
+    }
+       
+ /*   while (1 == 1) {
+
+
+    }*/
+
+
+    
 
 }
 
@@ -262,6 +307,7 @@ Window::Window(int w, int h, int numberQuest,int ord)
 
     width = w;
     height = h;
+    std::cout << "numberQuest="<<numberQuest << std::endl;
   std::string CheckButtonPictureFileName = "resources/images/arrow_disable.png";
   CheckButtonTexture.loadFromFile(CheckButtonPictureFileName);
   CheckButtonSprite.setTexture(CheckButtonTexture);
@@ -411,7 +457,13 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
 
 QuestType2::QuestType2( int w, int h,  int qtyButtons):
     
-    Window(w, h,  ((rand() % 5)),1),
+    Window(w, h,  
+   
+   ((rand() % 6))
+        
+        ,
+        
+        1),
     Buttons(qtyButtons,*this),
     Picture(*this)
    {
@@ -423,13 +475,14 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
     
-    
+
     int N = (rand() % 20);
     int M = 0;
     while ((M = (rand() % 20) + 1) >= N) {
         N = (rand() % 20);        
     }
-
+  
+   
    textFrame.setN_M(N, M);
    Picture.setButtonCount(N);
  
