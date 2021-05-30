@@ -34,6 +34,8 @@ protected:
         
 public:
   Buttons(int , Window&);
+  Buttons( Window&);
+  void setButtonCount(int bc) { ButtonCount = bc; }
   void CalcucateCoordinate();
   void setMargin_top(int margin) { 
       margin_top = margin; 
@@ -46,13 +48,16 @@ public:
   std::vector<std::unique_ptr<sf::Sprite>>& getButtons() { return 
       ButtonsList;
   }
-  bool  click(std::shared_ptr<sf::RenderWindow>&);
+  bool  click();
   int getButtonCount() { return ButtonCount; }
   std::vector<std::shared_ptr<sf::Texture>>& getButtonTexture() { return MyTexture; }
   int GetButtonsClickID() { return ButtonPressID; }
 
   int getMarginTop() {
       return margin_top; 
+  }
+  float getScale() {
+      return scale;
   }
   int getHeight() {
       return height;
@@ -136,7 +141,7 @@ protected:
     
   int questNumber;
   TextFrameBase textFrame;
-  bool checkandnextQuest();
+  bool checkandnextQuest(float);
   std::shared_ptr<sf::RenderWindow> window; 
   sf::Texture CheckButtonTexture;
   sf::Sprite CheckButtonSprite;
@@ -152,6 +157,7 @@ public:
   int getHeight() { return height; }
   int getQuestNumber(){ return questNumber; }
   int getordQuestNumber() { return ordQuestNumber; }
+  std::shared_ptr<sf::RenderWindow> getWindow() { return window; }
   ~Window() {
       int yyy = 0;
   }
@@ -187,8 +193,8 @@ public:
     PicturetoVeiw(Window& w) :  Buttons(0, w) {}
     PicturetoVeiw(QuestType2&, std::string);
     void CalcucateCoordinate();
-    void setButtonCount(int bc) { ButtonCount = bc; }
     void setpictureFilename(std::string fn) { pictureFilename = fn; }
+    bool click();
 };
 
 
@@ -197,7 +203,7 @@ class QuestType2 : public Window {
     //int QTY;
     Buttons Buttons;   
     PicturetoVeiw Picture;
-
+    
     //int check(int, int, int);
 public:
     QuestType2(int w, int h,  int qtyButtons);
