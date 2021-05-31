@@ -54,8 +54,8 @@ void PicturetoVeiw::CalcucateCoordinate( ) {
     if (PICTURESIZE.x > PICTURESIZE.y && PICTURESIZE.x / PICTURESIZE.y >= 2)  PICTURESIZE.x /=  2;
     int ButtonSlideHeght = WindowLink.getHeight() / 3;
     
-    int PICTURESIZE_W = PICTURESIZE.x;
-    int PICTURESIZE_H = PICTURESIZE.y;
+    float PICTURESIZE_W = PICTURESIZE.x;
+    float PICTURESIZE_H = PICTURESIZE.y;
     //std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
     scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
 
@@ -86,11 +86,11 @@ void PicturetoVeiw::CalcucateCoordinate( ) {
         std::cout<<"here"<<std::endl;
         //2 rows
         
-        int PICTURESIZE_W = PICTURESIZE.x;
-        int PICTURESIZE_H = PICTURESIZE.y;
+        float PICTURESIZE_W = PICTURESIZE.x;
+        float PICTURESIZE_H = PICTURESIZE.y;
         //std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
-        float scale = PICTURESIZE_W  / (PICTURESIZE_W - 5);
-
+         scale = PICTURESIZE_W  / (PICTURESIZE_W - 5);
+        cout << "scale = "<<scale << endl;
         do {
             scale = scale - 0.01;
             PICTURESIZE_W = PICTURESIZE.x * scale;
@@ -99,34 +99,30 @@ void PicturetoVeiw::CalcucateCoordinate( ) {
             //std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
         } while (((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount ) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
 
-        //std::cout <<"k=" << scale << std::endl;
-        //std::cout << "1:" <<PICTURESIZE_W <<"x"<< PICTURESIZE_H << std::endl;
-        //std::cout << "2:" <<PICTURESIZE.x * scale  << "x" << PICTURESIZE.y * scale << std::endl;
+
         for (int i = 0; i < ButtonCount; i++) {
             std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
             txt->loadFromFile(pictureFilename, sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
             std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
             sprite->setTexture(*txt.get());
-            //std::cout << "k=" << scale << std::endl;
             sprite->setScale(scale, scale);
             sprite->move(button_margin_left, ButtonSlideHeght);
+            
+
             button_margin_left = button_margin_left + 5 + PICTURESIZE.x* scale;
-            MyTexture.emplace_back(std::move(txt));
-            ButtonsList.emplace_back(std::move(sprite));
+
+            //const sf::Vector2f& position = ButtonsList[i]->getPosition();
+            //const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
             if (i+1 == (int)(ButtonCount / 2)) {
                 button_margin_left = 0; ButtonSlideHeght = ButtonSlideHeght + PICTURESIZE.x * scale + 5;
             }
+            MyTexture.emplace_back(std::move(txt));
+            ButtonsList.emplace_back(std::move(sprite));
 
         }
     }
        
- /*   while (1 == 1) {
-
-
-    }*/
-
-
-    //scale = koeffx;
+    //setScale(scale);
 
 }
 
@@ -144,11 +140,11 @@ bool PicturetoVeiw::click() {
         int x1 = (float)x0 + (float)rect.width * scale;
         int y1 = (float)y0 + (float)rect.height * scale;
 
-
+        
         const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
         
         x1 = x1;
-        std::cout << "pica: scale=" << scale << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
+        std::cout << "pica: scale=" << scale << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<" " <<(x1 - x0) << "x"<<(y1 - y0) << std::endl;
         if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
             std::string fileName = "";
             //std::cout << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
@@ -524,7 +520,7 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
     Buttons(qtyButtons,*this),
     Picture(*this)
    {
-    //std::cout << "QuestType2" <<std::endl ;
+
    
     bool first = true;
     int margintopSlideButton = 0;

@@ -59,6 +59,10 @@ public:
   float getScale() {
       return scale;
   }
+
+  void setScale(float s) {
+      scale = s;
+  }
   int getHeight() {
       return height;
   }
@@ -188,7 +192,8 @@ class QuestionBase {
 class QuestType2;
 class PicturetoVeiw : public Buttons {
     std::string pictureFilename;
-    
+    std::vector<bool>    isblackSide;
+
 public:
     PicturetoVeiw(Window& w) :  Buttons(0, w) {}
     PicturetoVeiw(QuestType2&, std::string);
