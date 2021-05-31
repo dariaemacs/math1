@@ -192,7 +192,7 @@ class QuestionBase {
 class QuestType2;
 class PicturetoVeiw : public Buttons {
     std::string pictureFilename;
-    std::vector<bool>    isblackSide;
+    std::vector<bool> isblackSide;
 
 public:
     PicturetoVeiw(Window& w) :  Buttons(0, w) {}

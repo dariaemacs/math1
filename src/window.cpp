@@ -49,7 +49,7 @@ void PicturetoVeiw::CalcucateCoordinate( ) {
     sf::Texture tmp;
 
     int button_margin_left = 0;
-    tmp.loadFromFile(pictureFilename);
+    tmp.loadFromFile(pictureFilename+".png");
     sf::Vector2u PICTURESIZE = tmp.getSize();
     if (PICTURESIZE.x > PICTURESIZE.y && PICTURESIZE.x / PICTURESIZE.y >= 2)  PICTURESIZE.x /=  2;
     int ButtonSlideHeght = WindowLink.getHeight() / 3;
@@ -71,7 +71,7 @@ void PicturetoVeiw::CalcucateCoordinate( ) {
 
         for (int i = 0; i < ButtonCount; i++) {
             std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
-            txt->loadFromFile(pictureFilename, sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            txt->loadFromFile(pictureFilename+".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
             std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
             sprite->setTexture(*txt.get());
             sprite->setScale(scale, scale);
@@ -79,6 +79,7 @@ void PicturetoVeiw::CalcucateCoordinate( ) {
             button_margin_left = button_margin_left + 5 + PICTURESIZE.x* scale;
             MyTexture.emplace_back(std::move(txt));
             ButtonsList.emplace_back(std::move(sprite));
+            isblackSide.push_back(true);
         }
     }
     else
@@ -102,7 +103,7 @@ void PicturetoVeiw::CalcucateCoordinate( ) {
 
         for (int i = 0; i < ButtonCount; i++) {
             std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
-            txt->loadFromFile(pictureFilename, sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            txt->loadFromFile(pictureFilename+".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
             std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
             sprite->setTexture(*txt.get());
             sprite->setScale(scale, scale);
@@ -118,6 +119,7 @@ void PicturetoVeiw::CalcucateCoordinate( ) {
             }
             MyTexture.emplace_back(std::move(txt));
             ButtonsList.emplace_back(std::move(sprite));
+            isblackSide.push_back(true);
 
         }
     }
@@ -151,15 +153,16 @@ bool PicturetoVeiw::click() {
             sf::Texture CheckButtonTexture;
             sf::Sprite CheckButtonSprite(CheckButtonTexture);
 
-            if (ButtonPressID >= 0) {
-                
-                fileName = "resources/images/digit" + std::to_string(ButtonPressID + 1) + ".jpg";
-                MyTexture[ButtonPressID]->loadFromFile(fileName); ButtonPressID = -1;
-            }
-            fileName = "resources/images/digit" + std::to_string(i + 1) + "_select.jpg";
-            ButtonPressID = i;
-            std::cout << ButtonPressID << std::endl;
-            MyTexture[i]->loadFromFile(fileName);
+            //if (ButtonPressID >= 0) {
+            if (isblackSide[i])
+                fileName = pictureFilename + "_black.png"; else fileName = pictureFilename + ".png";
+                MyTexture[i]->loadFromFile(fileName); //ButtonPressID = -1;
+                isblackSide[i] = !isblackSide[i];
+            //}
+            //fileName = "resources/images/digit" + std::to_string(i + 1) + "_select.jpg";
+            //ButtonPressID = i;
+            //std::cout << ButtonPressID << std::endl;
+            //MyTexture[i]->loadFromFile(fileName);
 
             //w->draw(*Buttons[i]);
             //w->display();
@@ -539,7 +542,7 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
    textFrame.setN_M(N, M);
    Picture.setButtonCount(N);
  
-   Picture.setpictureFilename("resources/images/"+filenamesforPicaQuest2[getQuestNumber()]+".png");
+   Picture.setpictureFilename("resources/images/"+filenamesforPicaQuest2[getQuestNumber()]);
    Picture.setMargin_left(10);
    Picture.setMargin_top(textFrame.getHeight()*2);
 
@@ -599,7 +602,7 @@ Buttons.setButtonCount(N);
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
                         Buttons.getButtonTexture()[N - M-1]->loadFromFile(
-                            "resources/images/digit" + std::to_string(rightfigurCount) + "_right.jpg"
+                            "resources/images/digit" + std::to_string(N - M) + "_right.jpg"
                         );
                     }
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft()-10, Buttons.getMarginTop());
