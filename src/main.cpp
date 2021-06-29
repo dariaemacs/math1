@@ -19,8 +19,10 @@ int main() {
         int width = 1024; int height = 600;
 
            srand(time(0));
-           QuestType1(width, height, 21);
-           QuestType2(width, height, 5);
+           /*QuestType1(width, height, 21);
+           QuestType2(width, height, 5);*/
+
+           QuestType3(width, height, 5);
            /*QuestType2(width, height, 5);
            QuestType2(width, height, 8);
 

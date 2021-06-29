@@ -190,13 +190,13 @@ class QuestionBase {
 };
 
 class QuestType2;
-class PicturetoVeiw : public Buttons {
+class PicturetoView : public Buttons {
     std::string pictureFilename;
     std::vector<bool> isblackSide;
 
 public:
-    PicturetoVeiw(Window& w) :  Buttons(0, w) {}
-    PicturetoVeiw(QuestType2&, std::string);
+    PicturetoView(Window& w) :  Buttons(0, w) {}
+    PicturetoView(QuestType2&, std::string);
     void CalcucateCoordinate();
     void setpictureFilename(std::string fn) { pictureFilename = fn; }
     bool click();
@@ -207,7 +207,7 @@ class QuestType2 : public Window {
 
     //int QTY;
     Buttons Buttons;   
-    PicturetoVeiw Picture;
+    PicturetoView Picture;
     
     //int check(int, int, int);
 public:
@@ -215,6 +215,16 @@ public:
 
 };
 
+class QuestType3 : public Window {
 
+    //int QTY;
+    Buttons Buttons;
+    PicturetoView Picture;
+    PicturetoView Basket;
+    //int check(int, int, int);
+public:
+    QuestType3(int w, int h, int qtyButtons);
+
+};
 
 #endif 

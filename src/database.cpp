@@ -3,13 +3,16 @@
 #include "color.hpp"
 #include "window.hpp"
 
-extern const figureQestions question1Figure[] =
+extern const figureQestions question1Text[] =
   {
     figureQestions{L"Сколько кружков на рисунках вы видете ? "       ,circle},
     figureQestions{L"Сколько прямоугольников на рисунках вы видите ? ",rectangle},
     figureQestions{L"Сколько треугольников на рисунках вы видите ? ",triangle},    
   }	;
-extern const figureQestions question2Figure[] =
+
+
+
+extern const figureQestions question2Text[] =
 {
 figureQestions{ L"Лена хочет подарить родным N ракушек. Ей осталось \nнайти M ракушек . Сколько ракушек Лена уже нашла ?",seashell },
 figureQestions{ L"В корзине было N ягод клубники. После того , как Игорь съел \nнесколько ягод, осталось M. Сколько ягод съел Игорь ?",berry },
@@ -19,10 +22,41 @@ figureQestions{ L"Наташе нужно раскрасить N бабочек. Она раскрасила \n M бабочек
 figureQestions{ L"Саша хочет купить велосипед. Он стоит N рублей, \nсейчас у Саши в копилке M рублей. Сколько  еще рублей нужно Саше, \nчтобы хватило на велосипед?",bycicle }
 };
 
-extern const figureQestions* qestionarrayList[] = { question1Figure ,question2Figure };
+/*
+"В первый день в курятнике вылупились 9 цыплят. А во второй день вылупились еще 5, их посадили в корзинку. Сколько всего цыплят вылупилось за два дня?",
+"У Кати было 8 карандашей. Мама купила ей еще 7 (в коробке). Сколько карандашей стало у Кати?",
+"Сначала строители построили 4 дома, а потом еще 8 (за деревьями). Сколько всего домов построили строители?",
+"На берегу пруда сидели 6 лягушек. Затем к ним прискакали еще 7 лягушек (за камышами). Сколько теперь всего лягушек сидит на берегу?",
+"Утром после дождя ребята собрали 7 грибов, а днем еще 9 грибов (в корзинке). Сколько всего грибов собрали ребята?",
+"Для урока Коля собрал 9 дубовых листьев и еще 8 кленовых (в корзинке). Сколько всего листьев собрал Коля?",
+*/
+
+extern const figureQestions question3Text[] =
+{
+figureQestions{ L"В первый день в курятнике вылупились N цыплят. А во второй день вылупились еще M, их посадили в корзинку. Сколько всего цыплят вылупилось за два дня?",chicken     },
+figureQestions{L"У Кати было N карандашей. Мама купила ей еще M (в коробке). Сколько карандашей стало у Кати?",                                                         pencil      },
+figureQestions{L"Сначала строители построили N дома, а потом еще M (за деревьями). Сколько всего домов построили строители?",                                           house       },
+figureQestions{L"На берегу пруда сидели N лягушек. Затем к ним прискакали еще M лягушек (за камышами). Сколько теперь всего лягушек сидит на берегу?" ,                  frog        },
+figureQestions{L"Утром после дождя ребята собрали N грибов, а днем еще M грибов (в корзинке). Сколько всего грибов собрали ребята?",                                    mashroom        },
+figureQestions{L"Для урока Коля собрал N дубовых листьев и еще M кленовых (в корзинке). Сколько всего листьев собрал Коля?",                                            oaklist     }
+};
+
+
+
+extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text };
 
 extern const std::array<std::string, N2> filenamesforPicaQuest2 = { std::string("shell"),std::string("berry"),std::string("mushroom"),std::string("fish"),
 std::string("butterfly"),std::string("coin")
+};
+
+
+extern const std::array<std::string , N3> filenamesforPicaQuest3 = {
+    std::string("chicken"),
+    std::string("pencil"),
+    std::string("house"),
+    std::string("frog"),
+    std::string("mushroom"),
+    std::string("leaf")
 };
 
 

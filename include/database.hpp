@@ -18,6 +18,7 @@ extern const std::wstring CommentsDic[];
 
 constexpr int N1 = 3; 
 constexpr int N2 = 6;
+constexpr int N3 = 6;
 constexpr int X = 5; 
 constexpr int Y = 6;
 
@@ -29,8 +30,9 @@ const float FPS = 30.0f;
 
 
 
-extern const figureQestions question1Figure[];
-extern const figureQestions question2Figure[];
+extern const figureQestions question1Text[];
+extern const figureQestions question2Text[];
+extern const figureQestions question3Text[];
 
 extern const figureQestions* qestionarrayList[];
 
@@ -49,6 +51,7 @@ struct phrasetoReplace {
 
 extern const std::array <std::array<phrasetoReplace, X>,Y> phrasestoReplace;
 extern const std::array<std::string,N2> filenamesforPicaQuest2 ;
+extern const std::array<std::string, N2> filenamesforPicaQuest3;
 
 #endif //DATABASE_H
 

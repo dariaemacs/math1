@@ -14,7 +14,15 @@ enum types {
     mashroom = 7,
     fish = 8,
     butterfly = 9,
-    bycicle = 10,
+
+
+    bycicle     = 10,
+    chicken     = 11,
+    pencil      = 12,
+    house       = 13,
+    frog        = 14,
+    oaklist     = 15,
+
     calc = -1
 
 
