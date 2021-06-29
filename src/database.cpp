@@ -4,11 +4,11 @@
 #include "window.hpp"
 
 extern const figureQestions question1Text[] =
-  {
-    figureQestions{L"Сколько кружков на рисунках вы видете ? "       ,circle},
-    figureQestions{L"Сколько прямоугольников на рисунках вы видите ? ",rectangle},
-    figureQestions{L"Сколько треугольников на рисунках вы видите ? ",triangle},    
-  }	;
+{
+  figureQestions{L"Сколько кружков на рисунках вы видете ? "       ,circle},
+  figureQestions{L"Сколько прямоугольников на рисунках вы видите ? ",rectangle},
+  figureQestions{L"Сколько треугольников на рисунках вы видите ? ",triangle},
+};
 
 
 
@@ -33,12 +33,16 @@ figureQestions{ L"Саша хочет купить велосипед. Он стоит N рублей, \nсейчас у Саш
 
 extern const figureQestions question3Text[] =
 {
-figureQestions{ L"В первый день в курятнике вылупились N цыплят. А во второй день вылупились еще M, их посадили в корзинку. Сколько всего цыплят вылупилось за два дня?",chicken     },
-figureQestions{L"У Кати было N карандашей. Мама купила ей еще M (в коробке). Сколько карандашей стало у Кати?",                                                         pencil      },
-figureQestions{L"Сначала строители построили N дома, а потом еще M (за деревьями). Сколько всего домов построили строители?",                                           house       },
-figureQestions{L"На берегу пруда сидели N лягушек. Затем к ним прискакали еще M лягушек (за камышами). Сколько теперь всего лягушек сидит на берегу?" ,                  frog        },
-figureQestions{L"Утром после дождя ребята собрали N грибов, а днем еще M грибов (в корзинке). Сколько всего грибов собрали ребята?",                                    mashroom        },
-figureQestions{L"Для урока Коля собрал N дубовых листьев и еще M кленовых (в корзинке). Сколько всего листьев собрал Коля?",                                            oaklist     }
+
+
+
+figureQestions{ L"В первый день в курятнике вылупились N цыплят. А во второй день \nвылупились еще M, их посадили в корзинку. Сколько всего цыплят вылупилось за два дня?",chicken     },
+figureQestions{L"У Кати было N карандашей. Мама купила ей еще M (в коробке). Сколько\n карандашей стало у Кати?",                                                         pencil      },
+figureQestions{L"Сначала строители построили N дома, а потом еще M (за деревьями).\n Сколько всего домов построили строители?",                                           house       },
+figureQestions{L"На берегу пруда сидели N лягушек. Затем к ним прискакали \nеще M лягушек (за камышами). Сколько теперь всего лягушек сидит на берегу?" ,                  frog        },
+figureQestions{L"Утром после дождя ребята собрали N грибов, а днем \nеще M грибов (в корзинке). Сколько всего грибов собрали ребята?",                                    mashroom        },
+figureQestions{L"Для урока Коля собрал N дубовых листьев и еще M \nкленовых (в корзинке). Сколько всего листьев собрал Коля?",                                            oaklist     }
+
 };
 
 
@@ -50,7 +54,7 @@ std::string("butterfly"),std::string("coin")
 };
 
 
-extern const std::array<std::string , N3> filenamesforPicaQuest3 = {
+extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("chicken"),
     std::string("pencil"),
     std::string("house"),
@@ -60,7 +64,7 @@ extern const std::array<std::string , N3> filenamesforPicaQuest3 = {
 };
 
 
-const std::array <std::array<phrasetoReplace, X>, Y> phrasestoReplace= {
+const std::array <std::array<phrasetoReplace, X>, Y> phrasestoReplace = {
   {
     {
       {
@@ -72,7 +76,7 @@ const std::array <std::array<phrasetoReplace, X>, Y> phrasestoReplace= {
 {L" 1 ягод", L" 1 ягода"},   { L" 2 ягод", L" 2 ягоды" }, { L" 3 ягод", L" 3 ягоды" }, { L" 4 ягод", L" 4 ягоды" }, { L" 21 ягод", L" 21 ягода" }
       }
     },
-    
+
     {
       {
 {L" 1 грибов", L" 1 гриб"},   { L" 2 грибов", L" 2 гриба" }, { L" 3 грибов", L" 3 гриба" }, { L" 4 грибов", L" 4 гриба" }, { L" 21 грибов", L" 21 гриб" }

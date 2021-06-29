@@ -32,6 +32,7 @@ std::wstring get_wstr(const std::array<figureQestions, N>& arr, int questvariant
 */
 
 std::wstring get_wstr(int questvariantIndex,int ordNumber) {
+//    setlocale(LC_ALL, "Russian");
   std::stringstream ss;
   ss << 1 << ". ";
   std::string str = ss.str();
@@ -759,14 +760,15 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
     Window(w, h,
 
-    ((rand() % 6))
+        ((rand() % 6))
 
         ,
 
-        1),
+        2),
     Buttons(qtyButtons, *this),
     Picture(*this),
     Basket(*this)
+
 {
 
 
@@ -777,10 +779,10 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
     CheckButtonSprite.setTexture(CheckButtonTexture);
 
 
-    int N = (rand() % 20);
+    int N = (rand() % 10);
     int M = 0;
-    while ((M = (rand() % 20) + 1) >= N) {
-        N = (rand() % 20);
+    while ((M = (rand() % 10) + 1) >= N) {
+        N = (rand() % 10);
     }
 
 
