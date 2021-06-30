@@ -116,7 +116,7 @@ void PicturetoView::CalcucateCoordinate( ) {
             //const sf::Vector2f& position = ButtonsList[i]->getPosition();
             //const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
             if (i+1 == (int)(ButtonCount / 2)) {
-                button_margin_left = 0; ButtonSlideHeght = ButtonSlideHeght + PICTURESIZE.x * scale + 5;
+                button_margin_left = 0; ButtonSlideHeght = ButtonSlideHeght + PICTURESIZE.y * scale + 5;
             }
             MyTexture.emplace_back(std::move(txt));
             ButtonsList.emplace_back(std::move(sprite));
@@ -756,18 +756,103 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
     }
 }
 
+PicturetoViewQuestWithBasket::PicturetoViewQuestWithBasket(Window& w) : PicturetoView(w) {};
+
+void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
+
+    using namespace std;
+    sf::Texture tmp;
+
+    int button_margin_left = 0;
+    tmp.loadFromFile(pictureFilename + ".png");
+    sf::Vector2u PICTURESIZE = tmp.getSize();
+    if (PICTURESIZE.x > PICTURESIZE.y&& PICTURESIZE.x / PICTURESIZE.y >= 2)  PICTURESIZE.x /= 2;
+    int ButtonSlideHeght = WindowLink.getHeight() / 3;
+
+    float PICTURESIZE_W = PICTURESIZE.x;
+    float PICTURESIZE_H = PICTURESIZE.y;
+    //std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
+    scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
+
+    if (ButtonCount < 7)  // 1 row of pictures
+    {
+        do {
+            scale = scale - 0.01;
+            PICTURESIZE_W = PICTURESIZE.x * scale;
+            PICTURESIZE_H = PICTURESIZE.y * scale;
+            //std::cout << "k=" << scale << std::endl;
+            //std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
+        } while (((PICTURESIZE_W * round(ButtonCount) + round((ButtonCount)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
+
+        for (int i = 0; i < ButtonCount; i++) {
+            std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
+            txt->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
+            sprite->setTexture(*txt.get());
+            sprite->setScale(scale, scale);
+            sprite->move(button_margin_left, ButtonSlideHeght);
+            button_margin_left = button_margin_left + 5 + PICTURESIZE.x * scale;
+            MyTexture.emplace_back(std::move(txt));
+            ButtonsList.emplace_back(std::move(sprite));
+            isblackSide.push_back(true);
+        }
+    }
+    else
+    {
+        std::cout << "here" << std::endl;
+        //2 rows
+
+        float PICTURESIZE_W = PICTURESIZE.x;
+        float PICTURESIZE_H = PICTURESIZE.y;
+        //std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
+        scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
+        cout << "scale = " << scale << endl;
+        do {
+            scale = scale - 0.01;
+            PICTURESIZE_W = PICTURESIZE.x * scale;
+            PICTURESIZE_H = PICTURESIZE.y * scale;
+            //std::cout << "k=" << scale << std::endl;
+            //std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
+        } while (((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
+
+
+        for (int i = 0; i < ButtonCount; i++) {
+            std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
+            txt->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
+            sprite->setTexture(*txt.get());
+            sprite->setScale(scale, scale);
+            sprite->move(button_margin_left, ButtonSlideHeght);
+
+
+            button_margin_left = button_margin_left + 5 + PICTURESIZE.x * scale;
+
+            //const sf::Vector2f& position = ButtonsList[i]->getPosition();
+            //const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
+            if (i + 1 == (int)(ButtonCount / 2)) {
+                button_margin_left = 0; ButtonSlideHeght = ButtonSlideHeght + PICTURESIZE.y * scale + 5;
+            }
+            MyTexture.emplace_back(std::move(txt));
+            ButtonsList.emplace_back(std::move(sprite));
+            isblackSide.push_back(true);
+
+        }
+    }
+
+}
+
 QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
     Window(w, h,
-
+        
         ((rand() % 6))
 
         ,
 
         2),
     Buttons(qtyButtons, *this),
-    Picture(*this),
-    Basket(*this)
+    PictureAndBasket(new PicturetoViewQuestWithBasket(*this) )
+    
 
 {
 
@@ -779,7 +864,7 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
     CheckButtonSprite.setTexture(CheckButtonTexture);
 
 
-    int N = (rand() % 10);
+    int N = 10; //(rand() % 10);
     int M = 0;
     while ((M = (rand() % 10) + 1) >= N) {
         N = (rand() % 10);
@@ -787,13 +872,13 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
 
     textFrame.setN_M(N, M);
-    Picture.setButtonCount(N);
+    PictureAndBasket->setButtonCount(N);
 
-    Picture.setpictureFilename("resources/images/" + filenamesforPicaQuest3[getQuestNumber()]);
-    Picture.setMargin_left(10);
-    Picture.setMargin_top(textFrame.getHeight() * 2);
+    PictureAndBasket->setpictureFilename("resources/images/" + filenamesforPicaQuest3[getQuestNumber()]);
+    PictureAndBasket->setMargin_left(10);
+    PictureAndBasket->setMargin_top(textFrame.getHeight() * 2);
 
-    Picture.CalcucateCoordinate();
+    PictureAndBasket->CalcucateCoordinate();
 
     Buttons.setButtonCount(N);
 
@@ -825,9 +910,9 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
         }
 
-        for (int bc = 0; bc < Picture.getButtonCount(); bc++) {
+        for (int bc = 0; bc < PictureAndBasket->getButtonCount(); bc++) {
 
-            window->draw(*Picture.getButtons()[bc]);
+            window->draw(*PictureAndBasket->getButtons()[bc]);
         }
 
 
@@ -859,7 +944,7 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
                     CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
                     CheckButtonSprite.setTexture(CheckButtonTexture);
                 }
-                if (Picture.click()) {
+                if (PictureAndBasket->click()) {
                     std::cout << "Picture.click" << std::endl;
                 }
 

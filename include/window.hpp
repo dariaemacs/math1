@@ -126,6 +126,9 @@ public:
 
 };
 
+
+
+
 class Window {
    bool first;
   
@@ -197,10 +200,12 @@ class PicturetoView : public Buttons {
 public:
     PicturetoView(Window& w) :  Buttons(0, w) {}
     PicturetoView(QuestType2&, std::string);
-    void CalcucateCoordinate();
+    virtual void CalcucateCoordinate();
     void setpictureFilename(std::string fn) { pictureFilename = fn; }
     bool click();
 };
+
+
 
 
 class QuestType2 : public Window {
@@ -215,13 +220,19 @@ public:
 
 };
 
+class PicturetoViewQuestWithBasket : public  PicturetoView {
+public:
+    PicturetoViewQuestWithBasket(Window&);
+    void CalcucateCoordinate();
+};
+
 class QuestType3 : public Window {
 
-    //int QTY;
+
     Buttons Buttons;
-    PicturetoView Picture;
-    PicturetoView Basket;
-    //int check(int, int, int);
+    PicturetoView*  PictureAndBasket;
+    
+
 public:
     QuestType3(int w, int h, int qtyButtons);
 
