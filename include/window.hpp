@@ -194,6 +194,7 @@ class QuestionBase {
 
 class QuestType2;
 class PicturetoView : public Buttons {
+protected:
     std::string pictureFilename;
     std::vector<bool> isblackSide;
 
@@ -230,7 +231,7 @@ class QuestType3 : public Window {
 
 
     Buttons Buttons;
-    PicturetoView*  PictureAndBasket;
+    PicturetoViewQuestWithBasket  PictureAndBasket;
     
 
 public:

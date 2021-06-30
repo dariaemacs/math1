@@ -765,15 +765,22 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
 
     int button_margin_left = 0;
     tmp.loadFromFile(pictureFilename + ".png");
+    std::cout << "picture" << std::endl;
     sf::Vector2u PICTURESIZE = tmp.getSize();
-    if (PICTURESIZE.x > PICTURESIZE.y&& PICTURESIZE.x / PICTURESIZE.y >= 2)  PICTURESIZE.x /= 2;
+    
+    std::cout << PICTURESIZE.x << std::endl;
+    float PICTURESIZEy = PICTURESIZE.y;
+    if (PICTURESIZE.x > PICTURESIZE.y && ((float)PICTURESIZE.x / (float)PICTURESIZE.y) >= 1.5) {
+        PICTURESIZE.x /= 2;
+    }
+  
     int ButtonSlideHeght = WindowLink.getHeight() / 3;
-
+  
     float PICTURESIZE_W = PICTURESIZE.x;
     float PICTURESIZE_H = PICTURESIZE.y;
     //std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
     scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
-
+ 
     if (ButtonCount < 7)  // 1 row of pictures
     {
         do {
@@ -799,7 +806,7 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
     }
     else
     {
-        std::cout << "here" << std::endl;
+        std::cout << PICTURESIZE.x << std::endl;
         //2 rows
 
         float PICTURESIZE_W = PICTURESIZE.x;
@@ -843,15 +850,15 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
 
 QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
-    Window(w, h,
+    Window(w, h,0
         
-        ((rand() % 6))
+        //((rand() % 6))
 
         ,
 
         2),
     Buttons(qtyButtons, *this),
-    PictureAndBasket(new PicturetoViewQuestWithBasket(*this) )
+    PictureAndBasket(PicturetoViewQuestWithBasket(*this) )
     
 
 {
@@ -872,13 +879,13 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
 
     textFrame.setN_M(N, M);
-    PictureAndBasket->setButtonCount(N);
+    PictureAndBasket.setButtonCount(N);
 
-    PictureAndBasket->setpictureFilename("resources/images/" + filenamesforPicaQuest3[getQuestNumber()]);
-    PictureAndBasket->setMargin_left(10);
-    PictureAndBasket->setMargin_top(textFrame.getHeight() * 2);
+    PictureAndBasket.setpictureFilename("resources/images/" + filenamesforPicaQuest3[getQuestNumber()]);
+    PictureAndBasket.setMargin_left(10);
+    PictureAndBasket.setMargin_top(textFrame.getHeight() * 2);
 
-    PictureAndBasket->CalcucateCoordinate();
+    PictureAndBasket.CalcucateCoordinate();
 
     Buttons.setButtonCount(N);
 
@@ -910,9 +917,9 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
         }
 
-        for (int bc = 0; bc < PictureAndBasket->getButtonCount(); bc++) {
+        for (int bc = 0; bc < PictureAndBasket.getButtonCount(); bc++) {
 
-            window->draw(*PictureAndBasket->getButtons()[bc]);
+            window->draw(*PictureAndBasket.getButtons()[bc]);
         }
 
 
@@ -944,7 +951,7 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
                     CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
                     CheckButtonSprite.setTexture(CheckButtonTexture);
                 }
-                if (PictureAndBasket->click()) {
+                if (PictureAndBasket.click()) {
                     std::cout << "Picture.click" << std::endl;
                 }
 
