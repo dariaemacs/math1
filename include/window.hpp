@@ -35,7 +35,9 @@ protected:
 public:
   Buttons(int , Window&);
   Buttons( Window&);
-  void setButtonCount(int bc) { ButtonCount = bc; }
+  void setButtonCount(int bc) { 
+      ButtonCount = bc; 
+  }
   void CalcucateCoordinate();
   void setMargin_top(int margin) { 
       margin_top = margin; 
@@ -244,7 +246,7 @@ class QuestType3 : public Window {
     
 
 public:
-    QuestType3(int w, int h, int qtyButtons);
+    QuestType3(int , int , int );
 
 };
 

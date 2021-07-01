@@ -113,8 +113,7 @@ void PicturetoView::CalcucateCoordinate( ) {
 
             button_margin_left = button_margin_left + 5 + PICTURESIZE.x* scale;
 
-            //const sf::Vector2f& position = ButtonsList[i]->getPosition();
-            //const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
+
             if (i+1 == (int)(ButtonCount / 2)) {
                 button_margin_left = 0; ButtonSlideHeght = ButtonSlideHeght + PICTURESIZE.y * scale + 5;
             }
@@ -223,7 +222,9 @@ bool Buttons::click() {
   return false;
 
 }
-Buttons::Buttons( int qtyButton, Window& w) :WindowLink(w), ButtonCount(qtyButton){}
+Buttons::Buttons( int qtyButton, Window& w) :WindowLink(w), ButtonCount(qtyButton){
+ 
+}
 Buttons::Buttons( Window& w) : WindowLink(w){}
 
 void TextFrameBase::setWidth(int) {
@@ -793,7 +794,7 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
             PICTURESIZE_H = PICTURESIZE.y * scale;
             //std::cout << "k=" << scale << std::endl;
             //std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
-        } while (((PICTURESIZE_W * round(ButtonCount+1) + round((ButtonCount+1)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
+        } while (((PICTURESIZE_W * round(ButtonCount+2) + round((ButtonCount+2)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
 
         for (int i = 0; i < ButtonCount; i++) {
             std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
@@ -808,19 +809,20 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
             isblackSide.push_back(true);
         }
         //calc for basket
-        basketTexture.loadFromFile(pictureFilename + "_basket.png");
-        sf::Vector2u BASKETPICTURESIZE = basketTexture.getSize();
-        do {
-            BASKETSCALE = BASKETSCALE - 0.01;
-            BASKETPICTURESIZE_W = BASKETPICTURESIZE.x * BASKETSCALE;
-            BASKETPICTURESIZE_H = BASKETPICTURESIZE.y * BASKETSCALE;
-            //std::cout << "k=" << scale << std::endl;
-            //std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
-        } while (((BASKETPICTURESIZE_W *  +  5)) > WindowLink.getWidth() || BASKETPICTURESIZE_H + 5 > ButtonSlideHeght);
-        
+        //basketTexture.loadFromFile(pictureFilename + "_basket.png");
+        //sf::Vector2u BASKETPICTURESIZE = basketTexture.getSize();
+        //do {
+        //    BASKETSCALE = BASKETSCALE - 0.01;
+        //    BASKETPICTURESIZE_W = BASKETPICTURESIZE.x * BASKETSCALE;
+        //    BASKETPICTURESIZE_H = BASKETPICTURESIZE.y * BASKETSCALE;
+        //    //std::cout << "k=" << scale << std::endl;
+        //    //std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
+        //} while (((BASKETPICTURESIZE_W *  +  5)) > WindowLink.getWidth() || BASKETPICTURESIZE_H + 5 > ButtonSlideHeght);
+        //
 
-        basketSprite.setTexture(basketTexture);
-        basketSprite.setScale(BASKETSCALE, BASKETSCALE);
+        //basketSprite.setTexture(basketTexture);
+        //basketSprite.setScale(BASKETSCALE, BASKETSCALE);
+        //basketSprite.move(button_margin_left , ButtonSlideHeght);
     }
     else
     {
@@ -864,6 +866,19 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
         }
     }
 
+    basketTexture.loadFromFile(pictureFilename + "_basket.png");
+    sf::Vector2u BASKETPICTURESIZE = basketTexture.getSize();
+    do {
+        BASKETSCALE = BASKETSCALE - 0.01;
+        BASKETPICTURESIZE_W = BASKETPICTURESIZE.x * BASKETSCALE;
+        BASKETPICTURESIZE_H = BASKETPICTURESIZE.y * BASKETSCALE;
+    } while (((BASKETPICTURESIZE_W * +5)) > WindowLink.getWidth() || BASKETPICTURESIZE_H + 5 > ButtonSlideHeght);
+
+
+    basketSprite.setTexture(basketTexture);
+    basketSprite.setScale(BASKETSCALE, BASKETSCALE);
+    basketSprite.move(button_margin_left, (BASKETPICTURESIZE_H / BASKETPICTURESIZE_W>=1.5? 
+        (WindowLink.getHeight() - BASKETPICTURESIZE_H)/2 : WindowLink.getHeight() / 3) );
 }
 
 QuestType3::QuestType3(int w, int h, int qtyButtons) :
@@ -874,7 +889,9 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
         ,
 
-        2),
+        2)
+    
+    ,
     Buttons(qtyButtons, *this),
     PictureAndBasket(PicturetoViewQuestWithBasket(*this) )
     
@@ -884,7 +901,7 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
     bool first = true;
     int margintopSlideButton = 0;
-
+    //std::cout << qtyButtons << std::endl;
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
 
@@ -894,7 +911,7 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
     while ((M = (rand() % 10) + 1) >= N) {
         N = (rand() % 10);
     }
-
+    N = 10;
 
     textFrame.setN_M(N, M);
     PictureAndBasket.setButtonCount(N);
@@ -905,7 +922,7 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
     PictureAndBasket.CalcucateCoordinate();
 
-    Buttons.setButtonCount(N);
+    //Buttons.setButtonCount(N);
 
     sf::Event event;
     while (window->isOpen()) {
@@ -953,13 +970,13 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
                     int rightfigurCount = 0;
                     //std::cout << Buttons.GetButtonsClickID()+1 = N- << std::endl;
-                    if (Buttons.GetButtonsClickID() + 1 == N - M)  QuestComment.settext(CommentsDic[1]);    else {
+                    if (Buttons.GetButtonsClickID() + 1 == N + M)  QuestComment.settext(CommentsDic[1]);    else {
                         QuestComment.settext(CommentsDic[2]);
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
-                        Buttons.getButtonTexture()[N - M - 1]->loadFromFile(
-                            "resources/images/digit" + std::to_string(N - M) + "_right.jpg"
+                        Buttons.getButtonTexture()[N + M - 1]->loadFromFile(
+                            "resources/images/digit" + std::to_string(N + M) + "_right.jpg"
                         );
                     }
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
