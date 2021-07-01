@@ -778,6 +778,10 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
   
     float PICTURESIZE_W = PICTURESIZE.x;
     float PICTURESIZE_H = PICTURESIZE.y;
+    float BASKETPICTURESIZE_W = 0;
+    float BASKETPICTURESIZE_H = 0;
+    float BASKETSCALE = 1;
+
     //std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
     scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
  
@@ -789,7 +793,7 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
             PICTURESIZE_H = PICTURESIZE.y * scale;
             //std::cout << "k=" << scale << std::endl;
             //std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
-        } while (((PICTURESIZE_W * round(ButtonCount) + round((ButtonCount)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
+        } while (((PICTURESIZE_W * round(ButtonCount+1) + round((ButtonCount+1)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
 
         for (int i = 0; i < ButtonCount; i++) {
             std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
@@ -803,6 +807,20 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
             ButtonsList.emplace_back(std::move(sprite));
             isblackSide.push_back(true);
         }
+        //calc for basket
+        basketTexture.loadFromFile(pictureFilename + "_basket.png");
+        sf::Vector2u BASKETPICTURESIZE = basketTexture.getSize();
+        do {
+            BASKETSCALE = BASKETSCALE - 0.01;
+            BASKETPICTURESIZE_W = BASKETPICTURESIZE.x * BASKETSCALE;
+            BASKETPICTURESIZE_H = BASKETPICTURESIZE.y * BASKETSCALE;
+            //std::cout << "k=" << scale << std::endl;
+            //std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
+        } while (((BASKETPICTURESIZE_W *  +  5)) > WindowLink.getWidth() || BASKETPICTURESIZE_H + 5 > ButtonSlideHeght);
+        
+
+        basketSprite.setTexture(basketTexture);
+        basketSprite.setScale(BASKETSCALE, BASKETSCALE);
     }
     else
     {
@@ -850,9 +868,9 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
 
 QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
-    Window(w, h,0
+    Window(w, h,
         
-        //((rand() % 6))
+        ((rand() % 6))
 
         ,
 
@@ -871,7 +889,7 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
     CheckButtonSprite.setTexture(CheckButtonTexture);
 
 
-    int N = 10; //(rand() % 10);
+    int N = (rand() % 10);
     int M = 0;
     while ((M = (rand() % 10) + 1) >= N) {
         N = (rand() % 10);
@@ -921,7 +939,7 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
             window->draw(*PictureAndBasket.getButtons()[bc]);
         }
-
+        window->draw(PictureAndBasket.getBasketSprite());
 
         window->display();
         while (window->pollEvent(event)) {
