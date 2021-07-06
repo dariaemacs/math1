@@ -45,9 +45,9 @@ figureQestions{L"Для урока Коля собрал N дубовых листьев и еще M \nкленовых (в к
 
 };
 
+extern const figureQestions question4Text[] = { figureQestions{ L"На математическом поезде числа записаны по \n определенному правилу. Определите правило и \nнажмите на пропущенные числа, чтобы они появились в окошках?",train     } };
 
-
-extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text };
+extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text };
 
 extern const std::array<std::string, N2> filenamesforPicaQuest2 = { std::string("shell"),std::string("berry"),std::string("mushroom"),std::string("fish"),
 std::string("butterfly"),std::string("coin")

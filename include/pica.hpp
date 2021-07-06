@@ -22,7 +22,7 @@ enum types {
     house       = 13,
     frog        = 14,
     oaklist     = 15,
-
+    train       = 16,
     calc = -1
 
 

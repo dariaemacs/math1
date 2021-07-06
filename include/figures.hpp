@@ -370,6 +370,17 @@ private:
   Rectangle rectangle;
 };
 
-
+class TrainForQuest :public FrameFigure {
+    Rectangle rectangle1;
+    Rectangle rectangle2;
+    Rectangle rectangle3;
+    Rectangle rectangle4;
+    Rectangle rectangle5;
+    Rectangle rectangle6;
+public:
+    TrainForQuest(std::shared_ptr<sf::RenderWindow>&);
+        ~TrainForQuest() {}
+    virtual void draw();
+};
 
 #endif // FIGURES_HPP

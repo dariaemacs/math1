@@ -250,4 +250,23 @@ public:
 
 };
 
+class TrainContainer {
+
+
+};
+
+
+class QuestType4 : public Window {
+
+
+    Buttons Buttons;
+   
+
+
+public:
+    QuestType4(int, int, int);
+
+};
+
+
 #endif 

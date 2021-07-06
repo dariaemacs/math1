@@ -698,6 +698,54 @@ Butterfly::Butterfly(std::shared_ptr<sf::RenderWindow>& win) :
    
 
 }
+TrainForQuest::TrainForQuest(std::shared_ptr<sf::RenderWindow>& win):
+    rectangle1(this),
+    rectangle2(this),
+    rectangle3(this),
+    rectangle4(this),
+    rectangle5(this),
+    rectangle6(this),
+    FrameFigure(win, 0, 0, 0){
+
+    xmin = 0;
+    xmax = 250;
+    ymin = 0;
+    ymax = 50;
+
+}
+
+void TrainForQuest::draw() {
+    if (!alreadyDraw) {
+        calcKoeff();
+        rectangle1.set_coords(0, 0);  
+        rectangle1.set_color(color::lightskyblue);
+        rectangle1.set_size(50, 50);
+
+        rectangle2.set_coords(51, 0);
+        rectangle2.set_size(50, 50);
+
+        rectangle3.set_coords(102, 0);
+        rectangle3.set_size(50, 50);
+
+        rectangle4.set_coords(153, 0);
+        rectangle4.set_size(50, 50);
+
+        rectangle5.set_coords(203, 0);
+        rectangle5.set_size(50, 50);
+
+        rectangle6.set_coords(254, 0);
+        rectangle6.set_size(50, 50);
+
+
+    }
+    rectangle1.draw(window);
+    rectangle2.draw(window);
+    rectangle3.draw(window);
+    rectangle4.draw(window);
+    rectangle5.draw(window);
+    rectangle6.draw(window);
+
+}
 
 void Butterfly::draw() {
     if (!alreadyDraw) {
@@ -721,7 +769,6 @@ void Butterfly::draw() {
         int indexColor16 = rand() % Colors.size();
 
         rectangle1.set_coords(192, 137);
-
         rectangle1.set_color(color::lightskyblue);
         rectangle1.set_size(40, 150);
         rectangle2.set_coords(202, 177);
