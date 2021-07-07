@@ -16,7 +16,7 @@
 
 //int QuestType1::QTY = 1;
 extern const int ELAPSED_TIME;
-
+extern std::vector< std::vector<int>> numSeries;
 /*
 template <size_t N>
 std::wstring get_wstr(const std::array<figureQestions, N>& arr, int questvariantIndex){
@@ -911,7 +911,7 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
     while ((M = (rand() % 10) + 1) >= N) {
         N = (rand() % 10);
     }
-    N = 10;
+    //N = 10;
 
     textFrame.setN_M(N, M);
     PictureAndBasket.setButtonCount(N);
@@ -1009,7 +1009,24 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
     CheckButtonSprite.setTexture(CheckButtonTexture);
 
     TrainForQuest  TrainForQuest(window);
+    
+    
+    int numSeriesIndex = rand() % numSeries.size();
 
+    int closeNumber1 ;
+    int closeNumber2;
+    int closeNumber3;
+    do {
+        closeNumber1 = rand() % 6;
+        closeNumber2 = rand() % 6;
+        closeNumber3 = rand() % 6;
+    } while (closeNumber1 == closeNumber2 && closeNumber2 == closeNumber3 && closeNumber1 == closeNumber3);
+
+    std::vector <sf::Text> numberInTrain;
+    for (int i = 0; i < numSeries[0].size(); i++) {
+        numberInTrain.push_back(sf::Text());
+        numberInTrain[i].setString(std::to_string(numSeries[numSeriesIndex][i]));
+    }
     sf::Event event;
     while (window->isOpen()) {
         window->clear();
@@ -1030,6 +1047,9 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
         window->draw(CheckButtonSprite);
+
+        //numberInTrain
+        window->draw(numberInTrain[0]);
 
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
 

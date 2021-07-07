@@ -3,6 +3,9 @@
 #include "color.hpp"
 #include "window.hpp"
 
+extern std::vector< std::vector<int>> numSeries = { {31,29,27,25,23,21},{1,2,3,4,5,6},{17,21,25,29,33,37} };
+//extern const int numSeries[][6] = { {31,29,27,25,23,21},{1,2,3,4,5,6},{17,21,25,29,33,37} };
+
 extern const figureQestions question1Text[] =
 {
   figureQestions{L"Сколько кружков на рисунках вы видете ? "       ,circle},

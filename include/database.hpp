@@ -15,6 +15,8 @@ struct figureQestions {
 
 
 extern const std::wstring CommentsDic[];
+extern std::vector< std::vector<int>> numSeries;
+
 
 constexpr int N1 = 3; 
 constexpr int N2 = 6;
