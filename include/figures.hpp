@@ -379,6 +379,7 @@ class TrainForQuest :public FrameFigure {
     Rectangle rectangle6;
 public:
     TrainForQuest(std::shared_ptr<sf::RenderWindow>&);
+    
         ~TrainForQuest() {}
     virtual void draw();
 };

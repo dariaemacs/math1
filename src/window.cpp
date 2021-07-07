@@ -286,7 +286,9 @@ void Buttons::CalcucateCoordinate() {
 
 
 TextFrameBase::TextFrameBase(int s, Window& winLink,char ):size(s), WindowLink(winLink) { //delegate
+    std::cout << Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf" << std::endl;
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
+    
     text = sf::Text("", font, s);
     text.setFillColor(sf::Color::Black);
     text.setPosition(Settings::PADDING, Settings::PADDING);
@@ -1022,11 +1024,24 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
         closeNumber3 = rand() % 6;
     } while (closeNumber1 == closeNumber2 && closeNumber2 == closeNumber3 && closeNumber1 == closeNumber3);
 
-    std::vector <sf::Text> numberInTrain;
+    std::vector <sf::Text*> numberInTrain;
+
+    sf::Font font;
+    font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
+    //numberInTrain[0]->setFont(font);
+    //numberInTrain[0]->setFillColor(sf::Color::Black);
+
+    
     for (int i = 0; i < numSeries[0].size(); i++) {
-        numberInTrain.push_back(sf::Text());
-        numberInTrain[i].setString(std::to_string(numSeries[numSeriesIndex][i]));
+        numberInTrain.push_back(new sf::Text);
+        numberInTrain[i]->setString(std::to_string(numSeries[numSeriesIndex][i]));
+        //numberInTrain[i]->setString("test");  
+        numberInTrain[i]->setFont(font);
+        numberInTrain[i]->setFillColor(sf::Color::Black);
+        //numberInTrain[i]->setPosition(100 + i * 30, YnumberInTrain);
+
     }
+    
     sf::Event event;
     while (window->isOpen()) {
         window->clear();
@@ -1049,7 +1064,16 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
         window->draw(CheckButtonSprite);
 
         //numberInTrain
-        window->draw(numberInTrain[0]);
+
+        /*
+    font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
+    text = sf::Text("", font, s);
+    text.setFillColor(sf::Color::Black);
+    text.setPosition(Settings::PADDING, Settings::PADDING);
+        */
+
+      
+
 
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
 
@@ -1057,6 +1081,16 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
         }
 
         TrainForQuest.draw();
+        float YnumberInTrain = TrainForQuest.getmargin_top();
+
+        YnumberInTrain = TrainForQuest.getmargin_top() + 
+            TrainForQuest.getymin() * TrainForQuest.getkoef();
+
+
+        for (int i = 0; i < numSeries[0].size(); i++) {
+            numberInTrain[i]->setPosition(100 + i * 30, YnumberInTrain);
+            window->draw(*numberInTrain[i]);
+        }
 
         window->display();
 
