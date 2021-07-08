@@ -13,10 +13,10 @@
     protected:
         static char number_of_figure;      //0,1
     
-        int xmin;
-        int xmax;
-        int ymin;
-        int ymax;
+        float xmin;
+        float xmax;
+        float ymin;
+        float ymax;
         float koef=1;
         std::shared_ptr<sf::RenderWindow>& window;
         int margin_left;

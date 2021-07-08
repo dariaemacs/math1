@@ -230,6 +230,24 @@ Buttons::Buttons( Window& w) : WindowLink(w){}
 void TextFrameBase::setWidth(int) {
     //text.se
 }
+
+void Mysf_text::CalcucateCoordinate(float w, float h) {
+
+    //size = 50;
+    setCharacterSize(size);
+    float width = getLocalBounds().width; 
+    float height = getLocalBounds().height;
+    while (width >= w || height >= h)
+    {
+        if (size > 0) setCharacterSize(size--); else return;
+        width = getLocalBounds().width;
+        height = getLocalBounds().height;
+    }
+
+    std::cout << "text size=" << width << "x" << height << " size=" << size <<std::endl;
+
+}
+
 void TextFrameBase::CalcucateCoordinate(const int w, const int h) {
     
     
@@ -1005,13 +1023,17 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
     Buttons(qtyButtons, *this){
 
     bool first = true;
+    bool firstPrintTrain = true;
     int margintopSlideButton = 0;
+    int numberInTrainCharactersize = 0;
     FrameFigure::resetnumber_of_figure();
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
 
     TrainForQuest  TrainForQuest(window);
+    sf::CircleShape shape(1);
     
+    shape.setFillColor(sf::Color::Red);
     
     int numSeriesIndex = rand() % numSeries.size();
 
@@ -1022,21 +1044,21 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
         closeNumber1 = rand() % 6;
         closeNumber2 = rand() % 6;
         closeNumber3 = rand() % 6;
-    } while (closeNumber1 == closeNumber2 && closeNumber2 == closeNumber3 && closeNumber1 == closeNumber3);
+    } while (closeNumber1 == closeNumber2 || closeNumber2 == closeNumber3 || closeNumber1 == closeNumber3);
 
-    std::vector <sf::Text*> numberInTrain;
+    std::vector <Mysf_text*> numberInTrain;
 
     sf::Font font;
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-    //numberInTrain[0]->setFont(font);
-    //numberInTrain[0]->setFillColor(sf::Color::Black);
+
 
     
     for (int i = 0; i < numSeries[0].size(); i++) {
-        numberInTrain.push_back(new sf::Text);
+        numberInTrain.push_back(new Mysf_text(50));
         numberInTrain[i]->setString(std::to_string(numSeries[numSeriesIndex][i]));
         //numberInTrain[i]->setString("test");  
         numberInTrain[i]->setFont(font);
+        
         numberInTrain[i]->setFillColor(sf::Color::Black);
         //numberInTrain[i]->setPosition(100 + i * 30, YnumberInTrain);
 
@@ -1063,15 +1085,8 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
         window->draw(textFrame.gettext());
         window->draw(CheckButtonSprite);
 
-        //numberInTrain
-
-        /*
-    font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-    text = sf::Text("", font, s);
-    text.setFillColor(sf::Color::Black);
-    text.setPosition(Settings::PADDING, Settings::PADDING);
-        */
-
+        
+        
       
 
 
@@ -1086,12 +1101,35 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
         YnumberInTrain = TrainForQuest.getmargin_top() + 
             TrainForQuest.getymin() * TrainForQuest.getkoef();
 
-
+       // std::cout << "closeNumber1 " << closeNumber1 << " " << closeNumber2 << " " << closeNumber3 << std::endl;
+        
+     
         for (int i = 0; i < numSeries[0].size(); i++) {
-            numberInTrain[i]->setPosition(100 + i * 30, YnumberInTrain);
-            window->draw(*numberInTrain[i]);
-        }
 
+            float squareWidth = (float)(TrainForQuest.getxmax() - TrainForQuest.getxmin()) * TrainForQuest.getkoef()
+                / TrainForQuest.getrectengleQTY(); 
+            numberInTrain[i]->setPosition(TrainForQuest.getxmin() + TrainForQuest.getmargin_left() +
+                squareWidth *
+                i + 3  , YnumberInTrain );
+            //*numberInTrain[i]->
+            shape.setPosition(TrainForQuest.getxmin() + TrainForQuest.getmargin_left() +
+                squareWidth *
+                i + 3, YnumberInTrain);
+            if (!(i == closeNumber1 ||
+                i == closeNumber2 || i == closeNumber3
+                )) {
+                if (firstPrintTrain) { numberInTrain[i]->CalcucateCoordinate(squareWidth-10 , squareWidth-10 );
+                numberInTrainCharactersize = numberInTrain[i]->getSize();
+                
+                }
+                firstPrintTrain = false;
+                numberInTrain[i]->setCharacterSize(numberInTrainCharactersize);
+                window->draw(*numberInTrain[i]);
+
+            }
+
+        }
+        window->draw(shape);
         window->display();
 
         while (window->pollEvent(event)) {
