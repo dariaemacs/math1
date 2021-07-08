@@ -708,7 +708,7 @@ TrainForQuest::TrainForQuest(std::shared_ptr<sf::RenderWindow>& win):
     FrameFigure(win, 0, 0, 0){
 
     xmin = 0;
-    xmax = 250;
+    xmax = 304;
     ymin = 0;
     ymax = 50;
 

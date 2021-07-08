@@ -34,16 +34,16 @@ int main() {
 
 
 
-     //     width = 1024;  height = 600;
+         width = 1024;  height = 600;
+         QuestType4(width, height, 20);
      //     QuestType3(width, height, 20);
      //     QuestType3(width, height, 20);
      //     QuestType3(width, height, 20);
      //     QuestType3(width, height, 20);
      //     QuestType3(width, height, 20);
      //     QuestType3(width, height, 20);
-     //     QuestType3(width, height, 20);
-     //width = 1152; height = 864;
-     //srand(time(0));
+     width = 1152; height = 864;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -52,7 +52,8 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType2(width, height, 20);
-     //width = 1200; height = 600;
+     width = 1200; height = 600;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -61,7 +62,8 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
 
-     //width = 1280; height = 720;
+     width = 1280; height = 720;
+     QuestType4(width, height, 20);
 
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -70,7 +72,8 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
-     //width = 1280; height = 768;
+     width = 1280; height = 768;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -79,7 +82,8 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
 
-     //width = 1280; height = 1024;
+     width = 1280; height = 1024;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -87,7 +91,8 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
-     //width = 1408; height = 1152;
+     width = 1408; height = 1152;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -95,7 +100,8 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
-     //width = 1440; height = 900;
+     width = 1440; height = 900;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -103,33 +109,8 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
-     //width = 1400; height = 1050;
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-
-     //width = 1440; height = 1080;
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-
-     //width = 1536; height = 960;
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //QuestType3(width, height, 20);
-     //width = 1536; height = 1024;
+     width = 1400; height = 1050;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -138,7 +119,8 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
 
-     //width = 1600; height = 900;
+     width = 1440; height = 1080;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -147,7 +129,17 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
 
-     //width = 1600; height = 1024;
+     width = 1536; height = 960;
+     QuestType4(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     width = 1536; height = 1024;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -156,7 +148,8 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
 
-     //width = 1600; height = 1200;
+     width = 1600; height = 900;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -165,7 +158,8 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
 
-     //width = 1680; height = 1050;
+     width = 1600; height = 1024;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -174,7 +168,8 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
 
-     //width = 1920; height = 1080;
+     width = 1600; height = 1200;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -183,7 +178,8 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
 
-     //width = 1920; height = 1200;
+     width = 1680; height = 1050;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
@@ -192,7 +188,28 @@ int main() {
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
 
-     //width = 2048; height = 1080;
+     width = 1920; height = 1080;
+     QuestType4(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+
+     width = 1920; height = 1200;
+     QuestType4(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+     //QuestType3(width, height, 20);
+
+     width = 2048; height = 1080;
+     QuestType4(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);
      //QuestType3(width, height, 20);

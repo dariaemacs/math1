@@ -1106,15 +1106,18 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
      
         for (int i = 0; i < numSeries[0].size(); i++) {
 
-            float squareWidth = (float)(TrainForQuest.getxmax() - TrainForQuest.getxmin()) * TrainForQuest.getkoef()
-                / TrainForQuest.getrectengleQTY(); 
-            numberInTrain[i]->setPosition(TrainForQuest.getxmin() + TrainForQuest.getmargin_left() +
+            float squareWidth = (float)(TrainForQuest.getxmax() - TrainForQuest.getxmin()) * (float)TrainForQuest.getkoef()
+                / (float)TrainForQuest.getrectengleQTY();
+            numberInTrain[i]->setPosition(
+                TrainForQuest.getxmin() * TrainForQuest.getkoef() + TrainForQuest.getmargin_left()+
+                
+                
                 squareWidth *
-                i + 3  , YnumberInTrain );
+                i   , YnumberInTrain );
             //*numberInTrain[i]->
-            shape.setPosition(TrainForQuest.getxmin() + TrainForQuest.getmargin_left() +
+            if (i==1) shape.setPosition(TrainForQuest.getxmin() + TrainForQuest.getmargin_left() +
                 squareWidth *
-                i + 3, YnumberInTrain);
+                i , YnumberInTrain);
             if (!(i == closeNumber1 ||
                 i == closeNumber2 || i == closeNumber3
                 )) {
@@ -1183,19 +1186,3 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
 
     }
 }
-    /*bool first = true;
-    int margintopSlideButton = 0;
-    FrameFigure::resetnumber_of_figure();
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
-   
-
-    const std::vector<FrameFigure*> figures =
-    {
-        new Car(window),
-        new Flower(window),
-        new Tree(window),
-        new Butterfly(window),
-        new Plane(window),
-        new Tower(window),
-    };*/
