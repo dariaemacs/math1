@@ -699,12 +699,13 @@ Butterfly::Butterfly(std::shared_ptr<sf::RenderWindow>& win) :
 
 }
 TrainForQuest::TrainForQuest(std::shared_ptr<sf::RenderWindow>& win):
-    rectangle1(this),
-    rectangle2(this),
-    rectangle3(this),
-    rectangle4(this),
-    rectangle5(this),
-    rectangle6(this),
+    rectangle({
+        new Rectangle(this),
+        new Rectangle(this),
+        new Rectangle(this),
+        new Rectangle(this),
+        new Rectangle(this),
+        new Rectangle(this) }),
     FrameFigure(win, 0, 0, 0){
 
     xmin = 0;
@@ -713,37 +714,43 @@ TrainForQuest::TrainForQuest(std::shared_ptr<sf::RenderWindow>& win):
     ymax = 50;
 
 }
+void TrainForQuest::SetSquareColor(int index , bool _switch) {
+    if (_switch)  rectangle[index]->set_color(color::lightskyblue);
+    else rectangle[index]->set_color(color::white);
+    
+};
+
 
 void TrainForQuest::draw() {
     if (!alreadyDraw) {
         calcKoeff();
-        rectangle1.set_coords(0, 0);  
-        rectangle1.set_color(color::lightskyblue);
-        rectangle1.set_size(50, 50);
+        rectangle[0]->set_coords(0, 0);  
+        //rectangle[0]->set_color(color::lightskyblue);
+        rectangle[0]->set_size(50, 50);
 
-        rectangle2.set_coords(51, 0);
-        rectangle2.set_size(50, 50);
+        rectangle[1]->set_coords(51, 0);
+        rectangle[1]->set_size(50, 50);
 
-        rectangle3.set_coords(102, 0);
-        rectangle3.set_size(50, 50);
+        rectangle[2]->set_coords(102, 0);
+        rectangle[2]->set_size(50, 50);
 
-        rectangle4.set_coords(153, 0);
-        rectangle4.set_size(50, 50);
+        rectangle[3]->set_coords(153, 0);
+        rectangle[3]->set_size(50, 50);
 
-        rectangle5.set_coords(203, 0);
-        rectangle5.set_size(50, 50);
-
-        rectangle6.set_coords(254, 0);
-        rectangle6.set_size(50, 50);
+        rectangle[4]->set_coords(203, 0);
+        rectangle[4]->set_size(50, 50);
+        rectangle[5]->set_coords(254, 0);
+        rectangle[5]->set_size(50, 50);
 
 
     }
-    rectangle1.draw(window);
-    rectangle2.draw(window);
-    rectangle3.draw(window);
-    rectangle4.draw(window);
-    rectangle5.draw(window);
-    rectangle6.draw(window);
+    rectangle[0]->draw(window);
+    rectangle[1]->draw(window);
+    rectangle[2]->draw(window);
+    rectangle[3]->draw(window);
+    rectangle[4]->draw(window);
+    rectangle[5]->draw(window);
+    
 
 }
 

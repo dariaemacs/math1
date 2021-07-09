@@ -371,15 +371,11 @@ private:
 };
 
 class TrainForQuest :public FrameFigure {
-    Rectangle rectangle1;
-    Rectangle rectangle2;
-    Rectangle rectangle3;
-    Rectangle rectangle4;
-    Rectangle rectangle5;
-    Rectangle rectangle6;
+    std::vector<Rectangle *>  rectangle;
+
 public:
     TrainForQuest(std::shared_ptr<sf::RenderWindow>&);
-    
+    void SetSquareColor(int, bool);
         ~TrainForQuest() {}
     virtual void draw();
 };

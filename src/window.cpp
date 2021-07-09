@@ -12,7 +12,10 @@
 #include "database.hpp"
 #include <fstream>
 #include <locale>
+#include <algorithm>
 
+#define minimal(a, b) (((a)<(b))?(a):(b))
+#define three_minimal(a, b, c) minimal(minimal(a, b), c)
 
 //int QuestType1::QTY = 1;
 extern const int ELAPSED_TIME;
@@ -1031,21 +1034,28 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
     CheckButtonSprite.setTexture(CheckButtonTexture);
 
     TrainForQuest  TrainForQuest(window);
-    sf::CircleShape shape(1);
+    //sf::CircleShape shape(1);
     
-    shape.setFillColor(sf::Color::Red);
+    //shape.setFillColor(sf::Color::Red);
     
     int numSeriesIndex = rand() % numSeries.size();
+    struct closenumberStruct { int index; int closeNumber; };
+    std::array< int, 3> closeNumber;
+    std::array< closenumberStruct, 3 > usercloseNumberEnter;
 
-    int closeNumber1 ;
-    int closeNumber2;
-    int closeNumber3;
+    
+        
+        ;
     do {
-        closeNumber1 = rand() % 6;
-        closeNumber2 = rand() % 6;
-        closeNumber3 = rand() % 6;
-    } while (closeNumber1 == closeNumber2 || closeNumber2 == closeNumber3 || closeNumber1 == closeNumber3);
+        closeNumber[0] = rand() % 6;
+        closeNumber[1] = rand() % 6;
+        closeNumber[2] = rand() % 6;
+    } while (closeNumber[0] == closeNumber[1] || closeNumber[1] == closeNumber[2] || closeNumber[0] == closeNumber[2]);
+    std::sort(closeNumber.begin(), closeNumber.end());
 
+   int currentusercloseNumberIndex = 0;
+    //currentusercloseNumberIndex = three_minimal(closeNumber1, closeNumber2, closeNumber3);
+    //closeNumber.
     std::vector <Mysf_text*> numberInTrain;
 
     sf::Font font;
@@ -1056,11 +1066,11 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
     for (int i = 0; i < numSeries[0].size(); i++) {
         numberInTrain.push_back(new Mysf_text(50));
         numberInTrain[i]->setString(std::to_string(numSeries[numSeriesIndex][i]));
-        //numberInTrain[i]->setString("test");  
+
         numberInTrain[i]->setFont(font);
         
         numberInTrain[i]->setFillColor(sf::Color::Black);
-        //numberInTrain[i]->setPosition(100 + i * 30, YnumberInTrain);
+   
 
     }
     
@@ -1115,24 +1125,28 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
                 squareWidth *
                 i   , YnumberInTrain );
             //*numberInTrain[i]->
-            if (i==1) shape.setPosition(TrainForQuest.getxmin() + TrainForQuest.getmargin_left() +
-                squareWidth *
-                i , YnumberInTrain);
-            if (!(i == closeNumber1 ||
-                i == closeNumber2 || i == closeNumber3
+            //if (i==1) shape.setPosition(TrainForQuest.getxmin() + TrainForQuest.getmargin_left() +
+            //    squareWidth *
+            //    i , YnumberInTrain);
+            if (!(i == closeNumber[0] ||
+                i == closeNumber[1] || i == closeNumber[2]
                 )) {
-                if (firstPrintTrain) { numberInTrain[i]->CalcucateCoordinate(squareWidth-10 , squareWidth-10 );
-                numberInTrainCharactersize = numberInTrain[i]->getSize();
-                
+                if (firstPrintTrain) {
+                    numberInTrain[i]->CalcucateCoordinate(squareWidth - 10, squareWidth - 10);
+                    numberInTrainCharactersize = numberInTrain[i]->getSize();
+
                 }
                 firstPrintTrain = false;
                 numberInTrain[i]->setCharacterSize(numberInTrainCharactersize);
                 window->draw(*numberInTrain[i]);
+            }; 
+            
+            
+            TrainForQuest.SetSquareColor(closeNumber[currentusercloseNumberIndex], true);
 
-            }
 
         }
-        window->draw(shape);
+        //window->draw(shape);
         window->display();
 
         while (window->pollEvent(event)) {
@@ -1167,9 +1181,20 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
                 }
 
                 if (Buttons.click()) {
+                    TrainForQuest.SetSquareColor(closeNumber[currentusercloseNumberIndex], false);
 
+                    usercloseNumberEnter[currentusercloseNumberIndex].closeNumber = Buttons.GetButtonsClickID()+1;
+                    usercloseNumberEnter[currentusercloseNumberIndex].index = closeNumber[currentusercloseNumberIndex];
+                    closeNumber[currentusercloseNumberIndex] = -90;
+                    //window->draw(*numberInTrain[i]);
+                    std::cout << "TUTA: " <<usercloseNumberEnter[currentusercloseNumberIndex].closeNumber << " " << usercloseNumberEnter[currentusercloseNumberIndex].index<<std::endl;
+                    currentusercloseNumberIndex++;
+                    if (currentusercloseNumberIndex > 2) currentusercloseNumberIndex = 0;
+                    
+                    std::cout << "currentusercloseNumberIndex=" << currentusercloseNumberIndex << std::endl;
                     CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
                     CheckButtonSprite.setTexture(CheckButtonTexture);
+
 
 
                 }
