@@ -236,7 +236,8 @@ void TextFrameBase::setWidth(int) {
 
 void Mysf_text::CalcucateCoordinate(float w, float h) {
 
-    //size = 50;
+    sf::String  tmp = getString();
+    setString("99");
     setCharacterSize(size);
     float width = getLocalBounds().width; 
     float height = getLocalBounds().height;
@@ -248,7 +249,7 @@ void Mysf_text::CalcucateCoordinate(float w, float h) {
     }
 
     std::cout << "text size=" << width << "x" << height << " size=" << size <<std::endl;
-
+    setString(tmp);
 }
 
 void TextFrameBase::CalcucateCoordinate(const int w, const int h) {
@@ -1032,7 +1033,8 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
     FrameFigure::resetnumber_of_figure();
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
-
+    float squareWidth = 0;
+    int opennumbaerCount = 0;
     TrainForQuest  TrainForQuest(window);
     //sf::CircleShape shape(1);
     
@@ -1045,7 +1047,12 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
 
     
         
-        ;
+    sf::Texture trainpictureTexture;
+    sf::Sprite trainpictureSprite;
+
+    trainpictureTexture.loadFromFile("resources/images/train.jpg");
+    trainpictureSprite.setTexture(trainpictureTexture);
+    //trainpictureSprite.
     do {
         closeNumber[0] = rand() % 6;
         closeNumber[1] = rand() % 6;
@@ -1116,7 +1123,7 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
      
         for (int i = 0; i < numSeries[0].size(); i++) {
 
-            float squareWidth = (float)(TrainForQuest.getxmax() - TrainForQuest.getxmin()) * (float)TrainForQuest.getkoef()
+           squareWidth = (float)(TrainForQuest.getxmax() - TrainForQuest.getxmin()) * (float)TrainForQuest.getkoef()
                 / (float)TrainForQuest.getrectengleQTY();
             numberInTrain[i]->setPosition(
                 TrainForQuest.getxmin() * TrainForQuest.getkoef() + TrainForQuest.getmargin_left()+
@@ -1128,13 +1135,13 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
             //if (i==1) shape.setPosition(TrainForQuest.getxmin() + TrainForQuest.getmargin_left() +
             //    squareWidth *
             //    i , YnumberInTrain);
-            if (!(i == closeNumber[0] ||
+            if ((!(i == closeNumber[0] ||
                 i == closeNumber[1] || i == closeNumber[2]
-                )) {
+                )) || i == usercloseNumberEnter[0].index || i == usercloseNumberEnter[1].index || i == usercloseNumberEnter[2].index){
                 if (firstPrintTrain) {
                     numberInTrain[i]->CalcucateCoordinate(squareWidth - 10, squareWidth - 10);
                     numberInTrainCharactersize = numberInTrain[i]->getSize();
-
+                    
                 }
                 firstPrintTrain = false;
                 numberInTrain[i]->setCharacterSize(numberInTrainCharactersize);
@@ -1142,12 +1149,24 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
             }; 
             
             
+
             TrainForQuest.SetSquareColor(closeNumber[currentusercloseNumberIndex], true);
 
 
         }
-        //window->draw(shape);
+        float scaletrainpicture =  squareWidth / 185+0.1;
+            trainpictureSprite.setScale(scaletrainpicture, scaletrainpicture);
+            trainpictureSprite.setPosition(
+                TrainForQuest.getxmin()* TrainForQuest.getkoef() + TrainForQuest.getmargin_left() +
+
+
+                squareWidth *
+                6+3, (float)YnumberInTrain-185* scaletrainpicture+ squareWidth+3);
+
+        window->draw(trainpictureSprite);
+        
         window->display();
+        
 
         while (window->pollEvent(event)) {
 
@@ -1162,22 +1181,12 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
 
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
 
-                    int rightfigurCount = 0;
-
-                    if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
-                        QuestComment.settext(CommentsDic[2]);
-
-
-                        Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
-                            "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
-
-                        Buttons.getButtonTexture()[rightfigurCount - 1]->loadFromFile(
-                            "resources/images/digit" + std::to_string(rightfigurCount) + "_right.jpg"
-                        );
-
-                    }
+                    if ((numSeries[numSeriesIndex][closeNumber[0]] == usercloseNumberEnter[0].closeNumber) &&
+                        (numSeries[numSeriesIndex][closeNumber[1]] == usercloseNumberEnter[1].closeNumber) &&
+                        (numSeries[numSeriesIndex][closeNumber[2]] == usercloseNumberEnter[2].closeNumber))
+                    QuestComment.settext(CommentsDic[1]);    
+                    else QuestComment.settext(CommentsDic[2]);
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
-
                 }
 
                 if (Buttons.click()) {
@@ -1185,17 +1194,21 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
 
                     usercloseNumberEnter[currentusercloseNumberIndex].closeNumber = Buttons.GetButtonsClickID()+1;
                     usercloseNumberEnter[currentusercloseNumberIndex].index = closeNumber[currentusercloseNumberIndex];
-                    closeNumber[currentusercloseNumberIndex] = -90;
+                    //closeNumber[currentusercloseNumberIndex] = -90;
                     //window->draw(*numberInTrain[i]);
                     std::cout << "TUTA: " <<usercloseNumberEnter[currentusercloseNumberIndex].closeNumber << " " << usercloseNumberEnter[currentusercloseNumberIndex].index<<std::endl;
+                    numberInTrain[closeNumber[currentusercloseNumberIndex]]->setString(std::to_string(Buttons.GetButtonsClickID() + 1));
+                    //numberInTrain[closeNumber[currentusercloseNumberIndex]]->CalcucateCoordinate(squareWidth - 10, squareWidth - 10);
+                    //numberInTrainCharactersize = numberInTrain[closeNumber[currentusercloseNumberIndex]]->getSize();
+                    numberInTrain[closeNumber[currentusercloseNumberIndex]]->setCharacterSize(numberInTrainCharactersize);
                     currentusercloseNumberIndex++;
-                    if (currentusercloseNumberIndex > 2) currentusercloseNumberIndex = 0;
-                    
-                    std::cout << "currentusercloseNumberIndex=" << currentusercloseNumberIndex << std::endl;
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
-
-
+                    if (currentusercloseNumberIndex > 2) currentusercloseNumberIndex = 0;                    
+                                                     CheckButtonSprite.setTexture(CheckButtonTexture);
+                    opennumbaerCount++;
+                    if (opennumbaerCount == 3) {
+                        readyforCheck = true;
+                        CheckButtonTexture.loadFromFile("resources/images/arrow_up.png");
+                    }
 
                 }
             }

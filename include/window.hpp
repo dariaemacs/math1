@@ -266,7 +266,7 @@ class QuestType4 : public Window {
 
 
     Buttons Buttons;
-   
+
 
 
 public:
