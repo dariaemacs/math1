@@ -37,9 +37,11 @@ extern const figureQestions question2Text[];
 extern const figureQestions question3Text[];
 
 extern const figureQestions question4Text[];
-
+extern const figureQestions question5Text[];
 extern const figureQestions* qestionarrayList[];
 
+
+extern const int question5Answers[];
 
 extern const std::vector<pica> tree;
 extern const std::vector<std::string> iconsFilename;

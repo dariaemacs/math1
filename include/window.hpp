@@ -273,6 +273,10 @@ public:
     QuestType4(int, int, int);
 
 };
-
+class QuestType5 : public Window {
+    Buttons Buttons;
+public:
+    QuestType5(int, int, int);
+};
 
 #endif 
