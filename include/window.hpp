@@ -209,7 +209,7 @@ protected:
 public:
     PicturetoView(Window& w) :  Buttons(0, w) {}
     PicturetoView(QuestType2&, std::string);
-    virtual void CalcucateCoordinate();
+    void CalcucateCoordinate();
     void setpictureFilename(std::string fn) { pictureFilename = fn; }
     bool click();
 };
@@ -278,5 +278,25 @@ class QuestType5 : public Window {
 public:
     QuestType5(int, int, int);
 };
+//class QuestType6;
+class PicturetAndFilmtoView : public PicturetoView {
+
+public:
+    PicturetAndFilmtoView(Window& w) : PicturetoView(w) {}
+    void CalcucateCoordinate();
+    //bool click();
+//protected: std::string pictureFilename;
+};
+
+class QuestType6 : public Window {
+    Buttons Buttons;
+    PicturetAndFilmtoView coin1;
+    PicturetAndFilmtoView coin2;
+public:
+    QuestType6(int, int, int);
+
+};
+
+
 
 #endif 

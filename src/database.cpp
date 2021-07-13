@@ -54,13 +54,18 @@ figureQestions{L"Марку 14 лет, а его брат Андрей на 11 лет младше. Сколько лет А
 };
 extern const int question5Answers[] = {10,11,18,19,20,3};
 
-extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text };
+
 
 extern const std::array<std::string, N2> filenamesforPicaQuest2 = { std::string("shell"),std::string("berry"),std::string("mushroom"),std::string("fish"),
 std::string("butterfly"),std::string("coin")
 };
-
-
+extern const figureQestions question6Text[] = {
+figureQestions{L"Максим решил купить в магазине наклейки за 6 рублей. У него есть такие монеты.\n Продавцу Максим дал одну монету и получил сдачу. Какую сдачу \nполучил мальчик"       ,calc},
+figureQestions{L"Деньги за покупку шоколада принимает автомат. У Насти есть такие монеты. Девочка хочет \nкупить шоколад за 8 рублей. Она опустила в автомат одну \nмонету и получила сдачу. Какую сдачу получила Настя?"       ,calc},
+figureQestions{L"Лиза решила купить в магазине шарик за 7 рублей. У нее есть такие монеты. \nПродавцу Лиза дала одну монету и получила сдачу. \nКакую сдачу получила девочка?"       ,calc},
+figureQestions{L"Деньги за покупку игрушки принимает автомат. У Ани есть такие монеты. \nДевочка хочет купить игрушку за 9 рублей. Она опустила в автомат одну \nмонету и получила сдачу. Какую сдачу получила Аня? "       ,calc},
+};
+extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text };
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("chicken"),
     std::string("pencil"),

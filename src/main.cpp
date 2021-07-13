@@ -22,8 +22,18 @@ int main() {
         srand(time(0));
 
 
-        QuestType4(width, height, 20);
-        QuestType5(width, height, 20);
+        QuestType6(width, height, 20);
+        QuestType6(width, height, 20);
+        QuestType6(width, height, 20);
+        QuestType6(width, height, 20);
+        QuestType6(width, height, 20);
+        QuestType6(width, height, 20);
+        QuestType6(width, height, 20);
+        QuestType6(width, height, 20);
+        QuestType6(width, height, 20);
+        QuestType6(width, height, 20);
+
+
         //QuestType3(width, height, 20);
         //QuestType3(width, height, 20);
         //QuestType3(width, height, 20);

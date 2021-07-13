@@ -88,7 +88,7 @@ void PicturetoView::CalcucateCoordinate( ) {
     }
     else
     {
-        std::cout<<"here"<<std::endl;
+        //std::cout<<"here"<<std::endl;
         //2 rows
         
         float PICTURESIZE_W = PICTURESIZE.x;
@@ -149,7 +149,7 @@ bool PicturetoView::click() {
         const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
         
         x1 = x1;
-        std::cout << "pica: scale=" << scale << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<" " <<(x1 - x0) << "x"<<(y1 - y0) << std::endl;
+        //std::cout << "pica: scale=" << scale << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<" " <<(x1 - x0) << "x"<<(y1 - y0) << std::endl;
         if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
             std::string fileName = "";
             //std::cout << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
@@ -161,18 +161,8 @@ bool PicturetoView::click() {
                 fileName = pictureFilename + "_black.png"; else fileName = pictureFilename + ".png";
                 MyTexture[i]->loadFromFile(fileName); //ButtonPressID = -1;
                 isblackSide[i] = !isblackSide[i];
-            //}
-            //fileName = "resources/images/digit" + std::to_string(i + 1) + "_select.jpg";
-            //ButtonPressID = i;
-            //std::cout << ButtonPressID << std::endl;
-            //MyTexture[i]->loadFromFile(fileName);
-
-            //w->draw(*Buttons[i]);
-            //w->display();
             return true;
-
-        } //else std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
-        //Buttons = Buttons.get()+1;
+        } 
 
     }
     return false;
@@ -198,7 +188,7 @@ bool Buttons::click() {
 
     const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
     x1 = x1;
-    std::cout << "scale" <<scale << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
+    //std::cout << "scale" <<scale << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
     if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
       std::string fileName = "";
       //std::cout << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
@@ -248,7 +238,7 @@ void Mysf_text::CalcucateCoordinate(float w, float h) {
         height = getLocalBounds().height;
     }
 
-    std::cout << "text size=" << width << "x" << height << " size=" << size <<std::endl;
+    //std::cout << "text size=" << width << "x" << height << " size=" << size <<std::endl;
     setString(tmp);
 }
 
@@ -308,7 +298,7 @@ void Buttons::CalcucateCoordinate() {
 
 
 TextFrameBase::TextFrameBase(int s, Window& winLink,char ):size(s), WindowLink(winLink) { //delegate
-    std::cout << Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf" << std::endl;
+    //std::cout << Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf" << std::endl;
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
     
     text = sf::Text("", font, s);
@@ -357,7 +347,7 @@ void TextFrameBase::setN_M(int N, int M) {
     posn = question.find(replaceFrom);
     if (posn < question.length()) question.replace(posn, replaceFrom.length(), replaceTo);
     text.setString(question);
-    std::cout << questionNumber << " "<< beginQuestion2Index << std::endl;
+    //std::cout << questionNumber << " "<< beginQuestion2Index << std::endl;
     for (int x = 0; x<X - 1;x++) {
         replaceFrom = phrasestoReplace[questionNumber][x].find;
         replaceTo = phrasestoReplace[questionNumber ][x].replace;
@@ -382,7 +372,7 @@ Window::Window(int w, int h, int numberQuest,int ord)
 
     width = w;
     height = h;
-    std::cout << "numberQuest="<<numberQuest << std::endl;
+    //std::cout << "numberQuest="<<numberQuest << std::endl;
   std::string CheckButtonPictureFileName = "resources/images/arrow_disable.png";
   CheckButtonTexture.loadFromFile(CheckButtonPictureFileName);
   CheckButtonSprite.setTexture(CheckButtonTexture);
@@ -403,7 +393,7 @@ Window::Window(int w, int h, int numberQuest,int ord)
   std::string comment = std::string("Game "  )+ std::to_string(w) + "x" + std::to_string(h);
   window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), comment);//,  sf::Style::Fullscreen);
     window->setFramerateLimit(Settings::FPS);
-    std::cout<<"Check point" << std::endl;
+    //std::cout<<"Check point" << std::endl;
     //window->~RenderWindow();
 
 
@@ -441,7 +431,7 @@ bool Window::checkandnextQuest(float scale) {
     const sf::Vector2i& M = sf::Mouse::getPosition(*window);
   const sf::Vector2f& position = CheckButtonSprite.getPosition();
   const sf::IntRect& rect =      CheckButtonSprite.getTextureRect();
-  std::cout << scale << rect.width << std::endl;
+  //std::cout << scale << rect.width << std::endl;
   int x0 = position.x;
   int y0 = position.y;
   int x1 = x0 + rect.width ;
@@ -518,7 +508,7 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
                     int rightfigurCount = check(circleQTY, triangleQTY, rectengleQTY);
                     if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
                         QuestComment.settext(CommentsDic[2]);
-                        std::cout << Buttons.GetButtonsClickID() << std::endl;
+                        //std::cout << Buttons.GetButtonsClickID() << std::endl;
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
@@ -634,12 +624,12 @@ Buttons.setButtonCount(N);
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft()-10, Buttons.getMarginTop());
                 }
                 if (Buttons.click()) {
-                    std::cout << "Button.click" << std::endl;
+                    //std::cout << "Button.click" << std::endl;
                     CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
                     CheckButtonSprite.setTexture(CheckButtonTexture);
                 }
                 if (Picture.click()) {
-                    std::cout << "Picture.click" << std::endl;
+                    //std::cout << "Picture.click" << std::endl;
                 }
 
 
@@ -659,7 +649,7 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
     FrameFigure::resetnumber_of_figure();
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
-    std::cout << fig1 << "," << fig2 << std::endl;
+    //std::cout << fig1 << "," << fig2 << std::endl;
 
     const std::vector<FrameFigure*> figures =
     {
@@ -790,10 +780,10 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
 
     int button_margin_left = 0;
     tmp.loadFromFile(pictureFilename + ".png");
-    std::cout << "picture" << std::endl;
+    //std::cout << "picture" << std::endl;
     sf::Vector2u PICTURESIZE = tmp.getSize();
     
-    std::cout << PICTURESIZE.x << std::endl;
+    //std::cout << PICTURESIZE.x << std::endl;
     float PICTURESIZEy = PICTURESIZE.y;
     if (PICTURESIZE.x > PICTURESIZE.y && ((float)PICTURESIZE.x / (float)PICTURESIZE.y) >= 1.5) {
         PICTURESIZE.x /= 2;
@@ -850,7 +840,7 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
     }
     else
     {
-        std::cout << PICTURESIZE.x << std::endl;
+        //std::cout << PICTURESIZE.x << std::endl;
         //2 rows
 
         float PICTURESIZE_W = PICTURESIZE.x;
@@ -1006,12 +996,12 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
                 }
                 if (Buttons.click()) {
-                    std::cout << "Button.click" << std::endl;
+                    //std::cout << "Button.click" << std::endl;
                     CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
                     CheckButtonSprite.setTexture(CheckButtonTexture);
                 }
                 if (PictureAndBasket.click()) {
-                    std::cout << "Picture.click" << std::endl;
+                    //std::cout << "Picture.click" << std::endl;
                 }
 
 
@@ -1196,7 +1186,7 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
                     usercloseNumberEnter[currentusercloseNumberIndex].index = closeNumber[currentusercloseNumberIndex];
                     //closeNumber[currentusercloseNumberIndex] = -90;
                     //window->draw(*numberInTrain[i]);
-                    std::cout << "TUTA: " <<usercloseNumberEnter[currentusercloseNumberIndex].closeNumber << " " << usercloseNumberEnter[currentusercloseNumberIndex].index<<std::endl;
+                    //std::cout << "TUTA: " <<usercloseNumberEnter[currentusercloseNumberIndex].closeNumber << " " << usercloseNumberEnter[currentusercloseNumberIndex].index<<std::endl;
                     numberInTrain[closeNumber[currentusercloseNumberIndex]]->setString(std::to_string(Buttons.GetButtonsClickID() + 1));
                     //numberInTrain[closeNumber[currentusercloseNumberIndex]]->CalcucateCoordinate(squareWidth - 10, squareWidth - 10);
                     //numberInTrainCharactersize = numberInTrain[closeNumber[currentusercloseNumberIndex]]->getSize();
@@ -1304,7 +1294,7 @@ QuestType5::QuestType5(int w, int h, int qtyButtons) :
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
                 }
                 if (Buttons.click()) {
-                    std::cout << "Button.click" << std::endl;
+                    //std::cout << "Button.click" << std::endl;
                     CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
                     CheckButtonSprite.setTexture(CheckButtonTexture);
                 }
@@ -1317,7 +1307,191 @@ QuestType5::QuestType5(int w, int h, int qtyButtons) :
     }
 }
 
+void PicturetAndFilmtoView::CalcucateCoordinate() {
+    using namespace std;
+    sf::Texture tmp;
 
+    int button_margin_left = 0;
+    tmp.loadFromFile(pictureFilename + ".png");
+    sf::Vector2u PICTURESIZE = tmp.getSize();
+    if (PICTURESIZE.x > PICTURESIZE.y&& PICTURESIZE.x / PICTURESIZE.y >= 2)  PICTURESIZE.x /= 3;
+    int ButtonSlideHeght = WindowLink.getHeight() / 3;
+
+    float PICTURESIZE_W = PICTURESIZE.x;
+    float PICTURESIZE_H = PICTURESIZE.y;
+    //std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
+    scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
+
+    if (ButtonCount < 7)  // 1 row of pictures
+    {
+        do {
+            scale = scale - 0.01;
+            PICTURESIZE_W = PICTURESIZE.x * scale;
+            PICTURESIZE_H = PICTURESIZE.y * scale;
+            //std::cout << "k=" << scale << std::endl;
+            //std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
+        } while (((PICTURESIZE_W * round(ButtonCount) + round((ButtonCount)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
+
+        for (int i = 0; i < ButtonCount; i++) {
+            std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
+            txt->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
+            sprite->setTexture(*txt.get());
+            sprite->setScale(scale, scale);
+            sprite->move(button_margin_left, ButtonSlideHeght);
+            button_margin_left = button_margin_left + 5 + PICTURESIZE.x * scale;
+            MyTexture.emplace_back(std::move(txt));
+            ButtonsList.emplace_back(std::move(sprite));
+            isblackSide.push_back(true);
+        }
+    }
+    else
+    {
+        //std::cout<<"here"<<std::endl;
+        //2 rows
+
+        float PICTURESIZE_W = PICTURESIZE.x;
+        float PICTURESIZE_H = PICTURESIZE.y;
+        //std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
+        scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
+        cout << "scale = " << scale << endl;
+        do {
+            scale = scale - 0.01;
+            PICTURESIZE_W = PICTURESIZE.x * scale;
+            PICTURESIZE_H = PICTURESIZE.y * scale;
+            //std::cout << "k=" << scale << std::endl;
+            //std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
+        } while (((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
+
+
+        for (int i = 0; i < ButtonCount; i++) {
+            std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
+            txt->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
+            sprite->setTexture(*txt.get());
+            sprite->setScale(scale, scale);
+            sprite->move(button_margin_left, ButtonSlideHeght);
+
+
+            button_margin_left = button_margin_left + 5 + PICTURESIZE.x * scale;
+
+
+            if (i + 1 == (int)(ButtonCount / 2)) {
+                button_margin_left = 0; ButtonSlideHeght = ButtonSlideHeght + PICTURESIZE.y * scale + 5;
+            }
+            MyTexture.emplace_back(std::move(txt));
+            ButtonsList.emplace_back(std::move(sprite));
+            isblackSide.push_back(true);
+
+        }
+    }
+
+    //setScale(scale);
+
+}
+
+QuestType6::QuestType6(int w, int h, int qtyButtons)
+:Window(w, h,((rand() % 4)),5),
+    Buttons(qtyButtons, *this),
+    coin1(*this),
+    coin2(*this){
+
+
+
+    bool first = true;
+    int margintopSlideButton = 0;
+
+    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    CheckButtonSprite.setTexture(CheckButtonTexture);
+
+
+
+
+
+    int coinRandomIndex = rand() % 2;
+    coin1.setButtonCount(1);
+    if (coinRandomIndex == 0) {
+        coin1.setpictureFilename("resources/images/moneta10");
+    }
+    else {
+     
+        coinRandomIndex = rand() % 3;
+        switch (coinRandomIndex)
+        {            
+            case 0:coin1.setpictureFilename("resources/images/moneta01"); break;
+            case 1:coin1.setpictureFilename("resources/images/moneta02"); break;
+            case 2:coin1.setpictureFilename("resources/images/moneta05"); break;
+        default:
+            break;
+        }
+    }
+
+    coin1.setMargin_left(10);
+    coin1.setMargin_top(textFrame.getHeight() * 2);
+
+    coin1.CalcucateCoordinate();
+
+    coin1.setButtonCount(1);
+
+    sf::Event event;
+    while (window->isOpen()) {
+        window->clear();
+        window->draw(List);
+
+        if (first) {
+            Buttons.CalcucateCoordinate(); first = false;
+
+            QuestComment.setmargin_top(h - Buttons.getHeight());
+            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getHeight());
+            //Buttons.setMargin_top(100);
+
+            Buttons.CalcucateCoordinate(); first = false;
+
+
+
+
+
+        }
+        window->draw(QuestComment.gettext());
+        window->draw(textFrame.gettext());
+        window->draw(CheckButtonSprite);
+        for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
+        {
+            window->draw(*Buttons.getButtons()[bc]);
+
+        }
+
+            window->draw(*coin1.getButtons()[0]);
+
+
+        window->display();
+        while (window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
+                window->close();
+            }
+
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+                if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
+
+
+                }
+                if (Buttons.click()) {
+                    //std::cout << "Button.click" << std::endl;
+                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                }
+                if (coin1.click()) {
+                    //std::cout << "Picture.click" << std::endl;
+                }
+
+
+            }
+        }
+    }
+
+    srand(time(0));
+}
 
 
 

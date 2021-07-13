@@ -38,6 +38,7 @@ extern const figureQestions question3Text[];
 
 extern const figureQestions question4Text[];
 extern const figureQestions question5Text[];
+extern const figureQestions question6Text[];
 extern const figureQestions* qestionarrayList[];
 
 
