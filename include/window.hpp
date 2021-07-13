@@ -280,11 +280,12 @@ public:
 };
 //class QuestType6;
 class PicturetAndFilmtoView : public PicturetoView {
-
+    float coinWidth;
+    float coinHeight;
 public:
     PicturetAndFilmtoView(Window& w) : PicturetoView(w) {}
     void CalcucateCoordinate();
-    //bool click();
+    bool click();
 //protected: std::string pictureFilename;
 };
 

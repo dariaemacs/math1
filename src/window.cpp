@@ -20,6 +20,13 @@
 //int QuestType1::QTY = 1;
 extern const int ELAPSED_TIME;
 extern std::vector< std::vector<int>> numSeries;
+
+inline void delay(clock_t sec)
+{
+    clock_t start_time = clock();
+    clock_t end_time = sec + start_time;
+    while (clock() != end_time);
+}
 /*
 template <size_t N>
 std::wstring get_wstr(const std::array<figureQestions, N>& arr, int questvariantIndex){
@@ -1314,7 +1321,7 @@ void PicturetAndFilmtoView::CalcucateCoordinate() {
     int button_margin_left = 0;
     tmp.loadFromFile(pictureFilename + ".png");
     sf::Vector2u PICTURESIZE = tmp.getSize();
-    if (PICTURESIZE.x > PICTURESIZE.y&& PICTURESIZE.x / PICTURESIZE.y >= 2)  PICTURESIZE.x /= 3;
+    if (PICTURESIZE.x > PICTURESIZE.y && PICTURESIZE.x / PICTURESIZE.y >= 2) { PICTURESIZE.x /= 3; coinWidth = PICTURESIZE.x; coinHeight = PICTURESIZE.y; }
     int ButtonSlideHeght = WindowLink.getHeight() / 3;
 
     float PICTURESIZE_W = PICTURESIZE.x;
@@ -1389,7 +1396,50 @@ void PicturetAndFilmtoView::CalcucateCoordinate() {
     //setScale(scale);
 
 }
+bool PicturetAndFilmtoView::click() {
+    for (int i = 0; i < ButtonCount; ++i) {
+        const sf::Vector2f& position = ButtonsList[i]->getPosition();
+        const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
+        int x0 = position.x;
+        int y0 = position.y;
+        int x1 = (float)x0 + (float)rect.width * scale;
+        int y1 = (float)y0 + (float)rect.height * scale;
 
+
+
+        const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
+        x1 = x1;
+        //std::cout << "scale" <<scale << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
+        if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
+            std::string fileName = "";
+            //std::cout << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
+            sf::Texture CheckButtonTexture;
+            sf::Sprite CheckButtonSprite(CheckButtonTexture);
+
+            if (ButtonPressID < 0) {
+                //fileName = "resources/images/digit" + std::to_string(ButtonPressID + 1) + ".jpg";
+                delay(1000);
+                MyTexture[0]->loadFromFile(pictureFilename+".png", sf::IntRect(coinWidth, 0, coinWidth * 2, coinHeight));
+                delay(1000);
+                MyTexture[0]->loadFromFile(pictureFilename + ".png", sf::IntRect(coinWidth * 2, 0, coinWidth * 3, coinHeight));
+                ButtonPressID = -1;
+                
+            }
+            //fileName = "resources/images/digit" + std::to_string(i + 1) + "_select.jpg";
+            ButtonPressID = i;
+
+            //MyTexture[i]->loadFromFile(fileName);
+
+            //w->draw(*Buttons[i]);
+            //w->display();
+            return true;
+
+        } //else std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
+        //Buttons = Buttons.get()+1;
+
+    }
+    return false;
+}
 QuestType6::QuestType6(int w, int h, int qtyButtons)
 :Window(w, h,((rand() % 4)),5),
     Buttons(qtyButtons, *this),
