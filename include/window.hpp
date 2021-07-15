@@ -302,16 +302,20 @@ public:
 };
 
 class squareBoard {
-    const int NN = 40; //qty of horiz line
-    const int MM = 20; //qty of vert line
-    float w, h , marginTop;
+    const float NN = 10;//qty of horiz lines
+          float MM; // this is qty of vert lines will calculate later
+    float w, h , marginTop, marginLeft,
+     widthsqareBord,
+     heightsqareBord;
     bool alreadyDraw;
-    std::array<sf::RectangleShape, 60> Line;
+    std::vector<sf::RectangleShape> HorizLine;
+    std::vector<sf::RectangleShape> VertLine;
+    std::vector<int> i1;
     public:
         squareBoard(float , float );
        void draw(std::shared_ptr<sf::RenderWindow>&);
        void setMargintop(int);
-        
+       int getwidthsqareBord() { return widthsqareBord; }
 };
 
 class QuestType7 : public Window {

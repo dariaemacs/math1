@@ -1622,21 +1622,45 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
 }
 
 squareBoard::squareBoard(float ww, float hh) :w(ww), h(hh), alreadyDraw(false) {
+    marginLeft = ww * 5 / 100;
+    marginTop = hh / 9;
+    //HorizLine.reserve(NN);
+    
+
     for (int i = 0; i < NN; i++)
     {
-        Line[i].setSize(sf::Vector2f(ww-20, 1));
-        Line[i].setFillColor(sf::Color::Blue);
+        HorizLine.push_back(sf::RectangleShape());
+        HorizLine[i].setSize(sf::Vector2f(ww- 2* marginLeft, 1));
+        HorizLine[i].setFillColor(sf::Color::Blue);
     }
-
+    widthsqareBord = w - marginLeft * 2;
+    heightsqareBord = h - marginTop;
+    MM = widthsqareBord / ((h - marginTop) / NN);
+    for (int i = 0; i < MM; i++)
+    {
+        VertLine.push_back(sf::RectangleShape());
+        VertLine[i].setSize(sf::Vector2f(1, 8*hh / 9));
+        VertLine[i].setFillColor(sf::Color::Blue);
+    }
+    
+    
 };
-void squareBoard::setMargintop(int mt) { marginTop = mt;}
+void squareBoard::setMargintop(int mt) { 
+    marginTop = mt;
+}
 
 void squareBoard::draw(std::shared_ptr<sf::RenderWindow>& win) {
     for (int i = 0; i < NN; i++) {
-        if (!alreadyDraw) Line[i].move(10,marginTop+ i * 10);
-        win->draw(Line[i]);
+        if (!alreadyDraw) HorizLine[i].move(marginLeft,marginTop+ i * (h- marginTop) / NN);
+        win->draw(HorizLine[i]);
         
     }
+    for (int i = 0; i < MM; i++) {
+        if (!alreadyDraw) VertLine[i].move(marginLeft+i* (h - marginTop) / NN, marginTop );
+        win->draw(VertLine[i]);
+
+    }
+
     alreadyDraw = true;
 }
 
@@ -1652,12 +1676,6 @@ bool first = true;
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
     
-    
-
-   
-
-
-    getsB().setMargintop(h/9);
 
     sf::Event event;
     while (window->isOpen()) {
