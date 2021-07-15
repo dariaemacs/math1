@@ -1318,7 +1318,7 @@ void PicturetAndFilmtoView::CalcucateCoordinate() {
     using namespace std;
     sf::Texture tmp;
 
-    int button_margin_left = 0;
+    
     tmp.loadFromFile(pictureFilename + ".png");
     sf::Vector2u PICTURESIZE = tmp.getSize();
     if (PICTURESIZE.x > PICTURESIZE.y && PICTURESIZE.x / PICTURESIZE.y >= 2) { PICTURESIZE.x /= 3; coinWidth = PICTURESIZE.x; coinHeight = PICTURESIZE.y; }
@@ -1342,11 +1342,11 @@ void PicturetAndFilmtoView::CalcucateCoordinate() {
         for (int i = 0; i < ButtonCount; i++) {
             std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
             txt->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            std::cout << "first loadFromFile" << std::endl;
             std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
             sprite->setTexture(*txt.get());
             sprite->setScale(scale, scale);
-            sprite->move(button_margin_left, ButtonSlideHeght);
-            button_margin_left = button_margin_left + 5 + PICTURESIZE.x * scale;
+            sprite->move(margin_left, ButtonSlideHeght);
             MyTexture.emplace_back(std::move(txt));
             ButtonsList.emplace_back(std::move(sprite));
             isblackSide.push_back(true);
@@ -1377,15 +1377,7 @@ void PicturetAndFilmtoView::CalcucateCoordinate() {
             std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
             sprite->setTexture(*txt.get());
             sprite->setScale(scale, scale);
-            sprite->move(button_margin_left, ButtonSlideHeght);
-
-
-            button_margin_left = button_margin_left + 5 + PICTURESIZE.x * scale;
-
-
-            if (i + 1 == (int)(ButtonCount / 2)) {
-                button_margin_left = 0; ButtonSlideHeght = ButtonSlideHeght + PICTURESIZE.y * scale + 5;
-            }
+            sprite->move(margin_left, ButtonSlideHeght);
             MyTexture.emplace_back(std::move(txt));
             ButtonsList.emplace_back(std::move(sprite));
             isblackSide.push_back(true);
@@ -1397,6 +1389,7 @@ void PicturetAndFilmtoView::CalcucateCoordinate() {
 
 }
 bool PicturetAndFilmtoView::click() {
+    const int speedRotation = 100;
     for (int i = 0; i < ButtonCount; ++i) {
         const sf::Vector2f& position = ButtonsList[i]->getPosition();
         const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
@@ -1404,8 +1397,6 @@ bool PicturetAndFilmtoView::click() {
         int y0 = position.y;
         int x1 = (float)x0 + (float)rect.width * scale;
         int y1 = (float)y0 + (float)rect.height * scale;
-
-
 
         const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
         x1 = x1;
@@ -1416,26 +1407,86 @@ bool PicturetAndFilmtoView::click() {
             sf::Texture CheckButtonTexture;
             sf::Sprite CheckButtonSprite(CheckButtonTexture);
 
+
+            //for film coin rotate
+            clock_t start_time1 = 0;
+            clock_t end_time1 = 0;
+            bool frame1 = false;
+            clock_t start_time2 = 0;
+            clock_t end_time2 = 0;
+            bool frame2 = false;
+
             if (ButtonPressID < 0) {
-                //fileName = "resources/images/digit" + std::to_string(ButtonPressID + 1) + ".jpg";
-                delay(1000);
-                MyTexture[0]->loadFromFile(pictureFilename+".png", sf::IntRect(coinWidth, 0, coinWidth * 2, coinHeight));
-                delay(1000);
-                MyTexture[0]->loadFromFile(pictureFilename + ".png", sf::IntRect(coinWidth * 2, 0, coinWidth * 3, coinHeight));
-                ButtonPressID = -1;
-                
+                while (true) {
+                    start_time1 = clock();
+                    if (!frame1) {
+                        end_time1 = speedRotation + start_time1;
+                        frame1 = true;
+
+                    }
+                    if (frame1 && start_time1 > end_time1) {
+                        std::cout << "testFilm2" << std::endl;
+
+                        MyTexture[0]->loadFromFile(pictureFilename + ".png", sf::IntRect(coinWidth, 0, coinWidth * 2, coinHeight));
+                        ButtonsList[0]->setTexture(*MyTexture[0]);
+                        WindowLink.getWindow()->draw(*ButtonsList[0]);
+                        WindowLink.getWindow()->display();
+                        start_time2 = clock();
+                        if (!frame2) {
+                            end_time2 = speedRotation + start_time2;
+                            frame2 = true;
+
+                        }
+                        if (frame2 && start_time2 > end_time2) {
+                            std::cout << "testFilm3" << std::endl;
+                            MyTexture[0]->loadFromFile(pictureFilename + ".png", sf::IntRect(coinWidth * 2, 0, coinWidth * 3, coinHeight));
+                            ButtonsList[0]->setTexture(*MyTexture[0]);
+                            WindowLink.getWindow()->draw(*ButtonsList[0]);
+                            WindowLink.getWindow()->display();
+                            break;
+                        }
+                    }
+                }
+                ButtonPressID = 1;
+
             }
-            //fileName = "resources/images/digit" + std::to_string(i + 1) + "_select.jpg";
-            ButtonPressID = i;
+            else
+            {
+                while (true) {
+                    start_time1 = clock();
+                    if (!frame1) {
+                        end_time1 = speedRotation + start_time1;
+                        frame1 = true;
 
-            //MyTexture[i]->loadFromFile(fileName);
+                    }
+                    if (frame1 && start_time1 > end_time1) {
+                        std::cout << "testFilm2" << std::endl;
+                        MyTexture[0]->loadFromFile(pictureFilename + ".png", sf::IntRect(coinWidth, 0, coinWidth * 2, coinHeight));
+                        ButtonsList[0]->setTexture(*MyTexture[0]);
+                        WindowLink.getWindow()->draw(*ButtonsList[0]);
+                        WindowLink.getWindow()->display();
+                        start_time2 = clock();
+                        if (!frame2) {
+                            end_time2 = speedRotation + start_time2;
+                            frame2 = true;
 
-            //w->draw(*Buttons[i]);
-            //w->display();
-            return true;
+                        }
+                        if (frame2 && start_time2 > end_time2) {
+                            std::cout << "testFilm3" << std::endl;
+                            MyTexture[0]->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, coinWidth , coinHeight));
+                            ButtonsList[0]->setTexture(*MyTexture[0]);
+                            WindowLink.getWindow()->draw(*ButtonsList[0]);
+                            WindowLink.getWindow()->display();
+                            break;
+                        }
+                    }
+                }
+            ButtonPressID = -1;
+        }
 
-        } //else std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
-        //Buttons = Buttons.get()+1;
+          
+
+        } 
 
     }
     return false;
@@ -1454,14 +1505,20 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
 
-
-
-
-
     int coinRandomIndex = rand() % 2;
     coin1.setButtonCount(1);
+    coin2.setButtonCount(1);
     if (coinRandomIndex == 0) {
         coin1.setpictureFilename("resources/images/moneta10");
+        coinRandomIndex = rand() % 3;
+        switch (coinRandomIndex)
+        {
+        case 0:coin2.setpictureFilename("resources/images/moneta01"); break;
+        case 1:coin2.setpictureFilename("resources/images/moneta02"); break;
+        case 2:coin2.setpictureFilename("resources/images/moneta05"); break;
+        default:
+            break;
+        }
     }
     else {
      
@@ -1474,14 +1531,19 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
         default:
             break;
         }
+        coin2.setpictureFilename("resources/images/moneta10");
     }
 
-    coin1.setMargin_left(10);
+    coin1.setMargin_left(0);
     coin1.setMargin_top(textFrame.getHeight() * 2);
-
     coin1.CalcucateCoordinate();
+  
+    coin2.setMargin_left(coin1.getcoinWidth()+10);
+    coin2.setMargin_top(textFrame.getHeight() * 2);
+    coin2.CalcucateCoordinate();
+    
+  
 
-    coin1.setButtonCount(1);
 
     sf::Event event;
     while (window->isOpen()) {
@@ -1512,6 +1574,7 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
         }
 
             window->draw(*coin1.getButtons()[0]);
+            window->draw(*coin2.getButtons()[0]);
 
 
         window->display();
@@ -1523,6 +1586,21 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
+                    
+
+
+                    if (Buttons.GetButtonsClickID() + 1 == question6Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
+                    else { //wrong
+                        QuestComment.settext(CommentsDic[2]);
+                        Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
+                            "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
+
+                        Buttons.getButtonTexture()[question5Answers[questNumber] - 1]->loadFromFile(
+                            "resources/images/digit" + std::to_string(question5Answers[questNumber]) + "_right.jpg"
+                        );
+                    }
+                    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
+
 
 
                 }
@@ -1531,8 +1609,8 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
                     CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
                     CheckButtonSprite.setTexture(CheckButtonTexture);
                 }
-                if (coin1.click()) {
-                    //std::cout << "Picture.click" << std::endl;
+                if (coin1.click() || coin2.click()) {
+                    
                 }
 
 
@@ -1543,5 +1621,94 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
     srand(time(0));
 }
 
+squareBoard::squareBoard(float ww, float hh) :w(ww), h(hh), alreadyDraw(false) {
+    for (int i = 0; i < NN; i++)
+    {
+        Line[i].setSize(sf::Vector2f(ww-20, 1));
+        Line[i].setFillColor(sf::Color::Blue);
+    }
+
+};
+void squareBoard::setMargintop(int mt) { marginTop = mt;}
+
+void squareBoard::draw(std::shared_ptr<sf::RenderWindow>& win) {
+    for (int i = 0; i < NN; i++) {
+        if (!alreadyDraw) Line[i].move(10,marginTop+ i * 10);
+        win->draw(Line[i]);
+        
+    }
+    alreadyDraw = true;
+}
+
+
+
+
+QuestType7::QuestType7(int w, int h) :
+    Window(w, h, 0, 6),
+    sB(w,h) {
+bool first = true;
+    int margintopSlideButton = 0;
+
+    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    CheckButtonSprite.setTexture(CheckButtonTexture);
+    
+    
+
+   
+
+
+    getsB().setMargintop(h/9);
+
+    sf::Event event;
+    while (window->isOpen()) {
+        window->clear();
+        window->draw(List);
+
+
+        window->draw(QuestComment.gettext());
+        window->draw(textFrame.gettext());
+        window->draw(CheckButtonSprite);
+        sB.draw(window);
+
+     
+
+
+        window->display();
+        while (window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
+                window->close();
+            }
+
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+                if (readyforCheck ) {
+
+/*
+
+                    if (Buttons.GetButtonsClickID() + 1 == question6Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
+                    else { //wrong
+                        QuestComment.settext(CommentsDic[2]);
+                        Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
+                            "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
+
+                        Buttons.getButtonTexture()[question5Answers[questNumber] - 1]->loadFromFile(
+                            "resources/images/digit" + std::to_string(question5Answers[questNumber]) + "_right.jpg"
+                        );
+                    }
+                    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
+*/
+
+
+                }
+
+
+
+
+            }
+        }
+    }
+
+    srand(time(0));
+}
 
 

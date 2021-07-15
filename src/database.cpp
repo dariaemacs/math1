@@ -65,7 +65,11 @@ figureQestions{L"Деньги за покупку шоколада принимает автомат. У Насти есть таки
 figureQestions{L"Лиза решила купить в магазине шарик за 7 рублей. У нее есть такие монеты. \nПродавцу Лиза дала одну монету и получила сдачу. \nКакую сдачу получила девочка?"       ,calc},
 figureQestions{L"Деньги за покупку игрушки принимает автомат. У Ани есть такие монеты. \nДевочка хочет купить игрушку за 9 рублей. Она опустила в автомат одну \nмонету и получила сдачу. Какую сдачу получила Аня? "       ,calc},
 };
-extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text };
+extern const int question6Answers[] = { 4,2,3,1};
+
+extern const figureQestions question7Text[] = { figureQestions{L"Дорисуй мышкой данную фигуру так, чтобы получился треугольник",calc} };
+
+extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text };
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("chicken"),
     std::string("pencil"),

@@ -8,6 +8,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <array>
 
 #include <SFML/Graphics.hpp>
 
@@ -282,10 +283,12 @@ public:
 class PicturetAndFilmtoView : public PicturetoView {
     float coinWidth;
     float coinHeight;
+
 public:
-    PicturetAndFilmtoView(Window& w) : PicturetoView(w) {}
+    PicturetAndFilmtoView(Window& w) : PicturetoView(w){}
     void CalcucateCoordinate();
     bool click();
+    float getcoinWidth() { return coinWidth; }
 //protected: std::string pictureFilename;
 };
 
@@ -295,6 +298,28 @@ class QuestType6 : public Window {
     PicturetAndFilmtoView coin2;
 public:
     QuestType6(int, int, int);
+
+};
+
+class squareBoard {
+    const int NN = 40; //qty of horiz line
+    const int MM = 20; //qty of vert line
+    float w, h , marginTop;
+    bool alreadyDraw;
+    std::array<sf::RectangleShape, 60> Line;
+    public:
+        squareBoard(float , float );
+       void draw(std::shared_ptr<sf::RenderWindow>&);
+       void setMargintop(int);
+        
+};
+
+class QuestType7 : public Window {
+    squareBoard sB;
+
+public:
+    QuestType7(int, int);
+    squareBoard& getsB() { return sB; }
 
 };
 
