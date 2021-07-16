@@ -1621,17 +1621,25 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
     srand(time(0));
 }
 
-squareBoard::squareBoard(float ww, float hh) :w(ww), h(hh), alreadyDraw(false) {
+point::point(float sz) :x(0), y(0), size(sz), sf::RectangleShape(){
+    sf::RectangleShape::setPosition(0,0);
+    sf::RectangleShape::setSize(sf::Vector2f(sz, sz));
+
+}
+
+squareBoard::squareBoard(float ww, float hh) : w(ww), h(hh), alreadyDraw(false), CheckPoint{ 10,10,10,10,10,10 }{
     marginLeft = ww * 5 / 100;
     marginTop = hh / 9;
     //HorizLine.reserve(NN);
-    
-
-    for (int i = 0; i < NN; i++)
+    for (int i = 0; i < 6; i++) {
+        CheckPoint[i].setSb(this);
+        CheckPoint[i].setFillColor(color::blue);
+    }
+    for (int i = 0; i < NN+1; i++)
     {
         HorizLine.push_back(sf::RectangleShape());
         HorizLine[i].setSize(sf::Vector2f(ww- 2* marginLeft, 1));
-        HorizLine[i].setFillColor(sf::Color::Blue);
+        HorizLine[i].setFillColor(color::slategray);
     }
     widthsqareBord = w - marginLeft * 2;
     heightsqareBord = h - marginTop;
@@ -1640,35 +1648,59 @@ squareBoard::squareBoard(float ww, float hh) :w(ww), h(hh), alreadyDraw(false) {
     {
         VertLine.push_back(sf::RectangleShape());
         VertLine[i].setSize(sf::Vector2f(1, 8*hh / 9));
-        VertLine[i].setFillColor(sf::Color::Blue);
+        VertLine[i].setFillColor(color::slategray);
     }
-    
+    //CheckPoint[0];
     
 };
-void squareBoard::setMargintop(int mt) { 
+void squareBoard::setMargintop(float mt) { 
     marginTop = mt;
 }
 
+float squareBoard::getMargintop() { return marginTop; }
+float squareBoard::getMarginLeft(){ return marginLeft; }
+float squareBoard::getsquareWidth() { return squareWidth; }
+
 void squareBoard::draw(std::shared_ptr<sf::RenderWindow>& win) {
+    squareWidth = (h - marginTop) / NN;
     for (int i = 0; i < NN; i++) {
-        if (!alreadyDraw) HorizLine[i].move(marginLeft,marginTop+ i * (h- marginTop) / NN);
+        if (!alreadyDraw) HorizLine[i].move(marginLeft,marginTop+ i * squareWidth);
         win->draw(HorizLine[i]);
         
     }
     for (int i = 0; i < MM; i++) {
-        if (!alreadyDraw) VertLine[i].move(marginLeft+i* (h - marginTop) / NN, marginTop );
+        if (!alreadyDraw) VertLine[i].move(marginLeft+i* squareWidth, marginTop );
         win->draw(VertLine[i]);
 
     }
+    CheckPoint[0].setFillColor(sf::Color::Blue);
+    float squarefromVertical = static_cast<int>(widthsqareBord / squareWidth);
+    int point0 = (squarefromVertical - 28) / 2;
+    CheckPoint[0].setPosition(point0,8 );
+    CheckPoint[1].setPosition(point0+14, 8);
+    CheckPoint[2].setPosition(point0 + 28, 8);
+
+    CheckPoint[3].setPosition(point0, 20);
+    CheckPoint[4].setPosition(point0 + 14, 20);
+    CheckPoint[5].setPosition(point0 + 28, 20);
+
+    for (int i = 0; i < 6; i++)
+ 
+    win->draw(CheckPoint[i]);
+    
 
     alreadyDraw = true;
 }
 
-
-
+float point::getSize() { return size; }
+void point::setSb(squareBoard* sBB) { Sb = sBB; }
+void point::setPosition(float i, float j) { 
+    int tmp = Sb->getsquareWidth();
+    sf::RectangleShape::setPosition(Sb->getMarginLeft() + (int)i * Sb->getsquareWidth() - (int)(getSize() / 2), Sb->getMargintop() + (int)j * Sb->getsquareWidth() - (int)(getSize() / 2));
+}
 
 QuestType7::QuestType7(int w, int h) :
-    Window(w, h, 0, 6),
+    Window(w, h, ((rand() % 3)), 6),
     sB(w,h) {
 bool first = true;
     int margintopSlideButton = 0;
@@ -1683,9 +1715,10 @@ bool first = true;
         window->draw(List);
 
 
-        window->draw(QuestComment.gettext());
+        //window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
         window->draw(CheckButtonSprite);
+        //window->draw(CheckPoint[0]);
         sB.draw(window);
 
      
@@ -1701,20 +1734,7 @@ bool first = true;
 
                 if (readyforCheck ) {
 
-/*
 
-                    if (Buttons.GetButtonsClickID() + 1 == question6Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
-                    else { //wrong
-                        QuestComment.settext(CommentsDic[2]);
-                        Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
-                            "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
-
-                        Buttons.getButtonTexture()[question5Answers[questNumber] - 1]->loadFromFile(
-                            "resources/images/digit" + std::to_string(question5Answers[questNumber]) + "_right.jpg"
-                        );
-                    }
-                    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
-*/
 
 
                 }

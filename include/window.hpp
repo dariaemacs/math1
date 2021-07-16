@@ -300,23 +300,43 @@ public:
     QuestType6(int, int, int);
 
 };
+class squareBoard;
+class point : public sf::RectangleShape {
+    float x, y; //coord in pixel
+    float i, j;  //coord in board 
+    float size; //size of point 
+    squareBoard* Sb;
+public:
+    point(float);
+    float getSize();
+    void setSb(squareBoard* sBB);
+    void setPosition(float, float);
+};
 
 class squareBoard {
-    const float NN = 10;//qty of horiz lines
+    const float NN =30;//qty of horiz lines
           float MM; // this is qty of vert lines will calculate later
     float w, h , marginTop, marginLeft,
      widthsqareBord,
-     heightsqareBord;
+     heightsqareBord, squareWidth;
     bool alreadyDraw;
     std::vector<sf::RectangleShape> HorizLine;
     std::vector<sf::RectangleShape> VertLine;
+    std::vector<sf::RectangleShape> UserInputLine;
+    std::array<point,6> CheckPoint;
     std::vector<int> i1;
     public:
         squareBoard(float , float );
        void draw(std::shared_ptr<sf::RenderWindow>&);
-       void setMargintop(int);
+       void setMargintop(float);
+       float getMargintop();
+       float getMarginLeft();
+       float getsquareWidth();
        int getwidthsqareBord() { return widthsqareBord; }
+       
 };
+
+
 
 class QuestType7 : public Window {
     squareBoard sB;
