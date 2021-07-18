@@ -73,11 +73,12 @@ extern const figureQestions question7Text[] = {
     figureQestions{L"Дорисуй мышкой данную фигуру так, чтобы получился квадрат",rectangle},
 };
 
-extern const variantOfLine question7squarevariantOfFirstLine[7] = { 0,1, 1,2, 2,5 , 1,4 , 0,3 ,3,4 , 4,5  };
-extern const variantOfLine question7trianglevariantOfFirstLine[13] = { 0,1, 1,2, 2,5 , 1,4 , 0,3 ,3,4 , 4,5, 
-1,5 , 2,4 , 1,3, 0,4 , 0,5 , 3,2
+extern const variantOfLine question7squarevariantOfFirstLine[] = { 0,1, 1,2, 2,3 , 3,4 , 4,5 ,5,0 , 1,5  };
+extern const variantOfLine question7trianglevariantOfFirstLine[] = { 0,1, 1,2, 2,3 , 3,4 , 4,5 ,5,0 , 1,5,
+0,3,2,5,1,3,2,4,1,5,0,4
+
 };
-extern const variantOfLine question7rectanglevariantOfFirstLine[7] = { 0,1, 1,2, 2,5 , 1,4 , 0,3 ,3,4 , 4,5 };
+extern const variantOfLine question7rectanglevariantOfFirstLine[] = { 0,1, 1,2, 2,5 , 1,4 , 0,3 ,3,4 , 4,5 };
 
 extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text };
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {

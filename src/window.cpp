@@ -1621,13 +1621,16 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
     srand(time(0));
 }
 
-point::point(float sz) :x(0), y(0), size(sz), sf::RectangleShape(){
+point::point(float sz) :x(0), y(0), i(0), j(0), Sb(0), size(sz), sf::RectangleShape(){
     sf::RectangleShape::setPosition(0,0);
     sf::RectangleShape::setSize(sf::Vector2f(sz, sz));
 
 }
 
-squareBoard::squareBoard(float ww, float hh) : w(ww), h(hh), alreadyDraw(false), CheckPoint{ 10,10,10,10,10,10 }{
+squareBoard::squareBoard(float ww, float hh, Window& wl) : w(ww), h(hh),  questFigure(wl.getQuestNumber()), squareWidth(0), alreadyDraw(false), CheckPoint{ 10,10,10,10,10,10 },
+WindowLink(wl)
+
+{
     marginLeft = ww * 5 / 100;
     marginTop = hh / 9;
     //HorizLine.reserve(NN);
@@ -1647,10 +1650,29 @@ squareBoard::squareBoard(float ww, float hh) : w(ww), h(hh), alreadyDraw(false),
     for (int i = 0; i < MM; i++)
     {
         VertLine.push_back(sf::RectangleShape());
-        VertLine[i].setSize(sf::Vector2f(1, 8*hh / 9));
+        VertLine[i].setSize(sf::Vector2f(1, 8 * hh / 9));
         VertLine[i].setFillColor(color::slategray);
+    };
+    int VARIANT = 0;
+    switch (question7Text[questFigure].key) {
+    case triangle:
+        VARIANT = rand()% 13;
+        UserInputLine.push_back(sf::RectangleShape());
+        UserInputLine[0].setPosition(CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().x, CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().y);
+        break;
+
+    case rectangle:
+        VARIANT = rand() % 7;
+
+        break;
+
+    case square:
+        VARIANT = rand() % 7;
+
+        break;
+
     }
-    //CheckPoint[0];
+
     
 };
 void squareBoard::setMargintop(float mt) { 
@@ -1660,17 +1682,62 @@ void squareBoard::setMargintop(float mt) {
 float squareBoard::getMargintop() { return marginTop; }
 float squareBoard::getMarginLeft(){ return marginLeft; }
 float squareBoard::getsquareWidth() { return squareWidth; }
+void squareBoard::setquestFigure(int qf) { questFigure = qf; }
+coord point::getPixelCoord() {
+    return coord(x, y);
+};
+coord point::getBoardCoord() {
+    return coord(i, j);
+};
 
-void squareBoard::draw(std::shared_ptr<sf::RenderWindow>& win) {
+
+int squareBoard::clickPoint() {
+
+    for (int i = 0; i < 6; ++i) {
+        coord  position  = CheckPoint[i].getPixelCoord();
+        int x0 = position.x;
+        int y0 = position.y;
+        int x1 = (float)x0 + CheckPoint[i].getSize();
+        int y1 = (float)y0 + CheckPoint[i].getSize();
+
+
+
+        const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
+        x1 = x1;
+        
+        if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
+            std::cout << "clickPoint #" << i << std::endl;
+            //std::string fileName = "";
+            //
+            //sf::Texture CheckButtonTexture;
+            //sf::Sprite CheckButtonSprite(CheckButtonTexture);
+
+            //if (ButtonPressID >= 0) {
+            //    fileName = "resources/images/digit" + std::to_string(ButtonPressID + 1) + ".jpg";
+            //    MyTexture[ButtonPressID]->loadFromFile(fileName); ButtonPressID = -1;
+            //}
+            //fileName = "resources/images/digit" + std::to_string(i + 1) + "_select.jpg";
+            //ButtonPressID = i;
+            //MyTexture[i]->loadFromFile(fileName);
+            //return true;
+
+        } 
+
+    }
+    return false;
+
+}
+
+void squareBoard::draw() {
     squareWidth = (h - marginTop) / NN;
     for (int i = 0; i < NN; i++) {
         if (!alreadyDraw) HorizLine[i].move(marginLeft,marginTop+ i * squareWidth);
-        win->draw(HorizLine[i]);
+        WindowLink.getWindow()->draw(HorizLine[i]);
         
     }
     for (int i = 0; i < MM; i++) {
         if (!alreadyDraw) VertLine[i].move(marginLeft+i* squareWidth, marginTop );
-        win->draw(VertLine[i]);
+        WindowLink.getWindow()->draw(VertLine[i]);
 
     }
     CheckPoint[0].setFillColor(sf::Color::Blue);
@@ -1685,9 +1752,9 @@ void squareBoard::draw(std::shared_ptr<sf::RenderWindow>& win) {
     CheckPoint[5].setPosition(point0 + 28, 20);
 
     for (int i = 0; i < 6; i++)
- 
-    win->draw(CheckPoint[i]);
+        WindowLink.getWindow()->draw(CheckPoint[i]);
     
+
 
     alreadyDraw = true;
 }
@@ -1696,15 +1763,16 @@ float point::getSize() { return size; }
 void point::setSb(squareBoard* sBB) { Sb = sBB; }
 void point::setPosition(float i, float j) { 
     int tmp = Sb->getsquareWidth();
-    sf::RectangleShape::setPosition(Sb->getMarginLeft() + (int)i * Sb->getsquareWidth() - (int)(getSize() / 2), Sb->getMargintop() + (int)j * Sb->getsquareWidth() - (int)(getSize() / 2));
+    x = Sb->getMarginLeft() + (int)i * Sb->getsquareWidth() - (int)(getSize() / 2);
+    y = Sb->getMargintop() + (int)j * Sb->getsquareWidth() - (int)(getSize() / 2);
+    sf::RectangleShape::setPosition(x, y);
 }
 
 QuestType7::QuestType7(int w, int h) :
     Window(w, h, ((rand() % 3)), 6),
-    sB(w,h) {
+    sB(w,h,*this) {
 bool first = true;
-    int margintopSlideButton = 0;
-
+    int margintopSlideButton = 0;    
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
     
@@ -1719,7 +1787,7 @@ bool first = true;
         window->draw(textFrame.gettext());
         window->draw(CheckButtonSprite);
         //window->draw(CheckPoint[0]);
-        sB.draw(window);
+        sB.draw();
 
      
 
@@ -1739,7 +1807,7 @@ bool first = true;
 
                 }
 
-
+                sB.clickPoint();
 
 
             }

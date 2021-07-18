@@ -47,8 +47,9 @@ extern const int question5Answers[];
 extern const int question6Answers[];
 
 struct variantOfLine { int i, j; };
-extern const variantOfLine question7squarevariantOfFirstLine[7];
-extern const variantOfLine question7trianglevariantOfFirstLine[13];
+extern const variantOfLine question7squarevariantOfFirstLine[];
+extern const variantOfLine question7trianglevariantOfFirstLine[];
+extern const variantOfLine question7rectanglevariantOfFirstLine[];
 
 extern const std::vector<pica> tree;
 extern const std::vector<std::string> iconsFilename;

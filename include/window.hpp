@@ -301,7 +301,9 @@ public:
 
 };
 class squareBoard;
+struct coord { float x, y; coord(float xx, float yy) :x(xx), y(yy) {} };
 class point : public sf::RectangleShape {
+    
     float x, y; //coord in pixel
     float i, j;  //coord in board 
     float size; //size of point 
@@ -311,6 +313,9 @@ public:
     float getSize();
     void setSb(squareBoard* sBB);
     void setPosition(float, float);
+    coord getPixelCoord();
+    coord getBoardCoord();
+
 };
 
 class squareBoard {
@@ -319,20 +324,24 @@ class squareBoard {
     float w, h , marginTop, marginLeft,
      widthsqareBord,
      heightsqareBord, squareWidth;
+    int questFigure;
     bool alreadyDraw;
     std::vector<sf::RectangleShape> HorizLine;
     std::vector<sf::RectangleShape> VertLine;
-    std::vector<sf::RectangleShape> UserInputLine;
+    std::vector<sf::ConvexShape> UserInputLine(3);
     std::array<point,6> CheckPoint;
     std::vector<int> i1;
+    Window& WindowLink;
     public:
-        squareBoard(float , float );
-       void draw(std::shared_ptr<sf::RenderWindow>&);
+        squareBoard(float , float , Window&);
+       void draw();
        void setMargintop(float);
        float getMargintop();
        float getMarginLeft();
        float getsquareWidth();
+       void setquestFigure(int);
        int getwidthsqareBord() { return widthsqareBord; }
+       int clickPoint();
        
 };
 
