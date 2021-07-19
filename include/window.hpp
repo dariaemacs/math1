@@ -328,7 +328,9 @@ class squareBoard {
     bool alreadyDraw;
     std::vector<sf::RectangleShape> HorizLine;
     std::vector<sf::RectangleShape> VertLine;
-    std::vector<sf::ConvexShape> UserInputLine(3);
+    //sf::VertexArray * UserInputLine(sf::Lines, 2);
+    sf::VertexArray line;
+   // sf::VertexArray lines(sf::Lines, 16);
     std::array<point,6> CheckPoint;
     std::vector<int> i1;
     Window& WindowLink;
@@ -341,6 +343,7 @@ class squareBoard {
        float getsquareWidth();
        void setquestFigure(int);
        int getwidthsqareBord() { return widthsqareBord; }
+       //std::vector<sf::VertexArray>& getUserInputLine() {return  UserInputLine;}
        int clickPoint();
        
 };

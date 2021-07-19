@@ -1627,13 +1627,14 @@ point::point(float sz) :x(0), y(0), i(0), j(0), Sb(0), size(sz), sf::RectangleSh
 
 }
 
-squareBoard::squareBoard(float ww, float hh, Window& wl) : w(ww), h(hh),  questFigure(wl.getQuestNumber()), squareWidth(0), alreadyDraw(false), CheckPoint{ 10,10,10,10,10,10 },
+squareBoard::squareBoard(float ww, float hh, Window& wl) : w(ww), h(hh),  questFigure(wl.getQuestNumber()), squareWidth(0), alreadyDraw(false), 
+CheckPoint{ 10,10,10,10,10,10 },
 WindowLink(wl)
 
 {
     marginLeft = ww * 5 / 100;
     marginTop = hh / 9;
-    //HorizLine.reserve(NN);
+    squareWidth = (h - marginTop) / NN;
     for (int i = 0; i < 6; i++) {
         CheckPoint[i].setSb(this);
         CheckPoint[i].setFillColor(color::blue);
@@ -1654,24 +1655,59 @@ WindowLink(wl)
         VertLine[i].setFillColor(color::slategray);
     };
     int VARIANT = 0;
-    switch (question7Text[questFigure].key) {
-    case triangle:
+    
+    for (int i = 0; i < CheckPoint.size(); i++)
+    CheckPoint[i].setFillColor(sf::Color::Blue);
+
+    CheckPoint[0].setPosition(0, 0);
+    CheckPoint[1].setPosition(0, 1);
+    CheckPoint[2].setPosition(0, 2);
+
+    CheckPoint[3].setPosition(1, 0);
+    CheckPoint[4].setPosition(1, 1);
+    CheckPoint[5].setPosition(1, 2);
+    //std::cout << question7Text[questFigure].key << std::endl;
+    float ax,bx;
+    float ay,by;
+
+    //switch (question7Text[questFigure].key) {
+    //switch (3) {
+    //    
+    //case triangle:
         VARIANT = rand()% 13;
-        UserInputLine.push_back(sf::RectangleShape());
-        UserInputLine[0].setPosition(CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().x, CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().y);
-        break;
+        std::cout << "triangl" << std::endl;
+        ax = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().x;
+        ay = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().y;
 
-    case rectangle:
-        VARIANT = rand() % 7;
+        bx = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().x;
+        by = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().y;
+        //line = new sf::VertexArray[2];
+        
+        line[0].position = sf::Vector2f(0, 0);
+        line[0].color = sf::Color::Blue;
+        line[1].position = sf::Vector2f(500, 500);
+        // линия будет с градиентом
+        line[1].color = sf::Color::Cyan;
 
-        break;
+        //UserInputLine[0]->position(sf::Vector2f(ax, ay));
+        //UserInputLine[1]position(sf::Vector2f(bx, by));
+        //UserInputLine[0]->position(sf::Vector2f(ax, ay));
+/*        UserInputLine[0].setPoint(0, sf::Vector2f(0, 0));
+        UserInputLine[0].setPoint(1, sf::Vector2f(10, 10));
+        UserInputLine[0].setPoint(2, sf::Vector2f(0, 0));   */    
+    //    break;
 
-    case square:
-        VARIANT = rand() % 7;
+    //case rectangle:
+    //    VARIANT = rand() % 7;
 
-        break;
+    //    break;
 
-    }
+    //case square:
+    //    VARIANT = rand() % 7;
+
+    //    break;
+
+    //}
 
     
 };
@@ -1707,19 +1743,7 @@ int squareBoard::clickPoint() {
         
         if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
             std::cout << "clickPoint #" << i << std::endl;
-            //std::string fileName = "";
-            //
-            //sf::Texture CheckButtonTexture;
-            //sf::Sprite CheckButtonSprite(CheckButtonTexture);
 
-            //if (ButtonPressID >= 0) {
-            //    fileName = "resources/images/digit" + std::to_string(ButtonPressID + 1) + ".jpg";
-            //    MyTexture[ButtonPressID]->loadFromFile(fileName); ButtonPressID = -1;
-            //}
-            //fileName = "resources/images/digit" + std::to_string(i + 1) + "_select.jpg";
-            //ButtonPressID = i;
-            //MyTexture[i]->loadFromFile(fileName);
-            //return true;
 
         } 
 
@@ -1729,7 +1753,18 @@ int squareBoard::clickPoint() {
 }
 
 void squareBoard::draw() {
-    squareWidth = (h - marginTop) / NN;
+
+
+  /*  sf::Vector2f y0 = UserInputLine[0].getPoint(0);
+    sf::Vector2f y1 = UserInputLine[0].getPoint(1);
+    sf::Vector2f y2 = UserInputLine[0].getPoint(2);*/
+    
+    for (int i = 0; i < 2; i++) {
+        line[i].color(sf::Color::Red);
+        UserInputLine[i].setOutlineThickness(1);
+        WindowLink.getWindow()->draw(UserInputLine[i]);
+    }
+   
     for (int i = 0; i < NN; i++) {
         if (!alreadyDraw) HorizLine[i].move(marginLeft,marginTop+ i * squareWidth);
         WindowLink.getWindow()->draw(HorizLine[i]);
@@ -1740,20 +1775,11 @@ void squareBoard::draw() {
         WindowLink.getWindow()->draw(VertLine[i]);
 
     }
-    CheckPoint[0].setFillColor(sf::Color::Blue);
-    float squarefromVertical = static_cast<int>(widthsqareBord / squareWidth);
-    int point0 = (squarefromVertical - 28) / 2;
-    CheckPoint[0].setPosition(point0,8 );
-    CheckPoint[1].setPosition(point0+14, 8);
-    CheckPoint[2].setPosition(point0 + 28, 8);
-
-    CheckPoint[3].setPosition(point0, 20);
-    CheckPoint[4].setPosition(point0 + 14, 20);
-    CheckPoint[5].setPosition(point0 + 28, 20);
-
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < CheckPoint.size(); i++)
         WindowLink.getWindow()->draw(CheckPoint[i]);
-    
+
+
+
 
 
     alreadyDraw = true;
@@ -1761,10 +1787,14 @@ void squareBoard::draw() {
 
 float point::getSize() { return size; }
 void point::setSb(squareBoard* sBB) { Sb = sBB; }
-void point::setPosition(float i, float j) { 
+void point::setPosition(float ii, float jj) { 
     int tmp = Sb->getsquareWidth();
-    x = Sb->getMarginLeft() + (int)i * Sb->getsquareWidth() - (int)(getSize() / 2);
-    y = Sb->getMargintop() + (int)j * Sb->getsquareWidth() - (int)(getSize() / 2);
+    float squarefromVertical = static_cast<int>(Sb->getwidthsqareBord() / Sb->getsquareWidth());
+    int point0 = (squarefromVertical - 28) / 2;
+    i = ii;
+    j = jj;
+    x = Sb->getMarginLeft() + (point0+14*jj) * Sb->getsquareWidth() - (int)(getSize() / 2);
+    y = Sb->getMargintop() + (8+12*ii) * Sb->getsquareWidth() - (int)(getSize() / 2);
     sf::RectangleShape::setPosition(x, y);
 }
 
@@ -1777,17 +1807,25 @@ bool first = true;
     CheckButtonSprite.setTexture(CheckButtonTexture);
     
 
+    // определяем вершины
+
+
     sf::Event event;
     while (window->isOpen()) {
+
         window->clear();
+
+
+
         window->draw(List);
 
 
-        //window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
         window->draw(CheckButtonSprite);
-        //window->draw(CheckPoint[0]);
+      
         sB.draw();
+       
+        
 
      
 
