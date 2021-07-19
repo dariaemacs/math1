@@ -329,7 +329,8 @@ class squareBoard {
     std::vector<sf::RectangleShape> HorizLine;
     std::vector<sf::RectangleShape> VertLine;
     //sf::VertexArray * UserInputLine(sf::Lines, 2);
-    sf::VertexArray line;
+    std::vector < sf::VertexArray> line;
+    std::vector<sf::RectangleShape> Line1;
    // sf::VertexArray lines(sf::Lines, 16);
     std::array<point,6> CheckPoint;
     std::vector<int> i1;

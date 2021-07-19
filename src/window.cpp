@@ -1675,27 +1675,72 @@ WindowLink(wl)
     //    
     //case triangle:
         VARIANT = rand()% 13;
-        std::cout << "triangl" << std::endl;
-        ax = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().x;
-        ay = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().y;
-
-        bx = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().x;
-        by = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().y;
-        //line = new sf::VertexArray[2];
         
-        line[0].position = sf::Vector2f(0, 0);
-        line[0].color = sf::Color::Blue;
-        line[1].position = sf::Vector2f(500, 500);
-        // линия будет с градиентом
-        line[1].color = sf::Color::Cyan;
+        ax = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().x+(CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        ay = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().y+(CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        //(int)(getSize() / 2)
+        bx = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().x+(CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        by = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().y+(CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
 
-        //UserInputLine[0]->position(sf::Vector2f(ax, ay));
-        //UserInputLine[1]position(sf::Vector2f(bx, by));
-        //UserInputLine[0]->position(sf::Vector2f(ax, ay));
-/*        UserInputLine[0].setPoint(0, sf::Vector2f(0, 0));
-        UserInputLine[0].setPoint(1, sf::Vector2f(10, 10));
-        UserInputLine[0].setPoint(2, sf::Vector2f(0, 0));   */    
-    //    break;
+        std::cout << ax<<" "<<ay << " "<<bx<<" "<<by<< std::endl;
+
+        line.push_back(sf::VertexArray());
+        line[0].setPrimitiveType(sf::LineStrip);
+        line[0].resize(2);
+        line[0][0].position = sf::Vector2f(ax, ay);
+        line[0][0].color = sf::Color::Red;
+        line[0][1].position = sf::Vector2f(bx, by);
+        line[0][1].color = sf::Color::Red;
+      
+        line.push_back(sf::VertexArray());
+        line[1].setPrimitiveType(sf::LineStrip);
+        line[1].resize(2);
+        line[1][0].position = sf::Vector2f(ax+0.5, ay + 0.5);
+        line[1][0].color = sf::Color::Red;
+        line[1][1].position = sf::Vector2f(bx + 0.5, by + 0.5);
+        line[1][1].color = sf::Color::Red;
+
+        line.push_back(sf::VertexArray());
+        line[2].setPrimitiveType(sf::LineStrip);
+        line[2].resize(2);
+        line[2][0].position = sf::Vector2f(ax - 0.5, ay - 0.5);
+        line[2][0].color = sf::Color::Red;
+        line[2][1].position = sf::Vector2f(bx - 0.5, by - 0.5);
+        line[2][1].color = sf::Color::Red;
+
+        line.push_back(sf::VertexArray());
+        line[1].setPrimitiveType(sf::LineStrip);
+        line[1].resize(2);
+        line[1][0].position = sf::Vector2f(ax + 1, ay + 1);
+        line[1][0].color = sf::Color::Red;
+        line[1][1].position = sf::Vector2f(bx + 1, by + 1);
+        line[1][1].color = sf::Color::Red;
+
+        line.push_back(sf::VertexArray());
+        line[2].setPrimitiveType(sf::LineStrip);
+        line[2].resize(2);
+        line[2][0].position = sf::Vector2f(ax - 1, ay - 1);
+        line[2][0].color = sf::Color::Red;
+        line[2][1].position = sf::Vector2f(bx - 1, by - 1);
+        line[2][1].color = sf::Color::Red;
+        /*
+        line.push_back(sf::VertexArray());
+        line[3].setPrimitiveType(sf::LineStrip);
+        line[3].resize(2);
+        line[3][0].position = sf::Vector2f(ax + 2, ay + 2);
+        line[3][0].color = sf::Color::Red;
+        line[3][1].position = sf::Vector2f(bx + 2, by + 2);
+        line[3][1].color = sf::Color::Red;
+
+        line.push_back(sf::VertexArray());
+        line[4].setPrimitiveType(sf::LineStrip);
+        line[4].resize(2);
+        line[4][0].position = sf::Vector2f(ax - 2, ay - 2);
+        line[4][0].color = sf::Color::Red;
+        line[4][1].position = sf::Vector2f(bx - 2, by - 2);
+        line[4][1].color = sf::Color::Red;*/
+
+    //   break;
 
     //case rectangle:
     //    VARIANT = rand() % 7;
@@ -1759,12 +1804,8 @@ void squareBoard::draw() {
     sf::Vector2f y1 = UserInputLine[0].getPoint(1);
     sf::Vector2f y2 = UserInputLine[0].getPoint(2);*/
     
-    for (int i = 0; i < 2; i++) {
-        line[i].color(sf::Color::Red);
-        UserInputLine[i].setOutlineThickness(1);
-        WindowLink.getWindow()->draw(UserInputLine[i]);
-    }
-   
+    
+  
     for (int i = 0; i < NN; i++) {
         if (!alreadyDraw) HorizLine[i].move(marginLeft,marginTop+ i * squareWidth);
         WindowLink.getWindow()->draw(HorizLine[i]);
@@ -1778,6 +1819,8 @@ void squareBoard::draw() {
     for (int i = 0; i < CheckPoint.size(); i++)
         WindowLink.getWindow()->draw(CheckPoint[i]);
 
+    for (int i = 0; i < line.size(); i++)
+        WindowLink.getWindow()->draw(line[i]);
 
 
 
