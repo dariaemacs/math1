@@ -301,7 +301,7 @@ public:
 
 };
 class squareBoard;
-struct coord { float x, y; coord(float xx, float yy) :x(xx), y(yy) {} };
+struct coord { float x, y; coord(float xx, float yy) :x(xx), y(yy) {}; coord() :x(0), y(0) {}; };
 class point : public sf::RectangleShape {
     
     float x, y; //coord in pixel
@@ -315,6 +315,7 @@ public:
     void setPosition(float, float);
     coord getPixelCoord();
     coord getBoardCoord();
+    
 
 };
 
@@ -326,11 +327,12 @@ class squareBoard {
      heightsqareBord, squareWidth;
     int questFigure;
     bool alreadyDraw;
+    int CurrenClickpoint; 
     std::vector<sf::RectangleShape> HorizLine;
     std::vector<sf::RectangleShape> VertLine;
     //sf::VertexArray * UserInputLine(sf::Lines, 2);
     std::vector < sf::VertexArray> line;
-    std::vector<sf::RectangleShape> Line1;
+    
    // sf::VertexArray lines(sf::Lines, 16);
     std::array<point,6> CheckPoint;
     std::vector<int> i1;
@@ -343,9 +345,17 @@ class squareBoard {
        float getMarginLeft();
        float getsquareWidth();
        void setquestFigure(int);
-       int getwidthsqareBord() { return widthsqareBord; }
+       int getwidthsqareBord() { return widthsqareBord; };
+       int getCurrenClickpoint(){ return CurrenClickpoint; };
+       std::array<point, 6>& getCheckPoint() { return CheckPoint; }
        //std::vector<sf::VertexArray>& getUserInputLine() {return  UserInputLine;}
-       int clickPoint();
+       bool clickPoint();
+       void addLine(float , float, float, float);
+       sf::VertexArray getLastline() {  return line[line.size()-1]; };
+       void dellLastline() {
+           if (line.size()>5) for (int i = 0; i < 5; i++) line.pop_back();
+       };
+
        
 };
 

@@ -21,7 +21,7 @@ int main() {
 
         srand(time(0));
 
-
+        //QuestType1(width, height,20);
 
         QuestType7(width, height);
 
