@@ -14,6 +14,7 @@
 #include <locale>
 #include <algorithm>
 
+#define maximal(a, b) (((a)>(b))?(a):(b))
 #define minimal(a, b) (((a)<(b))?(a):(b))
 #define three_minimal(a, b, c) minimal(minimal(a, b), c)
 
@@ -1632,7 +1633,7 @@ point::point(float sz) :x(0), y(0), i(0), j(0), Sb(0), size(sz), sf::RectangleSh
 
 squareBoard::squareBoard(float ww, float hh, Window& wl) : w(ww), h(hh),  questFigure(wl.getQuestNumber()), squareWidth(0), alreadyDraw(false), 
 CheckPoint{ 10,10,10,10,10,10 },
-WindowLink(wl), CurrenClickpoint(false)
+WindowLink(wl), CurrentClickpoint(-1)
 
 {
     marginLeft = ww * 5 / 100;
@@ -1673,7 +1674,7 @@ WindowLink(wl), CurrenClickpoint(false)
     float ax,bx;
     float ay,by;
     int fig = question7Text[questFigure].key;
-    fig = 3;
+    //
     switch (fig) {
        
 
@@ -1688,19 +1689,34 @@ WindowLink(wl), CurrenClickpoint(false)
 
 
             addLine(ax, ay, bx, by);
-
+            ChekpointInput.push_back(maximal(question7trianglevariantOfFirstLine[VARIANT].i, question7trianglevariantOfFirstLine[VARIANT].j) * 10 + minimal(question7trianglevariantOfFirstLine[VARIANT].i, question7trianglevariantOfFirstLine[VARIANT].j));
 
 
             break;
 
         case rectangle:
             VARIANT = rand() % 7;
+            ax = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+            ay = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+           
+            bx = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+            by = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+
+
+            addLine(ax, ay, bx, by);
+            ChekpointInput.push_back(maximal(question7rectanglevariantOfFirstLine[VARIANT].i, question7rectanglevariantOfFirstLine[VARIANT].j) * 10 + minimal(question7rectanglevariantOfFirstLine[VARIANT].i, question7rectanglevariantOfFirstLine[VARIANT].j));
 
             break;
 
         case square:
             VARIANT = rand() % 7;
+            ax = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+            ay = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
 
+            bx = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+            by = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+            addLine(ax, ay, bx, by);
+            ChekpointInput.push_back(maximal(question7rectanglevariantOfFirstLine[VARIANT].i, question7rectanglevariantOfFirstLine[VARIANT].j) * 10 + minimal(question7rectanglevariantOfFirstLine[VARIANT].i, question7rectanglevariantOfFirstLine[VARIANT].j));
             break;
 
         
@@ -1710,7 +1726,7 @@ WindowLink(wl), CurrenClickpoint(false)
 };
 
 void squareBoard::addLine(float ax, float ay, float bx, float by) {
-    line.push_back(sf::VertexArray());
+    line.push_back(MyVertexArray());
     int size = line.size()-1;
     line[size].setPrimitiveType(sf::LineStrip);
     line[size].resize(2);
@@ -1718,8 +1734,9 @@ void squareBoard::addLine(float ax, float ay, float bx, float by) {
     line[size][0].color = sf::Color::Red;
     line[size][1].position = sf::Vector2f(bx, by);
     line[size][1].color = sf::Color::Red;
-   
-    line.push_back(sf::VertexArray());
+    
+
+    line.push_back(MyVertexArray());
     size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
     line[size].resize(2);
@@ -1728,7 +1745,7 @@ void squareBoard::addLine(float ax, float ay, float bx, float by) {
     line[size][1].position = sf::Vector2f(bx + 0.5, by + 0.5);
     line[size][1].color = sf::Color::Red;
     
-    line.push_back(sf::VertexArray());
+    line.push_back(MyVertexArray());
     size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
     line[size].resize(2);
@@ -1736,8 +1753,8 @@ void squareBoard::addLine(float ax, float ay, float bx, float by) {
     line[size][0].color = sf::Color::Red;
     line[size][1].position = sf::Vector2f(bx - 0.5, by - 0.5);
     line[size][1].color = sf::Color::Red;
-
-    line.push_back(sf::VertexArray());
+    
+    line.push_back(MyVertexArray());
     size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
     line[size].resize(2);
@@ -1745,17 +1762,17 @@ void squareBoard::addLine(float ax, float ay, float bx, float by) {
     line[size][0].color = sf::Color::Red;
     line[size][1].position = sf::Vector2f(bx + 1, by + 1);
     line[size][1].color = sf::Color::Red;
-
-    line.push_back(sf::VertexArray());
+    
+    line.push_back(MyVertexArray());
     size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
     line[size].resize(2);
     line[size][0].position = sf::Vector2f(ax - 1, ay - 1);
     line[size][0].color = sf::Color::Red;
     line[size][1].position = sf::Vector2f(bx - 1, by - 1);
-    //line[size][1].position = sf::Vector2f(100, 100);
-    //line[size][1].position = sf::Vector2f(500, 500);
     line[size][1].color = sf::Color::Red;
+
+    std::cout << "sz of line="<<line.size() << std::endl;
 }
 
 void squareBoard::setMargintop(float mt) { 
@@ -1773,7 +1790,7 @@ coord point::getBoardCoord() {
     return coord(i, j);
 };
 
-bool squareBoard::clickPoint(){
+bool squareBoard::clickPoint(bool trydrawLine){
 
    for (int i = 0; i < 6; ++i) {
         coord  position  = CheckPoint[i].getPixelCoord();
@@ -1787,10 +1804,25 @@ bool squareBoard::clickPoint(){
         const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
         x1 = x1;
         
-        if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
-            std::cout << "clickPoint #" << i << std::endl;
-           //addLine()
-            CurrenClickpoint = i;
+        if (M.x >= x0-25  && M.x<= x1+25  && M.y >= y0 - 25 && M.y <= y1 + 25) {
+            
+           
+            //std::cout << "clickPoint #" << CurrentClickpoint << std::endl;
+            if (trydrawLine) {
+                std::cout << "line "<< i<<"->"<< getCurrentClickpoint() <<  std::endl;
+                dellLastline();
+                addLine((getCheckPoint())[getCurrentClickpoint()].getPixelCoord().x + CheckPoint[i].getSize() / 2,
+                    (getCheckPoint())[getCurrentClickpoint()].getPixelCoord().y + +CheckPoint[i].getSize() / 2,
+                    x0 + CheckPoint[i].getSize() / 2, y0 + CheckPoint[i].getSize() / 2
+                );
+                line[line.size()-1].setHold();
+                ChekpointInput.push_back(maximal(i, CurrentClickpoint) * 10 + minimal(i, CurrentClickpoint));
+                CurrentClickpoint = -1;
+                
+            }
+            else CurrentClickpoint = i;
+
+
             return true;
 
         } 
@@ -1824,7 +1856,7 @@ void squareBoard::draw() {
   
     for (int i = 0; i < line.size(); i++)
     {
-        std::cout << "drawline " << line[i].getVertexCount() << std::endl;
+        //std::cout << "drawline " << line[i].getVertexCount() << std::endl;
         WindowLink.getWindow()->draw(line[i]);
         
     }
@@ -1861,18 +1893,19 @@ bool first = true;
 
 
     sf::Event event;
+    bool trydrawLine = false;
     while (window->isOpen()) {
 
         window->clear();
 
 
-        /*
+       
         window->draw(List);
 
 
         window->draw(textFrame.gettext());
         window->draw(CheckButtonSprite);
-      */
+      
         sB.draw();
        
         
@@ -1897,34 +1930,31 @@ bool first = true;
 
                 }
 
-                if (sB.clickPoint()) {
+                sB.clickPoint(trydrawLine); trydrawLine = false;
 
                     
-                }
+                
 
 
             }
-            int CurrenClickpointID = sB.getCurrenClickpoint();
-            if (CurrenClickpointID > 0) {
+            int CurrentClickpointID = sB.getCurrentClickpoint();
+            if (CurrentClickpointID >= 0) {
                 coord XY;
-                XY = sB.getCheckPoint()[sB.getCurrenClickpoint()].getPixelCoord();
-                const sf::Vector2i& M = sf::Mouse::getPosition(*window);
-
-
-
-
-
+                XY = sB.getCheckPoint()[CurrentClickpointID].getPixelCoord();
+                const sf::Vector2i& M = sf::Mouse::getPosition(*window);               
                 sf::VertexArray VA = sB.getLastline();
                 std::cout << M.x << "x" << M.y << std::endl;
                 sB.dellLastline();
-                sB.addLine(XY.x, XY.y, M.x, M.y);
-
+                int szPoint = sB.getCheckPoint()[0].getSize() / 2;
+                sB.addLine(XY.x+ szPoint, XY.y+ szPoint, M.x+ szPoint, M.y+ szPoint);
+                trydrawLine = true;
 
             }
         }
     }
 
     srand(time(0));
+    sB.printChekpointInput();
 }
 
 

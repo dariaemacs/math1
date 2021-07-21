@@ -14,6 +14,13 @@
 
 class Window;
 
+class MyVertexArray : public sf::VertexArray {
+    bool hold;
+public:
+    MyVertexArray() : hold(false), sf::VertexArray() { int uu = 90; };
+    void setHold() { hold=true; }
+    bool getHold() { return hold; }
+};
 
 
 class Buttons {
@@ -327,14 +334,14 @@ class squareBoard {
      heightsqareBord, squareWidth;
     int questFigure;
     bool alreadyDraw;
-    int CurrenClickpoint; 
+    int CurrentClickpoint; 
     std::vector<sf::RectangleShape> HorizLine;
     std::vector<sf::RectangleShape> VertLine;
-    //sf::VertexArray * UserInputLine(sf::Lines, 2);
-    std::vector < sf::VertexArray> line;
-    
-   // sf::VertexArray lines(sf::Lines, 16);
+    std::vector < MyVertexArray> line;
     std::array<point,6> CheckPoint;
+    
+    std::vector < int> ChekpointInput;
+
     std::vector<int> i1;
     Window& WindowLink;
     public:
@@ -346,15 +353,21 @@ class squareBoard {
        float getsquareWidth();
        void setquestFigure(int);
        int getwidthsqareBord() { return widthsqareBord; };
-       int getCurrenClickpoint(){ return CurrenClickpoint; };
+       int getCurrentClickpoint(){ return CurrentClickpoint; };
        std::array<point, 6>& getCheckPoint() { return CheckPoint; }
        //std::vector<sf::VertexArray>& getUserInputLine() {return  UserInputLine;}
-       bool clickPoint();
+       bool clickPoint(bool);
        void addLine(float , float, float, float);
        sf::VertexArray getLastline() {  return line[line.size()-1]; };
        void dellLastline() {
-           if (line.size()>5) for (int i = 0; i < 5; i++) line.pop_back();
+           if (line.size()>5 && (!line[line.size()-1].getHold())) for (int i = 0; i < 5; i++) line.pop_back();
        };
+
+       void printChekpointInput() {
+           if (ChekpointInput.size() > 0) for (int i = 0; i < ChekpointInput.size(); i++) std::cout<< ChekpointInput[i]<<",";
+           std::cout << std::endl;
+       };
+
 
        
 };
