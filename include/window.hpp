@@ -12,6 +12,10 @@
 
 #include <SFML/Graphics.hpp>
 
+#define maximal(a, b) (((a)>(b))?(a):(b))
+#define minimal(a, b) (((a)<(b))?(a):(b))
+#define three_minimal(a, b, c) minimal(minimal(a, b), c)
+
 class Window;
 
 class MyVertexArray : public sf::VertexArray {
@@ -362,12 +366,19 @@ class squareBoard {
        void dellLastline() {
            if (line.size()>5 && (!line[line.size()-1].getHold())) for (int i = 0; i < 5; i++) line.pop_back();
        };
-
+       void sortChekpointInput(){
+       sort(ChekpointInput.begin(), ChekpointInput.end());
+       ChekpointInput.erase(unique(ChekpointInput.begin(), ChekpointInput.end()), ChekpointInput.end());
+       }
        void printChekpointInput() {
            if (ChekpointInput.size() > 0) for (int i = 0; i < ChekpointInput.size(); i++) std::cout<< ChekpointInput[i]<<",";
            std::cout << std::endl;
        };
-
+       void addChekpointInput(int a,int b) {
+           if ((a == 0 && b == 2) || (a == 2 && b == 0)) { addChekpointInput(0, 1); addChekpointInput(1, 2); return; }
+           if ((a == 3 && b == 5) || (a == 5 && b == 3)) { addChekpointInput(5, 4); addChekpointInput(4, 3); return; }
+           ChekpointInput.push_back(maximal(a, b) * 10 + minimal(a, b));
+       };
 
        
 };

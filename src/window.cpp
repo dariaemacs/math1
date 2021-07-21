@@ -1689,7 +1689,7 @@ WindowLink(wl), CurrentClickpoint(-1)
 
 
             addLine(ax, ay, bx, by);
-            ChekpointInput.push_back(maximal(question7trianglevariantOfFirstLine[VARIANT].i, question7trianglevariantOfFirstLine[VARIANT].j) * 10 + minimal(question7trianglevariantOfFirstLine[VARIANT].i, question7trianglevariantOfFirstLine[VARIANT].j));
+            addChekpointInput(question7trianglevariantOfFirstLine[VARIANT].i, question7trianglevariantOfFirstLine[VARIANT].j);
 
 
             break;
@@ -1704,8 +1704,8 @@ WindowLink(wl), CurrentClickpoint(-1)
 
 
             addLine(ax, ay, bx, by);
-            ChekpointInput.push_back(maximal(question7rectanglevariantOfFirstLine[VARIANT].i, question7rectanglevariantOfFirstLine[VARIANT].j) * 10 + minimal(question7rectanglevariantOfFirstLine[VARIANT].i, question7rectanglevariantOfFirstLine[VARIANT].j));
-
+            addChekpointInput(question7rectanglevariantOfFirstLine[VARIANT].i, question7rectanglevariantOfFirstLine[VARIANT].j);
+            
             break;
 
         case square:
@@ -1716,7 +1716,7 @@ WindowLink(wl), CurrentClickpoint(-1)
             bx = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
             by = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
             addLine(ax, ay, bx, by);
-            ChekpointInput.push_back(maximal(question7rectanglevariantOfFirstLine[VARIANT].i, question7rectanglevariantOfFirstLine[VARIANT].j) * 10 + minimal(question7rectanglevariantOfFirstLine[VARIANT].i, question7rectanglevariantOfFirstLine[VARIANT].j));
+            addChekpointInput(question7rectanglevariantOfFirstLine[VARIANT].i, question7rectanglevariantOfFirstLine[VARIANT].j);
             break;
 
         
@@ -1816,8 +1816,10 @@ bool squareBoard::clickPoint(bool trydrawLine){
                     x0 + CheckPoint[i].getSize() / 2, y0 + CheckPoint[i].getSize() / 2
                 );
                 line[line.size()-1].setHold();
-                ChekpointInput.push_back(maximal(i, CurrentClickpoint) * 10 + minimal(i, CurrentClickpoint));
-                CurrentClickpoint = -1;
+                if (i != CurrentClickpoint) {
+                    addChekpointInput(i, CurrentClickpoint);
+                    CurrentClickpoint = -1;
+                }
                 
             }
             else CurrentClickpoint = i;
@@ -1914,7 +1916,7 @@ bool first = true;
 
 
         window->display();
-         //sf::Vector2i& M = sf::Mouse::getPosition(*window);
+
         while (window->pollEvent(event)) {
 
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
@@ -1923,16 +1925,16 @@ bool first = true;
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
-                if (readyforCheck ) {
-
-
+                if (readyforCheck && checkandnextQuest(1)) {
+                    sB.sortChekpointInput();
+                    sB.printChekpointInput();
 
 
                 }
 
                 sB.clickPoint(trydrawLine); trydrawLine = false;
-
-                    
+                CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                CheckButtonSprite.setTexture(CheckButtonTexture);
                 
 
 
@@ -1948,13 +1950,12 @@ bool first = true;
                 int szPoint = sB.getCheckPoint()[0].getSize() / 2;
                 sB.addLine(XY.x+ szPoint, XY.y+ szPoint, M.x+ szPoint, M.y+ szPoint);
                 trydrawLine = true;
-
+                
             }
         }
     }
 
     srand(time(0));
-    sB.printChekpointInput();
 }
 
 
