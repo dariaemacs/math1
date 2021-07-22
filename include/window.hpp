@@ -387,7 +387,9 @@ class squareBoard {
            ChekpointInput.push_back(maximal(a, b) * 10 + minimal(a, b));
        };
        void eraseLines();
-       
+       bool isTriangle();
+       bool issegmentexsistinFigure(int);
+
 };
 
 

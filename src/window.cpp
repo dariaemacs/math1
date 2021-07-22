@@ -1899,6 +1899,43 @@ bool QuestType7::IsclearButtonClick() {
     return false;
 
 }
+bool squareBoard::issegmentexsistinFigure(int segment) {
+    unsigned long long tmp = result;
+    while (tmp > 0) {
+        if ((tmp % 100)== segment) return true;
+        //std::cout << tmp << std::end;
+        tmp = tmp / 100;
+    }
+    
+    return false;
+}
+bool squareBoard::isTriangle() {
+
+    auto segmentexsistinFigure = [](int index, unsigned long long tmp)
+    {
+        int count = 3;
+        while (count-- > 0) {
+            if (count == index) return tmp % 100;
+            //std::cout << tmp << std::end;
+            tmp = tmp / 100;
+        }
+        
+    };
+
+    int tmp1 = 0;
+    int tmp2 = 0;
+    if (issegmentexsistinFigure(10) && issegmentexsistinFigure(21)) tmp1++;
+    if (issegmentexsistinFigure(43) && issegmentexsistinFigure(54)) tmp2++;
+    if (tmp1 + tmp2>1) return false;
+    if (ChekpointInput.size() - tmp1- tmp2 != 3) return false;
+
+    //float a = pow(x, 2)
+    int test1 = segmentexsistinFigure(1, result);
+    int test2 = segmentexsistinFigure(2, result);
+    int test3 = segmentexsistinFigure(3, result);
+    
+    return true;
+}
 
 void squareBoard::eraseLines() {
     ChekpointInput.clear();
@@ -1966,7 +2003,8 @@ bool first = true;
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
                     sB.sortChekpointInput();
                     sB.printChekpointInput();
-
+                    sB.isTriangle();
+                    std::cout<<sB.issegmentexsistinFigure(10)<<std::endl;
 
                 }
                 if (IsclearButtonClick()) {
