@@ -342,12 +342,14 @@ class squareBoard {
     std::vector<sf::RectangleShape> HorizLine;
     std::vector<sf::RectangleShape> VertLine;
     std::vector < MyVertexArray> line;
-    std::array<point,6> CheckPoint;
-    
+    std::array<point,6> CheckPoint;    
     std::vector < int> ChekpointInput;
+    int firstpointInput_i;
+    int firstpointInput_j;
 
     std::vector<int> i1;
     Window& WindowLink;
+    unsigned long long result;
     public:
         squareBoard(float , float , Window&);
        void draw();
@@ -371,15 +373,20 @@ class squareBoard {
        ChekpointInput.erase(unique(ChekpointInput.begin(), ChekpointInput.end()), ChekpointInput.end());
        }
        void printChekpointInput() {
-           if (ChekpointInput.size() > 0) for (int i = 0; i < ChekpointInput.size(); i++) std::cout<< ChekpointInput[i]<<",";
-           std::cout << std::endl;
+           result = 0;
+           if (ChekpointInput.size() > 0) for (int i = 0; i < ChekpointInput.size(); i++) {
+               result = result * 100 + ChekpointInput[i] ;
+           }
+               
+               std::cout<< result <<",";
+           //std::cout << std::endl;
        };
        void addChekpointInput(int a,int b) {
            if ((a == 0 && b == 2) || (a == 2 && b == 0)) { addChekpointInput(0, 1); addChekpointInput(1, 2); return; }
            if ((a == 3 && b == 5) || (a == 5 && b == 3)) { addChekpointInput(5, 4); addChekpointInput(4, 3); return; }
            ChekpointInput.push_back(maximal(a, b) * 10 + minimal(a, b));
        };
-
+       void eraseLines();
        
 };
 
@@ -387,11 +394,13 @@ class squareBoard {
 
 class QuestType7 : public Window {
     squareBoard sB;
+    sf::Texture    EraseButtonTexture;
+    sf::Sprite     EraseButtonSprite;
 
 public:
     QuestType7(int, int);
     squareBoard& getsB() { return sB; }
-
+    bool IsclearButtonClick();
 };
 
 
