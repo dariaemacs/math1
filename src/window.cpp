@@ -1951,7 +1951,9 @@ bool first = true;
     EraseButtonSprite.setPosition(sf::Vector2f(w-128, h - 128));
 
     sB.setquestFigure(question7Text[getQuestNumber()].key);
-
+    QuestComment.settext(L"");
+    
+    
 
     sf::Event event;
     bool trydrawLine = false;
@@ -1990,24 +1992,24 @@ bool first = true;
                     sB.printChekpointInput();
                     switch (sB.getquestFigure())
                     {
-                    triangle:
+                    case triangle:
                         if (sB.isfigureInputright(question7AnswersTriangle)) QuestComment.settext(CommentsDic[1]);
                         else QuestComment.settext(CommentsDic[2]);
                         break;
 
 
-                    rectangle:
+                    case rectangle:
                         if (sB.isfigureInputright(question7AnswersRectangle)) QuestComment.settext(CommentsDic[1]);
                         else QuestComment.settext(CommentsDic[2]);
                         break;
 
 
-                    square:
+                    case square:
                         if (sB.isfigureInputright(question7AnswersSquare)) QuestComment.settext(CommentsDic[1]);
                         else QuestComment.settext(CommentsDic[2]);
                         break;
                     };
-                    //}
+                    QuestComment.setmargin_top(h - QuestComment.getHeight()-50);
 
 
                 }
