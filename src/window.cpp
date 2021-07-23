@@ -1899,43 +1899,6 @@ bool QuestType7::IsclearButtonClick() {
     return false;
 
 }
-bool squareBoard::issegmentexsistinFigure(int segment) {
-    unsigned long long tmp = result;
-    while (tmp > 0) {
-        if ((tmp % 100)== segment) return true;
-        //std::cout << tmp << std::end;
-        tmp = tmp / 100;
-    }
-    
-    return false;
-}
-bool squareBoard::isTriangle() {
-
-    auto segmentexsistinFigure = [](int index, unsigned long long tmp)
-    {
-        int count = 3;
-        while (count-- > 0) {
-            if (count == index) return tmp % 100;
-            //std::cout << tmp << std::end;
-            tmp = tmp / 100;
-        }
-        
-    };
-
-    int tmp1 = 0;
-    int tmp2 = 0;
-    if (issegmentexsistinFigure(10) && issegmentexsistinFigure(21)) tmp1++;
-    if (issegmentexsistinFigure(43) && issegmentexsistinFigure(54)) tmp2++;
-    if (tmp1 + tmp2>1) return false;
-    if (ChekpointInput.size() - tmp1- tmp2 != 3) return false;
-
-    //float a = pow(x, 2)
-    int test1 = segmentexsistinFigure(1, result);
-    int test2 = segmentexsistinFigure(2, result);
-    int test3 = segmentexsistinFigure(3, result);
-    
-    return true;
-}
 
 void squareBoard::eraseLines() {
     ChekpointInput.clear();
@@ -1954,6 +1917,27 @@ void squareBoard::eraseLines() {
     addChekpointInput(firstpointInput_i, firstpointInput_j);
 }
 
+bool squareBoard::issegmentexsistinFigure(int segment) {
+    unsigned long long tmp = result;
+    while (tmp > 0) {
+        if ((tmp % 100) == segment) return true;
+        //std::cout << tmp << std::end;
+        tmp = tmp / 100;
+    }
+
+    return false;
+}
+
+bool squareBoard::isfigureInputright(const unsigned long long* figureAnswer) {
+    if (!issegmentexsistinFigure(firstpointInput_i*10+ firstpointInput_j)) return false;
+    int size = sizeof(question7AnswersTriangle) / sizeof(*question7AnswersTriangle);
+    for (int i = 0; i < size; i++)
+        if (figureAnswer[i] == result) return true;
+
+    return false;
+}
+
+
 QuestType7::QuestType7(int w, int h) :
     Window(w, h, ((rand() % 3)), 6),
     sB(w,h,*this) {
@@ -1966,7 +1950,7 @@ bool first = true;
     EraseButtonSprite.setTexture(EraseButtonTexture);
     EraseButtonSprite.setPosition(sf::Vector2f(w-128, h - 128));
 
-    // определяем вершины
+    sB.setquestFigure(question7Text[getQuestNumber()].key);
 
 
     sf::Event event;
@@ -1983,6 +1967,7 @@ bool first = true;
         window->draw(textFrame.gettext());
         window->draw(CheckButtonSprite);
         window->draw(EraseButtonSprite);
+        window->draw(QuestComment.gettext());
         sB.draw();
        
         
@@ -2003,8 +1988,27 @@ bool first = true;
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
                     sB.sortChekpointInput();
                     sB.printChekpointInput();
-                    sB.isTriangle();
-                    std::cout<<sB.issegmentexsistinFigure(10)<<std::endl;
+                    switch (sB.getquestFigure())
+                    {
+                    triangle:
+                        if (sB.isfigureInputright(question7AnswersTriangle)) QuestComment.settext(CommentsDic[1]);
+                        else QuestComment.settext(CommentsDic[2]);
+                        break;
+
+
+                    rectangle:
+                        if (sB.isfigureInputright(question7AnswersRectangle)) QuestComment.settext(CommentsDic[1]);
+                        else QuestComment.settext(CommentsDic[2]);
+                        break;
+
+
+                    square:
+                        if (sB.isfigureInputright(question7AnswersSquare)) QuestComment.settext(CommentsDic[1]);
+                        else QuestComment.settext(CommentsDic[2]);
+                        break;
+                    };
+                    //}
+
 
                 }
                 if (IsclearButtonClick()) {
@@ -2036,7 +2040,7 @@ bool first = true;
         }
     }
 
-    srand(time(0));
+    //srand(time(0));
 }
 
 

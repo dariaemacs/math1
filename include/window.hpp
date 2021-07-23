@@ -356,6 +356,10 @@ class squareBoard {
        void setMargintop(float);
        float getMargintop();
        float getMarginLeft();
+       int getquestFigure() {
+           return questFigure;
+       }
+       int getResult() { return result; }
        float getsquareWidth();
        void setquestFigure(int);
        int getwidthsqareBord() { return widthsqareBord; };
@@ -387,9 +391,9 @@ class squareBoard {
            ChekpointInput.push_back(maximal(a, b) * 10 + minimal(a, b));
        };
        void eraseLines();
-       bool isTriangle();
+       bool isfigureInputright(const unsigned long long*);
        bool issegmentexsistinFigure(int);
-
+       
 };
 
 

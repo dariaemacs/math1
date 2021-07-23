@@ -66,19 +66,44 @@ figureQestions{L"Лиза решила купить в магазине шарик за 7 рублей. У нее есть так
 figureQestions{L"Деньги за покупку игрушки принимает автомат. У Ани есть такие монеты. \nДевочка хочет купить игрушку за 9 рублей. Она опустила в автомат одну \nмонету и получила сдачу. Какую сдачу получила Аня? "       ,calc},
 };
 extern const int question6Answers[] = { 4,2,3,1};
+extern const unsigned long long question7AnswersRectangle[3] = { 21415254, 10304143, 102130435254 };
+extern const unsigned long long question7AnswersSquare[2] = { 21415254, 10304143};
+extern const unsigned long long question7AnswersTriangle[21] = {
+103031,
+104041,
+10213032,
+10215052,
+105051,
+10214042,
+10213032,
+30435054,
+304043,
+32435254,
+425254,
+215152,
+415154,
+31435154,
+213132,
+214142,
+103031,
+10213032,
+405054,
+324243,
+314143
+};
 
 extern const figureQestions question7Text[] = { 
     figureQestions{L"Дорисуй мышкой данную фигуру так, чтобы получился треугольник",triangle},
     figureQestions{L"Дорисуй мышкой данную фигуру так, чтобы получился прямоугольник",rectangle},
-    figureQestions{L"Дорисуй мышкой данную фигуру так, чтобы получился квадрат",rectangle},
+    figureQestions{L"Дорисуй мышкой данную фигуру так, чтобы получился квадрат",square},
 };
 
-extern const variantOfLine question7squarevariantOfFirstLine[] = { 0,1, 1,2, 2,3 , 3,4 , 4,5 ,5,0 , 1,5  };
-extern const variantOfLine question7trianglevariantOfFirstLine[] = { 0,1, 1,2, 2,3 , 3,4 , 4,5 ,5,0 , 1,5,
-0,3,2,5,1,3,2,4,1,5,0,4
+extern const variantOfLine question7squarevariantOfFirstLine[] = { 1,0, 2,1, 3,2 , 4,3 , 5,4 ,5,0 , 5,1  };
+extern const variantOfLine question7trianglevariantOfFirstLine[] = { 1,0, 2,1, 3,2 , 4,3 , 5,4 ,5,0 , 5,1,
+3,0,5,2,3,1,4,2,5,1,4,0
 
 };
-extern const variantOfLine question7rectanglevariantOfFirstLine[] = { 0,1, 1,2, 2,5 , 1,4 , 0,3 ,3,4 , 4,5 };
+extern const variantOfLine question7rectanglevariantOfFirstLine[] = { 1,0, 2,1, 5,2 , 4,1 , 3,0 ,4,3 , 5,4 };
 
 extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text };
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
