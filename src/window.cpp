@@ -60,13 +60,14 @@ void PicturetoView::CalcucateCoordinate( ) {
     using namespace std;
     sf::Texture tmp;
 
-    int button_margin_left = 0;
+    int button_margin_left = margin_left;
     tmp.loadFromFile(pictureFilename+".png");
     sf::Vector2u PICTURESIZE = tmp.getSize();
     if (PICTURESIZE.x > PICTURESIZE.y && PICTURESIZE.x / PICTURESIZE.y >= 2)  PICTURESIZE.x /=  2;
     int ButtonSlideHeght = WindowLink.getHeight() / 3;
     
     float PICTURESIZE_W = PICTURESIZE.x;
+    width = PICTURESIZE.x;
     float PICTURESIZE_H = PICTURESIZE.y;
     ////std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
     scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
@@ -1877,7 +1878,7 @@ void point::setPosition(float ii, float jj) {
     i = ii;
     j = jj;
     x = Sb->getMarginLeft() + (point0+14*jj) * Sb->getsquareWidth() - (int)(getSize() / 2);
-    y = Sb->getMargintop() + (8+12*ii) * Sb->getsquareWidth() - (int)(getSize() / 2);
+    y = Sb->getMargintop() + (6+14*ii) * Sb->getsquareWidth() - (int)(getSize() / 2);
     sf::RectangleShape::setPosition(x, y);
 }
 
@@ -2046,3 +2047,149 @@ bool first = true;
 }
 
 
+QuestType8::QuestType8(int w, int h)
+    :Window(w, h, ((rand() % 4)), 7),
+    setofpic0(*this),
+    setofpic1(*this),
+    setofpic2(*this),
+    setofpic3(*this),
+    setofpic4(*this),
+    setofpic5(*this){
+    
+
+
+
+    bool first = true;
+    int margintopSlideButton = 0;
+
+    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    CheckButtonSprite.setTexture(CheckButtonTexture);
+
+   
+    setofpic0.setButtonCount(1);
+    setofpic1.setButtonCount(1);
+    setofpic2.setButtonCount(1);
+    setofpic3.setButtonCount(1);
+    setofpic4.setButtonCount(1);
+    setofpic5.setButtonCount(1);
+    
+
+    setofpic0.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "0");
+    setofpic1.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "1");
+    setofpic2.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "2");
+    setofpic3.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "3");
+    setofpic4.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "4");
+    setofpic5.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "5");
+
+    setofpic0.setMargin_left(10);
+    setofpic0.CalcucateCoordinate();
+    setofpic1.setMargin_left(setofpic0.getWidth()* setofpic0.getScale() +10);
+    setofpic1.CalcucateCoordinate();
+    setofpic2.setMargin_left(2*(setofpic1.getWidth()* setofpic1.getScale()) + 10);
+    setofpic2.CalcucateCoordinate();
+    setofpic3.setMargin_left(3 * (setofpic2.getWidth() * setofpic2.getScale()) + 10);
+    setofpic3.CalcucateCoordinate();
+    setofpic4.setMargin_left(4 * (setofpic3.getWidth() * setofpic3.getScale()) + 10);
+    setofpic4.CalcucateCoordinate();
+    setofpic5.setMargin_left(5 * (setofpic4.getWidth() * setofpic4.getScale()) + 10);
+    setofpic5.CalcucateCoordinate();
+
+
+
+    /*setofpic1.setMargin_left(200);
+    setofpic1.CalcucateCoordinate();
+    setofpic2.setMargin_left(300);
+    setofpic2.CalcucateCoordinate();
+    setofpic3.setMargin_left(400);
+    setofpic3.CalcucateCoordinate();
+    setofpic4.setMargin_left(500);
+    setofpic4.CalcucateCoordinate();
+    setofpic5.setMargin_left(600);
+    setofpic5.CalcucateCoordinate();*/
+
+
+
+    sf::Event event;
+    while (window->isOpen()) {
+        window->clear();
+        window->draw(List);
+
+        if (first) {
+            //Buttons.CalcucateCoordinate(); 
+            first = false;
+
+            QuestComment.setmargin_top(h - h/3);
+            QuestComment.CalcucateCoordinate(h / 3,w/2);
+            //Buttons.setMargin_top(100);
+
+            
+            first = false;
+
+
+
+
+
+        }
+        window->draw(QuestComment.gettext());
+        window->draw(textFrame.gettext());
+
+        window->draw(*setofpic0.getButtons()[0]);
+        window->draw(*setofpic1.getButtons()[0]);
+        window->draw(*setofpic2.getButtons()[0]);
+        window->draw(*setofpic3.getButtons()[0]);
+        window->draw(*setofpic4.getButtons()[0]);
+        window->draw(*setofpic5.getButtons()[0]);
+        /*window->draw(setofpic1.getButtons()[bc]);
+        window->draw(setofpic2.getButtons()[bc]);
+        window->draw(setofpic3.getButtons()[bc]);
+        window->draw(setofpic4.getButtons()[bc]);
+        window->draw(setofpic5.getButtons()[bc]);*/
+    
+        
+
+
+
+
+        window->display();
+        while (window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
+                window->close();
+            }
+
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+                //if (readyforCheck ) {
+
+
+
+                //    if (Buttons.GetButtonsClickID() + 1 == question6Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
+                //    else { //wrong
+                //        QuestComment.settext(CommentsDic[2]);
+                //        Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
+                //            "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
+
+                //        Buttons.getButtonTexture()[question5Answers[questNumber] - 1]->loadFromFile(
+                //            "resources/images/digit" + std::to_string(question5Answers[questNumber]) + "_right.jpg"
+                //        );
+                //    }
+                //    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
+
+
+
+                //}
+                //if (Buttons.click()) {
+                //    ////std::cout << "Button.click" << std::endl;
+                //    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                //    CheckButtonSprite.setTexture(CheckButtonTexture);
+                //}
+                //if (coin1.click() || coin2.click()) {
+
+                //}
+
+
+            }
+        }
+    }
+
+    srand(time(0));
+}

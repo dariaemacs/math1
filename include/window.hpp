@@ -81,6 +81,10 @@ public:
       return height;
   }
 
+  int getWidth() {
+      return width;
+  }
+
   int getMarginLeft() { 
       return margin_left; 
   }
@@ -303,6 +307,16 @@ public:
 //protected: std::string pictureFilename;
 };
 
+class setofpictureObject : public PicturetoView {
+
+
+public:
+    setofpictureObject(Window& w) : PicturetoView(w) {}
+    //void CalcucateCoordinate();
+    //bool click();
+    
+};
+
 class QuestType6 : public Window {
     Buttons Buttons;
     PicturetAndFilmtoView coin1;
@@ -409,6 +423,20 @@ public:
     bool IsclearButtonClick();
 };
 
+
+class QuestType8 : public Window {
+    setofpictureObject setofpic0;
+    setofpictureObject setofpic1;
+    setofpictureObject setofpic2;
+    setofpictureObject setofpic3;
+    setofpictureObject setofpic4;
+    setofpictureObject setofpic5;
+    
+    
+public:
+    QuestType8(int, int);
+
+};
 
 
 #endif 

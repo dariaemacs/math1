@@ -21,6 +21,7 @@ extern std::vector< std::vector<int>> numSeries;
 constexpr int N1 = 3; 
 constexpr int N2 = 6;
 constexpr int N3 = 6;
+constexpr int N8 = 4;
 constexpr int X = 5; 
 constexpr int Y = 6;
 
@@ -40,6 +41,7 @@ extern const figureQestions question4Text[];
 extern const figureQestions question5Text[];
 extern const figureQestions question6Text[];
 extern const figureQestions question7Text[];
+extern const figureQestions question8Text[];
 extern const figureQestions* qestionarrayList[];
 
 
@@ -53,6 +55,7 @@ struct variantOfLine { int i, j; };
 extern const variantOfLine question7squarevariantOfFirstLine[];
 extern const variantOfLine question7trianglevariantOfFirstLine[];
 extern const variantOfLine question7rectanglevariantOfFirstLine[];
+//extern const variantOfLine question8rectanglevariantOfFirstLine[];
 
 extern const std::vector<pica> tree;
 extern const std::vector<std::string> iconsFilename;
@@ -69,6 +72,8 @@ struct phrasetoReplace {
 extern const std::array <std::array<phrasetoReplace, X>,Y> phrasestoReplace;
 extern const std::array<std::string,N2> filenamesforPicaQuest2 ;
 extern const std::array<std::string, N2> filenamesforPicaQuest3;
+extern const std::array<std::string, N8> filenamesforPicaQuest8;
+
 
 #endif //DATABASE_H
 

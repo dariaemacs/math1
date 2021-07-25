@@ -21,15 +21,23 @@ int main() {
 
         srand(time(0));
 
-        //QuestType1(width, height,20);
-
-        QuestType7(width, height);
-
-
-
+       
+   /*     QuestType1(width, height, 20);
+        QuestType2(width, height, 20);
+        QuestType3(width, height, 20);
+        QuestType4(width, height, 20);
+        QuestType5(width, height, 20);
+        QuestType6(width, height, 20);
+        QuestType7(width, height);*/
+        QuestType8(width, height);
+       /* QuestType8(width, height, 20);
+        QuestType8(width, height, 20);
+        QuestType8(width, height, 20);
+        QuestType8(width, height, 20);
+        QuestType8(width, height, 20);*/
 
          width = 1024;  height = 600;
-         QuestType7(width, height);
+         QuestType8(width, height);
 
      width = 1152; height = 864;
      QuestType7(width, height);

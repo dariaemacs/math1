@@ -98,6 +98,15 @@ extern const figureQestions question7Text[] = {
     figureQestions{L"Дорисуй мышкой данную фигуру так, чтобы получился квадрат",square},
 };
 
+extern const figureQestions question8Text[] = {
+
+figureQestions{L"Катя рисует аквариум с рыбками по правилу.\n Определи это правило и нарисуй нужное количество рыбок в пустом аквариуме.",calc},
+figureQestions{L"Серёжа рисует дом с окошками по правилу. Определи это правило\n и нарисуй нужное количество окошек в последнем доме.",calc},
+figureQestions{L"Игнат рисует листочки по правилу. Определи это правило\n и нарисуй нужное количество листочков на пустой веточке.",calc},
+figureQestions{L"Ангелина рисует бабочек по правилу. Определи это правило\n и нарисуй нужное количество бабочек на пустом цветке.",calc}
+
+};
+
 extern const variantOfLine question7squarevariantOfFirstLine[] = { 1,0, 2,1, 3,2 , 4,3 , 5,4 ,5,0 , 5,1  };
 extern const variantOfLine question7trianglevariantOfFirstLine[] = { 1,0, 2,1, 3,2 , 4,3 , 5,4 ,5,0 , 5,1,
 3,0,5,2,3,1,4,2,5,1,4,0
@@ -105,7 +114,7 @@ extern const variantOfLine question7trianglevariantOfFirstLine[] = { 1,0, 2,1, 3
 };
 extern const variantOfLine question7rectanglevariantOfFirstLine[] = { 1,0, 2,1, 5,2 , 4,1 , 3,0 ,4,3 , 5,4 };
 
-extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text };
+extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text };
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("chicken"),
     std::string("pencil"),
@@ -113,6 +122,13 @@ extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("frog"),
     std::string("mushroom"),
     std::string("leaf")
+};
+
+extern const std::array<std::string, N8> filenamesforPicaQuest8 = {
+    std::string("aqua_fish"),
+    std::string("house"),
+    std::string("leaf"),
+    std::string("flower")
 };
 
 
