@@ -312,7 +312,7 @@ class setofpictureObject : public PicturetoView {
 
 public:
     setofpictureObject(Window& w) : PicturetoView(w) {}
-    //void CalcucateCoordinate();
+    void CalcucateCoordinate();
     //bool click();
     
 };
@@ -429,8 +429,12 @@ class QuestType8 : public Window {
     setofpictureObject setofpic1;
     setofpictureObject setofpic2;
     setofpictureObject setofpic3;
-    setofpictureObject setofpic4;
-    setofpictureObject setofpic5;
+
+    setofpictureObject plus;
+    setofpictureObject minus;
+
+    //setofpictureObject setofpic4;
+    //setofpictureObject setofpic5;
     
     
 public:

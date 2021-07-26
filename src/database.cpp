@@ -131,6 +131,18 @@ extern const std::array<std::string, N8> filenamesforPicaQuest8 = {
     std::string("flower")
 };
 
+extern const std::array<std::string, N8> filenamesforPicaQuestMinus8 = {
+    std::string("delete_fish"),
+    std::string("delete_window"),
+    std::string("delete_leaf"),
+    std::string("delete_butterfly")
+};
+extern const std::array<std::string, N8> filenamesforPicaQuestPlus8 = {
+    std::string("add_fish"),
+    std::string("add_window"),
+    std::string("add_leaf"),
+    std::string("add_butterfly")
+};
 
 const std::array <std::array<phrasetoReplace, X>, Y> phrasestoReplace = {
   {

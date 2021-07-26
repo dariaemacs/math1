@@ -74,6 +74,10 @@ extern const std::array<std::string,N2> filenamesforPicaQuest2 ;
 extern const std::array<std::string, N2> filenamesforPicaQuest3;
 extern const std::array<std::string, N8> filenamesforPicaQuest8;
 
+extern const std::array<std::string, N8> filenamesforPicaQuestPlus8;
+extern const std::array<std::string, N8> filenamesforPicaQuestMinus8;
+
+
 
 #endif //DATABASE_H
 

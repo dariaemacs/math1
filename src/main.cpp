@@ -40,53 +40,53 @@ int main() {
          QuestType8(width, height);
 
      width = 1152; height = 864;
-     QuestType7(width, height);
+     QuestType8(width, height);
 
      width = 1200; height = 600;
-     QuestType7(width, height);
+     QuestType8(width, height);
 
      width = 1280; height = 720;
-     QuestType7(width, height);
+     QuestType8(width, height);
 
      width = 1280; height = 768;
-     QuestType7(width, height);
+     QuestType8(width, height);
      width = 1280; height = 1024;
-     QuestType7(width, height);
+     QuestType8(width, height);
 
      width = 1408; height = 1152;
-     QuestType7(width, height);
+     QuestType8(width, height);
      width = 1440; height = 900;
-     QuestType7(width, height);
+     QuestType8(width, height);
      width = 1400; height = 1050;
-     QuestType7(width, height);
+     QuestType8(width, height);
 
 
      width = 1440; height = 1080;
-     QuestType7(width, height);
+     QuestType8(width, height);
 
      width = 1536; height = 960;
-     QuestType7(width, height);
+     QuestType8(width, height);
      width = 1536; height = 1024;
-     QuestType7(width, height);
+     QuestType8(width, height);
 
      width = 1600; height = 900;
-     QuestType7(width, height);
+     QuestType8(width, height);
      width = 1600; height = 1024;
-     QuestType7(width, height);
+     QuestType8(width, height);
      width = 1600; height = 1200;
-     QuestType7(width, height);
+     QuestType8(width, height);
 
      width = 1680; height = 1050;
-     QuestType7(width, height);
+     QuestType8(width, height);
 
      width = 1920; height = 1080;
-     QuestType7(width, height);
+     QuestType8(width, height);
 
      width = 1920; height = 1200;
-     QuestType7(width, height);
+     QuestType8(width, height);
 
      width = 2048; height = 1080;
-     QuestType7(width, height);
+     QuestType8(width, height);
 
     
 

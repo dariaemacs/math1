@@ -1393,6 +1393,46 @@ void PicturetAndFilmtoView::CalcucateCoordinate() {
     //setScale(scale);
 
 }
+
+void setofpictureObject::CalcucateCoordinate() {
+    using namespace std;
+    sf::Texture tmp;
+
+
+    tmp.loadFromFile(pictureFilename + ".png");
+    sf::Vector2u PICTURESIZE = tmp.getSize();
+    if (PICTURESIZE.x > PICTURESIZE.y&& PICTURESIZE.x / PICTURESIZE.y >= 2) { PICTURESIZE.x /= 3; }
+    int ButtonSlideHeght = WindowLink.getHeight() / 3;
+
+    float PICTURESIZE_W = PICTURESIZE.x;
+    float PICTURESIZE_H = PICTURESIZE.y;
+    ////std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
+    scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
+
+
+        do {
+            scale = scale - 0.01;
+            PICTURESIZE_W = PICTURESIZE.x * scale;
+            PICTURESIZE_H = PICTURESIZE.y * scale;
+            ////std::cout << "k=" << scale << std::endl;
+            ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
+        } while (((PICTURESIZE_W * 6 + 6* 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
+
+
+            std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
+            txt->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            ////std::cout << "first loadFromFile" << std::endl;
+            std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
+            sprite->setTexture(*txt.get());
+            sprite->setScale(scale, scale);
+            sprite->move(margin_left, ButtonSlideHeght);
+            MyTexture.emplace_back(std::move(txt));
+            ButtonsList.emplace_back(std::move(sprite));
+            isblackSide.push_back(true);
+            width  = PICTURESIZE_W;
+            height = PICTURESIZE_H;
+}
+
 bool PicturetAndFilmtoView::click() {
     const int speedRotation = 100;
     for (int i = 0; i < ButtonCount; ++i) {
@@ -2053,8 +2093,10 @@ QuestType8::QuestType8(int w, int h)
     setofpic1(*this),
     setofpic2(*this),
     setofpic3(*this),
-    setofpic4(*this),
-    setofpic5(*this){
+
+    plus(*this),
+    minus(*this)
+{
     
 
 
@@ -2070,42 +2112,40 @@ QuestType8::QuestType8(int w, int h)
     setofpic1.setButtonCount(1);
     setofpic2.setButtonCount(1);
     setofpic3.setButtonCount(1);
-    setofpic4.setButtonCount(1);
-    setofpic5.setButtonCount(1);
+    plus.setButtonCount(1);
+    minus.setButtonCount(1);
+    //setofpic4.setButtonCount(1);
+    //setofpic5.setButtonCount(1);
     
 
-    setofpic0.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "0");
-    setofpic1.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "1");
-    setofpic2.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "2");
-    setofpic3.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "3");
-    setofpic4.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "4");
-    setofpic5.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "5");
+    setofpic0.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "1");
+    setofpic1.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "2");
+    setofpic2.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "3");
+    setofpic3.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "0");
 
-    setofpic0.setMargin_left(10);
+    plus.setpictureFilename("resources/images/" +  filenamesforPicaQuestPlus8[getQuestNumber()] );
+    minus.setpictureFilename("resources/images/" + filenamesforPicaQuestMinus8[getQuestNumber()]);
+
+    setofpic0.setMargin_left(0);
     setofpic0.CalcucateCoordinate();
-    setofpic1.setMargin_left(setofpic0.getWidth()* setofpic0.getScale() +10);
+    setofpic1.setMargin_left(setofpic0.getWidth());
     setofpic1.CalcucateCoordinate();
-    setofpic2.setMargin_left(2*(setofpic1.getWidth()* setofpic1.getScale()) + 10);
+    setofpic2.setMargin_left(2*(setofpic1.getWidth() ));
     setofpic2.CalcucateCoordinate();
-    setofpic3.setMargin_left(3 * (setofpic2.getWidth() * setofpic2.getScale()) + 10);
+    setofpic3.setMargin_left(3 * (setofpic2.getWidth()  ));
     setofpic3.CalcucateCoordinate();
-    setofpic4.setMargin_left(4 * (setofpic3.getWidth() * setofpic3.getScale()) + 10);
-    setofpic4.CalcucateCoordinate();
-    setofpic5.setMargin_left(5 * (setofpic4.getWidth() * setofpic4.getScale()) + 10);
-    setofpic5.CalcucateCoordinate();
+
+    plus.setMargin_left(0);
+    minus.setMargin_left(0);
+    plus.CalcucateCoordinate();
+    minus.CalcucateCoordinate();
+
+    //setofpic4.setMargin_left(4 * (setofpic3.getWidth() ));
+    //setofpic4.CalcucateCoordinate();
+    //setofpic5.setMargin_left(5 * (setofpic4.getWidth() ));
+    //setofpic5.CalcucateCoordinate();
 
 
-
-    /*setofpic1.setMargin_left(200);
-    setofpic1.CalcucateCoordinate();
-    setofpic2.setMargin_left(300);
-    setofpic2.CalcucateCoordinate();
-    setofpic3.setMargin_left(400);
-    setofpic3.CalcucateCoordinate();
-    setofpic4.setMargin_left(500);
-    setofpic4.CalcucateCoordinate();
-    setofpic5.setMargin_left(600);
-    setofpic5.CalcucateCoordinate();*/
 
 
 
@@ -2137,13 +2177,10 @@ QuestType8::QuestType8(int w, int h)
         window->draw(*setofpic1.getButtons()[0]);
         window->draw(*setofpic2.getButtons()[0]);
         window->draw(*setofpic3.getButtons()[0]);
-        window->draw(*setofpic4.getButtons()[0]);
-        window->draw(*setofpic5.getButtons()[0]);
-        /*window->draw(setofpic1.getButtons()[bc]);
-        window->draw(setofpic2.getButtons()[bc]);
-        window->draw(setofpic3.getButtons()[bc]);
-        window->draw(setofpic4.getButtons()[bc]);
-        window->draw(setofpic5.getButtons()[bc]);*/
+
+        window->draw(*plus.getButtons()[0]);
+        window->draw(*minus.getButtons()[0]);
+
     
         
 
