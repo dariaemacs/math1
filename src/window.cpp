@@ -1394,7 +1394,7 @@ void PicturetAndFilmtoView::CalcucateCoordinate() {
 
 }
 
-void setofpictureObject::CalcucateCoordinate() {
+void setofpictureObject::CalcucateCoordinate(int where) {
     using namespace std;
     sf::Texture tmp;
 
@@ -1425,7 +1425,10 @@ void setofpictureObject::CalcucateCoordinate() {
             std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
             sprite->setTexture(*txt.get());
             sprite->setScale(scale, scale);
-            sprite->move(margin_left, ButtonSlideHeght);
+            if (where == 1) sprite->move(margin_left, ButtonSlideHeght); else
+                if (where == 2) { 
+                    if (isAdd) margin_left = (WindowLink.getWidth() - PICTURESIZE_W * 2) / 2;
+                    sprite->move(margin_left, WindowLink.getHeight() - PICTURESIZE_H); }
             MyTexture.emplace_back(std::move(txt));
             ButtonsList.emplace_back(std::move(sprite));
             isblackSide.push_back(true);
@@ -1670,6 +1673,41 @@ point::point(float sz) :x(0), y(0), i(0), j(0), Sb(0), size(sz), sf::RectangleSh
     sf::RectangleShape::setPosition(0,0);
     sf::RectangleShape::setSize(sf::Vector2f(sz, sz));
 
+}
+//void QuestType8::loadfromfileforSetofpic3(std::string fn) {
+//    setofpic3.loadFromFile(fn);
+//}
+int setofpictureObject::click(int qty, setofpictureObject& lastpic) {
+    const int speedRotation = 100;
+    for (int i = 0; i < ButtonCount; ++i) {
+        const sf::Vector2f& position = ButtonsList[i]->getPosition();
+        const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
+        int x0 = position.x;
+        int y0 = position.y;
+        int x1 = (float)x0 + (float)rect.width * scale;
+        int y1 = (float)y0 + (float)rect.height * scale;
+
+        const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
+        x1 = x1;
+
+        if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
+            std::string fileName = "";
+            sf::Texture CheckButtonTexture;
+            sf::Sprite CheckButtonSprite(CheckButtonTexture);
+            std::cout <<"**" << std::to_string(qty) << std::endl;
+            if (isAdd ) qty++; else qty--;
+            if (qty >= 0) {
+            fileName = "resources/images/" + filenamesforPicaQuest8[WindowLink.getQuestNumber()] + std::to_string(qty);
+            //WindowLink.setofpic3.loadFromFile(fileName + ".png"); //ButtonPressID = -1;
+            std::cout << std::to_string(qty) << std::endl;
+            (lastpic.getButtonTexture()[0])->loadFromFile(fileName + ".png"); //ButtonPressID = -1;;
+         
+        }
+
+
+        }
+    }
+    return qty;
 }
 
 squareBoard::squareBoard(float ww, float hh, Window& wl) : w(ww), h(hh),  questFigure(wl.getQuestNumber()), squareWidth(0), alreadyDraw(false), 
@@ -2095,7 +2133,8 @@ QuestType8::QuestType8(int w, int h)
     setofpic3(*this),
 
     plus(*this),
-    minus(*this)
+    minus(*this),
+    thingsCount(0)
 {
     
 
@@ -2127,19 +2166,22 @@ QuestType8::QuestType8(int w, int h)
     minus.setpictureFilename("resources/images/" + filenamesforPicaQuestMinus8[getQuestNumber()]);
 
     setofpic0.setMargin_left(0);
-    setofpic0.CalcucateCoordinate();
+    setofpic0.CalcucateCoordinate(1);
     setofpic1.setMargin_left(setofpic0.getWidth());
-    setofpic1.CalcucateCoordinate();
+    setofpic1.CalcucateCoordinate(1);
     setofpic2.setMargin_left(2*(setofpic1.getWidth() ));
-    setofpic2.CalcucateCoordinate();
+    setofpic2.CalcucateCoordinate(1);
     setofpic3.setMargin_left(3 * (setofpic2.getWidth()  ));
-    setofpic3.CalcucateCoordinate();
+    setofpic3.CalcucateCoordinate(1);
 
     plus.setMargin_left(0);
-    minus.setMargin_left(0);
-    plus.CalcucateCoordinate();
-    minus.CalcucateCoordinate();
-
+    plus.setisAdd();
+    plus.CalcucateCoordinate(2);
+    minus.setMargin_left(plus.getMarginLeft()+ plus.getWidth());
+    
+        minus.setMargin_top(500);
+    minus.CalcucateCoordinate(2);
+    
     //setofpic4.setMargin_left(4 * (setofpic3.getWidth() ));
     //setofpic4.CalcucateCoordinate();
     //setofpic5.setMargin_left(5 * (setofpic4.getWidth() ));
@@ -2194,7 +2236,11 @@ QuestType8::QuestType8(int w, int h)
             }
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-
+                if (thingsCount>0) thingsCount = minus.click(thingsCount, setofpic3) ;
+                if (thingsCount < 5) thingsCount = plus.click(thingsCount, setofpic3) ;
+                
+                
+                    window->draw(*setofpic3.getButtons()[0]);
                 //if (readyforCheck ) {
 
 

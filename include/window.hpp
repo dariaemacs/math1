@@ -308,12 +308,13 @@ public:
 };
 
 class setofpictureObject : public PicturetoView {
-
+    bool isAdd;
 
 public:
-    setofpictureObject(Window& w) : PicturetoView(w) {}
-    void CalcucateCoordinate();
-    //bool click();
+    setofpictureObject(Window& w) : PicturetoView(w), isAdd(false){}
+    void CalcucateCoordinate(int);
+    void setisAdd() { isAdd = true; }
+    int click(int, setofpictureObject&);
     
 };
 
@@ -432,6 +433,7 @@ class QuestType8 : public Window {
 
     setofpictureObject plus;
     setofpictureObject minus;
+    int thingsCount;
 
     //setofpictureObject setofpic4;
     //setofpictureObject setofpic5;
@@ -439,7 +441,7 @@ class QuestType8 : public Window {
     
 public:
     QuestType8(int, int);
-
+  
 };
 
 
