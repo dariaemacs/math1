@@ -2153,8 +2153,7 @@ QuestType8::QuestType8(int w, int h)
     setofpic3.setButtonCount(1);
     plus.setButtonCount(1);
     minus.setButtonCount(1);
-    //setofpic4.setButtonCount(1);
-    //setofpic5.setButtonCount(1);
+
     
 
     setofpic0.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "1");
@@ -2182,52 +2181,138 @@ QuestType8::QuestType8(int w, int h)
         minus.setMargin_top(500);
     minus.CalcucateCoordinate(2);
     
-    //setofpic4.setMargin_left(4 * (setofpic3.getWidth() ));
-    //setofpic4.CalcucateCoordinate();
-    //setofpic5.setMargin_left(5 * (setofpic4.getWidth() ));
-    //setofpic5.CalcucateCoordinate();
-
-
-
-
-
     sf::Event event;
     while (window->isOpen()) {
         window->clear();
         window->draw(List);
 
         if (first) {
-            //Buttons.CalcucateCoordinate(); 
-            first = false;
-
-            QuestComment.setmargin_top(h - h/3);
-            QuestComment.CalcucateCoordinate(h / 3,w/2);
-            //Buttons.setMargin_top(100);
-
             
             first = false;
 
-
-
-
-
+            
+            QuestComment.CalcucateCoordinate(h / 3,w/2);
+            QuestComment.settext(L"");
+            first = false;
+            QuestComment.setmargin_top(h - minus.getHeight());
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
-
         window->draw(*setofpic0.getButtons()[0]);
         window->draw(*setofpic1.getButtons()[0]);
         window->draw(*setofpic2.getButtons()[0]);
         window->draw(*setofpic3.getButtons()[0]);
-
         window->draw(*plus.getButtons()[0]);
         window->draw(*minus.getButtons()[0]);
+        window->draw(CheckButtonSprite);
+        window->display();
+        while (window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
+                window->close();
+            }
+
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+                if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
+                    if (thingsCount==4) QuestComment.settext(CommentsDic[1]);
+                    else QuestComment.settext(CommentsDic[2]);
+
+
+                int thingsCounttmp = thingsCount;
+                    thingsCount = minus.click(thingsCount, setofpic3) ; 
+  
+        
+                    thingsCount = plus.click(thingsCount, setofpic3) ;
+                    if (thingsCounttmp != thingsCount) {
+                        CheckButtonTexture.loadFromFile("resources/images/arrow_up.png");
+                        readyforCheck = true;
+                    }
+                
+                    window->draw(*setofpic3.getButtons()[0]);
+
+
+            }
+        }
+    }
+
+    srand(time(0));
+}
+
+table::table(int margintop, Window& wlink):WindowLink(wlink){
+    for (int i = 0; i < 6; i++)
+    {
+        
+        if (i < 5) verticalline[i].resize(2);
+        if (i < 4) horizline[i].resize(2);
+    }
+    //horizline[0].
+    horizline[0][0].position= sf::Vector2f(00, margintop);
+    horizline[0][1].position = sf::Vector2f(200, margintop);
+    horizline[0][0].color = sf::Color::Blue;
+    horizline[0][1].color = sf::Color::Blue;
+
+    horizline[1][0].position = sf::Vector2f(00, margintop+30);
+    horizline[1][1].position = sf::Vector2f(200, margintop + 30);
+    horizline[1][0].color = sf::Color::Red;
+    horizline[1][1].color = sf::Color::Red;
+
+
+    horizline[2][0].position = sf::Vector2f(0, margintop + 60);
+    horizline[2][1].position = sf::Vector2f(200, margintop + 60);
+    horizline[2][0].color = sf::Color::Red;
+    horizline[2][1].color = sf::Color::Red;
+
+
+    horizline[3][0].position = sf::Vector2f(10, margintop + 90);
+    horizline[3][1].position = sf::Vector2f(10, margintop + 90);
+    horizline[3][0].color = sf::Color::Red;
+    horizline[3][1].color = sf::Color::Red;
+
+}
+
+void table::draw() {
+
+    for (int i = 0; i < 6; i++)
+    {
+
+        //if (i < 5) WindowLink.getWindow()->draw(verticalline[i]);
+        if (i < 4) {
+            WindowLink.getWindow()->draw(horizline[i]);
+        }
+    }
 
     
-        
+}
 
+QuestType9::QuestType9( int w, int h, int qtyButtons) :Window(w, h, ((rand() % 4)), 7),Buttons(qtyButtons, *this),
+tab(Window::getHeight()/3,  *this){
 
+    bool first=true;
 
+    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    CheckButtonSprite.setTexture(CheckButtonTexture);
+    sf::Event event;
+    while (window->isOpen()) {
+        window->clear();
+        window->draw(List);
+        tab.draw();
+        if (first) {
+
+            first = false;
+
+            Buttons.CalcucateCoordinate(); first = false;
+            QuestComment.CalcucateCoordinate(h / 3, w / 2);
+            first = false;
+      
+        }
+        window->draw(QuestComment.gettext());
+        window->draw(textFrame.gettext());
+        for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
+            window->draw(*Buttons.getButtons()[bc]);
+        }
+        window->draw(CheckButtonSprite);
+       
+     
 
         window->display();
         while (window->pollEvent(event)) {
@@ -2236,38 +2321,23 @@ QuestType8::QuestType8(int w, int h)
             }
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                if (thingsCount>0) thingsCount = minus.click(thingsCount, setofpic3) ;
-                if (thingsCount < 5) thingsCount = plus.click(thingsCount, setofpic3) ;
-                
-                
-                    window->draw(*setofpic3.getButtons()[0]);
-                //if (readyforCheck ) {
+
+                //if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
+                //    if (thingsCount == 4) QuestComment.settext(CommentsDic[1]);
+                //    else QuestComment.settext(CommentsDic[2]);
 
 
-
-                //    if (Buttons.GetButtonsClickID() + 1 == question6Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
-                //    else { //wrong
-                //        QuestComment.settext(CommentsDic[2]);
-                //        Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
-                //            "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
-
-                //        Buttons.getButtonTexture()[question5Answers[questNumber] - 1]->loadFromFile(
-                //            "resources/images/digit" + std::to_string(question5Answers[questNumber]) + "_right.jpg"
-                //        );
-                //    }
-                //    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
+                //int thingsCounttmp = thingsCount;
+                //thingsCount = minus.click(thingsCount, setofpic3);
 
 
-
+                //thingsCount = plus.click(thingsCount, setofpic3);
+                //if (thingsCounttmp != thingsCount) {
+                //    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png");
+                //    readyforCheck = true;
                 //}
-                //if (Buttons.click()) {
-                //    ////std::cout << "Button.click" << std::endl;
-                //    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                //    CheckButtonSprite.setTexture(CheckButtonTexture);
-                //}
-                //if (coin1.click() || coin2.click()) {
 
-                //}
+                //window->draw(*setofpic3.getButtons()[0]);
 
 
             }
@@ -2275,4 +2345,5 @@ QuestType8::QuestType8(int w, int h)
     }
 
     srand(time(0));
+
 }

@@ -29,7 +29,14 @@ int main() {
         QuestType5(width, height, 20);
         QuestType6(width, height, 20);
         QuestType7(width, height);*/
-        QuestType8(width, height);
+        //QuestType8(width, height);
+        QuestType9(width, height, 20);
+        QuestType9(width, height, 20);
+        QuestType9(width, height, 20);
+        QuestType9(width, height, 20);
+        QuestType9(width, height, 20);
+        QuestType9(width, height, 20);
+        QuestType9(width, height, 20);
        /* QuestType8(width, height, 20);
         QuestType8(width, height, 20);
         QuestType8(width, height, 20);

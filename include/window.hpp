@@ -443,6 +443,21 @@ public:
     QuestType8(int, int);
   
 };
+class table {
+    std::array < sf::VertexArray,5> verticalline;
+    std::array < sf::VertexArray,4> horizline;
+    std::array < sf::Text, 6> text;
+    Window& WindowLink;
+    public:
+        table(int, Window&);
+       void draw();
 
+};
+class QuestType9 : public Window {
+    table tab;
+    Buttons Buttons;
+public:
+    QuestType9(int, int, int);
+};
 
 #endif 

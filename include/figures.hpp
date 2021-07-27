@@ -198,11 +198,11 @@ class Rectangle  {
     rectangle->setPosition((x* owner->getkoef() - (owner->getxmin() * owner->getkoef()))+ owner->getmargin_left(), (y* owner->getkoef() - (owner->getymin() * owner->getkoef())) + owner->getmargin_top());
   }
 
-  void set_size(float width, float height){
+  void set_size(float width, float height) {
       w = width;
       h = height;
-    rectangle->setSize(sf::Vector2f(width* owner->getkoef(), height* owner->getkoef()));
-  }
+      rectangle->setSize(sf::Vector2f(width * owner->getkoef(), height * owner->getkoef()));
+  };
   
   void settings(){
     rectangle->setOutlineThickness(2);
