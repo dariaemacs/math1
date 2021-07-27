@@ -42,6 +42,8 @@ extern const figureQestions question5Text[];
 extern const figureQestions question6Text[];
 extern const figureQestions question7Text[];
 extern const figureQestions question8Text[];
+extern const figureQestions question9Text[];
+
 extern const figureQestions* qestionarrayList[];
 
 

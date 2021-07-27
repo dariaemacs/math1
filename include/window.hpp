@@ -121,6 +121,7 @@ class TextFrameBase {
   int size;
   int w;
   int h;
+  float margin_top;
   Window& WindowLink;
 protected: 
     int questionNumber;
@@ -135,11 +136,17 @@ public:
  // void setwinLink(Window &w) { WindowLink = w; }
   void settext(std::wstring a) { text.setString(a);}
   void setmargin_top(int m);
+  float getmargin_top() {
+      return margin_top; 
+  }
   void CalcucateCoordinate(int, int);
   void setWidth(int);
   int getHeight();
   void setN_M(int,int);
   void setquestionNumber(int qn) { questionNumber=qn; }
+  int getSize() { 
+      return size; 
+  }
 
 
 };
@@ -188,6 +195,7 @@ public:
   int getHeight() { return height; }
   int getQuestNumber(){ return questNumber; }
   int getordQuestNumber() { return ordQuestNumber; }
+  TextFrameBase gettextFrame() { return textFrame; }
   std::shared_ptr<sf::RenderWindow> getWindow() { return window; }
   ~Window() {
       int yyy = 0;
@@ -447,10 +455,11 @@ class table {
     std::array < sf::VertexArray,5> verticalline;
     std::array < sf::VertexArray,4> horizline;
     std::array < sf::Text, 6> text;
+    sf::Font font;
     Window& WindowLink;
     public:
-        table(int, Window&);
-       void draw();
+        table(Window&);
+        void draw();
 
 };
 class QuestType9 : public Window {

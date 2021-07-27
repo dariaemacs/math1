@@ -263,6 +263,7 @@ void TextFrameBase::CalcucateCoordinate(const int w, const int h) {
         width = text.getLocalBounds().width;
         height = text.getLocalBounds().height;
     }
+    margin_top = text.getLocalBounds().top;
 }
 
 PicturetoView::PicturetoView(QuestType2& qtl, std::string fn) : Buttons(0, qtl), pictureFilename(fn){};
@@ -325,6 +326,7 @@ TextFrameBase::TextFrameBase(int s, std::wstring str, int w1, int h1, Window& wi
 void TextFrameBase::setmargin_top(int m) {
     sf::Vector2f pos = text.getPosition();
     text.setPosition(pos.x, m);
+    margin_top = m;
 }
 
 TextFrameBase::TextFrameBase(int s, int quest, int w,  int h, Window& winLink)
@@ -2238,35 +2240,56 @@ QuestType8::QuestType8(int w, int h)
     srand(time(0));
 }
 
-table::table(int margintop, Window& wlink):WindowLink(wlink){
+table::table( Window& wlink):WindowLink(wlink){
     for (int i = 0; i < 6; i++)
     {
         
-        if (i < 5) verticalline[i].resize(2);
-        if (i < 4) horizline[i].resize(2);
+        if (i < 5) {
+            verticalline[i].resize(2);
+            verticalline[i].setPrimitiveType(sf::LineStrip);
+        }
+        if (i < 4) {
+            horizline[i].resize(2);
+            horizline[i].setPrimitiveType(sf::LineStrip);
+        }
     }
-    //horizline[0].
-    horizline[0][0].position= sf::Vector2f(00, margintop);
+
+    text[4].setString(CommentsDic[6]);
+    text[4].setFont(font);
+    text[4].setFillColor(sf::Color::Black);
+    text[4].setPosition(sf::Vector2f(200, 350));
+    text[4].setCharacterSize(WindowLink.gettextFrame().getSize());
+
+    float height0Row = text[4].getLocalBounds().height;
+    float margintop = wlink.gettextFrame().getHeight()+ wlink.gettextFrame().getmargin_top()+15;
+
+    horizline[0][0].position= sf::Vector2f(10, margintop);
     horizline[0][1].position = sf::Vector2f(200, margintop);
-    horizline[0][0].color = sf::Color::Blue;
-    horizline[0][1].color = sf::Color::Blue;
+    horizline[0][0].color = sf::Color::Black;
+    horizline[0][1].color = sf::Color::Black;
 
-    horizline[1][0].position = sf::Vector2f(00, margintop+30);
+    horizline[1][0].position = sf::Vector2f(10, margintop+30);
     horizline[1][1].position = sf::Vector2f(200, margintop + 30);
-    horizline[1][0].color = sf::Color::Red;
-    horizline[1][1].color = sf::Color::Red;
+    horizline[1][0].color = sf::Color::Black;
+    horizline[1][1].color = sf::Color::Black;
 
 
-    horizline[2][0].position = sf::Vector2f(0, margintop + 60);
+    horizline[2][0].position = sf::Vector2f(10, margintop + 60);
     horizline[2][1].position = sf::Vector2f(200, margintop + 60);
-    horizline[2][0].color = sf::Color::Red;
-    horizline[2][1].color = sf::Color::Red;
+    horizline[2][0].color = sf::Color::Black;
+    horizline[2][1].color = sf::Color::Black;
 
 
     horizline[3][0].position = sf::Vector2f(10, margintop + 90);
-    horizline[3][1].position = sf::Vector2f(10, margintop + 90);
-    horizline[3][0].color = sf::Color::Red;
-    horizline[3][1].color = sf::Color::Red;
+    horizline[3][1].position = sf::Vector2f(200, margintop + 90);
+    horizline[3][0].color = sf::Color::Black;
+    horizline[3][1].color = sf::Color::Black;
+
+    font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
+
+
+
+
 
 }
 
@@ -2280,12 +2303,12 @@ void table::draw() {
             WindowLink.getWindow()->draw(horizline[i]);
         }
     }
-
+    WindowLink.getWindow()->draw(text[4]);
     
 }
 
-QuestType9::QuestType9( int w, int h, int qtyButtons) :Window(w, h, ((rand() % 4)), 7),Buttons(qtyButtons, *this),
-tab(Window::getHeight()/3,  *this){
+QuestType9::QuestType9( int w, int h, int qtyButtons) :Window(w, h, ((rand() % 4)), 8),Buttons(qtyButtons, *this),
+tab(*this){
 
     bool first=true;
 

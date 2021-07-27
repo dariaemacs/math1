@@ -106,7 +106,15 @@ figureQestions{L"Игнат рисует листочки по правилу. Определи это правило\n и нари
 figureQestions{L"Ангелина рисует бабочек по правилу. Определи это правило\n и нарисуй нужное количество бабочек на пустом цветке.",calc}
 
 };
-
+extern const figureQestions question9Text[] = {
+figureQestions{L"Дети пошли в лес и собрали грибы, ягоды и листья.\n Сколько грибов собрали дети?",calc},
+figureQestions{L"Дети пошли в лес и собрали грибы, ягоды и листья.\n Сколько ягод собрали дети?",calc},
+figureQestions{L"Дети пошли в лес и собрали грибы, ягоды и листья.\n Сколько листьев собрали дети?",calc},
+figureQestions{L"Дети пошли в лес и собрали грибы, ягоды и листья.\n Сколько всего грибов и ягод собрал Костя?",calc},
+figureQestions{L"Дети пошли в лес и собрали грибы, ягоды и листья.\n Сколько всего листьев и грибов собрал Костя?",calc},
+figureQestions{L"Дети пошли в лес и собрали грибы, ягоды и листья.\n Сколько всего грибов и ягод собрала Маша?",calc},
+figureQestions{L"Дети пошли в лес и собрали грибы, ягоды и листья.\n Сколько всего листьев и грибов собрала Маша?",calc}
+};
 extern const variantOfLine question7squarevariantOfFirstLine[] = { 1,0, 2,1, 3,2 , 4,3 , 5,4 ,5,0 , 5,1  };
 extern const variantOfLine question7trianglevariantOfFirstLine[] = { 1,0, 2,1, 3,2 , 4,3 , 5,4 ,5,0 , 5,1,
 3,0,5,2,3,1,4,2,5,1,4,0
@@ -114,7 +122,7 @@ extern const variantOfLine question7trianglevariantOfFirstLine[] = { 1,0, 2,1, 3
 };
 extern const variantOfLine question7rectanglevariantOfFirstLine[] = { 1,0, 2,1, 5,2 , 4,1 , 3,0 ,4,3 , 5,4 };
 
-extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text };
+extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text ,question9Text };
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("chicken"),
     std::string("pencil"),
@@ -197,7 +205,14 @@ const std::wstring CommentsDic[] =
 {
     {L"Выбери ответ" },
     {L"Верно. Молодец, +1 балл" },
-    {L"Неверно. Ошибка :(" }
+    {L"Неверно. Ошибка :(" },
+
+    {L"Имя" },
+    {L"Грибы" },
+    {L"Листья" },
+    {L"Костя" },
+    {L"Маша" }
+
 };
 
 
