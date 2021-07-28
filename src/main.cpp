@@ -22,78 +22,60 @@ int main() {
         srand(time(0));
 
        
-   /*     QuestType1(width, height, 20);
-        QuestType2(width, height, 20);
-        QuestType3(width, height, 20);
-        QuestType4(width, height, 20);
-        QuestType5(width, height, 20);
-        QuestType6(width, height, 20);
-        QuestType7(width, height);*/
-        //QuestType8(width, height);
         QuestType9(width, height, 20);
-        QuestType9(width, height, 20);
-        QuestType9(width, height, 20);
-        QuestType9(width, height, 20);
-        QuestType9(width, height, 20);
-        QuestType9(width, height, 20);
-        QuestType9(width, height, 20);
-       /* QuestType8(width, height, 20);
-        QuestType8(width, height, 20);
-        QuestType8(width, height, 20);
-        QuestType8(width, height, 20);
-        QuestType8(width, height, 20);*/
+
 
          width = 1024;  height = 600;
-         QuestType8(width, height);
+         QuestType9(width, height, 20);
 
      width = 1152; height = 864;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
 
      width = 1200; height = 600;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
 
      width = 1280; height = 720;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
 
      width = 1280; height = 768;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
      width = 1280; height = 1024;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
 
      width = 1408; height = 1152;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
      width = 1440; height = 900;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
      width = 1400; height = 1050;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
 
 
      width = 1440; height = 1080;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
 
      width = 1536; height = 960;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
      width = 1536; height = 1024;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
 
      width = 1600; height = 900;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
      width = 1600; height = 1024;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
      width = 1600; height = 1200;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
 
      width = 1680; height = 1050;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
 
      width = 1920; height = 1080;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
 
      width = 1920; height = 1200;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
 
      width = 2048; height = 1080;
-     QuestType8(width, height);
+     QuestType9(width, height,20);
 
     
 

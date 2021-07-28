@@ -2253,39 +2253,126 @@ table::table( Window& wlink):WindowLink(wlink){
             horizline[i].setPrimitiveType(sf::LineStrip);
         }
     }
+    float margintop = wlink.gettextFrame().getHeight() + wlink.gettextFrame().getmargin_top() + 15;
+
+    font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
+    text[0].setString(CommentsDic[6]);
+    text[0].setFont(font);
+    text[0].setFillColor(sf::Color::Black);
+    text[0].setPosition(sf::Vector2f(0, 0));
+    text[0].setCharacterSize(WindowLink.gettextFrame().getSize()-15);  //WindowLink.getWindow()->draw(text[4]);
+
+    float height0Row = text[0].getLocalBounds().height+10;
+    float width0Row  = text[0].getLocalBounds().width + 30;
+    float tableWidth = wlink.getWidth() * 2 / 3 - 10;
+    float objectsrowWidth = (tableWidth + 10 - width0Row) / 3;
+
+   
+
+
+    font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
+    text[0].setString(CommentsDic[3]);
+    text[0].setFont(font);
+    text[0].setFillColor(sf::Color::Black);
+    text[0].setPosition(sf::Vector2f(10, margintop-3));
+    text[0].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+
+
+    horizline[0][0].position= sf::Vector2f(10, margintop);
+    horizline[0][1].position = sf::Vector2f(tableWidth, margintop);
+    horizline[0][0].color = sf::Color::Black;
+    horizline[0][1].color = sf::Color::Black;
+
+    horizline[1][0].position = sf::Vector2f(10, margintop+ height0Row);
+    horizline[1][1].position = sf::Vector2f(tableWidth, margintop + height0Row);
+    horizline[1][0].color = sf::Color::Black;
+    horizline[1][1].color = sf::Color::Black;
 
     text[4].setString(CommentsDic[6]);
     text[4].setFont(font);
     text[4].setFillColor(sf::Color::Black);
-    text[4].setPosition(sf::Vector2f(200, 350));
-    text[4].setCharacterSize(WindowLink.gettextFrame().getSize());
-
-    float height0Row = text[4].getLocalBounds().height;
-    float margintop = wlink.gettextFrame().getHeight()+ wlink.gettextFrame().getmargin_top()+15;
-
-    horizline[0][0].position= sf::Vector2f(10, margintop);
-    horizline[0][1].position = sf::Vector2f(200, margintop);
-    horizline[0][0].color = sf::Color::Black;
-    horizline[0][1].color = sf::Color::Black;
-
-    horizline[1][0].position = sf::Vector2f(10, margintop+30);
-    horizline[1][1].position = sf::Vector2f(200, margintop + 30);
-    horizline[1][0].color = sf::Color::Black;
-    horizline[1][1].color = sf::Color::Black;
+    text[4].setPosition(sf::Vector2f(10, margintop + height0Row));
+    text[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
 
 
     horizline[2][0].position = sf::Vector2f(10, margintop + 60);
-    horizline[2][1].position = sf::Vector2f(200, margintop + 60);
+    horizline[2][1].position = sf::Vector2f(tableWidth, margintop + 60);
     horizline[2][0].color = sf::Color::Black;
     horizline[2][1].color = sf::Color::Black;
 
 
     horizline[3][0].position = sf::Vector2f(10, margintop + 90);
-    horizline[3][1].position = sf::Vector2f(200, margintop + 90);
+    horizline[3][1].position = sf::Vector2f(tableWidth, margintop + 90);
     horizline[3][0].color = sf::Color::Black;
     horizline[3][1].color = sf::Color::Black;
 
+
+
+    verticalline[0][0].position = sf::Vector2f(10, margintop );
+    verticalline[0][1].position = sf::Vector2f(10, margintop + 90);
+    verticalline[0][0].color = sf::Color::Black;
+    verticalline[0][1].color = sf::Color::Black;
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
+    //text[4].setString(CommentsDic[3]);
+    //text[4].setFont(font);
+    //text[4].setFillColor(sf::Color::Black);
+    //text[4].setPosition(sf::Vector2f(10, margintop));
+    //text[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+
+
+    verticalline[1][0].position = sf::Vector2f(width0Row, margintop);
+    verticalline[1][1].position = sf::Vector2f(width0Row, margintop + 90);
+    verticalline[1][0].color = sf::Color::Black;
+    verticalline[1][1].color = sf::Color::Black;
+    text[1].setString(CommentsDic[4]);
+    text[1].setFont(font);
+    text[1].setFillColor(sf::Color::Black);
+    text[1].setPosition(sf::Vector2f(width0Row, margintop - 3));
+    text[1].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+
+    verticalline[2][0].position = sf::Vector2f(width0Row + objectsrowWidth, margintop);
+    verticalline[2][1].position = sf::Vector2f(width0Row + objectsrowWidth, margintop + 90);
+    verticalline[2][0].color = sf::Color::Black;
+    verticalline[2][1].color = sf::Color::Black;
+
+    text[2].setString(CommentsDic[5]);
+    text[2].setFont(font);
+    text[2].setFillColor(sf::Color::Black);
+    text[2].setPosition(sf::Vector2f(width0Row + objectsrowWidth, margintop - 3));
+    text[2].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+
+    //text[5].setString(CommentsDic[4]);
+    //text[5].setFont(font);
+    //text[5].setFillColor(sf::Color::Black);
+    //text[5].setPosition(sf::Vector2f(width0Row, margintop));
+    //text[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    verticalline[3][0].position = sf::Vector2f(width0Row + 2* objectsrowWidth, margintop - 3);
+    verticalline[3][1].position = sf::Vector2f(width0Row + 2* objectsrowWidth, margintop + 90);
+    verticalline[3][0].color = sf::Color::Black;
+    verticalline[3][1].color = sf::Color::Black;
+
+    text[3].setString(CommentsDic[6]);
+    text[3].setFont(font);
+    text[3].setFillColor(sf::Color::Black);
+    text[3].setPosition(sf::Vector2f(width0Row + 2 * objectsrowWidth, margintop - 3));
+    text[3].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+
+
+    verticalline[4][0].position = sf::Vector2f(width0Row + 3 * objectsrowWidth-10, margintop);
+    verticalline[4][1].position = sf::Vector2f(width0Row + 3 * objectsrowWidth-10, margintop + 90);
+    verticalline[4][0].color = sf::Color::Black;
+    verticalline[4][1].color = sf::Color::Black;
+
+
+
+
+
+    //text[6].setString(CommentsDic[4]);
+    //text[6].setFont(font);
+    //text[6].setFillColor(sf::Color::Black);
+    //text[6].setPosition(sf::Vector2f(width0Row, margintop));
+    //text[6].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+  
 
 
 
@@ -2302,8 +2389,12 @@ void table::draw() {
         if (i < 4) {
             WindowLink.getWindow()->draw(horizline[i]);
         }
+        if (i < 5) {
+            WindowLink.getWindow()->draw(verticalline[i]);
+        }
+        WindowLink.getWindow()->draw(text[i]);
     }
-    WindowLink.getWindow()->draw(text[4]);
+    
     
 }
 
@@ -2325,7 +2416,10 @@ tab(*this){
 
             Buttons.CalcucateCoordinate(); first = false;
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
+            QuestComment.setmargin_top(h - Buttons.getHeight());
+            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
             first = false;
+
       
         }
         window->draw(QuestComment.gettext());
