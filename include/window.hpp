@@ -458,6 +458,8 @@ class table {
     sf::Font font;
     Window& WindowLink;
     float mash_koeff;
+    float mash_width;
+    float mash_height;
     float mash_x;
     float mash_y;
     public:
@@ -466,6 +468,13 @@ class table {
         float getmash_koeff() { 
             return mash_koeff; 
 };
+
+        float getmash_width() {
+            return mash_width;
+        };
+        float getmash_height() {
+            return mash_height;
+        };
         float getmash_x() { return  mash_x; }
         float getmash_y() { return  mash_y; }
 
@@ -476,8 +485,8 @@ class QuestType9 : public Window {
     std::array<sf::Texture,13> MashTexture;
     std::array<sf::Sprite,13>  MashSprite;
 
-    std::array<sf::Texture, 9> BerryTexture;
-    std::array<sf::Sprite, 9>  BerrySprite;
+    std::array<sf::Texture, 16> BerryTexture;
+    std::array<sf::Sprite, 16>  BerrySprite;
 
     std::array<sf::Texture, 12> LeadTexture;
     std::array<sf::Sprite, 12>  LeadSprite;
@@ -485,7 +494,7 @@ class QuestType9 : public Window {
 public:
     QuestType9(int, int, int);
     std::array<sf::Sprite,13> getMashsprite() { return MashSprite; }
-    std::array<sf::Sprite,9> getMBerryprite() { return BerrySprite; }
+    std::array<sf::Sprite,16> getMBerryprite() { return BerrySprite; }
     std::array<sf::Sprite,12> getLeadsprite() { return LeadSprite; }
 };
 

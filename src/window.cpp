@@ -2268,6 +2268,9 @@ table::table( Window& wlink):WindowLink(wlink){
     float tableWidth = wlink.getWidth() * 2 / 3 - 10;
     float objectsrowWidth = (tableWidth + 10 - width0Row) / 3;
     mash_koeff =  (objectsrowWidth / 4) / 310;
+    mash_width = objectsrowWidth / 4;
+    mash_height = mash_width;
+
 
 
 
@@ -2296,21 +2299,21 @@ table::table( Window& wlink):WindowLink(wlink){
     text[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
 
 
-    horizline[2][0].position = sf::Vector2f(10, margintop + 60);
-    horizline[2][1].position = sf::Vector2f(tableWidth, margintop + 60);
+    horizline[2][0].position = sf::Vector2f(10, margintop + height0Row+ 3 * mash_height);
+    horizline[2][1].position = sf::Vector2f(tableWidth, margintop + height0Row + 3 * mash_height);
     horizline[2][0].color = sf::Color::Black;
     horizline[2][1].color = sf::Color::Black;
 
 
-    horizline[3][0].position = sf::Vector2f(10, margintop + 90);
-    horizline[3][1].position = sf::Vector2f(tableWidth, margintop + 90);
+    horizline[3][0].position = sf::Vector2f(10, margintop + 6 * mash_height);
+    horizline[3][1].position = sf::Vector2f(tableWidth, margintop + 6 * mash_height);
     horizline[3][0].color = sf::Color::Black;
     horizline[3][1].color = sf::Color::Black;
 
 
 
     verticalline[0][0].position = sf::Vector2f(10, margintop );
-    verticalline[0][1].position = sf::Vector2f(10, margintop + 90);
+    verticalline[0][1].position = sf::Vector2f(10, margintop + 6 * mash_height);
     verticalline[0][0].color = sf::Color::Black;
     verticalline[0][1].color = sf::Color::Black;
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
@@ -2322,7 +2325,7 @@ table::table( Window& wlink):WindowLink(wlink){
 
 
     verticalline[1][0].position = sf::Vector2f(width0Row, margintop);
-    verticalline[1][1].position = sf::Vector2f(width0Row, margintop + 90);
+    verticalline[1][1].position = sf::Vector2f(width0Row, margintop + 6*mash_height);
     verticalline[1][0].color = sf::Color::Black;
     verticalline[1][1].color = sf::Color::Black;
     text[1].setString(CommentsDic[4]);
@@ -2335,7 +2338,7 @@ table::table( Window& wlink):WindowLink(wlink){
 
 
     verticalline[2][0].position = sf::Vector2f(width0Row + objectsrowWidth, margintop);
-    verticalline[2][1].position = sf::Vector2f(width0Row + objectsrowWidth, margintop + 90);
+    verticalline[2][1].position = sf::Vector2f(width0Row + objectsrowWidth, margintop + 6 * mash_height);
     verticalline[2][0].color = sf::Color::Black;
     verticalline[2][1].color = sf::Color::Black;
 
@@ -2351,11 +2354,11 @@ table::table( Window& wlink):WindowLink(wlink){
     //text[5].setPosition(sf::Vector2f(width0Row, margintop));
     //text[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     verticalline[3][0].position = sf::Vector2f(width0Row + 2* objectsrowWidth, margintop - 3);
-    verticalline[3][1].position = sf::Vector2f(width0Row + 2* objectsrowWidth, margintop + 90);
+    verticalline[3][1].position = sf::Vector2f(width0Row + 2* objectsrowWidth, margintop + 6 * mash_height);
     verticalline[3][0].color = sf::Color::Black;
     verticalline[3][1].color = sf::Color::Black;
 
-    text[3].setString(CommentsDic[6]);
+    text[3].setString(CommentsDic[5]);
     text[3].setFont(font);
     text[3].setFillColor(sf::Color::Black);
     text[3].setPosition(sf::Vector2f(width0Row + 2 * objectsrowWidth, margintop - 3));
@@ -2363,9 +2366,15 @@ table::table( Window& wlink):WindowLink(wlink){
 
 
     verticalline[4][0].position = sf::Vector2f(width0Row + 3 * objectsrowWidth-10, margintop);
-    verticalline[4][1].position = sf::Vector2f(width0Row + 3 * objectsrowWidth-10, margintop + 90);
+    verticalline[4][1].position = sf::Vector2f(width0Row + 3 * objectsrowWidth-10, margintop + 6 * mash_height);
     verticalline[4][0].color = sf::Color::Black;
     verticalline[4][1].color = sf::Color::Black;
+
+    text[5].setString(CommentsDic[7]);
+    text[5].setFont(font);
+    text[5].setFillColor(sf::Color::Black); 
+    text[5].setPosition(sf::Vector2f(10, margintop + height0Row + 3 * mash_height));
+    text[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
 
     //objectsrowWidth / 4 
 
@@ -2416,6 +2425,8 @@ tab(*this){
     {
         MashTexture[i].loadFromFile(res_path + "mushroom.png" );
         MashSprite[i].setTexture(MashTexture[i]);
+        BerryTexture[i].loadFromFile(res_path + "berry.png");
+        BerrySprite[i].setTexture(BerryTexture[i]);
     }
 
     while (window->isOpen()) {
@@ -2431,9 +2442,59 @@ tab(*this){
             QuestComment.setmargin_top(h - Buttons.getHeight());
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
             first = false;
-            MashSprite[0].setScale(tab.getmash_koeff(), tab.getmash_koeff()); 
-            MashSprite[0].setPosition(sf::Vector2f(tab.getmash_x(), tab.getmash_y()));
-            
+            for (int i = 0; i < 4; i++) {
+                MashSprite[i].setScale(tab.getmash_koeff(), tab.getmash_koeff());                
+                MashSprite[i].setPosition(sf::Vector2f(tab.getmash_x()+i*
+                    tab.getmash_width()
+                    , tab.getmash_y()   ));
+
+                BerrySprite[i].setScale(tab.getmash_koeff()+ 0.08, tab.getmash_koeff() + 0.08);
+                BerrySprite[i].setPosition(sf::Vector2f(4*tab.getmash_width() + tab.getmash_x() + i *
+                    tab.getmash_width()
+                    , tab.getmash_y()));
+
+            }
+
+
+
+            for (int i = 0; i < 4; i++) {
+                MashSprite[i+4].setScale(tab.getmash_koeff(), tab.getmash_koeff());
+                MashSprite[i+4].setPosition(sf::Vector2f(tab.getmash_x() + i *
+                    tab.getmash_width()
+                    , tab.getmash_y() + tab.getmash_height()));
+
+                BerrySprite[i+4].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+                BerrySprite[i+4].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x() + i *
+                    tab.getmash_width()
+                    , tab.getmash_y() + tab.getmash_height()));
+
+            }
+            BerrySprite[8].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+            BerrySprite[8].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x()  
+                , tab.getmash_y() + tab.getmash_height()*2));
+
+
+            for (int i = 0; i < 4; i++) {
+                MashSprite[i + 8].setScale(tab.getmash_koeff(), tab.getmash_koeff());
+                MashSprite[i + 8].setPosition(sf::Vector2f(tab.getmash_x() + i *
+                    tab.getmash_width()
+                    , tab.getmash_y() + 3*tab.getmash_height()));
+
+
+                BerrySprite[i + 9].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+                BerrySprite[i + 9].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x() + i *
+                    tab.getmash_width()
+                    , tab.getmash_y() + 3 * tab.getmash_height()));
+
+            }
+/*            for (int i = 0; i < 4; i++) {
+                BerrySprite[i + 13].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+                BerrySprite[i + 13].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x()
+                    , tab.getmash_y() + 3 * tab.getmash_height()));
+            }*/
+            MashSprite[12].setScale(tab.getmash_koeff(), tab.getmash_koeff());
+            MashSprite[12].setPosition(sf::Vector2f(tab.getmash_x() 
+                , tab.getmash_y() + 4 * tab.getmash_height()));
             
         }
         window->draw(QuestComment.gettext());
@@ -2442,8 +2503,13 @@ tab(*this){
             window->draw(*Buttons.getButtons()[bc]);
         }
         window->draw(CheckButtonSprite);
-        
-        window->draw(MashSprite[0]);
+        for (int i = 0; i < 13; i++) {
+            window->draw(MashSprite[i]);
+            window->draw(BerrySprite[i]);
+        }
+        window->draw(BerrySprite[13]);
+        window->draw(BerrySprite[14]);
+        window->draw(BerrySprite[15]);
      
 
         window->display();
