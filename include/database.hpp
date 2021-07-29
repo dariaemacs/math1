@@ -30,6 +30,7 @@ constexpr int beginQuestion2Index = 3;
 const int ELAPSED_TIME = 20;
 const float FPS = 30.0f;
 
+extern const std::string res_path;
 
 
 

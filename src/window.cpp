@@ -2156,6 +2156,7 @@ QuestType8::QuestType8(int w, int h)
     plus.setButtonCount(1);
     minus.setButtonCount(1);
 
+
     
 
     setofpic0.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "1");
@@ -2266,8 +2267,8 @@ table::table( Window& wlink):WindowLink(wlink){
     float width0Row  = text[0].getLocalBounds().width + 30;
     float tableWidth = wlink.getWidth() * 2 / 3 - 10;
     float objectsrowWidth = (tableWidth + 10 - width0Row) / 3;
+    mash_koeff =  (objectsrowWidth / 4) / 310;
 
-   
 
 
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
@@ -2287,7 +2288,7 @@ table::table( Window& wlink):WindowLink(wlink){
     horizline[1][1].position = sf::Vector2f(tableWidth, margintop + height0Row);
     horizline[1][0].color = sf::Color::Black;
     horizline[1][1].color = sf::Color::Black;
-
+    
     text[4].setString(CommentsDic[6]);
     text[4].setFont(font);
     text[4].setFillColor(sf::Color::Black);
@@ -2329,6 +2330,9 @@ table::table( Window& wlink):WindowLink(wlink){
     text[1].setFillColor(sf::Color::Black);
     text[1].setPosition(sf::Vector2f(width0Row, margintop - 3));
     text[1].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    mash_x = width0Row;
+    mash_y = margintop + height0Row;
+
 
     verticalline[2][0].position = sf::Vector2f(width0Row + objectsrowWidth, margintop);
     verticalline[2][1].position = sf::Vector2f(width0Row + objectsrowWidth, margintop + 90);
@@ -2363,7 +2367,7 @@ table::table( Window& wlink):WindowLink(wlink){
     verticalline[4][0].color = sf::Color::Black;
     verticalline[4][1].color = sf::Color::Black;
 
-
+    //objectsrowWidth / 4 
 
 
 
@@ -2396,6 +2400,7 @@ void table::draw() {
     }
     
     
+    
 }
 
 QuestType9::QuestType9( int w, int h, int qtyButtons) :Window(w, h, ((rand() % 4)), 8),Buttons(qtyButtons, *this),
@@ -2406,6 +2411,13 @@ tab(*this){
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
     sf::Event event;
+
+    for (int i = 0; i < 13; i++)
+    {
+        MashTexture[i].loadFromFile(res_path + "mushroom.png" );
+        MashSprite[i].setTexture(MashTexture[i]);
+    }
+
     while (window->isOpen()) {
         window->clear();
         window->draw(List);
@@ -2419,8 +2431,10 @@ tab(*this){
             QuestComment.setmargin_top(h - Buttons.getHeight());
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
             first = false;
-
-      
+            MashSprite[0].setScale(tab.getmash_koeff(), tab.getmash_koeff()); 
+            MashSprite[0].setPosition(sf::Vector2f(tab.getmash_x(), tab.getmash_y()));
+            
+            
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
@@ -2428,7 +2442,8 @@ tab(*this){
             window->draw(*Buttons.getButtons()[bc]);
         }
         window->draw(CheckButtonSprite);
-       
+        
+        window->draw(MashSprite[0]);
      
 
         window->display();
