@@ -268,6 +268,46 @@ void TextFrameBase::CalcucateCoordinate(const int w, const int h) {
 
 PicturetoView::PicturetoView(QuestType2& qtl, std::string fn) : Buttons(0, qtl), pictureFilename(fn){};
 //PicturetoView(QuestType2&, std::string)
+void Buttons::CalcucateCoordinate(float hieght) {
+    float ButtonSize = (WindowLink.getWidth()*2/3-50) / 10 ;
+    float step = 5;
+    float margin_left_button;
+    float margin_top_button;
+     if (ButtonCount >= 10)
+     {
+         while (ButtonSize + 10 > hieght / 2) ButtonSize--;
+         margin_left_button = WindowLink.getWidth() - (ButtonSize * 10 + 50);
+         margin_top_button = WindowLink.getHeight() - ButtonSize*2-5;
+     }
+     else {
+         while (ButtonSize + 10 > hieght) ButtonSize--;
+         margin_left_button = WindowLink.getWidth() - (ButtonSize * ButtonCount + 50);
+         margin_top_button = WindowLink.getHeight() - hieght;
+     };
+     margin_left = margin_left_button;
+     margin_top = margin_top_button;
+    for (int i = 0; i < ButtonCount; i++) {
+        std::string pictureFilename = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
+        std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
+        txt->loadFromFile(pictureFilename);
+        static sf::Vector2u PICTURESIZE = txt->getSize();
+        std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
+        sprite->setTexture(*txt.get());
+        if (i == 0) scale = (float)ButtonSize / PICTURESIZE.y;
+        sprite->setScale(scale, scale);
+       
+        sprite->move(margin_left_button, margin_top_button);
+        if ((i + 1) % 10 == 0 && i + 1 > 0) {
+            margin_left_button = margin_left;
+            margin_top_button += (ButtonSize + 5);
+        }
+        else
+        margin_left_button += (5 + ButtonSize);
+        MyTexture.emplace_back(std::move(txt));
+        ButtonsList.emplace_back(std::move(sprite));
+    }
+
+}
 void Buttons::CalcucateCoordinate() {
     using namespace std;
     int ButtonSlideHeght = WindowLink.getHeight()/3;
@@ -2317,12 +2357,6 @@ table::table( Window& wlink):WindowLink(wlink){
     verticalline[0][0].color = sf::Color::Black;
     verticalline[0][1].color = sf::Color::Black;
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-    //text[4].setString(CommentsDic[3]);
-    //text[4].setFont(font);
-    //text[4].setFillColor(sf::Color::Black);
-    //text[4].setPosition(sf::Vector2f(10, margintop));
-    //text[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-
 
     verticalline[1][0].position = sf::Vector2f(width0Row, margintop);
     verticalline[1][1].position = sf::Vector2f(width0Row, margintop + 6*mash_height);
@@ -2357,6 +2391,7 @@ table::table( Window& wlink):WindowLink(wlink){
     verticalline[3][1].position = sf::Vector2f(width0Row + 2* objectsrowWidth, margintop + 6 * mash_height);
     verticalline[3][0].color = sf::Color::Black;
     verticalline[3][1].color = sf::Color::Black;
+    tablemax_y = margintop + 6 * mash_height;
 
     text[3].setString(CommentsDic[5]);
     text[3].setFont(font);
@@ -2427,6 +2462,17 @@ tab(*this){
         MashSprite[i].setTexture(MashTexture[i]);
         BerryTexture[i].loadFromFile(res_path + "berry.png");
         BerrySprite[i].setTexture(BerryTexture[i]);
+        if (i < 12) {
+            LeafTexture[i].loadFromFile(res_path + "leaf_10.png");
+            LeafSprite[i].setTexture(LeafTexture[i]);
+        }
+
+    }
+
+    for (int i = 13; i < 16; i++)
+    {
+        BerryTexture[i].loadFromFile(res_path + "berry.png");
+        BerrySprite[i].setTexture(BerryTexture[i]);
     }
 
     while (window->isOpen()) {
@@ -2437,10 +2483,14 @@ tab(*this){
 
             first = false;
 
-            Buttons.CalcucateCoordinate(); first = false;
+            Buttons.CalcucateCoordinate((h-tab.gettablemax_y())/1.4); 
+            //Buttons.CalcucateCoordinate();
+            first = false;
+            QuestComment.setmargin_top(Buttons.getMarginTop());
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
-            QuestComment.setmargin_top(h - Buttons.getHeight());
-            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+            
+            //QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop()/2);
+            //QuestComment.CalcucateCoordinate(0,0);
             first = false;
             for (int i = 0; i < 4; i++) {
                 MashSprite[i].setScale(tab.getmash_koeff(), tab.getmash_koeff());                
@@ -2452,9 +2502,37 @@ tab(*this){
                 BerrySprite[i].setPosition(sf::Vector2f(4*tab.getmash_width() + tab.getmash_x() + i *
                     tab.getmash_width()
                     , tab.getmash_y()));
+             
+                LeafSprite[i].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+                LeafSprite[i].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() + i *
+                    tab.getmash_width()
+                    , tab.getmash_y()));
+
+                LeafSprite[i+6].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+                LeafSprite[i+6].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() + i *
+                    tab.getmash_width()
+                    , tab.getmash_y()+ 3*tab.getmash_height()));
 
             }
 
+            LeafSprite[4].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+            LeafSprite[4].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() 
+                , tab.getmash_y() + tab.getmash_height()));
+
+            LeafSprite[5].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+            LeafSprite[5].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() +
+                tab.getmash_width()
+                , tab.getmash_y() + tab.getmash_height()));
+
+
+            LeafSprite[10].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+            LeafSprite[10].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x()
+                , tab.getmash_y() + 4* tab.getmash_height()));
+
+            LeafSprite[11].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+            LeafSprite[11].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() +
+                tab.getmash_width()
+                , tab.getmash_y() + 4*tab.getmash_height()));
 
 
             for (int i = 0; i < 4; i++) {
@@ -2495,6 +2573,15 @@ tab(*this){
             MashSprite[12].setScale(tab.getmash_koeff(), tab.getmash_koeff());
             MashSprite[12].setPosition(sf::Vector2f(tab.getmash_x() 
                 , tab.getmash_y() + 4 * tab.getmash_height()));
+            for (int i = 0; i < 3; i++) {
+                BerrySprite[13+i].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+                BerrySprite[13+i].setPosition(sf::Vector2f(
+                    4 * tab.getmash_width() + tab.getmash_x() + i *
+                    tab.getmash_width()
+
+                    , tab.getmash_y() + 4 * tab.getmash_height())
+                );
+            }
             
         }
         window->draw(QuestComment.gettext());
@@ -2506,6 +2593,7 @@ tab(*this){
         for (int i = 0; i < 13; i++) {
             window->draw(MashSprite[i]);
             window->draw(BerrySprite[i]);
+            if (i<12) window->draw(LeafSprite[i]);
         }
         window->draw(BerrySprite[13]);
         window->draw(BerrySprite[14]);

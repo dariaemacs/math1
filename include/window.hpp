@@ -51,6 +51,7 @@ public:
       ButtonCount = bc; 
   }
   void CalcucateCoordinate();
+  void CalcucateCoordinate(float);
   void setMargin_top(int margin) { 
       margin_top = margin; 
   }
@@ -462,6 +463,7 @@ class table {
     float mash_height;
     float mash_x;
     float mash_y;
+    float tablemax_y;
     public:
         table(Window&);
         void draw();
@@ -475,6 +477,11 @@ class table {
         float getmash_height() {
             return mash_height;
         };
+
+        float gettablemax_y() {
+            return tablemax_y;
+        };
+
         float getmash_x() { return  mash_x; }
         float getmash_y() { return  mash_y; }
 
@@ -488,14 +495,14 @@ class QuestType9 : public Window {
     std::array<sf::Texture, 16> BerryTexture;
     std::array<sf::Sprite, 16>  BerrySprite;
 
-    std::array<sf::Texture, 12> LeadTexture;
-    std::array<sf::Sprite, 12>  LeadSprite;
+    std::array<sf::Texture, 12> LeafTexture;
+    std::array<sf::Sprite, 12>  LeafSprite;
   
 public:
     QuestType9(int, int, int);
     std::array<sf::Sprite,13> getMashsprite() { return MashSprite; }
     std::array<sf::Sprite,16> getMBerryprite() { return BerrySprite; }
-    std::array<sf::Sprite,12> getLeadsprite() { return LeadSprite; }
+    std::array<sf::Sprite,12> getLeafsprite() { return LeafSprite; }
 };
 
 #endif 
