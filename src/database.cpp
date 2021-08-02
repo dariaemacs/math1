@@ -127,6 +127,8 @@ extern const variantOfLine question7trianglevariantOfFirstLine[] = { 1,0, 2,1, 3
 };
 extern const variantOfLine question7rectanglevariantOfFirstLine[] = { 1,0, 2,1, 5,2 , 4,1 , 3,0 ,4,3 , 5,4 };
 
+extern const int question9AnswerDetails[] = { 8,5    , 9,7,   6 ,6 ,  8,9,   8,6 ,    5,7    , 5,6};
+
 extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text ,question9Text };
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("chicken"),

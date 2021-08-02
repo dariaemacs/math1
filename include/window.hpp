@@ -34,24 +34,30 @@ class questanswerClass {
     int quadroQTY;
     float width;
     float height ;
+    float scale;
 public:
-    questanswerClass(float ww, float hh, int quadroQTY) : width(ww), height(hh), quadroQTY(quadroQTY)
-    {
+    void setParams(float ww, float hh, int q, float scale) {
+        width = ww;
+        height = hh;
+        quadroQTY = q;
+        scale = scale;
         miniwindow.create(ww, hh);
-            
-        for (int i = 0; i < quadroQTY; i++)
-        {
+        for (int i = 0; i < quadroQTY; i++) {
             quadroTexture.push_back(sf::Texture());
             quadroSprite.push_back(sf::Sprite());
-            quadroTexture[i].loadFromFile("resources/images/arrow_down.png");
-            quadroTexture[i].setRepeated(false);
-            quadroSprite[i].setScale(0.3, 0.3);
+            quadroSprite[i].setScale(scale,scale);
+            quadroSprite[i].setPosition(i * 500 * scale, 0);
+        }
+    }
+    sf::Texture& operator[](int index) { return quadroTexture[index]; }
+    void draw() {
+        for (int i = 0; i < quadroQTY; i++) {
+            miniwindow.draw(quadroSprite[i]);
             quadroSprite[i].setTexture(quadroTexture[i]);
             miniwindow.draw(quadroSprite[i]);
         }
-       // miniwindow.display();
+    
     }
-    sf::Texture& operator[](int index) { return quadroTexture[index]; }
     sf::RenderTexture& getminiwindow() {  
         //miniwindow.clear(sf::Color::Red);
         //for (int i = 0; i < quadroQTY; i++) miniwindow.draw(quadroSprite[0]); 
@@ -210,7 +216,7 @@ class Window {
 
   
 protected:
-    
+    bool badAnswer;
   int questNumber;
   TextFrameBase textFrame;
   bool checkandnextQuest(float);

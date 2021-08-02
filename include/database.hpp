@@ -80,7 +80,7 @@ extern const std::array<std::string, N8> filenamesforPicaQuest8;
 
 extern const std::array<std::string, N8> filenamesforPicaQuestPlus8;
 extern const std::array<std::string, N8> filenamesforPicaQuestMinus8;
-
+extern const int question9AnswerDetails[];
 
 
 #endif //DATABASE_H
