@@ -53,6 +53,7 @@ extern const int question6Answers[];
 extern const unsigned long long question7AnswersTriangle[21];
 extern const unsigned long long question7AnswersRectangle[3];
 extern const unsigned long long question7AnswersSquare[2];
+extern const int question9AnswersSquare[];
 
 struct variantOfLine { int i, j; };
 extern const variantOfLine question7squarevariantOfFirstLine[];

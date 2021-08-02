@@ -26,7 +26,40 @@ public:
     bool getHold() { return hold; }
 };
 
+class questanswerClass {
+    sf::RenderTexture miniwindow;
+    sf::Text text;
+    std::vector <sf::Texture> quadroTexture;
+    std::vector <sf::Sprite>  quadroSprite;
+    int quadroQTY;
+    float width;
+    float height ;
+public:
+    questanswerClass(float ww, float hh, int quadroQTY) : width(ww), height(hh), quadroQTY(quadroQTY)
+    {
+        miniwindow.create(ww, hh);
+            
+        for (int i = 0; i < quadroQTY; i++)
+        {
+            quadroTexture.push_back(sf::Texture());
+            quadroSprite.push_back(sf::Sprite());
+            quadroTexture[i].loadFromFile("resources/images/arrow_down.png");
+            quadroTexture[i].setRepeated(false);
+            quadroSprite[i].setScale(0.3, 0.3);
+            quadroSprite[i].setTexture(quadroTexture[i]);
+            miniwindow.draw(quadroSprite[i]);
+        }
+       // miniwindow.display();
+    }
+    sf::Texture& operator[](int index) { return quadroTexture[index]; }
+    sf::RenderTexture& getminiwindow() {  
+        //miniwindow.clear(sf::Color::Red);
+        //for (int i = 0; i < quadroQTY; i++) miniwindow.draw(quadroSprite[0]); 
+        miniwindow.display();
+        return miniwindow; }
+    
 
+};
 class Buttons {
   bool touched{ false };
   bool pressed{ false };
@@ -497,7 +530,7 @@ class QuestType9 : public Window {
 
     std::array<sf::Texture, 12> LeafTexture;
     std::array<sf::Sprite, 12>  LeafSprite;
-  
+    questanswerClass questanswer;
 public:
     QuestType9(int, int, int);
     std::array<sf::Sprite,13> getMashsprite() { return MashSprite; }

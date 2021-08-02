@@ -137,6 +137,8 @@ extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("leaf")
 };
 
+extern const int question9AnswersSquare[] = { 13,16,12,17,14,12,11 };
+
 extern const std::array<std::string, N8> filenamesforPicaQuest8 = {
     std::string("aqua_fish"),
     std::string("house"),
