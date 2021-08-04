@@ -44,6 +44,10 @@ extern const figureQestions question6Text[];
 extern const figureQestions question7Text[];
 extern const figureQestions question8Text[];
 extern const figureQestions question9Text[];
+extern const figureQestions question10Text[];
+
+extern const std::wstring question10Variant1[];
+
 
 extern const figureQestions* qestionarrayList[];
 
@@ -81,6 +85,8 @@ extern const std::array<std::string, N8> filenamesforPicaQuest8;
 extern const std::array<std::string, N8> filenamesforPicaQuestPlus8;
 extern const std::array<std::string, N8> filenamesforPicaQuestMinus8;
 extern const int question9AnswerDetails[];
+struct  mystruct { std::wstring len1; std::wstring len2; std::wstring len3; };
+extern  const mystruct  question10Variant2[6];
 
 
 #endif //DATABASE_H

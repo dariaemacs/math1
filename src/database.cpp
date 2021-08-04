@@ -120,6 +120,14 @@ figureQestions{L"Дети пошли в лес и собрали грибы, ягоды и листья.\n Сколько все
 figureQestions{L"Дети пошли в лес и собрали грибы, ягоды и листья.\n Сколько всего грибов и ягод собрала Маша?",calc},
 figureQestions{L"Дети пошли в лес и собрали грибы, ягоды и листья.\n Сколько всего листьев и грибов собрала Маша?",calc}
 };
+
+extern const figureQestions question10Text[] = {
+    figureQestions{L"Ученики записали величины N в порядке M и получили разные ответы.\nНажми на правильный ответ.",calc},
+};
+
+
+
+
 extern const variantOfLine question7squarevariantOfFirstLine[] = { 1,0, 2,1, 3,2 , 4,3 , 5,4 ,5,0 , 5,1  };
 extern const variantOfLine question7trianglevariantOfFirstLine[] = { 1,0, 2,1, 3,2 , 4,3 , 5,4 ,5,0 , 5,1,
 3,0,5,2,3,1,4,2,5,1,4,0
@@ -129,7 +137,7 @@ extern const variantOfLine question7rectanglevariantOfFirstLine[] = { 1,0, 2,1, 
 
 extern const int question9AnswerDetails[] = { 8,5    , 9,7,   6 ,6 ,  8,9,   8,6 ,    5,7    , 5,6};
 
-extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text ,question9Text };
+extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text ,question9Text,question10Text };
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("chicken"),
     std::string("pencil"),
@@ -159,6 +167,18 @@ extern const std::array<std::string, N8> filenamesforPicaQuestPlus8 = {
     std::string("add_window"),
     std::string("add_leaf"),
     std::string("add_butterfly")
+};
+
+extern const std::wstring question10Variant1[] = { L" возрастания" , L" убывания" };
+
+extern  const mystruct  question10Variant2[6] =
+{
+    {L" 9 см", L" 19 см", L" 3 дм"},
+{L" 5 см", L" 20 см", L" 5 дм"},
+ {  L" 7 см", L" 15 см", L" 7 дм"},
+  { L" 6 см", L" 1 дм",  L" 18 см"},
+  { L" 2 см", L" 19 см", L" 2 дм"},
+  { L" 8 см", L" 10 см", L" 3 дм"}
 };
 
 const std::array <std::array<phrasetoReplace, X>, Y> phrasestoReplace = {
@@ -220,7 +240,8 @@ const std::wstring CommentsDic[] =
     {L"Грибы" },
     {L"Листья" },
     {L"Костя" },
-    {L"Маша" }
+    {L"Маша" },
+    {L"Неверно! :( Решение:" }
 
 };
 

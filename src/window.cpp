@@ -2604,6 +2604,7 @@ tab(*this)
 
         if (badAnswer) {
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            sprite.setPosition((w-questanswer.getWidth()) /2 , (h - questanswer.getHeight()) / 2);
             window->draw(sprite);
            
         }
@@ -2638,6 +2639,94 @@ tab(*this)
                 CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
                 CheckButtonSprite.setTexture(CheckButtonTexture);
             }
+
+            }
+
+
+        }
+    }
+
+    srand(time(0));
+
+}
+
+QuestType10::QuestType10(int w, int h) :
+    Window(w, h, 0, 9)
+    {
+
+    bool first = true;
+    int question10Variant1ID = rand() % 2;
+    int question10Variant2ID = sizeof(question10Variant2)/ sizeof(*question10Variant2)-1;
+
+    std::wstring  replaceFrom = L"N";
+    //question10Variant2[0].len1.co
+    std::wstring replaceTo(question10Variant2[question10Variant2ID].len1+
+                             question10Variant2[question10Variant2ID].len2+
+                             question10Variant2[question10Variant2ID].len3);
+
+    std::wstring question = question10Text[getQuestNumber()].questionText;
+    int posn = question.find(replaceFrom);
+    if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
+    //posn = question.find(replaceFrom);
+    //if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
+
+    textFrame.settext(question);
+
+    //std::string tmp(question10Variant1[question10Variant1ID].begin(), question10Variant1[question10Variant1ID].end());
+    std::cout << question10Variant1ID << std::endl;
+    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    CheckButtonSprite.setTexture(CheckButtonTexture);
+    sf::Event event;
+    //questanswer[0].loadFromFile("resources/images/arrow_disable.png");
+
+    
+
+    while (window->isOpen()) {
+        window->clear();
+
+        window->draw(List);
+      
+        if (first) {
+
+            first = false;
+
+
+            QuestComment.CalcucateCoordinate(h / 3, w / 2);
+
+            
+
+        }
+
+
+        window->draw(QuestComment.gettext());
+        window->draw(textFrame.gettext());
+
+
+
+        if (badAnswer) {
+            //sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            //sprite.setPosition((w - questanswer.getWidth()) / 2, (h - questanswer.getHeight()) / 2);
+            //window->draw(sprite);
+
+        }
+        window->display();
+        while (window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
+                window->close();
+            }
+
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+                if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
+
+                        QuestComment.settext(CommentsDic[2]);
+                        badAnswer = true;
+                        
+
+               // if (Buttons.click()) {
+                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                //}
 
             }
 

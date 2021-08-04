@@ -42,6 +42,7 @@ public:
         quadroQTY = q;
         scale = scale;
         miniwindow.create(ww, hh);
+        
         for (int i = 0; i < quadroQTY; i++) {
             quadroTexture.push_back(sf::Texture());
             quadroSprite.push_back(sf::Sprite());
@@ -63,7 +64,8 @@ public:
         //for (int i = 0; i < quadroQTY; i++) miniwindow.draw(quadroSprite[0]); 
         miniwindow.display();
         return miniwindow; }
-    
+    float getHeight() { return height; }
+    float getWidth() { return width; }
 
 };
 class Buttons {
@@ -544,4 +546,10 @@ public:
     std::array<sf::Sprite,12> getLeafsprite() { return LeafSprite; }
 };
 
+class QuestType10 : public Window {
+
+public:
+    QuestType10(int, int);
+
+};
 #endif 
