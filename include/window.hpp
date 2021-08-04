@@ -18,6 +18,20 @@
 
 class Window;
 
+class CheckButton {
+    int qty;
+    std::array<sf::Text, 4> str;
+    std::array<sf::Texture,4>   quadroTexture;
+    std::array<sf::Sprite ,4>   quadroSprite;
+    Window& wLnk;
+    public:
+    CheckButton(Window&);
+    void setTextValue(int);
+    std::array<sf::Sprite, 4>& getSprite();
+    std::array<sf::Text, 4>& getText();
+
+};
+
 class MyVertexArray : public sf::VertexArray {
     bool hold;
 public:
@@ -213,7 +227,6 @@ class Window {
   int space;
   int number; 
   int ordQuestNumber;
-  
 
 
   
@@ -547,9 +560,13 @@ public:
 };
 
 class QuestType10 : public Window {
+    CheckButton checkbutton;
+    int question10Variant1ID;
+    int question10Variant2ID;
 
 public:
     QuestType10(int, int);
-
+    int getquestion10Variant1ID() { return question10Variant1ID; }
+    int getquestion10Variant2ID() { return question10Variant2ID; }
 };
 #endif 

@@ -2650,29 +2650,62 @@ tab(*this)
 
 }
 
+void CheckButton::setTextValue(int index) {
+    for (int i = 0; i < 4; i++) {
+        str[i].setString(question10Variant2[index].len1);
+        str[i].setPosition(quadroSprite[i].getPosition().x, quadroSprite[i].getPosition().y);
+    }
+}
+
+CheckButton::CheckButton(Window& wl):wLnk(wl){
+    float coeff = (500.0f / ((wl.getHeight()- wl.gettextFrame().getHeight())))/5;
+    float qudroSize = coeff * 500.0f;
+    float margin = (((wl.getHeight() - wl.gettextFrame().getHeight()) ) - qudroSize * 4) / 4;
+    for (int i = 0; i < 4; i++) {
+        quadroTexture[i].loadFromFile(res_path + "empty.jpg");
+        quadroSprite[i].setTexture(quadroTexture[i]);
+        quadroSprite[i].setScale(coeff, coeff);
+        quadroSprite[i].setPosition(10, ( wl.gettextFrame().getHeight())+30 + (qudroSize+ margin) *i );
+        
+       
+    }
+
+
+}
+std::array<sf::Sprite, 4>& CheckButton::getSprite() {
+    return quadroSprite;
+}
+std::array<sf::Text, 4>& CheckButton::getText() {
+    return str;
+}
+
 QuestType10::QuestType10(int w, int h) :
-    Window(w, h, 0, 9)
+    Window(w, h, 0, 9),
+    checkbutton(*this)
     {
 
     bool first = true;
-    int question10Variant1ID = rand() % 2;
-    int question10Variant2ID = sizeof(question10Variant2)/ sizeof(*question10Variant2)-1;
+    question10Variant1ID = rand() % 2;
+    question10Variant2ID = sizeof(question10Variant2)/ sizeof(*question10Variant2)-1;
+
+    checkbutton.setTextValue(question10Variant2ID);
 
     std::wstring  replaceFrom = L"N";
-    //question10Variant2[0].len1.co
-    std::wstring replaceTo(question10Variant2[question10Variant2ID].len1+
-                             question10Variant2[question10Variant2ID].len2+
-                             question10Variant2[question10Variant2ID].len3);
-
+    std::wstring replaceTo(question10Variant2[question10Variant2ID].len1+question10Variant2[question10Variant2ID].len2+question10Variant2[question10Variant2ID].len3);
     std::wstring question = question10Text[getQuestNumber()].questionText;
     int posn = question.find(replaceFrom);
     if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
-    //posn = question.find(replaceFrom);
-    //if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
 
-    textFrame.settext(question);
+      replaceFrom = L"M";
+     replaceTo = question10Variant1[question10Variant1ID];
+    
+    posn = question.find(replaceFrom);
+    if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
 
-    //std::string tmp(question10Variant1[question10Variant1ID].begin(), question10Variant1[question10Variant1ID].end());
+
+    textFrame.CalcucateCoordinate(w, textFrame.getHeight());
+
+
     std::cout << question10Variant1ID << std::endl;
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
@@ -2697,6 +2730,10 @@ QuestType10::QuestType10(int w, int h) :
 
         }
 
+        for (int i = 0; i < 4; i++) {
+            window->draw(checkbutton.getSprite()[i]);
+            window->draw(checkbutton.getText()[i]);
+        }
 
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
