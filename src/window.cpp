@@ -41,6 +41,10 @@ std::wstring get_wstr(const std::array<figureQestions, N>& arr, int questvariant
     return ws;
 }
 */
+float CheckButton::getHeightText() {
+    float tmp = str[0].getLocalBounds().height;
+    return str[0].getLocalBounds().height;
+}
 
 std::wstring get_wstr(int questvariantIndex,int ordNumber) {
 //    setlocale(LC_ALL, "Russian");
@@ -54,6 +58,7 @@ std::wstring get_wstr(int questvariantIndex,int ordNumber) {
   return ws;
 }
 int TextFrameBase::getHeight() {
+   
     return text.getLocalBounds().height;
 }
 void PicturetoView::CalcucateCoordinate( ) {
@@ -2650,16 +2655,37 @@ tab(*this)
 
 }
 
-void CheckButton::setTextValue(int index) {
+sf::RectangleShape CheckButton::setTextValue(int index) {
+    
+    font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
+  
+    sf::RectangleShape rectangle;
     for (int i = 0; i < 4; i++) {
-        str[i].setString(question10Variant2[index].len1);
-        str[i].setPosition(quadroSprite[i].getPosition().x, quadroSprite[i].getPosition().y);
-    }
+        str[i]= sf::Text(question10Variant2[index].len1, font, wLnk.gettextFrame().getSize());
+        float x = quadroSprite[i].getPosition().x; // +qudroSize;
+        float tmiii = quadroSprite[i].getLocalBounds().width;
+        float y = quadroSprite[i].getPosition().y; // +(qudroSize - getHeightText()) / 2;
+        str[i].setOutlineColor(sf::Color::Green);
+
+        if (i == 0) {
+            rectangle.setPosition(sf::Vector2f(quadroSprite[0].getPosition().x-5 , quadroSprite[0].getPosition().y ));
+            rectangle.setSize(sf::Vector2f(2, getHeightText()));
+        }
+        
+           str[i].setPosition(x+100,y);
+           str[i].setFillColor(sf::Color::Black);
+           str[i].setOutlineColor(sf::Color::Red);
+           
+         }
+    
+    //float yuu= quadroSprite[0].getTexture()->
+    
+  return rectangle;
 }
 
 CheckButton::CheckButton(Window& wl):wLnk(wl){
-    float coeff = (500.0f / ((wl.getHeight()- wl.gettextFrame().getHeight())))/5;
-    float qudroSize = coeff * 500.0f;
+     coeff = (452.0f / ((wl.getHeight()- wl.gettextFrame().getHeight())))/5;
+     qudroSize = coeff * 452.0f;
     float margin = (((wl.getHeight() - wl.gettextFrame().getHeight()) ) - qudroSize * 4) / 4;
     for (int i = 0; i < 4; i++) {
         quadroTexture[i].loadFromFile(res_path + "empty.jpg");
@@ -2676,6 +2702,7 @@ std::array<sf::Sprite, 4>& CheckButton::getSprite() {
     return quadroSprite;
 }
 std::array<sf::Text, 4>& CheckButton::getText() {
+    std::wstring tmp = str[3].getString();
     return str;
 }
 
@@ -2688,7 +2715,7 @@ QuestType10::QuestType10(int w, int h) :
     question10Variant1ID = rand() % 2;
     question10Variant2ID = sizeof(question10Variant2)/ sizeof(*question10Variant2)-1;
 
-    checkbutton.setTextValue(question10Variant2ID);
+    sf::RectangleShape A = checkbutton.setTextValue(question10Variant2ID);
 
     std::wstring  replaceFrom = L"N";
     std::wstring replaceTo(question10Variant2[question10Variant2ID].len1+question10Variant2[question10Variant2ID].len2+question10Variant2[question10Variant2ID].len3);
@@ -2702,8 +2729,8 @@ QuestType10::QuestType10(int w, int h) :
     posn = question.find(replaceFrom);
     if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
 
-
-    textFrame.CalcucateCoordinate(w, textFrame.getHeight());
+    textFrame.settext(question);
+    textFrame.CalcucateCoordinate(w-w*5/100, textFrame.getHeight());
 
 
     std::cout << question10Variant1ID << std::endl;
@@ -2729,15 +2756,20 @@ QuestType10::QuestType10(int w, int h) :
             
 
         }
-
+        A.setFillColor(sf::Color::Red);
+        window->draw(A);
         for (int i = 0; i < 4; i++) {
             window->draw(checkbutton.getSprite()[i]);
+            sf::Text tmp1 = checkbutton.getText()[i];
+            std::wstring tmpStr = tmp1.getString();
+            //const sf::Font F = tmp1.getFont();
             window->draw(checkbutton.getText()[i]);
         }
 
-        window->draw(QuestComment.gettext());
+        //window->draw(QuestComment.gettext());
+        
         window->draw(textFrame.gettext());
-
+        
 
 
         if (badAnswer) {

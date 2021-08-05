@@ -20,16 +20,19 @@ class Window;
 
 class CheckButton {
     int qty;
+    sf::Font font;
     std::array<sf::Text, 4> str;
     std::array<sf::Texture,4>   quadroTexture;
     std::array<sf::Sprite ,4>   quadroSprite;
     Window& wLnk;
+    float coeff;
+    float qudroSize;
     public:
     CheckButton(Window&);
-    void setTextValue(int);
+    sf::RectangleShape setTextValue(int);
     std::array<sf::Sprite, 4>& getSprite();
     std::array<sf::Text, 4>& getText();
-
+    float getHeightText();
 };
 
 class MyVertexArray : public sf::VertexArray {
