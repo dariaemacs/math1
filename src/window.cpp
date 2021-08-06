@@ -28,24 +28,44 @@ inline void delay(clock_t sec)
     clock_t end_time = sec + start_time;
     while (clock() != end_time);
 }
-/*
-template <size_t N>
-std::wstring get_wstr(const std::array<figureQestions, N>& arr, int questvariantIndex){
-    std::stringstream ss;
-    ss << 1 << ". ";
-    std::string str = ss.str();
 
-    std::wstring ws(str.begin(), str.end());
-    ws += arr[questvariantIndex].questionText.c_str();
-
-    return ws;
+int CheckButton::GenerateRandomSetNumber() {
+    int SIZE = sizeof(question10VariantForRandom1) / sizeof(*question10VariantForRandom1);
+    return rand() % (SIZE+1);
 }
-*/
 float CheckButton::getHeightText() {
-    float tmp = str[0].getLocalBounds().height;
-    return str[0].getLocalBounds().height;
+        return str[0].getLocalBounds().height;
+}
+float CheckButton::getWidthText(int index) {
+    return str[index].getLocalBounds().width;
 }
 
+bool CheckButton::click() {
+    for (int i = 0; i < 4; ++i) {
+        const sf::Vector2f& position = quadroSprite[i].getPosition();
+        const sf::IntRect& rect = quadroSprite[i].getTextureRect();
+        int x0 = position.x;
+        int y0 = position.y;
+        int x1 = (float)x0 + (float)rect.width * coeff;
+        int y1 = (float)y0 + (float)rect.height * coeff;
+        const sf::Vector2i& M = sf::Mouse::getPosition(*wLnk.getWindow());
+        if (M.x >= x0 && M.x <= x1+ getWidthText(i) + textmarginleft && M.y >= y0 && M.y <= y1) {
+            std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
+            if (clickID >= 0) {
+                quadroSprite[clickID].setActive();
+                quadroTexture[clickID].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + quadroSprite[i].getFN());
+            }
+            clickID = i;
+                quadroSprite[i].setActive();
+                quadroTexture[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + quadroSprite[i].getFN());
+                if (!quadroSprite[i].getActive()) clickID = -1;
+            
+            return true;
+        }
+    }
+
+    return false;
+}
 std::wstring get_wstr(int questvariantIndex,int ordNumber) {
 //    setlocale(LC_ALL, "Russian");
   std::stringstream ss;
@@ -61,6 +81,8 @@ int TextFrameBase::getHeight() {
    
     return text.getLocalBounds().height;
 }
+
+
 void PicturetoView::CalcucateCoordinate( ) {
     using namespace std;
     sf::Texture tmp;
@@ -2655,35 +2677,43 @@ tab(*this)
 
 }
 
-sf::RectangleShape CheckButton::setTextValue(int index) {
+void CheckButton::setTextValue(int index) {
     
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
   
     sf::RectangleShape rectangle;
+    //std::cout << wLnk.gettextFrame().getSize() << std::endl;
+    int question10Variant1IDRandom1 = rand() % (sizeof(question10VariantForRandom1) / sizeof(question10VariantForRandom1[0]));
+
     for (int i = 0; i < 4; i++) {
-        str[i]= sf::Text(question10Variant2[index].len1, font, wLnk.gettextFrame().getSize());
+
+        str[i]= sf::Text(
+            
+            question10Variant2[index][question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][0]]
+            +
+            question10Variant2[index][question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][1]]
+            +
+            question10Variant2[index][question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][2]]
+            
+            , font, 35);
         float x = quadroSprite[i].getPosition().x; // +qudroSize;
         float tmiii = quadroSprite[i].getLocalBounds().width;
-        float y = quadroSprite[i].getPosition().y; // +(qudroSize - getHeightText()) / 2;
-        str[i].setOutlineColor(sf::Color::Green);
+        str[i].setLineSpacing(0.001);
+        float huuu = str[i].getLineSpacing();
 
-        if (i == 0) {
-            rectangle.setPosition(sf::Vector2f(quadroSprite[0].getPosition().x-5 , quadroSprite[0].getPosition().y ));
-            rectangle.setSize(sf::Vector2f(2, getHeightText()));
-        }
-        
-           str[i].setPosition(x+100,y);
+        float y = quadroSprite[i].getPosition().y +(qudroSize - getHeightText()) / 2;
+           str[i].setPosition(x+ qudroSize  + textmarginleft,y-10);
            str[i].setFillColor(sf::Color::Black);
            str[i].setOutlineColor(sf::Color::Red);
            
          }
     
-    //float yuu= quadroSprite[0].getTexture()->
+
     
-  return rectangle;
+ 
 }
 
-CheckButton::CheckButton(Window& wl):wLnk(wl){
+CheckButton::CheckButton(Window& wl):wLnk(wl), textmarginleft(10), clickID(-1){
      coeff = (452.0f / ((wl.getHeight()- wl.gettextFrame().getHeight())))/5;
      qudroSize = coeff * 452.0f;
     float margin = (((wl.getHeight() - wl.gettextFrame().getHeight()) ) - qudroSize * 4) / 4;
@@ -2698,14 +2728,16 @@ CheckButton::CheckButton(Window& wl):wLnk(wl){
 
 
 }
-std::array<sf::Sprite, 4>& CheckButton::getSprite() {
+std::array<mySpriteCheckButton, 4>& CheckButton::getSprite() {
     return quadroSprite;
 }
 std::array<sf::Text, 4>& CheckButton::getText() {
     std::wstring tmp = str[3].getString();
     return str;
-}
+};
 
+std::string mySpriteCheckButton::getFN() { return fn; };
+bool mySpriteCheckButton::getActive() { return active; }
 QuestType10::QuestType10(int w, int h) :
     Window(w, h, 0, 9),
     checkbutton(*this)
@@ -2713,12 +2745,22 @@ QuestType10::QuestType10(int w, int h) :
 
     bool first = true;
     question10Variant1ID = rand() % 2;
-    question10Variant2ID = sizeof(question10Variant2)/ sizeof(*question10Variant2)-1;
+    question10Variant2ID = rand() %  (sizeof(question10Variant2)/ sizeof(question10Variant2[0]) );
 
-    sf::RectangleShape A = checkbutton.setTextValue(question10Variant2ID);
+    int question10Variant3ID = rand() % (sizeof(question10VariantForRandom2) / sizeof(question10VariantForRandom2[0]));
+   
+    //std::cout << question10Variant3ID << std::endl;
 
     std::wstring  replaceFrom = L"N";
-    std::wstring replaceTo(question10Variant2[question10Variant2ID].len1+question10Variant2[question10Variant2ID].len2+question10Variant2[question10Variant2ID].len3);
+    //question10Variant2[question10Variant2ID];
+
+
+    std::wstring replaceTo(question10Variant2[question10Variant2ID][question10VariantForRandom2[question10Variant3ID][0]]
+    +
+        question10Variant2[question10Variant2ID][question10VariantForRandom2[question10Variant3ID][1]]
+    +
+        question10Variant2[question10Variant2ID][question10VariantForRandom2[question10Variant3ID][2]]
+    );
     std::wstring question = question10Text[getQuestNumber()].questionText;
     int posn = question.find(replaceFrom);
     if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
@@ -2737,7 +2779,7 @@ QuestType10::QuestType10(int w, int h) :
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
     sf::Event event;
-    //questanswer[0].loadFromFile("resources/images/arrow_disable.png");
+    checkbutton.setTextValue(question10Variant2ID);
 
     
 
@@ -2756,8 +2798,8 @@ QuestType10::QuestType10(int w, int h) :
             
 
         }
-        A.setFillColor(sf::Color::Red);
-        window->draw(A);
+        
+     
         for (int i = 0; i < 4; i++) {
             window->draw(checkbutton.getSprite()[i]);
             sf::Text tmp1 = checkbutton.getText()[i];
@@ -2792,10 +2834,11 @@ QuestType10::QuestType10(int w, int h) :
                         badAnswer = true;
                         
 
-               // if (Buttons.click()) {
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
-                //}
+               if (checkbutton.click()) {
+                   
+                    /*CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);*/
+                }
 
             }
 

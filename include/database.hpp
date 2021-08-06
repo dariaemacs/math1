@@ -12,7 +12,7 @@ struct figureQestions {
 	
 };
 
-
+extern const int  question10VariantForRandom1[9][4];
 
 extern const std::wstring CommentsDic[];
 extern std::vector< std::vector<int>> numSeries;
@@ -86,8 +86,8 @@ extern const std::array<std::string, N8> filenamesforPicaQuestPlus8;
 extern const std::array<std::string, N8> filenamesforPicaQuestMinus8;
 extern const int question9AnswerDetails[];
 struct  mystruct { std::wstring len1; std::wstring len2; std::wstring len3; };
-extern  const mystruct  question10Variant2[6];
-
+extern  const std::wstring  question10Variant2[6][3];
+extern  const int  question10VariantForRandom2[4][3];
 
 #endif //DATABASE_H
 

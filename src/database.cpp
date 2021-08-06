@@ -171,15 +171,35 @@ extern const std::array<std::string, N8> filenamesforPicaQuestPlus8 = {
 
 extern const std::wstring question10Variant1[] = { L" возрастания" , L" убывания" };
 
-extern  const mystruct  question10Variant2[6] =
+extern  const std::wstring  question10Variant2[6][3] =
 {
-    {L" 9 см", L" 19 см", L" 3 дм"},
-    {L" 5 см", L" 20 см", L" 5 дм"},
-    {  L" 7 см", L" 15 см", L" 7 дм"},
-  { L" 6 см", L" 1 дм",  L" 18 см"},
-  { L" 2 см", L" 19 см", L" 2 дм"},
-  { L" 8 см", L" 10 см", L" 3 дм"}
+    L" 9 см", L" 19 см", L" 3 дм",
+    L" 5 см", L" 20 см", L" 5 дм",
+      L" 7 см", L" 15 см", L" 7 дм",
+  L" 6 см", L" 1 дм",  L" 18 см",
+  L" 2 см", L" 19 см", L" 2 дм",
+  L" 8 см", L" 10 см", L" 3 дм"
 };
+
+extern const int  question10VariantForRandom1[9][4] =
+{  1,3,0,2,
+   1,2,3,0,
+   2,3,0,1,
+   1,3,2,0,
+   3,1,2,0,
+   3,2,1,0,
+   3,0,2,1,
+   2,1,3,0,
+   2,0,3,1
+};
+
+extern  const int  question10VariantForRandom2[4][3] =
+{   {0,1,2},
+    {1,2,0},
+    {0,2,1},
+    {2,1,0}
+};
+
 
 const std::array <std::array<phrasetoReplace, X>, Y> phrasestoReplace = {
   {

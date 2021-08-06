@@ -17,22 +17,41 @@
 #define three_minimal(a, b, c) minimal(minimal(a, b), c)
 
 class Window;
-
+class mySpriteCheckButton : public sf::Sprite {
+    std::string fn;
+    bool active;
+public:
+    mySpriteCheckButton() : fn("empty.jpg"), active(false) {};
+    void setActive() {
+        if (!active) fn = "select.png"; else fn = "empty.jpg";
+        active = !active;
+    };
+    std::string getFN();
+    bool getActive();
+};
 class CheckButton {
     int qty;
+    int clickID;
+    int textmarginleft;
     sf::Font font;
     std::array<sf::Text, 4> str;
     std::array<sf::Texture,4>   quadroTexture;
-    std::array<sf::Sprite ,4>   quadroSprite;
+    std::array<mySpriteCheckButton,4>   quadroSprite;
     Window& wLnk;
     float coeff;
     float qudroSize;
+    int rightQuestNum;
     public:
+
     CheckButton(Window&);
-    sf::RectangleShape setTextValue(int);
-    std::array<sf::Sprite, 4>& getSprite();
+    int GenerateRandomSetNumber();
+    //int GenerateRandomSet();
+    void setTextValue(int);
+    std::array<mySpriteCheckButton, 4>& getSprite();
     std::array<sf::Text, 4>& getText();
     float getHeightText();
+    float getWidthText(int);
+    bool  click();
 };
 
 class MyVertexArray : public sf::VertexArray {
