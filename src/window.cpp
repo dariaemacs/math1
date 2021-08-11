@@ -2848,4 +2848,115 @@ QuestType10::QuestType10(int w, int h) :
 
     srand(time(0));
 
+};
+
+
+QuestType11::QuestType11(int w, int h) :
+    Window(w, h, 0, 10),
+    checkbutton(*this),
+    picture(*this)
+{
+
+    bool first = true;
+    question10Variant1ID = rand() % 2;
+    question10Variant2ID = rand() % (sizeof(question11pictureFN) / sizeof(question11pictureFN[0]));
+
+    //int question10Variant3ID = rand() % (sizeof(question10VariantForRandom2) / sizeof(question10VariantForRandom2[0]));
+
+    //std::cout << question10Variant3ID << std::endl;
+
+
+    std::wstring question = question11Text[0].questionText;
+
+    std::wstring replaceFrom = L"N";
+    std::wstring replaceTo = question10Variant1[question10Variant1ID];
+
+    int posn = question.find(replaceFrom);
+    if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
+
+    textFrame.settext(question);
+    textFrame.CalcucateCoordinate(w - w * 5 / 100, textFrame.getHeight());
+
+
+    std::cout << question10Variant1ID << std::endl;
+    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    CheckButtonSprite.setTexture(CheckButtonTexture);
+    sf::Event event;
+    checkbutton.setTextValue(question10Variant2ID);
+
+    picture.setButtonCount(10);
+
+    picture.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][0]);
+    picture.setMargin_left(10);
+    picture.setMargin_top(textFrame.getHeight() * 2);
+
+    while (window->isOpen()) {
+        window->clear();
+
+        window->draw(List);
+
+        if (first) {
+
+            first = false;
+           picture.CalcucateCoordinate();
+
+            QuestComment.CalcucateCoordinate(h / 3, w / 2);
+
+
+
+        }
+
+
+        for (int i = 0; i < 4; i++) {
+            window->draw(checkbutton.getSprite()[i]);
+            sf::Text tmp1 = checkbutton.getText()[i];
+            std::wstring tmpStr = tmp1.getString();
+            //const sf::Font F = tmp1.getFont();
+            window->draw(checkbutton.getText()[i]);
+        }
+
+        //window->draw(QuestComment.gettext());
+
+        window->draw(textFrame.gettext());
+        for (int bc = 0; bc < picture.getButtonCount(); bc++) {
+
+            window->draw(*picture.getButtons()[bc]);
+        }
+
+
+        if (badAnswer) {
+            //sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            //sprite.setPosition((w - questanswer.getWidth()) / 2, (h - questanswer.getHeight()) / 2);
+            //window->draw(sprite);
+
+        }
+        window->display();
+        while (window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
+                window->close();
+            }
+
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+                if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
+
+                    QuestComment.settext(CommentsDic[2]);
+                badAnswer = true;
+
+
+                if (checkbutton.click()) {
+
+                    /*CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);*/
+                }
+
+            }
+
+
+        }
+    }
+
+    srand(time(0));
+
 }
+

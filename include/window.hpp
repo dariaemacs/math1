@@ -591,4 +591,17 @@ public:
     int getquestion10Variant1ID() { return question10Variant1ID; }
     int getquestion10Variant2ID() { return question10Variant2ID; }
 };
+
+class QuestType11 : public Window {
+    CheckButton checkbutton;
+    PicturetoView picture;
+    int question10Variant1ID;
+    int question10Variant2ID;
+
+public:
+    QuestType11(int, int);
+    int getquestion10Variant1ID() { return question10Variant1ID; }
+    int getquestion10Variant2ID() { return question10Variant2ID; }
+};
+
 #endif 

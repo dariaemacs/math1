@@ -22,60 +22,60 @@ int main() {
         srand(time(0));
 
        
-        QuestType10(width, height);
+        QuestType11(width, height);
 
 
          width = 1024;  height = 600;
-         QuestType10(width, height);
+         QuestType11(width, height);
 
      width = 1152; height = 864;
-     QuestType10(width, height);
+     QuestType11(width, height);
 
      width = 1200; height = 600;
-     QuestType10(width, height);
+     QuestType11(width, height);
 
      width = 1280; height = 720;
-     QuestType10(width, height);
+     QuestType11(width, height);
 
      width = 1280; height = 768;
-     QuestType10(width, height);
+     QuestType11(width, height);
      width = 1280; height = 1024;
-     QuestType10(width, height);
+     QuestType11(width, height);
 
      width = 1408; height = 1152;
-     QuestType10(width, height);
+     QuestType11(width, height);
      width = 1440; height = 900;
-     QuestType10(width, height);
+     QuestType11(width, height);
      width = 1400; height = 1050;
-     QuestType10(width, height);
+     QuestType11(width, height);
 
 
      width = 1440; height = 1080;
-     QuestType10(width, height);
+     QuestType11(width, height);
 
      width = 1536; height = 960;
-     QuestType10(width, height);
+     QuestType11(width, height);
      width = 1536; height = 1024;
-     QuestType10(width, height);
+     QuestType11(width, height);
 
      width = 1600; height = 900;
-     QuestType10(width, height);
+     QuestType11(width, height);
      width = 1600; height = 1024;
-     QuestType10(width, height);
+     QuestType11(width, height);
      width = 1600; height = 1200;
-     QuestType10(width, height);
+     QuestType11(width, height);
 
      width = 1680; height = 1050;
-     QuestType10(width, height);
+     QuestType11(width, height);
 
      width = 1920; height = 1080;
-     QuestType10(width, height);
+     QuestType11(width, height);
 
      width = 1920; height = 1200;
-     QuestType10(width, height);
+     QuestType11(width, height);
 
      width = 2048; height = 1080;
-     QuestType10(width, height);
+     QuestType11(width, height);
 
     
 

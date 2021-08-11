@@ -45,10 +45,19 @@ extern const figureQestions question7Text[];
 extern const figureQestions question8Text[];
 extern const figureQestions question9Text[];
 extern const figureQestions question10Text[];
+extern const figureQestions question11Text[];
+
+
 
 extern const std::wstring question10Variant1[];
 
 
+extern const std::wstring question11Variant1[2];
+extern const std::wstring question11Variant2[6][2][4];
+extern const std::string question11pictureFN[4][2];
+
+
+extern const std::wstring question11rectanglevariant1[2];
 extern const figureQestions* qestionarrayList[];
 
 
@@ -63,6 +72,7 @@ struct variantOfLine { int i, j; };
 extern const variantOfLine question7squarevariantOfFirstLine[];
 extern const variantOfLine question7trianglevariantOfFirstLine[];
 extern const variantOfLine question7rectanglevariantOfFirstLine[];
+
 //extern const variantOfLine question8rectanglevariantOfFirstLine[];
 
 extern const std::vector<pica> tree;

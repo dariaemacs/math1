@@ -125,6 +125,77 @@ extern const figureQestions question10Text[] = {
     figureQestions{L"Ученики записали величины N в порядке M \nи получили разные ответы. Нажми на правильный ответ.",calc},
 };
 
+extern const std::wstring question11Variant1[] = {
+    L"увеличения" ,
+    L"уменьшения"
+};
+extern const std::wstring question11Variant2[6][2][4] = {
+                   {{
+                            L"Сколько станет муравьев, если добавить ещё одного муравья?",
+                            L"Сколько станет муравьев, если убрать одного муравья?",
+                            L"На сколько муравьев меньше, чем шмелей?",
+                            L"Сколько всего насекомых?"
+                    },
+                    {
+                            L"Сколько станет шмелей, если добавить ещё одного шмеля?",
+                            L"Сколько станет шмелей, если убрать одного шмеля?",
+                            L"На сколько шмелей больше, чем муравьев?",
+                            L"Сколько всего насекомых?"
+                    }},
+
+                    {{
+                           L"Сколько станет уток, если добавить ещё одну утку?",
+                           L"Сколько станет уток, если убрать одну утку?",
+                           L"На сколько уток меньше, чем попугаев?",
+                           L"Сколько всего птиц?"
+                    },
+
+                    {
+                            L"Сколько станет попугаев, если добавить ещё одного попугая?",
+                            L"Сколько станет попугаев, если убрать одного попугая?",
+                            L"На сколько попугаев больше, чем уток?",
+                            L"Сколько всего птиц?"
+                    }},
+                    {{
+                            L"Сколько станет осьминогов, если добавить ещё одного осьминога?",
+                            L"Сколько станет осьминогов, если убрать одного осьминога?",
+                            L"На сколько осьминогов меньше, чем акул?",
+                            L"Сколько всего морских обитателей?"
+                    },
+                    {
+                            L"Сколько станет акул, если добавить ещё одну акулу?",
+                            L"Сколько станет акул, если убрать одну акулу?",
+                            L"На сколько акул больше, чем осьминогов?",
+                            L"Сколько всего морских обитателей?"
+                    }},
+                    {{
+                            L"Сколько станет бегемотов, если добавить ещё одного бегемота?",
+                            L"Сколько станет бегемотов, если убрать одного бегемота?",
+                            L"На сколько бегемотов меньше, чем верблюдов?",
+                            L"Сколько всего животных?"
+                    },
+                    {
+                            L"Сколько станет верблюдов, если добавить ещё одного верблюда?",
+                            L"Сколько станет верблюдов, если убрать одного верблюда?",
+                            L"На сколько верблюдов больше, чем бегемотов?",
+                            L"Сколько всего животных?"
+                    }
+                    }
+};
+extern const std::string question11pictureFN[4][2] =
+{
+    {"ant","bumblebee2"},
+    {"duck11","parrot"},
+    {"octopus","shark"},
+    {"pict1801","camel"}
+};
+
+
+
+
+extern const figureQestions question11Text[] = {
+figureQestions{L"Для ответа на какие вопросы к рисунку нужно выполнить действие N",calc}
+};
 
 
 
@@ -137,7 +208,7 @@ extern const variantOfLine question7rectanglevariantOfFirstLine[] = { 1,0, 2,1, 
 
 extern const int question9AnswerDetails[] = { 8,5    , 9,7,   6 ,6 ,  8,9,   8,6 ,    5,7    , 5,6};
 
-extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text ,question9Text,question10Text };
+extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text ,question9Text,question10Text ,question11Text };
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("chicken"),
     std::string("pencil"),
