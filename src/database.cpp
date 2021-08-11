@@ -126,10 +126,10 @@ extern const figureQestions question10Text[] = {
 };
 
 extern const std::wstring question11Variant1[] = {
-    L"увеличени€" ,
-    L"уменьшени€"
+    L"сложени€" ,
+    L"вычитание"
 };
-extern const std::wstring question11Variant2[6][2][4] = {
+extern const std::wstring question11Variant2[4][2][4] = {
                    {{
                             L"—колько станет муравьев, если добавить ещЄ одного муравь€?",
                             L"—колько станет муравьев, если убрать одного муравь€?",

@@ -2675,8 +2675,19 @@ tab(*this)
 
     srand(time(0));
 
-}
+};
+void CheckButton::setStrValue(int index, std::wstring str1) {
+    font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
+    str[index] = sf::Text(str1, font, 28);
+    float x = quadroSprite[index].getPosition().x; // +qudroSize;
+    float y = quadroSprite[index].getPosition().y + (qudroSize - getHeightText()) / 2;
+    str[index].setPosition(x + qudroSize + textmarginleft, y );
+    
+    str[index].setFillColor(sf::Color::Black);
+    str[index].setOutlineColor(sf::Color::Red);
+    //
 
+}
 void CheckButton::setTextValue(int index) {
     
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
@@ -2863,7 +2874,7 @@ QuestType11::QuestType11(int w, int h) :
 
     //int question10Variant3ID = rand() % (sizeof(question10VariantForRandom2) / sizeof(question10VariantForRandom2[0]));
 
-    //std::cout << question10Variant3ID << std::endl;
+    std::cout << question10Variant2ID << std::endl;
 
 
     std::wstring question = question11Text[0].questionText;
@@ -2882,11 +2893,11 @@ QuestType11::QuestType11(int w, int h) :
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
     sf::Event event;
-    checkbutton.setTextValue(question10Variant2ID);
+    //checkbutton.setTextValue(question10Variant2ID);
 
-    picture.setButtonCount(10);
+    picture.setButtonCount(4);
 
-    picture.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][0]);
+    picture.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][question10Variant1ID]);
     picture.setMargin_left(10);
     picture.setMargin_top(textFrame.getHeight() * 2);
 
@@ -2909,9 +2920,13 @@ QuestType11::QuestType11(int w, int h) :
 
         for (int i = 0; i < 4; i++) {
             window->draw(checkbutton.getSprite()[i]);
-            sf::Text tmp1 = checkbutton.getText()[i];
-            std::wstring tmpStr = tmp1.getString();
+            
+            std::wstring tmpStr = question11Variant2[question10Variant2ID][question10Variant1ID][i];
+            checkbutton.setStrValue(i, tmpStr);
             //const sf::Font F = tmp1.getFont();
+
+            tmpStr = checkbutton.getText()[i].getString();
+
             window->draw(checkbutton.getText()[i]);
         }
 

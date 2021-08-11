@@ -47,13 +47,17 @@ class CheckButton {
     int GenerateRandomSetNumber();
     //int GenerateRandomSet();
     void setTextValue(int);
+    void setStrValue(int, std::wstring);
     std::array<mySpriteCheckButton, 4>& getSprite();
     std::array<sf::Text, 4>& getText();
     float getHeightText();
     float getWidthText(int);
     bool  click();
 };
-
+//class CheckButton11 : public CheckButton {
+//
+//
+//};
 class MyVertexArray : public sf::VertexArray {
     bool hold;
 public:

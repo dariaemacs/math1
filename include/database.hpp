@@ -53,7 +53,7 @@ extern const std::wstring question10Variant1[];
 
 
 extern const std::wstring question11Variant1[2];
-extern const std::wstring question11Variant2[6][2][4];
+extern const std::wstring question11Variant2[4][2][4];
 extern const std::string question11pictureFN[4][2];
 
 
