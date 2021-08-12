@@ -13,6 +13,7 @@
 #include <fstream>
 #include <locale>
 #include <algorithm>
+#include <math.h>
 
 #define maximal(a, b) (((a)>(b))?(a):(b))
 #define minimal(a, b) (((a)<(b))?(a):(b))
@@ -28,6 +29,10 @@ inline void delay(clock_t sec)
     clock_t end_time = sec + start_time;
     while (clock() != end_time);
 }
+
+void mySpriteCheckButton::setTop(float t) { top = t; }
+void mySpriteCheckButton::setLeft(float l) { left = l; }
+
 
 int CheckButton::GenerateRandomSetNumber() {
     int SIZE = sizeof(question10VariantForRandom1) / sizeof(*question10VariantForRandom1);
@@ -2676,18 +2681,27 @@ tab(*this)
     srand(time(0));
 
 };
-void CheckButton::setStrValue(int index, std::wstring str1) {
-    font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-    str[index] = sf::Text(str1, font, 28);
-    float x = quadroSprite[index].getPosition().x; // +qudroSize;
-    float y = quadroSprite[index].getPosition().y + (qudroSize - getHeightText()) / 2;
-    str[index].setPosition(x + qudroSize + textmarginleft, y );
-    
-    str[index].setFillColor(sf::Color::Black);
-    str[index].setOutlineColor(sf::Color::Red);
-    //
+sf::Font& CheckButton::getFont() { return font; }
 
-}
+std::array<sf::Texture, 4>& CheckButton::getquadroTexture() { return quadroTexture; }
+float CheckButton::getQudroSize() { return qudroSize; }
+float CheckButton::getTextmarginleft() {return textmarginleft;}
+void CheckButton11::setStrValue(int index, std::wstring str1) {
+    getFont().loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
+    getText()[index] = sf::Text(str1, getFont(), 28);
+    float x = getSprite()[index].getPosition().x; // +qudroSize;
+    float y = getSprite()[index].getPosition().y + (getQudroSize() - getHeightText()) / 2;
+    getText()[index].setPosition(x + getQudroSize() + getTextmarginleft(), y);
+    getText()[index].setFillColor(sf::Color::Black);
+    getText()[index].setOutlineColor(sf::Color::Red);
+    
+};
+void CheckButton11::SetqudroSize(float q) { 
+    qudroSize = q; 
+    coeff = qudroSize / 500; 
+    for (int i = 0; i < 4;i++)
+    getSprite()[i].setScale(coeff, coeff); 
+};
 void CheckButton::setTextValue(int index) {
     
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
@@ -2860,12 +2874,67 @@ QuestType10::QuestType10(int w, int h) :
     srand(time(0));
 
 };
+void CheckButton11::SetSpacing(float space) {
+    for (int i = 1; i < 4; i++)
+    {
+        float left = getSprite()[i].getPosition().x;;
+        float wi = getSprite()[i].getLocalBounds().width;
+        float top = getSprite()[i - 1].getPosition().y + qudroSize + space;
+            
+        getSprite()[i].setPosition(left, top - space);
+    }
+}
+void PicturetoView11::CalcucateCoordinate(float w) {
+
+    using namespace std;
+    sf::Texture tmp;
+
+    int button_margin_left = margin_left;
+    tmp.loadFromFile(pictureFilename + ".png");
+    sf::Vector2u PICTURESIZE = tmp.getSize();
+    if (PICTURESIZE.x > PICTURESIZE.y&& PICTURESIZE.x / PICTURESIZE.y >= 2)  PICTURESIZE.x /= 2;
+    int ButtonSlideHeght = WindowLink.getHeight() / 3;
+
+    float PICTURESIZE_W = PICTURESIZE.x;
+    width = PICTURESIZE.x;
+    float PICTURESIZE_H = PICTURESIZE.y;
+    ////std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
+    scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
+
+    if (ButtonCount < 7)  // 1 row of pictures
+    {
+        do {
+            scale = scale - 0.01;
+            PICTURESIZE_W = PICTURESIZE.x * scale;
+            PICTURESIZE_H = PICTURESIZE.y * scale;
+            ////std::cout << "k=" << scale << std::endl;
+            ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
+        } while ((PICTURESIZE_W * round(ButtonCount) ) > WindowLink.getWidth()/3) ;
+        height = PICTURESIZE_H;
+
+        for (int i = 0; i < ButtonCount; i++) {
+            std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
+            txt->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
+            sprite->setTexture(*txt.get());
+            sprite->setScale(scale, scale);
+            sprite->move(button_margin_left, ButtonSlideHeght);
+            button_margin_left = button_margin_left + 5 + PICTURESIZE.x * scale;
+            MyTexture.emplace_back(std::move(txt));
+            ButtonsList.emplace_back(std::move(sprite));
+            isblackSide.push_back(true);
+        }
+    }
 
 
+
+
+}
 QuestType11::QuestType11(int w, int h) :
     Window(w, h, 0, 10),
     checkbutton(*this),
-    picture(*this)
+    picture1(*this),
+    picture2(*this)
 {
 
     bool first = true;
@@ -2893,13 +2962,20 @@ QuestType11::QuestType11(int w, int h) :
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
     sf::Event event;
-    //checkbutton.setTextValue(question10Variant2ID);
+    checkbutton.SetqudroSize(35);
+   
 
-    picture.setButtonCount(4);
+    picture1.setButtonCount(4);
 
-    picture.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][question10Variant1ID]);
-    picture.setMargin_left(10);
-    picture.setMargin_top(textFrame.getHeight() * 2);
+    picture1.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][question10Variant1ID]);
+    picture1.setMargin_left(10);
+    picture1.setMargin_top(textFrame.getHeight() );
+
+    picture2.setButtonCount(6);
+
+    picture2.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][ abs(question10Variant1ID-1)]);
+    picture2.setMargin_left(10);
+    picture2.setMargin_top(textFrame.getHeight() );
 
     while (window->isOpen()) {
         window->clear();
@@ -2909,10 +2985,10 @@ QuestType11::QuestType11(int w, int h) :
         if (first) {
 
             first = false;
-           picture.CalcucateCoordinate();
-
+           picture1.CalcucateCoordinate(12);
+           picture2.CalcucateCoordinate(12);
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
-
+            checkbutton.SetSpacing(11);
 
 
         }
@@ -2924,18 +3000,23 @@ QuestType11::QuestType11(int w, int h) :
             std::wstring tmpStr = question11Variant2[question10Variant2ID][question10Variant1ID][i];
             checkbutton.setStrValue(i, tmpStr);
             //const sf::Font F = tmp1.getFont();
-
+            
             tmpStr = checkbutton.getText()[i].getString();
 
             window->draw(checkbutton.getText()[i]);
+            
         }
 
         //window->draw(QuestComment.gettext());
 
         window->draw(textFrame.gettext());
-        for (int bc = 0; bc < picture.getButtonCount(); bc++) {
+        for (int bc = 0; bc < picture1.getButtonCount(); bc++) {
 
-            window->draw(*picture.getButtons()[bc]);
+            window->draw(*picture1.getButtons()[bc]);
+        }
+        for (int bc = 0; bc < picture2.getButtonCount(); bc++) {
+
+            window->draw(*picture2.getButtons()[bc]);
         }
 
 

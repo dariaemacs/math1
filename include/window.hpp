@@ -18,6 +18,8 @@
 
 class Window;
 class mySpriteCheckButton : public sf::Sprite {
+    float top;
+    float left;
     std::string fn;
     bool active;
 public:
@@ -28,6 +30,8 @@ public:
     };
     std::string getFN();
     bool getActive();
+    void setTop(float t);
+    void setLeft(float l);
 };
 class CheckButton {
     int qty;
@@ -38,26 +42,40 @@ class CheckButton {
     std::array<sf::Texture,4>   quadroTexture;
     std::array<mySpriteCheckButton,4>   quadroSprite;
     Window& wLnk;
-    float coeff;
-    float qudroSize;
+    
+    
     int rightQuestNum;
+    protected:
+    float qudroSize;
+    float coeff;
     public:
 
     CheckButton(Window&);
     int GenerateRandomSetNumber();
     //int GenerateRandomSet();
-    void setTextValue(int);
-    void setStrValue(int, std::wstring);
+    void setTextValue(int);    
     std::array<mySpriteCheckButton, 4>& getSprite();
     std::array<sf::Text, 4>& getText();
+    float getTextmarginleft();
     float getHeightText();
     float getWidthText(int);
     bool  click();
+    sf::Font& getFont();
+    float getQudroSize();
+    
+    std::array<sf::Texture, 4>& getquadroTexture();
+
 };
-//class CheckButton11 : public CheckButton {
-//
-//
-//};
+class CheckButton11 : public CheckButton {
+protected :
+    float spacing;
+public:
+    CheckButton11(Window& w) :CheckButton( w) {}
+    void setStrValue(int, std::wstring);
+    void SetqudroSize(float);
+    void SetSpacing(float);
+
+};
 class MyVertexArray : public sf::VertexArray {
     bool hold;
 public:
@@ -319,7 +337,15 @@ public:
     bool click();
 };
 
+class PicturetoView11 : public PicturetoView {
 
+public:
+    PicturetoView11(Window& w) : PicturetoView(w) {
+    
+    }
+    void CalcucateCoordinate(float w);
+    bool click();
+};
 
 
 class QuestType2 : public Window {
@@ -597,8 +623,9 @@ public:
 };
 
 class QuestType11 : public Window {
-    CheckButton checkbutton;
-    PicturetoView picture;
+    CheckButton11 checkbutton;
+    PicturetoView11 picture1;
+    PicturetoView11 picture2;
     int question10Variant1ID;
     int question10Variant2ID;
 
