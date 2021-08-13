@@ -35,12 +35,15 @@ public:
 };
 class CheckButton {
     int qty;
-    int clickID;
-    int textmarginleft;
+ 
+ 
     sf::Font font;
     std::array<sf::Text, 4> str;
     std::array<sf::Texture,4>   quadroTexture;
     std::array<mySpriteCheckButton,4>   quadroSprite;
+protected:
+    int textmarginleft;
+    int clickID;
     Window& wLnk;
     
     
@@ -68,12 +71,16 @@ class CheckButton {
 };
 class CheckButton11 : public CheckButton {
 protected :
-    float spacing;
+    float spacing; 
+    float margin_top;
+    char answerNUMBER;
 public:
-    CheckButton11(Window& w) :CheckButton( w) {}
+    CheckButton11(Window& w) :CheckButton( w), margin_top(0), answerNUMBER(0){}
     void setStrValue(int, std::wstring);
     void SetqudroSize(float);
     void SetSpacing(float);
+    void Set_margitop(float);
+    bool click();
 
 };
 class MyVertexArray : public sf::VertexArray {
@@ -178,6 +185,7 @@ public:
       scale = s;
   }
   int getHeight() {
+      std::cout<< "hhhhhhhh=" << height << std::endl;
       return height;
   }
 

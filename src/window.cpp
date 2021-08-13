@@ -71,6 +71,35 @@ bool CheckButton::click() {
 
     return false;
 }
+
+bool CheckButton11::click() {
+    for (int i = 0; i < 4; ++i) {
+        const sf::Vector2f& position = getSprite()[i].getPosition();
+        const sf::IntRect& rect = getSprite()[i].getTextureRect();
+        int x0 = position.x;
+        int y0 = position.y;
+        int x1 = (float)x0 + (float)rect.width * coeff;
+        int y1 = (float)y0 + (float)rect.height * coeff;
+        const sf::Vector2i& M = sf::Mouse::getPosition(*wLnk.getWindow());
+        if (M.x >= x0 && M.x <= x1 + getWidthText(i) + textmarginleft && M.y >= y0 && M.y <= y1) {
+            std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
+            //if (clickID >= 0) {
+            //    getSprite()[clickID].setActive();
+            //    getquadroTexture()[clickID].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + getSprite()[i].getFN());
+            //}
+            clickID = i;
+            getSprite()[i].setActive();
+            getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + getSprite()[i].getFN());
+            if (!getSprite()[i].getActive()) clickID = -1; 
+            answerNUMBER |= i;
+            std::cout <<"answerNUMBER="<< (int)answerNUMBER << std::endl;
+
+            return true;
+        }
+    }
+
+    return false;
+}
 std::wstring get_wstr(int questvariantIndex,int ordNumber) {
 //    setlocale(LC_ALL, "Russian");
   std::stringstream ss;
@@ -83,7 +112,7 @@ std::wstring get_wstr(int questvariantIndex,int ordNumber) {
   return ws;
 }
 int TextFrameBase::getHeight() {
-   
+    std::cout << "h=" << text.getLocalBounds().height << std::endl;
     return text.getLocalBounds().height;
 }
 
@@ -2737,7 +2766,11 @@ void CheckButton::setTextValue(int index) {
     
  
 }
-
+void  CheckButton11::Set_margitop(float mt) {
+    margin_top = mt;
+    for (int i = 0; i < 4; i++)
+        getSprite()[i].setPosition(getSprite()[i].getPosition().x, getSprite()[i].getPosition().y + margin_top);
+}
 CheckButton::CheckButton(Window& wl):wLnk(wl), textmarginleft(10), clickID(-1){
      coeff = (452.0f / ((wl.getHeight()- wl.gettextFrame().getHeight())))/5;
      qudroSize = coeff * 452.0f;
@@ -2907,10 +2940,8 @@ void PicturetoView11::CalcucateCoordinate(float w) {
             scale = scale - 0.01;
             PICTURESIZE_W = PICTURESIZE.x * scale;
             PICTURESIZE_H = PICTURESIZE.y * scale;
-            ////std::cout << "k=" << scale << std::endl;
-            ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
         } while ((PICTURESIZE_W * round(ButtonCount) ) > WindowLink.getWidth()/3) ;
-        height = PICTURESIZE_H;
+        
 
         for (int i = 0; i < ButtonCount; i++) {
             std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
@@ -2918,7 +2949,7 @@ void PicturetoView11::CalcucateCoordinate(float w) {
             std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
             sprite->setTexture(*txt.get());
             sprite->setScale(scale, scale);
-            sprite->move(button_margin_left, ButtonSlideHeght);
+            sprite->move(button_margin_left, margin_top);
             button_margin_left = button_margin_left + 5 + PICTURESIZE.x * scale;
             MyTexture.emplace_back(std::move(txt));
             ButtonsList.emplace_back(std::move(sprite));
@@ -2926,7 +2957,7 @@ void PicturetoView11::CalcucateCoordinate(float w) {
         }
     }
 
-
+    height = PICTURESIZE_H;
 
 
 }
@@ -2964,33 +2995,36 @@ QuestType11::QuestType11(int w, int h) :
     sf::Event event;
     checkbutton.SetqudroSize(35);
    
-
     picture1.setButtonCount(4);
-
-    picture1.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][question10Variant1ID]);
-    picture1.setMargin_left(10);
-    picture1.setMargin_top(textFrame.getHeight() );
-
     picture2.setButtonCount(6);
 
-    picture2.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][ abs(question10Variant1ID-1)]);
+    picture1.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][0]);
+    picture1.setMargin_left(10);
+    picture2.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][1]);
     picture2.setMargin_left(10);
-    picture2.setMargin_top(textFrame.getHeight() );
+
+    picture1.setMargin_top(textFrame.getHeight() + 15);
+    
 
     while (window->isOpen()) {
         window->clear();
 
         window->draw(List);
-
+        window->draw(CheckButtonSprite);
         if (first) {
 
             first = false;
            picture1.CalcucateCoordinate(12);
+           picture2.setMargin_top(textFrame.getHeight() + 15 + picture1.getHeight());
            picture2.CalcucateCoordinate(12);
+
+
+
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
+            //checkbutton.se
             checkbutton.SetSpacing(11);
 
-
+            checkbutton.Set_margitop(textFrame.getHeight() + 15 + picture1.getHeight() + picture2.getHeight());
         }
 
 
@@ -3042,8 +3076,8 @@ QuestType11::QuestType11(int w, int h) :
 
                 if (checkbutton.click()) {
 
-                    /*CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);*/
+                   CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);
                 }
 
             }
