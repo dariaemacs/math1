@@ -73,13 +73,15 @@ class CheckButton11 : public CheckButton {
 protected :
     float spacing; 
     float margin_top;
-    char answerNUMBER;
+    unsigned char answerNUMBER;
+    
 public:
     CheckButton11(Window& w) :CheckButton( w), margin_top(0), answerNUMBER(0){}
     void setStrValue(int, std::wstring);
     void SetqudroSize(float);
     void SetSpacing(float);
     void Set_margitop(float);
+    unsigned char getanswerNUMBER();
     bool click();
 
 };
@@ -292,7 +294,7 @@ protected:
   sf::Sprite CheckButtonSprite;
   sf::RectangleShape List;
   TextFrameBase QuestComment;
-
+  int countofBALL;
   bool readyforCheck; 
 public:
     friend  std::wstring get_wstr(int questvariantIndex);

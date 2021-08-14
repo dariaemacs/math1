@@ -71,7 +71,9 @@ bool CheckButton::click() {
 
     return false;
 }
-
+unsigned char CheckButton11::getanswerNUMBER() {
+    return answerNUMBER;
+}
 bool CheckButton11::click() {
     for (int i = 0; i < 4; ++i) {
         const sf::Vector2f& position = getSprite()[i].getPosition();
@@ -83,16 +85,13 @@ bool CheckButton11::click() {
         const sf::Vector2i& M = sf::Mouse::getPosition(*wLnk.getWindow());
         if (M.x >= x0 && M.x <= x1 + getWidthText(i) + textmarginleft && M.y >= y0 && M.y <= y1) {
             std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
-            //if (clickID >= 0) {
-            //    getSprite()[clickID].setActive();
-            //    getquadroTexture()[clickID].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + getSprite()[i].getFN());
-            //}
             clickID = i;
             getSprite()[i].setActive();
             getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + getSprite()[i].getFN());
             if (!getSprite()[i].getActive()) clickID = -1; 
-            answerNUMBER |= i;
-            std::cout <<"answerNUMBER="<< (int)answerNUMBER << std::endl;
+            
+            answerNUMBER = ((1 << i)) ^ answerNUMBER;
+            //std::cout <<"answerNUMBER="<< (int)answerNUMBER << std::endl;
 
             return true;
         }
@@ -482,7 +481,8 @@ Window::Window(int w, int h, int numberQuest,int ord)
     readyforCheck(false),
     first(true),
     textFrame(Settings::QUESTFONTSIZE, numberQuest,w,h,*this),   
-    QuestComment(Settings::QUESTFONTSIZE, CommentsDic[0] , w , h,*this)
+    QuestComment(Settings::QUESTFONTSIZE, CommentsDic[0] , w , h,*this),
+    countofBALL(0)
 {
 
     width = w;
@@ -2940,7 +2940,7 @@ void PicturetoView11::CalcucateCoordinate(float w) {
             scale = scale - 0.01;
             PICTURESIZE_W = PICTURESIZE.x * scale;
             PICTURESIZE_H = PICTURESIZE.y * scale;
-        } while ((PICTURESIZE_W * round(ButtonCount) ) > WindowLink.getWidth()/3) ;
+        } while ((PICTURESIZE_W * round(ButtonCount) ) > WindowLink.getWidth()/2) ;
         
 
         for (int i = 0; i < ButtonCount; i++) {
@@ -3003,7 +3003,7 @@ QuestType11::QuestType11(int w, int h) :
     picture2.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][1]);
     picture2.setMargin_left(10);
 
-    picture1.setMargin_top(textFrame.getHeight() + 15);
+    picture1.setMargin_top(h / 3);
     
 
     while (window->isOpen()) {
@@ -3014,8 +3014,10 @@ QuestType11::QuestType11(int w, int h) :
         if (first) {
 
             first = false;
-           picture1.CalcucateCoordinate(12);
-           picture2.setMargin_top(textFrame.getHeight() + 15 + picture1.getHeight());
+           picture1.CalcucateCoordinate(2);
+           picture2.setMargin_top(h / 3 + picture1.getHeight()
+           //    textFrame.getHeight() + 15 + picture1.getHeight()+h/10
+           );
            picture2.CalcucateCoordinate(12);
 
 
@@ -3024,7 +3026,10 @@ QuestType11::QuestType11(int w, int h) :
             //checkbutton.se
             checkbutton.SetSpacing(11);
 
-            checkbutton.Set_margitop(textFrame.getHeight() + 15 + picture1.getHeight() + picture2.getHeight());
+            checkbutton.Set_margitop(
+            //    textFrame.getHeight() + 15 + picture1.getHeight() + picture2.getHeight() + h / 10
+                h - (checkbutton.getQudroSize()+20)*4
+            );
         }
 
 
@@ -3040,8 +3045,9 @@ QuestType11::QuestType11(int w, int h) :
             window->draw(checkbutton.getText()[i]);
             
         }
+        QuestComment.setmargin_top(h - (checkbutton.getQudroSize() + 20) * 4);
+        window->draw(QuestComment.gettext());
 
-        //window->draw(QuestComment.gettext());
 
         window->draw(textFrame.gettext());
         for (int bc = 0; bc < picture1.getButtonCount(); bc++) {
@@ -3069,14 +3075,27 @@ QuestType11::QuestType11(int w, int h) :
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
+                {
 
-                    QuestComment.settext(CommentsDic[2]);
-                badAnswer = true;
-
+                    countofBALL = question7BALL[question10Variant1ID][checkbutton.getanswerNUMBER()];
+                    std::cout <<"countofBALL=" << countofBALL << std::endl;
+                    switch (countofBALL) {
+                    case 0: QuestComment.settext(CommentsDic[11]); break;
+                    case 1: QuestComment.settext(CommentsDic[10]); break;
+                    case 2: QuestComment.settext(CommentsDic[9]); break;
+                    }
+                        
+                        
+                 //   badAnswer = true;
+                    //countofrightAnswer = 0;
+                    //unsigned char tmp;
+                    //if (question10Variant1ID==0) unsigned char tmp = 
+                }
 
                 if (checkbutton.click()) {
 
-                   CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                   CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); 
+                   readyforCheck = true;
                     CheckButtonSprite.setTexture(CheckButtonTexture);
                 }
 

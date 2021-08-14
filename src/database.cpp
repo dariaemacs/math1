@@ -208,6 +208,12 @@ extern const variantOfLine question7rectanglevariantOfFirstLine[] = { 1,0, 2,1, 
 
 extern const int question9AnswerDetails[] = { 8,5    , 9,7,   6 ,6 ,  8,9,   8,6 ,    5,7    , 5,6};
 
+extern const unsigned char question7BALL[2][16] = { //{0,1 2 3 4 5 6 7 8 9 10 11 12 13 14,15}
+    {0,1,0,1,0,1,0,1,1,2,1,1,1,1,1,1},
+    {0,0,1,1,1,1,2,1,0,0,1,1,1,1,1,1}
+
+};
+
 extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text ,question9Text,question10Text ,question11Text };
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("chicken"),
@@ -332,8 +338,10 @@ const std::wstring CommentsDic[] =
     {L"Листья" },
     {L"Костя" },
     {L"Маша" },
-    {L"Неверно! :( Решение:" }
-
+    {L"Неверно! :( Решение:" },
+    {L"Верно. Молодец +2 балла" },
+    {L"Засчитан +1 балл." },
+    {L"Ошибка. Баллы не засчитаны :(" },
 };
 
 
