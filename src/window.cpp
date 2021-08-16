@@ -74,7 +74,7 @@ bool CheckButton::click() {
 unsigned char CheckButton11::getanswerNUMBER() {
     return answerNUMBER;
 }
-bool CheckButton11::click() {
+bool CheckButton11::click(int question11Variant3ID) {
     for (int i = 0; i < 4; ++i) {
         const sf::Vector2f& position = getSprite()[i].getPosition();
         const sf::IntRect& rect = getSprite()[i].getTextureRect();
@@ -89,8 +89,9 @@ bool CheckButton11::click() {
             getSprite()[i].setActive();
             getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + getSprite()[i].getFN());
             if (!getSprite()[i].getActive()) clickID = -1; 
-            
-            answerNUMBER = ((1 << i)) ^ answerNUMBER;
+             unsigned char tmp = question11ALLVariants[question11Variant3ID][i];
+ 
+            answerNUMBER = ((1 << tmp)) ^ answerNUMBER;
             //std::cout <<"answerNUMBER="<< (int)answerNUMBER << std::endl;
 
             return true;
@@ -2969,18 +2970,20 @@ QuestType11::QuestType11(int w, int h) :
 {
 
     bool first = true;
-    question10Variant1ID = rand() % 2;
-    question10Variant2ID = rand() % (sizeof(question11pictureFN) / sizeof(question11pictureFN[0]));
-
+    srand(time(0));
+    question11Variant1ID = rand() % 2;
+    question11Variant2ID = rand() % (sizeof(question11pictureFN) / sizeof(question11pictureFN[0]));
+    question11Variant3ID = rand() % (sizeof(question11ALLVariants) / sizeof(question11ALLVariants[0]));
+    //sizeof(question10VariantForRandom1) / sizeof(question10VariantForRandom1[0])
     //int question10Variant3ID = rand() % (sizeof(question10VariantForRandom2) / sizeof(question10VariantForRandom2[0]));
 
-    std::cout << question10Variant2ID << std::endl;
+    std::cout << question11Variant2ID << std::endl;
 
 
     std::wstring question = question11Text[0].questionText;
 
     std::wstring replaceFrom = L"N";
-    std::wstring replaceTo = question10Variant1[question10Variant1ID];
+    std::wstring replaceTo = question11Variant1[question11Variant1ID];
 
     int posn = question.find(replaceFrom);
     if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
@@ -2989,7 +2992,7 @@ QuestType11::QuestType11(int w, int h) :
     textFrame.CalcucateCoordinate(w - w * 5 / 100, textFrame.getHeight());
 
 
-    std::cout << question10Variant1ID << std::endl;
+    std::cout << question11Variant1ID << std::endl;
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
     sf::Event event;
@@ -2998,9 +3001,9 @@ QuestType11::QuestType11(int w, int h) :
     picture1.setButtonCount(4);
     picture2.setButtonCount(6);
 
-    picture1.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][0]);
+    picture1.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question11Variant2ID][0]);
     picture1.setMargin_left(10);
-    picture2.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question10Variant2ID][1]);
+    picture2.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question11Variant2ID][1]);
     picture2.setMargin_left(10);
 
     picture1.setMargin_top(h / 3);
@@ -3026,8 +3029,7 @@ QuestType11::QuestType11(int w, int h) :
             //checkbutton.se
             checkbutton.SetSpacing(11);
 
-            checkbutton.Set_margitop(
-            //    textFrame.getHeight() + 15 + picture1.getHeight() + picture2.getHeight() + h / 10
+            checkbutton.Set_margitop(           
                 h - (checkbutton.getQudroSize()+20)*4
             );
         }
@@ -3036,7 +3038,7 @@ QuestType11::QuestType11(int w, int h) :
         for (int i = 0; i < 4; i++) {
             window->draw(checkbutton.getSprite()[i]);
             
-            std::wstring tmpStr = question11Variant2[question10Variant2ID][question10Variant1ID][i];
+            std::wstring tmpStr = question11Variant2[question11Variant2ID][question11Variant1ID][question11ALLVariants[question11Variant3ID][i]];
             checkbutton.setStrValue(i, tmpStr);
             //const sf::Font F = tmp1.getFont();
             
@@ -3077,8 +3079,8 @@ QuestType11::QuestType11(int w, int h) :
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
                 {
 
-                    countofBALL = question7BALL[question10Variant1ID][checkbutton.getanswerNUMBER()];
-                    std::cout <<"countofBALL=" << countofBALL << std::endl;
+                    countofBALL = question7BALL[question11Variant1ID][checkbutton.getanswerNUMBER()];
+                   
                     switch (countofBALL) {
                     case 0: QuestComment.settext(CommentsDic[11]); break;
                     case 1: QuestComment.settext(CommentsDic[10]); break;
@@ -3092,7 +3094,7 @@ QuestType11::QuestType11(int w, int h) :
                     //if (question10Variant1ID==0) unsigned char tmp = 
                 }
 
-                if (checkbutton.click()) {
+                if (checkbutton.click(question11Variant3ID)) {
 
                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); 
                    readyforCheck = true;

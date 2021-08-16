@@ -82,7 +82,7 @@ public:
     void SetSpacing(float);
     void Set_margitop(float);
     unsigned char getanswerNUMBER();
-    bool click();
+    bool click(int);
 
 };
 class MyVertexArray : public sf::VertexArray {
@@ -636,13 +636,14 @@ class QuestType11 : public Window {
     CheckButton11 checkbutton;
     PicturetoView11 picture1;
     PicturetoView11 picture2;
-    int question10Variant1ID;
-    int question10Variant2ID;
+    int question11Variant1ID;
+    int question11Variant2ID;
+    int question11Variant3ID;
 
 public:
     QuestType11(int, int);
-    int getquestion10Variant1ID() { return question10Variant1ID; }
-    int getquestion10Variant2ID() { return question10Variant2ID; }
+    int getquestion11Variant1ID() { return question11Variant1ID; }
+    int getquestion11Variant2ID() { return question11Variant2ID; }
 };
 
 #endif 
