@@ -72,7 +72,7 @@ bool CheckButton::click() {
     return false;
 }
 unsigned char CheckButton11::getanswerNUMBER() {
-    return answerNUMBER;
+		return answerNUMBER;
 };
 bool CheckButton11::isAnswerRight(int i , int question11Variant3ID,  int question11Variant1ID) {
     int tmp = 1 << i;
