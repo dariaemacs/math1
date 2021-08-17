@@ -73,7 +73,19 @@ bool CheckButton::click() {
 }
 unsigned char CheckButton11::getanswerNUMBER() {
     return answerNUMBER;
+};
+bool CheckButton11::isAnswerRight(int i , int question11Variant3ID,  int question11Variant1ID) {
+    int tmp = 1 << i;
+    if ((clickID & tmp) > 0) {
+        if (question11Variant1ID == 0) { //увеличение
+            if (question11ALLVariants[question11Variant3ID][i] == 0 || question11ALLVariants[question11Variant3ID][i] == 3) return true;
+            else
+                if (question11ALLVariants[question11Variant3ID][i] == 1 || question11ALLVariants[question11Variant3ID][i] == 2) return true;
+        }
+    }
+    return false;
 }
+
 bool CheckButton11::click(int question11Variant3ID) {
     for (int i = 0; i < 4; ++i) {
         const sf::Vector2f& position = getSprite()[i].getPosition();
@@ -83,23 +95,21 @@ bool CheckButton11::click(int question11Variant3ID) {
         int x1 = (float)x0 + (float)rect.width * coeff;
         int y1 = (float)y0 + (float)rect.height * coeff;
         const sf::Vector2i& M = sf::Mouse::getPosition(*wLnk.getWindow());
+
+
         if (M.x >= x0 && M.x <= x1 + getWidthText(i) + textmarginleft && M.y >= y0 && M.y <= y1) {
-            std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
-            clickID = i;
             getSprite()[i].setActive();
             getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + getSprite()[i].getFN());
-            if (!getSprite()[i].getActive()) clickID = -1; 
-             unsigned char tmp = question11ALLVariants[question11Variant3ID][i];
- 
+            unsigned char tmp = question11ALLVariants[question11Variant3ID][i];
             answerNUMBER = ((1 << tmp)) ^ answerNUMBER;
-            //std::cout <<"answerNUMBER="<< (int)answerNUMBER << std::endl;
-
+            clickID = ((1 << i)) ^ clickID;
             return true;
         }
-    }
-
+    };
+    std::cout << "clickID="<< clickID << std::endl;
     return false;
-}
+};
+void CheckButton11::resetclickID() { clickID = 0; };
 std::wstring get_wstr(int questvariantIndex,int ordNumber) {
 //    setlocale(LC_ALL, "Russian");
   std::stringstream ss;
@@ -3032,6 +3042,7 @@ QuestType11::QuestType11(int w, int h) :
             checkbutton.Set_margitop(           
                 h - (checkbutton.getQudroSize()+20)*4
             );
+            checkbutton.resetclickID();
         }
 
 
@@ -3079,12 +3090,23 @@ QuestType11::QuestType11(int w, int h) :
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
                 {
 
-                    countofBALL = question7BALL[question11Variant1ID][checkbutton.getanswerNUMBER()];
-                   
+                    countofBALL = question11BALL[question11Variant1ID][checkbutton.getanswerNUMBER()];
+                    for (int i = 0; i < 4; i++) {
+                            if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
+                            checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+                        else
+                            if (!checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
+                                checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
+                        else 
+                            if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && !checkbutton.getSprite()[i].getActive())
+                                    checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+
+                    }
+                        //std::cout << checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID);
                     switch (countofBALL) {
-                    case 0: QuestComment.settext(CommentsDic[11]); break;
-                    case 1: QuestComment.settext(CommentsDic[10]); break;
-                    case 2: QuestComment.settext(CommentsDic[9]); break;
+                    case 0: QuestComment.settext(CommentsDic[11]); break; //L"Ошибка. Баллы не засчитаны :(" 
+                    case 1: QuestComment.settext(CommentsDic[10]); break; //
+                    case 2: QuestComment.settext(CommentsDic[9]) ;  break;  //
                     }
                         
                         

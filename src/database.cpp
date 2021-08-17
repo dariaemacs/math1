@@ -238,7 +238,7 @@ extern const variantOfLine question7rectanglevariantOfFirstLine[] = { 1,0, 2,1, 
 
 extern const int question9AnswerDetails[] = { 8,5    , 9,7,   6 ,6 ,  8,9,   8,6 ,    5,7    , 5,6};
 
-extern const unsigned char question7BALL[2][16] = { 
+extern const unsigned char question11BALL[2][16] = { 
     {0,1,0,1,0,1,0,1,1,2,1,1,1,1,1,1},
     {0,0,1,1,1,1,2,1,0,0,1,1,1,1,1,1}
 

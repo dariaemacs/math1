@@ -70,7 +70,7 @@ extern const int question6Answers[];
 extern const unsigned long long question7AnswersTriangle[21];
 extern const unsigned long long question7AnswersRectangle[3];
 extern const unsigned long long question7AnswersSquare[2];
-extern const unsigned char question7BALL[2][16];
+extern const unsigned char question11BALL[2][16];
 extern const int question9AnswersSquare[];
 
 struct variantOfLine { int i, j; };

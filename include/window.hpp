@@ -28,6 +28,10 @@ public:
         if (!active) fn = "select.png"; else fn = "empty.jpg";
         active = !active;
     };
+    void setPicturefnm(std::string fnn) {
+        fn = fnn;
+        };
+
     std::string getFN();
     bool getActive();
     void setTop(float t);
@@ -55,6 +59,7 @@ protected:
 
     CheckButton(Window&);
     int GenerateRandomSetNumber();
+    
     //int GenerateRandomSet();
     void setTextValue(int);    
     std::array<mySpriteCheckButton, 4>& getSprite();
@@ -77,13 +82,14 @@ protected :
     
 public:
     CheckButton11(Window& w) :CheckButton( w), margin_top(0), answerNUMBER(0){}
+    void resetclickID();
     void setStrValue(int, std::wstring);
     void SetqudroSize(float);
     void SetSpacing(float);
     void Set_margitop(float);
     unsigned char getanswerNUMBER();
     bool click(int);
-
+    bool isAnswerRight(int , int , int);
 };
 class MyVertexArray : public sf::VertexArray {
     bool hold;
@@ -593,14 +599,11 @@ class table {
         float getmash_height() {
             return mash_height;
         };
-
         float gettablemax_y() {
             return tablemax_y;
         };
-
         float getmash_x() { return  mash_x; }
         float getmash_y() { return  mash_y; }
-
 };
 class QuestType9 : public Window {
     table tab;
