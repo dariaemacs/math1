@@ -75,14 +75,15 @@ unsigned char CheckButton11::getanswerNUMBER() {
 		return answerNUMBER;
 };
 bool CheckButton11::isAnswerRight(int i , int question11Variant3ID,  int question11Variant1ID) {
-    int tmp = 1 << i;
-    if ((clickID & tmp) > 0) {
-        if (question11Variant1ID == 0) { //увеличение
-            if (question11ALLVariants[question11Variant3ID][i] == 0 || question11ALLVariants[question11Variant3ID][i] == 3) return true;
-            else
-                if (question11ALLVariants[question11Variant3ID][i] == 1 || question11ALLVariants[question11Variant3ID][i] == 2) return true;
-        }
+
+    if (question11Variant1ID == 0)  //увеличение
+    {
+        if (question11ALLVariants[question11Variant3ID][i] == 0 || question11ALLVariants[question11Variant3ID][i] == 3) return true;
     }
+    else {
+        if (question11ALLVariants[question11Variant3ID][i] == 1 || question11ALLVariants[question11Variant3ID][i] == 2) return true;
+    }
+
     return false;
 }
 
@@ -3133,3 +3134,111 @@ QuestType11::QuestType11(int w, int h) :
 
 }
 
+QuestType12::QuestType12(int w, int h, int qtyButtons) :
+    Window(w, h,
+
+        (rand() % 6)
+
+        ,
+
+        11),
+    Buttons(qtyButtons, *this)
+{
+
+
+    bool first = true;
+    int margintopSlideButton = 0;
+
+    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    CheckButtonSprite.setTexture(CheckButtonTexture);
+
+
+    sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+    sprite.setPosition((w - questanswer.getWidth()) / 2, (h - questanswer.getHeight()) / 2);
+
+
+
+    sf::Event event;
+    while (window->isOpen()) {
+        window->clear();
+        window->draw(List);
+
+        if (first) {
+            Buttons.CalcucateCoordinate(); first = false;
+
+            QuestComment.setmargin_top(h - Buttons.getHeight());
+            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getHeight());
+            //Buttons.setMargin_top(100);
+
+            Buttons.CalcucateCoordinate(); first = false;
+
+
+
+
+
+        }
+        window->draw(QuestComment.gettext());
+        window->draw(textFrame.gettext());
+        window->draw(CheckButtonSprite);
+        for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
+        {
+            window->draw(*Buttons.getButtons()[bc]);
+
+        }
+
+        if (badAnswer) {
+
+            window->draw(sprite);
+        }
+
+
+
+        window->display();
+        while (window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
+                window->close();
+            }
+
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+                if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
+
+
+
+                    if (Buttons.GetButtonsClickID() + 1 == question12Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
+                    else { //wrong
+
+                        badAnswer = true;
+                        questanswer.setParams(Buttons.getWidth() * 5, Buttons.getHeight(), 5, Buttons.getScale());
+
+                        questanswer[0].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2]) + ".jpg");
+                        questanswer[1].loadFromFile(res_path + "digit_plus.jpg");
+                        questanswer[2].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2 + 1]) + ".jpg");
+                        questanswer[3].loadFromFile(res_path + "digit_equal.jpg");
+                        questanswer[4].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2] +
+                            question9AnswerDetails[questNumber * 2 + 1]
+                        ) + ".jpg");
+
+                        QuestComment.settext(CommentsDic[2]);
+                        Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
+                            "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
+
+                        Buttons.getButtonTexture()[question5Answers[questNumber] - 1]->loadFromFile(
+                            "resources/images/digit" + std::to_string(question5Answers[questNumber]) + "_right.jpg"
+                        );
+                    }
+                    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
+                }
+                if (Buttons.click()) {
+                    ////std::cout << "Button.click" << std::endl;
+                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                }
+
+
+
+            }
+        }
+        srand(time(0));
+    }
+}

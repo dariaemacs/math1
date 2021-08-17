@@ -649,4 +649,11 @@ public:
     int getquestion11Variant2ID() { return question11Variant2ID; }
 };
 
+class QuestType12 : public Window {
+    Buttons Buttons;
+    questanswerClass questanswer;
+public:
+    QuestType12(int, int, int);
+};
+
 #endif 

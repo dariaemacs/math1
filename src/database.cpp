@@ -121,6 +121,15 @@ figureQestions{L"Дети пошли в лес и собрали грибы, ягоды и листья.\n Сколько все
 figureQestions{L"Дети пошли в лес и собрали грибы, ягоды и листья.\n Сколько всего листьев и грибов собрала Маша?",calc}
 };
 
+extern const figureQestions question12Text[] = {
+figureQestions{L"Ребята нашли 2 белых гриба, 3 сыроежки, \n5 опят и 4 шишки. Сколько грибов нашли ребята?",calc},
+figureQestions{L"В парке было 7 уток, 2 воробья, 5 голубей \nи 4 белки. Сколько было птиц в парке?",calc},
+figureQestions{L"В школьном живом уголке 4 попугая, морская свинка, \n6 голубей, 4 канарейки и рыбка. Сколько птиц в живом уголке?",calc},
+figureQestions{L"В корзинку ребята собрали 5 кленовых листьев, 2 дубовых листа, \n4 березовых листочка и 6 желудей. Сколько листьев собрали ребята?",calc},
+figureQestions{L"Мама купила 4 яблока, 3 груши, 5 помидоров и 2 персика. \nСколько фруктов купила мама?",calc},
+figureQestions{L"На столе лежали 5 морковок, 4 огурца, 3 банана и 2 луковицы. \nСколько овощей лежит на столе?",calc}
+};
+
 extern const figureQestions question10Text[] = {
     figureQestions{L"Ученики записали величины N в порядке M \nи получили разные ответы. Нажми на правильный ответ.",calc},
 };
@@ -129,6 +138,8 @@ extern const std::wstring question11Variant1[] = {
     L"сложения" ,
     L"вычитание"
 };
+
+
 extern const std::wstring question11Variant2[4][2][4] = {
                    {{
                             L"Сколько станет муравьев, если добавить ещё одного муравья?",
@@ -238,13 +249,16 @@ extern const variantOfLine question7rectanglevariantOfFirstLine[] = { 1,0, 2,1, 
 
 extern const int question9AnswerDetails[] = { 8,5    , 9,7,   6 ,6 ,  8,9,   8,6 ,    5,7    , 5,6};
 
+extern const int question12Answers[] = { 10,14,14,11,9,11 };
+
 extern const unsigned char question11BALL[2][16] = { 
     {0,1,0,1,0,1,0,1,1,2,1,1,1,1,1,1},
     {0,0,1,1,1,1,2,1,0,0,1,1,1,1,1,1}
 
 };
 
-extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text ,question9Text,question10Text ,question11Text };
+extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text ,question9Text,question10Text ,question11Text 
+,question12Text};
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("chicken"),
     std::string("pencil"),

@@ -46,6 +46,7 @@ extern const figureQestions question8Text[];
 extern const figureQestions question9Text[];
 extern const figureQestions question10Text[];
 extern const figureQestions question11Text[];
+extern const figureQestions question12Text[];
 
 
 
@@ -67,6 +68,7 @@ extern const figureQestions* qestionarrayList[];
 
 extern const int question5Answers[];
 extern const int question6Answers[];
+extern const int question12Answers[];
 extern const unsigned long long question7AnswersTriangle[21];
 extern const unsigned long long question7AnswersRectangle[3];
 extern const unsigned long long question7AnswersSquare[2];
