@@ -3154,7 +3154,7 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
 
 
     sf::Sprite sprite(questanswer.getminiwindow().getTexture());
-    sprite.setPosition((w - questanswer.getWidth()) / 2, (h - questanswer.getHeight()) / 2);
+
 
 
 
@@ -3188,6 +3188,8 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
 
         if (badAnswer) {
 
+            sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            sprite.setPosition((w - questanswer.getWidth()) / 2, (h - questanswer.getHeight()) / 2);
             window->draw(sprite);
         }
 
@@ -3209,16 +3211,18 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
                     else { //wrong
 
                         badAnswer = true;
-                        questanswer.setParams(Buttons.getWidth() * 5, Buttons.getHeight(), 5, Buttons.getScale());
+                        //std::cout << "badAnswer" << std::endl;
+                        questanswer.setParams(Buttons.getWidth() * 7, Buttons.getHeight(), 7, Buttons.getScale());
 
-                        questanswer[0].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2]) + ".jpg");
+                        questanswer[0].loadFromFile(res_path + "digit" + std::to_string(question12AnswerParts[questNumber][0]) + ".jpg");
                         questanswer[1].loadFromFile(res_path + "digit_plus.jpg");
-                        questanswer[2].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2 + 1]) + ".jpg");
-                        questanswer[3].loadFromFile(res_path + "digit_equal.jpg");
-                        questanswer[4].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2] +
-                            question9AnswerDetails[questNumber * 2 + 1]
-                        ) + ".jpg");
-
+                        questanswer[2].loadFromFile(res_path + "digit" + std::to_string(question12AnswerParts[questNumber][1]) + ".jpg");
+                        questanswer[3].loadFromFile(res_path + "digit_plus.jpg");
+                        questanswer[4].loadFromFile(res_path + "digit" + std::to_string(question12AnswerParts[questNumber][2]) + ".jpg");
+                        questanswer[5].loadFromFile(res_path + "digit_equal.jpg");
+                        questanswer[6].loadFromFile(res_path + "digit" + std::to_string(question12Answers[questNumber]) + ".jpg");
+                        questanswer.draw();
+                        
                         QuestComment.settext(CommentsDic[2]);
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");

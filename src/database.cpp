@@ -130,6 +130,15 @@ figureQestions{L"Мама купила 4 яблока, 3 груши, 5 помидоров и 2 персика. \nСколь
 figureQestions{L"На столе лежали 5 морковок, 4 огурца, 3 банана и 2 луковицы. \nСколько овощей лежит на столе?",calc}
 };
 
+extern const unsigned char question12AnswerParts[6][3] =
+{
+{2,3,5},
+{7,2,5},
+{4,6,4},
+{5,2,4},
+{4,3,2},
+{5,4,2}
+};
 extern const figureQestions question10Text[] = {
     figureQestions{L"Ученики записали величины N в порядке M \nи получили разные ответы. Нажми на правильный ответ.",calc},
 };
