@@ -161,6 +161,7 @@ std::vector<const sf::Color*> Colors = {
 char FrameFigure::number_of_figure = 0;
 int Circle::QTY = 0;
 
+//void setKoef();
 
 void FrameFigure::calcKoeff() {
     alreadyDraw = true;
@@ -183,23 +184,10 @@ void FrameFigure::calcKoeff() {
 
      std::cout << "picture size :" << frameWidthNew <<"x" << frameWidthNew  << std::endl;
 
-     //int fw = (number_of_figure == 0 ? frameWidth / 2 : frameWidth);
-     //margin_left = number_of_figure * window->getSize().x / 2 + abs((window->getSize().x / 2 - frameWidthNew ) / 2);
-     //while (margin_left + frameWidthNew > fw) {
-     //    koef = koef - 0.01;
-     //    frameWidthNew = (getxmax() - getxmin()) * koef;
-     //    if (margin_left < 10) margin_left = 10; //left picture
-     //    if (margin_left + frameWidthNew* koef > window->getSize().y) margin_left -= 10; //left picture
-     //    koef = koef - 0.01;
-     //}
-     ////std::cout << "margin_left=" << margin_left <<  std::endl;
-
-     //float f = window->getSize().y / 3;
-     //margin_top = (window->getSize().y - frameHeightNew)/2;
+   
      number_of_figure++;
-    /*koef = 1;
-    margin_left = 0;
-    margin_top = 0; */
+    //koef = 1;
+
 }
 
 
@@ -398,20 +386,24 @@ ThreePicture1::ThreePicture1(std::shared_ptr<sf::RenderWindow>& win):
      triangle1(this),
      rectangle1(this),
     FrameFigure(win, 0, 0, 0){
+    xmin = 0;
+    xmax = 500;
+    ymin = 0;
+    ymax = 200;
  };
 
 void ThreePicture1::draw() {
     if (!alreadyDraw) {
         calcKoeff();
         int y = 20;
-        int x = -55;
-        circle1.set_radius(23);
-        circle1.set_coords(30, 30);
-        circle1.set_color(color::blue);
-        triangle1.set_coords(100, 100, 150, 150, 200, 200);
-        rectangle1.set_coords(500 , 500);
-        rectangle1.set_color(color::lightskyblue);
-        rectangle1.set_size(10, 80);
+        int x = 100;
+        circle1.set_radius(100);
+        circle1.set_coords(500, 0);
+        //circle1.set_color(color::blue);
+        triangle1.set_coords(120+x, 200, 250+x, 0, 400+x, 200);
+        rectangle1.set_coords(0 , 0);
+        
+        rectangle1.set_size(200, 200);
 
     }
     circle1.draw(window);

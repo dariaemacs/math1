@@ -252,8 +252,9 @@ class ThreePicture1 :public FrameFigure {
     int maxY;
     public:
     ThreePicture1(std::shared_ptr<sf::RenderWindow>& );
-    ~ThreePicture1();
+    ~ThreePicture1() {}
     virtual void draw();
+  
 };
 
 class Tower:public FrameFigure

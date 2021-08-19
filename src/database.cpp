@@ -73,7 +73,7 @@ figureQestions{L"Деньги за покупку игрушки принимает автомат. У Ани есть такие м
 
 extern const figureQestions question13Text[] = {
 figureQestions{L"Рассмотри фигуры. И отметь все верные ответы: \nВерно ли, что: "       ,calc},
-}
+};
 
 extern const int question6Answers[] = { 4,2,3,1};
 extern const unsigned long long question7AnswersRectangle[3] = { 21415254, 10304143, 102130435254 };
