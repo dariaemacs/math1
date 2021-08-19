@@ -47,6 +47,11 @@ extern const figureQestions question9Text[];
 extern const figureQestions question10Text[];
 extern const figureQestions question11Text[];
 extern const figureQestions question12Text[];
+extern const figureQestions question13Text[];
+
+extern const std::wstring question13Variant[4][3];
+
+
 
 
 

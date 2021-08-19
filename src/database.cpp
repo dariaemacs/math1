@@ -70,6 +70,11 @@ figureQestions{L"Деньги за покупку шоколада принимает автомат. У Насти есть таки
 figureQestions{L"Лиза решила купить в магазине шарик за 7 рублей. У нее есть такие монеты. \nПродавцу Лиза дала одну монету и получила сдачу. \nКакую сдачу получила девочка?"       ,calc},
 figureQestions{L"Деньги за покупку игрушки принимает автомат. У Ани есть такие монеты. \nДевочка хочет купить игрушку за 9 рублей. Она опустила в автомат одну \nмонету и получила сдачу. Какую сдачу получила Аня? "       ,calc},
 };
+
+extern const figureQestions question13Text[] = {
+figureQestions{L"Рассмотри фигуры. И отметь все верные ответы: \nВерно ли, что: "       ,calc},
+}
+
 extern const int question6Answers[] = { 4,2,3,1};
 extern const unsigned long long question7AnswersRectangle[3] = { 21415254, 10304143, 102130435254 };
 extern const unsigned long long question7AnswersSquare[2] = { 21415254, 10304143};
@@ -202,7 +207,30 @@ extern const std::wstring question11Variant2[4][2][4] = {
                     }
                     }
 };
+extern const std::wstring question13Variant[4][3] = {
 
+            {
+                    L"Все эти фигуры - многоугольники.", //0
+                    L"Круг расположен слева от прямоугольника.", //1
+                    L"Одна фигура не имеет углов.", //1
+            },
+            {
+                    L"Все эти фигуры - треугольники.", //0
+                    L"Только одна фигура имеет четыре угла.", //1
+                    L"Квадрат расположен справа от круга.", //0
+            },
+            {
+                    L"Все эти фигуры - не круги.", 
+                    L"Только одна фигура имеет четыре угла.", 
+                    L"Прямоугольник расположен слева от круга.", 
+            },
+            {
+                    L"Все эти фигуры - четырехугольники.", //0
+                    L"У всех этих фигур есть углы.", //1
+                    L"Прямоугольник расположен слева от треугольника.",//0
+            },
+
+};
 
 extern const int question11ALLVariants[24][4] = {
 {0,3,2,1},
@@ -267,7 +295,7 @@ extern const unsigned char question11BALL[2][16] = {
 };
 
 extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text ,question9Text,question10Text ,question11Text 
-,question12Text};
+,question12Text,question13Text };
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("chicken"),
     std::string("pencil"),

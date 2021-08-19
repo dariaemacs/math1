@@ -3246,3 +3246,162 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
         srand(time(0));
     }
 }
+
+QuestType13::QuestType13(int w, int h) :
+    Window(w, h, 0, 10),
+    checkbutton(*this)
+    
+{
+
+    bool first = true;
+    srand(time(0));
+    question11Variant1ID = rand() % 2;
+    question11Variant2ID = rand() % (sizeof(question11pictureFN) / sizeof(question11pictureFN[0]));
+    question11Variant3ID = rand() % (sizeof(question11ALLVariants) / sizeof(question11ALLVariants[0]));
+
+
+    std::cout << question11Variant2ID << std::endl;
+
+
+    std::wstring question = question11Text[0].questionText;
+
+    std::wstring replaceFrom = L"N";
+    std::wstring replaceTo = question11Variant1[question11Variant1ID];
+
+    int posn = question.find(replaceFrom);
+    if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
+
+    textFrame.settext(question);
+    textFrame.CalcucateCoordinate(w - w * 5 / 100, textFrame.getHeight());
+
+
+    std::cout << question11Variant1ID << std::endl;
+    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    CheckButtonSprite.setTexture(CheckButtonTexture);
+    sf::Event event;
+    checkbutton.SetqudroSize(35);
+
+    picture1.setButtonCount(4);
+    picture2.setButtonCount(6);
+
+    picture1.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question11Variant2ID][0]);
+    picture1.setMargin_left(10);
+    picture2.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question11Variant2ID][1]);
+    picture2.setMargin_left(10);
+
+    picture1.setMargin_top(h / 3);
+
+
+    while (window->isOpen()) {
+        window->clear();
+
+        window->draw(List);
+        window->draw(CheckButtonSprite);
+        if (first) {
+
+            first = false;
+            picture1.CalcucateCoordinate(2);
+            picture2.setMargin_top(h / 3 + picture1.getHeight()
+                //    textFrame.getHeight() + 15 + picture1.getHeight()+h/10
+            );
+            picture2.CalcucateCoordinate(12);
+
+
+
+            QuestComment.CalcucateCoordinate(h / 3, w / 2);
+            //checkbutton.se
+            checkbutton.SetSpacing(11);
+
+            checkbutton.Set_margitop(
+                h - (checkbutton.getQudroSize() + 20) * 4
+            );
+            checkbutton.resetclickID();
+        }
+
+
+        for (int i = 0; i < 4; i++) {
+            window->draw(checkbutton.getSprite()[i]);
+
+            std::wstring tmpStr = question11Variant2[question11Variant2ID][question11Variant1ID][question11ALLVariants[question11Variant3ID][i]];
+            checkbutton.setStrValue(i, tmpStr);
+            //const sf::Font F = tmp1.getFont();
+
+            tmpStr = checkbutton.getText()[i].getString();
+
+            window->draw(checkbutton.getText()[i]);
+
+        }
+        QuestComment.setmargin_top(h - (checkbutton.getQudroSize() + 20) * 4);
+        window->draw(QuestComment.gettext());
+
+
+        window->draw(textFrame.gettext());
+        for (int bc = 0; bc < picture1.getButtonCount(); bc++) {
+
+            window->draw(*picture1.getButtons()[bc]);
+        }
+        for (int bc = 0; bc < picture2.getButtonCount(); bc++) {
+
+            window->draw(*picture2.getButtons()[bc]);
+        }
+
+
+        if (badAnswer) {
+            //sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            //sprite.setPosition((w - questanswer.getWidth()) / 2, (h - questanswer.getHeight()) / 2);
+            //window->draw(sprite);
+
+        }
+        window->display();
+        while (window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
+                window->close();
+            }
+
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+                if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
+                {
+
+                    countofBALL = question11BALL[question11Variant1ID][checkbutton.getanswerNUMBER()];
+                    for (int i = 0; i < 4; i++) {
+                        if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
+                            checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+                        else
+                            if (!checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
+                                checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
+                            else
+                                if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && !checkbutton.getSprite()[i].getActive())
+                                    checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+
+                    }
+                    //std::cout << checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID);
+                    switch (countofBALL) {
+                    case 0: QuestComment.settext(CommentsDic[11]); break; //L"Ошибка. Баллы не засчитаны :(" 
+                    case 1: QuestComment.settext(CommentsDic[10]); break; //
+                    case 2: QuestComment.settext(CommentsDic[9]);  break;  //
+                    }
+
+
+                    //   badAnswer = true;
+                       //countofrightAnswer = 0;
+                       //unsigned char tmp;
+                       //if (question10Variant1ID==0) unsigned char tmp = 
+                }
+
+                if (checkbutton.click(question11Variant3ID)) {
+
+                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png");
+                    readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                }
+
+            }
+
+
+        }
+    }
+
+    srand(time(0));
+
+}

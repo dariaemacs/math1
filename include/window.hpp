@@ -656,4 +656,16 @@ public:
     QuestType12(int, int, int);
 };
 
+class QuestType13 : public Window {
+    CheckButton11 checkbutton;
+    int question11Variant1ID;
+    int question11Variant2ID;
+    int question11Variant3ID;
+
+public:
+    QuestType13(int, int);
+    int getquestion11Variant1ID() { return question11Variant1ID; }
+    int getquestion11Variant2ID() { return question11Variant2ID; }
+};
+
 #endif 

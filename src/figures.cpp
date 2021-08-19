@@ -393,6 +393,33 @@ void Plane::draw() {
 
 }
 
+ThreePicture1::ThreePicture1(std::shared_ptr<sf::RenderWindow>& win):
+     circle1(this),
+     triangle1(this),
+     rectangle1(this),
+    FrameFigure(win, 0, 0, 0){
+ };
+
+void ThreePicture1::draw() {
+    if (!alreadyDraw) {
+        calcKoeff();
+        int y = 20;
+        int x = -55;
+        circle1.set_radius(23);
+        circle1.set_coords(30, 30);
+        circle1.set_color(color::blue);
+        triangle1.set_coords(100, 100, 150, 150, 200, 200);
+        rectangle1.set_coords(500 , 500);
+        rectangle1.set_color(color::lightskyblue);
+        rectangle1.set_size(10, 80);
+
+    }
+    circle1.draw(window);
+    triangle1.draw(window);
+    rectangle1.draw(window);
+}
+
+
 Flower::Flower(std::shared_ptr<sf::RenderWindow>& win)
     :circle1(this),
     circle2(this),
