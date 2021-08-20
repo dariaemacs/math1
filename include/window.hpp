@@ -50,7 +50,7 @@ protected:
     int clickID;
     Window& wLnk;
     
-    
+    float margin_top;
     int rightQuestNum;
     protected:
     float qudroSize;
@@ -70,23 +70,23 @@ protected:
     bool  click();
     sf::Font& getFont();
     float getQudroSize();
-    
+    void Set_margitop(float);
+    void SetqudroSize(float);
+    void setStrValue(int, std::wstring,int);
+    int getrightQuestNum() { return rightQuestNum; }
+    int getClickID() { return clickID; }
     std::array<sf::Texture, 4>& getquadroTexture();
 
 };
 class CheckButton11 : public CheckButton {
 protected :
     float spacing; 
-    float margin_top;
     unsigned char answerNUMBER;
     
 public:
-    CheckButton11(Window& w) :CheckButton( w), margin_top(0), answerNUMBER(0){}
+    CheckButton11(Window& w) :CheckButton( w),  answerNUMBER(0){}
     void resetclickID();
-    void setStrValue(int, std::wstring);
-    void SetqudroSize(float);
-    void SetSpacing(float);
-    void Set_margitop(float);
+        void SetSpacing(float);
     unsigned char getanswerNUMBER();
     bool click(int);
     bool isAnswerRight(int , int , int);

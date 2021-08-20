@@ -36,7 +36,7 @@ void mySpriteCheckButton::setLeft(float l) { left = l; }
 
 int CheckButton::GenerateRandomSetNumber() {
     int SIZE = sizeof(question10VariantForRandom1) / sizeof(*question10VariantForRandom1);
-    return rand() % (SIZE+1);
+    return rand() % SIZE;
 }
 float CheckButton::getHeightText() {
         return str[0].getLocalBounds().height;
@@ -2729,7 +2729,7 @@ float CheckButton::getQudroSize() {
     return qudroSize; 
 }
 float CheckButton::getTextmarginleft() {return textmarginleft;}
-void CheckButton11::setStrValue(int index, std::wstring str1) {
+void CheckButton::setStrValue(int index, std::wstring str1, int SIZE = 28) {
     getFont().loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
     getText()[index] = sf::Text(str1, getFont(), 28);
     float x = getSprite()[index].getPosition().x; // +qudroSize;
@@ -2739,7 +2739,7 @@ void CheckButton11::setStrValue(int index, std::wstring str1) {
     getText()[index].setOutlineColor(sf::Color::Red);
     
 };
-void CheckButton11::SetqudroSize(float q) { 
+void CheckButton::SetqudroSize(float q) { 
     qudroSize = q; 
     coeff = qudroSize / 500; 
     for (int i = 0; i < 4;i++)
@@ -2764,6 +2764,12 @@ void CheckButton::setTextValue(int index) {
             question10Variant2[index][question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][2]]
             
             , font, 35);
+
+        if (question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][0] == 0 &&
+            question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][1] == 1 &&
+            question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][2] == 2) rightQuestNum = i;
+        
+
         float x = quadroSprite[i].getPosition().x; // +qudroSize;
         float tmiii = quadroSprite[i].getLocalBounds().width;
         str[i].setLineSpacing(0.001);
@@ -2780,20 +2786,20 @@ void CheckButton::setTextValue(int index) {
     
  
 }
-void  CheckButton11::Set_margitop(float mt) {
+void  CheckButton::Set_margitop(float mt) {
     margin_top = mt;
     for (int i = 0; i < getSprite().size(); i++)
-        getSprite()[i].setPosition(getSprite()[i].getPosition().x, getSprite()[i].getPosition().y + margin_top);
+        getSprite()[i].setPosition(getSprite()[i].getPosition().x, i * getQudroSize() + margin_top);
 }
-CheckButton::CheckButton(Window& wl):wLnk(wl), textmarginleft(10), clickID(-1){
+CheckButton::CheckButton(Window& wl):wLnk(wl), textmarginleft(10), clickID(-1), margin_top(0) {
      coeff = (452.0f / ((wl.getHeight()- wl.gettextFrame().getHeight())))/5;
      qudroSize = coeff * 452.0f;
     float margin = (((wl.getHeight() - wl.gettextFrame().getHeight()) ) - qudroSize * 4) / 4;
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < quadroTexture.size(); i++) {
         quadroTexture[i].loadFromFile(res_path + "empty.jpg");
         quadroSprite[i].setTexture(quadroTexture[i]);
         quadroSprite[i].setScale(coeff, coeff);
-        quadroSprite[i].setPosition(10, ( wl.gettextFrame().getHeight())+30 + (qudroSize+ margin) *i );
+        //quadroSprite[i].setPosition(10, ( wl.gettextFrame().getHeight())+30 + (qudroSize+ margin) *i );
         
        
     }
@@ -2842,7 +2848,7 @@ QuestType10::QuestType10(int w, int h) :
     
     posn = question.find(replaceFrom);
     if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
-
+    checkbutton.SetqudroSize(40);
     textFrame.settext(question);
     textFrame.CalcucateCoordinate(w-w*5/100, textFrame.getHeight());
 
@@ -2859,38 +2865,47 @@ QuestType10::QuestType10(int w, int h) :
         window->clear();
 
         window->draw(List);
-      
+        window->draw(CheckButtonSprite);
         if (first) {
-
             first = false;
-
-
-            QuestComment.CalcucateCoordinate(h / 3, w / 2);
-
             
-
+            QuestComment.CalcucateCoordinate(h / 3, w / 2);
+            QuestComment.setmargin_top((h - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y - checkbutton.getQudroSize()-10);
+            //QuestComment.setmargin_top(0);
+            checkbutton.Set_margitop((h - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y);
         }
         
+        //for (int i = 0; i < 3; i++) {
+        //    window->draw(checkbutton.getSprite()[i]);
+        //    //question13VariantID
+        //    std::wstring tmpStr = question13Variant[question13VariantID][i];
+        //    checkbutton.setStrValue(i, tmpStr);
+        //    tmpStr = checkbutton.getText()[i].getString();
+        //    window->draw(checkbutton.getText()[i]);
+        //}
      
         for (int i = 0; i < 4; i++) {
             window->draw(checkbutton.getSprite()[i]);
             sf::Text tmp1 = checkbutton.getText()[i];
             std::wstring tmpStr = tmp1.getString();
-            //const sf::Font F = tmp1.getFont();
+            checkbutton.setStrValue(i, tmpStr);
             window->draw(checkbutton.getText()[i]);
         }
 
-        //window->draw(QuestComment.gettext());
+        window->draw(QuestComment.gettext());
         
         window->draw(textFrame.gettext());
         
 
 
         if (badAnswer) {
-            //sf::Sprite sprite(questanswer.getminiwindow().getTexture());
-            //sprite.setPosition((w - questanswer.getWidth()) / 2, (h - questanswer.getHeight()) / 2);
-            //window->draw(sprite);
+            checkbutton.getquadroTexture()[checkbutton.getClickID()].loadFromFile(
+                "resources/images/select_wrong.png");
 
+            checkbutton.getquadroTexture()[checkbutton.getrightQuestNum()].loadFromFile(
+                "resources/images/select_right.png");
+
+            //checkbutton.getClickID()
         }
         window->display();
         while (window->pollEvent(event)) {
@@ -2900,16 +2915,19 @@ QuestType10::QuestType10(int w, int h) :
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
-                if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
-
+                if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
+                    if (checkbutton.getrightQuestNum() == checkbutton.getClickID())
+                    QuestComment.settext(CommentsDic[1]); 
+                    else {
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
-                        
+                    }
+                }
 
                if (checkbutton.click()) {
                    
-                    /*CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);*/
+                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);
                 }
 
             }
@@ -3039,12 +3057,13 @@ QuestType11::QuestType11(int w, int h) :
 
 
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
-            //checkbutton.se
+            QuestComment.settext(L"");
             checkbutton.SetSpacing(11);
 
             checkbutton.Set_margitop(           
-                h - (checkbutton.getQudroSize()+20)*4
+                ((h - (checkbutton.getQudroSize() + 20) * 4) - checkbutton.getSprite()[0].getPosition().y )
             );
+            //QuestComment.setmargin_top((h - (checkbutton.getQudroSize() + 20) * 4) - checkbutton.getSprite()[0].getPosition().y - checkbutton.getQudroSize() - 10);
             checkbutton.resetclickID();
         }
 
@@ -3061,7 +3080,8 @@ QuestType11::QuestType11(int w, int h) :
             window->draw(checkbutton.getText()[i]);
             
         }
-        QuestComment.setmargin_top(h - (checkbutton.getQudroSize() + 20) * 4);
+        //QuestComment.setmargin_top(h - (checkbutton.getQudroSize() + 20) * 4);
+        QuestComment.setmargin_top(textFrame.getHeight()+15);
         window->draw(QuestComment.gettext());
 
 
@@ -3170,7 +3190,7 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
 
             QuestComment.setmargin_top(h - Buttons.getHeight());
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getHeight());
-            //Buttons.setMargin_top(100);
+     
 
             Buttons.CalcucateCoordinate(); first = false;
 
@@ -3287,7 +3307,7 @@ QuestType13::QuestType13(int w, int h) :
     sf::Event event;
     checkbutton.SetqudroSize(35);
 
-
+    QuestComment.settext(L"");
 
 
     while (window->isOpen()) {
@@ -3307,12 +3327,11 @@ QuestType13::QuestType13(int w, int h) :
 
 
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
-            //checkbutton.se
+            checkbutton.Set_margitop((h - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y);
+
+            QuestComment.setmargin_top(checkbutton.getSprite()[0].getPosition().y- checkbutton.getQudroSize());
             checkbutton.SetSpacing(11);
 
-            checkbutton.Set_margitop(
-                h - (checkbutton.getQudroSize()+20 ) * 3
-            );
             checkbutton.resetclickID();
         }
 
@@ -3322,14 +3341,12 @@ QuestType13::QuestType13(int w, int h) :
             //question13VariantID
             std::wstring tmpStr = question13Variant[question13VariantID][i];
             checkbutton.setStrValue(i, tmpStr);
-
-
             tmpStr = checkbutton.getText()[i].getString();
-
             window->draw(checkbutton.getText()[i]);
-
         }
-        QuestComment.setmargin_top(h - (checkbutton.getQudroSize() + 20) * 3);
+
+  
+      
         window->draw(QuestComment.gettext());
         
         pica[0]->draw();
