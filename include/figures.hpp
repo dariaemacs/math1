@@ -244,17 +244,43 @@ private:
     Rectangle rectangle3;
 };
 
-class ThreePicture1 :public FrameFigure {
+class ThreePicture0 :public FrameFigure {
     Circle circle1;
     Triangle triangle1;
     Rectangle rectangle1;
     int maxX;//координаты спрайта
     int maxY;
     public:
-    ThreePicture1(std::shared_ptr<sf::RenderWindow>& );
-    ~ThreePicture1() {}
+    ThreePicture0(std::shared_ptr<sf::RenderWindow>& );
+    ~ThreePicture0() {}
     virtual void draw();
   
+};
+
+class ThreePicture1 :public FrameFigure {
+    Circle circle1;
+    Triangle triangle1;
+    Rectangle rectangle1;
+    int maxX;//координаты спрайта
+    int maxY;
+public:
+    ThreePicture1(std::shared_ptr<sf::RenderWindow>&);
+    ~ThreePicture1() {}
+    virtual void draw();
+
+};
+
+class ThreePicture2 :public FrameFigure {
+    Circle circle1;
+    Triangle triangle1;
+    Rectangle rectangle1;
+    int maxX;//координаты спрайта
+    int maxY;
+public:
+    ThreePicture2(std::shared_ptr<sf::RenderWindow>&);
+    ~ThreePicture2() {}
+    virtual void draw();
+
 };
 
 class Tower:public FrameFigure

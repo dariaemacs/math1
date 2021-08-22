@@ -3277,11 +3277,11 @@ QuestType13::QuestType13(int w, int h) :
 {
 
 
-    std::shared_ptr<FrameFigure> pica[] = {std::make_shared<ThreePicture1>(window) };
+    std::shared_ptr<FrameFigure> pica[] = { std::make_shared<ThreePicture0>(window) ,std::make_shared<ThreePicture1>(window) };
     bool first = true;
     FrameFigure::resetnumber_of_figure();
     srand(time(0));
-    int SIZE = sizeof(question13Variant) / sizeof(*question13Variant);
+    int SIZE = sizeof(pica) / sizeof(*pica);
     question13VariantID = rand() % SIZE;
 
 
@@ -3348,8 +3348,8 @@ QuestType13::QuestType13(int w, int h) :
   
       
         window->draw(QuestComment.gettext());
-        
-        pica[0]->draw();
+        std::cout << question13VariantID << std::endl;
+        pica[question13VariantID]->draw();
         window->draw(textFrame.gettext());
         //for (int bc = 0; bc < picture1.getButtonCount(); bc++) {
 

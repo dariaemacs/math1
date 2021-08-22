@@ -659,11 +659,9 @@ public:
 class QuestType13 : public Window {
     CheckButton11 checkbutton;
     int question13VariantID;
-
 public:
     QuestType13(int, int);
     int getquestion13VariantID() { return question13VariantID; }
-
 };
 
 #endif 
