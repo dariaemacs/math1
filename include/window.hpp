@@ -658,10 +658,14 @@ public:
 
 class QuestType13 : public Window {
     CheckButton11 checkbutton;
-    int question13VariantID;
+    int question13VariantID1;
+    int question13VariantID2;
+    int question13VariantID3;
 public:
     QuestType13(int, int);
-    int getquestion13VariantID() { return question13VariantID; }
+    int getquestion13VariantID1() { return question13VariantID1; }
+    int getquestion13VariantID2() { return question13VariantID2; }
+    int getquestion13VariantID3() { return question13VariantID3; }
 };
 
 #endif 

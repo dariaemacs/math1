@@ -71,6 +71,8 @@ extern const std::wstring question11rectanglevariant1[2];
 extern const figureQestions* qestionarrayList[];
 
 
+
+
 extern const int question5Answers[];
 extern const int question6Answers[];
 extern const int question12Answers[];
@@ -85,6 +87,8 @@ struct variantOfLine { int i, j; };
 extern const variantOfLine question7squarevariantOfFirstLine[];
 extern const variantOfLine question7trianglevariantOfFirstLine[];
 extern const variantOfLine question7rectanglevariantOfFirstLine[];
+
+extern const int question13VariantofRandom[4][3];
 
 //extern const variantOfLine question8rectanglevariantOfFirstLine[];
 

@@ -104,10 +104,11 @@ bool CheckButton11::click(int question11Variant3ID) {
             unsigned char tmp = question11ALLVariants[question11Variant3ID][i];
             answerNUMBER = ((1 << tmp)) ^ answerNUMBER;
             clickID = ((1 << i)) ^ clickID;
+            std::cout << "clickID=" << clickID << std::endl;
             return true;
         }
     };
-    std::cout << "clickID="<< clickID << std::endl;
+    
     return false;
 };
 void CheckButton11::resetclickID() { clickID = 0; };
@@ -3277,29 +3278,30 @@ QuestType13::QuestType13(int w, int h) :
 {
 
 
-    std::shared_ptr<FrameFigure> pica[] = { std::make_shared<ThreePicture0>(window) ,std::make_shared<ThreePicture1>(window),std::make_shared<ThreePicture2>(window) };
+ std::shared_ptr<FrameFigure> pica[] = 
+ { std::make_shared<ThreePicture0>(window) ,
+     std::make_shared<ThreePicture1>(window),
+     std::make_shared<ThreePicture2>(window),
+     std::make_shared<ThreePicture3>(window)
+    };
     bool first = true;
     FrameFigure::resetnumber_of_figure();
     srand(time(0));
     int SIZE = sizeof(pica) / sizeof(*pica);
     srand(time(0));
-    question13VariantID = rand() % SIZE;
+    question13VariantID1 = rand() % SIZE;
+    SIZE = sizeof(question13Variant) / sizeof(*question13Variant);
+    srand(time(0));
+    question13VariantID2 = rand() % SIZE;
+    SIZE = sizeof(question13VariantofRandom) / sizeof(*question13VariantofRandom);
+    srand(time(0));
+    question13VariantID3 = rand() % SIZE;
 
 
 
-    //std::cout << question11Variant2ID << std::endl;
 
 
-    //std::wstring question = question11Text[0].questionText;
-
-    //std::wstring replaceFrom = L"N";
-    //std::wstring replaceTo = question11Variant1[question11Variant1ID];
-
-    //int posn = question.find(replaceFrom);
-    //if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
-
-    //textFrame.settext(question);
-    //textFrame.CalcucateCoordinate(w - w * 5 / 100, textFrame.getHeight());
+  
     
 
 
@@ -3319,11 +3321,7 @@ QuestType13::QuestType13(int w, int h) :
         if (first) {
 
             first = false;
-            //picture1.CalcucateCoordinate(2);
-            //picture2.setMargin_top(h / 3 + picture1.getHeight()
 
-            //);
-            //picture2.CalcucateCoordinate(12);
 
 
 
@@ -3339,8 +3337,8 @@ QuestType13::QuestType13(int w, int h) :
 
         for (int i = 0; i < 3; i++) {
             window->draw(checkbutton.getSprite()[i]);
-            //question13VariantID
-            std::wstring tmpStr = question13Variant[question13VariantID][i];
+
+            std::wstring tmpStr = question13Variant[question13VariantID2][question13VariantofRandom[question13VariantID3][i]];
             checkbutton.setStrValue(i, tmpStr);
             tmpStr = checkbutton.getText()[i].getString();
             window->draw(checkbutton.getText()[i]);
@@ -3349,8 +3347,7 @@ QuestType13::QuestType13(int w, int h) :
   
       
         window->draw(QuestComment.gettext());
-        std::cout << question13VariantID << std::endl;
-        pica[question13VariantID]->draw();
+        pica[question13VariantID1]->draw();
         window->draw(textFrame.gettext());
         //for (int bc = 0; bc < picture1.getButtonCount(); bc++) {
 
@@ -3380,7 +3377,10 @@ QuestType13::QuestType13(int w, int h) :
                 {
 
                     countofBALL = 0;
-                    for (int i = 0; i < 4; i++) {
+                    
+                    for (int i = 0; i < 3; i++) {
+                        char tmp = 1 << i;
+                        if (((checkbutton.getClickID() & tmp)>>i) == 1) {}
                      /*   if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
                             checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
                         else

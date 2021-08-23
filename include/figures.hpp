@@ -270,6 +270,19 @@ public:
 
 };
 
+class ThreePicture3 :public FrameFigure {
+    Circle circle1;
+    Triangle triangle1;
+    Rectangle rectangle1;
+    int maxX;//координаты спрайта
+    int maxY;
+public:
+    ThreePicture3(std::shared_ptr<sf::RenderWindow>&);
+    ~ThreePicture3() {}
+    virtual void draw();
+
+};
+
 class ThreePicture2 :public FrameFigure {
     Circle circle1;
     Triangle triangle1;
