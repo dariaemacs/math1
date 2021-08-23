@@ -3277,11 +3277,12 @@ QuestType13::QuestType13(int w, int h) :
 {
 
 
-    std::shared_ptr<FrameFigure> pica[] = { std::make_shared<ThreePicture0>(window) ,std::make_shared<ThreePicture1>(window) };
+    std::shared_ptr<FrameFigure> pica[] = { std::make_shared<ThreePicture0>(window) ,std::make_shared<ThreePicture1>(window),std::make_shared<ThreePicture2>(window) };
     bool first = true;
     FrameFigure::resetnumber_of_figure();
     srand(time(0));
     int SIZE = sizeof(pica) / sizeof(*pica);
+    srand(time(0));
     question13VariantID = rand() % SIZE;
 
 
@@ -3398,10 +3399,7 @@ QuestType13::QuestType13(int w, int h) :
                     }
 
 
-                    //   badAnswer = true;
-                       //countofrightAnswer = 0;
-                       //unsigned char tmp;
-                       //if (question10Variant1ID==0) unsigned char tmp = 
+
                 }
 
                 if (checkbutton.click(0)) {
@@ -3417,6 +3415,6 @@ QuestType13::QuestType13(int w, int h) :
         }
     }
 
-    srand(time(0));
+ 
 
 }

@@ -422,24 +422,35 @@ void ThreePicture1::draw() {
     rectangle1.draw(window);
 }
 
-//void ThreePicture2::draw() {
-//    if (!alreadyDraw) {
-//        calcKoeff();
-//        int y = 20;
-//        int x = 100;
-//        circle1.set_radius(100);
-//        circle1.set_coords(0, 0);
-//        //circle1.set_color(color::blue);
-//        triangle1.set_coords(120 + x, 200, 250 + x, 0, 400 + x, 200);
-//        rectangle1.set_coords(550, 0);
-//
-//        rectangle1.set_size(200, 200);
-//
-//    }
-//    circle1.draw(window);
-//    triangle1.draw(window);
-//    rectangle1.draw(window);
-//}
+ThreePicture2::ThreePicture2(std::shared_ptr<sf::RenderWindow>& win) :
+    circle1(this),
+    triangle1(this),
+    rectangle1(this),
+    FrameFigure(win, 0, 0, 0) {
+    xmin = 0;
+    xmax = 500;
+    ymin = 0;
+    ymax = 200;
+};
+
+void ThreePicture2::draw() {
+    if (!alreadyDraw) {
+        calcKoeff();
+        int y = 20;
+        int x = 100;
+        circle1.set_radius(100);
+        circle1.set_coords(0, 0);
+        //circle1.set_color(color::blue);
+        triangle1.set_coords(120 + x, 200, 250 + x, 0, 400 + x, 200);
+        rectangle1.set_coords(550, 0);
+
+        rectangle1.set_size(200, 200);
+
+    }
+    circle1.draw(window);
+    triangle1.draw(window);
+    rectangle1.draw(window);
+}
 
 void ThreePicture0::draw() {
     if (!alreadyDraw) {
