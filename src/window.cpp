@@ -3349,6 +3349,7 @@ QuestType13::QuestType13(int w, int h) :
         window->draw(QuestComment.gettext());
         pica[question13VariantID1]->draw();
         window->draw(textFrame.gettext());
+        //std::cout <<"question13VariantID1="<<question13VariantID1 << std::endl;
         //for (int bc = 0; bc < picture1.getButtonCount(); bc++) {
 
         //    window->draw(*picture1.getButtons()[bc]);
@@ -3377,20 +3378,28 @@ QuestType13::QuestType13(int w, int h) :
                 {
 
                     countofBALL = 0;
-                    
-                    for (int i = 0; i < 3; i++) {
-                        char tmp = 1 << i;
-                        if (((checkbutton.getClickID() & tmp)>>i) == 1) {}
-                     /*   if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
-                            checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
-                        else
-                            if (!checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
-                                checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
-                            else
-                                if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && !checkbutton.getSprite()[i].getActive())
-                                    checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");*/
 
+
+                    //char tmp = 1 << 0;
+                    std::vector <int> result;
+                    if (((checkbutton.getClickID() & (1 << 0)) >> 0) > 0)  result.push_back(question13VariantofRandom[question13VariantID2][0]); //  ;
+                    if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[question13VariantID2][1]); //  ;
+                    if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[question13VariantID2][2]); //  ;
+                    sort(result.begin(), result.end(), std::greater<int>());
+                    int result_int = 0;
+                    int dec = 1;
+                    for (int i = 0; i < result.size() ; i++)
+                    {                            
+                        std::cout << result[i]<<std::endl;
                     }
+                 /*   if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
+                        checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+                    else
+                        if (!checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
+                            checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
+                        else
+                            if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && !checkbutton.getSprite()[i].getActive())
+                                checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");*/
 
                     switch (countofBALL) {
                     case 0: QuestComment.settext(CommentsDic[11]); break; //L"Ошибка. Баллы не засчитаны :(" 

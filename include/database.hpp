@@ -76,6 +76,7 @@ extern const figureQestions* qestionarrayList[];
 extern const int question5Answers[];
 extern const int question6Answers[];
 extern const int question12Answers[];
+extern const int question13Answers[4][4];
 extern const unsigned long long question7AnswersTriangle[21];
 extern const unsigned long long question7AnswersRectangle[3];
 extern const unsigned long long question7AnswersSquare[2];
