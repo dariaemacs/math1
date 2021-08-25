@@ -663,6 +663,7 @@ class QuestType13 : public Window {
     int question13VariantID3;
 public:
     QuestType13(int, int);
+    QuestType13(int w, int h, int a, int b);
     int getquestion13VariantID1() { return question13VariantID1; }
     int getquestion13VariantID2() { return question13VariantID2; }
     int getquestion13VariantID3() { return question13VariantID3; }

@@ -3270,7 +3270,7 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
     }
 }
 
-QuestType13::QuestType13(int w, int h) :
+QuestType13::QuestType13(int w, int h,int a, int b) :
     Window(w, h, 0, 12),
     checkbutton(*this)
 
@@ -3296,7 +3296,11 @@ QuestType13::QuestType13(int w, int h) :
     SIZE = sizeof(question13VariantofRandom) / sizeof(*question13VariantofRandom);
     srand(time(0));
     question13VariantID3 = rand() % SIZE;
+    question13VariantID1 = a;
+    question13VariantID2 = b;
 
+    std::cout << "question13VariantID1=" << question13VariantID1 << std::endl;
+    std::cout << "question13VariantID2=" << question13VariantID2 << std::endl;
 
 
 
@@ -3332,6 +3336,9 @@ QuestType13::QuestType13(int w, int h) :
             checkbutton.SetSpacing(11);
 
             checkbutton.resetclickID();
+            CheckButtonTexture.loadFromFile("resources/images/arrow_up.png");
+            readyforCheck = true;
+            CheckButtonSprite.setTexture(CheckButtonTexture);
         }
 
 
@@ -3382,18 +3389,17 @@ QuestType13::QuestType13(int w, int h) :
 
                     //char tmp = 1 << 0;
                     std::vector <int> result;
-                    if (((checkbutton.getClickID() & (1 << 0)) >> 0) > 0)  result.push_back(question13VariantofRandom[question13VariantID2][0]); //  ;
-                    if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[question13VariantID2][1]); //  ;
-                    if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[question13VariantID2][2]); //  ;
+                    if (((checkbutton.getClickID() & (1 << 0)) >> 0) > 0) result.push_back(question13VariantofRandom[question13VariantID3][0]); //  ;
+                    if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[ question13VariantID3][1]); //  ;
+                    if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[ question13VariantID3][2]); //  ;
                     sort(result.begin(), result.end(), std::greater<int>());
                     char result_int = 0;
                     int dec = 1;
                     for (int i = 0; i < result.size() ; i++)
                     {      
-                        result_int = result_int | (1 << result[i]);
-                        
+                        result_int = result_int | (1 << result[i]);                       
                     }
-                    std::cout << "result_int="  << (int)result_int << std::endl;
+                    std::cout << "result_int="  << (int)result_int << " " << question13Answers[question13VariantID1][question13VariantID2]<< std::endl;
 
                     if (question13Answers[question13VariantID1][question13VariantID2] == result_int) QuestComment.settext(CommentsDic[1]);
                     else QuestComment.settext(CommentsDic[2]);
@@ -3419,9 +3425,7 @@ QuestType13::QuestType13(int w, int h) :
 
                 if (checkbutton.click(0)) {
 
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png");
-                    readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+
                 }
 
             }
