@@ -3386,12 +3386,18 @@ QuestType13::QuestType13(int w, int h) :
                     if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[question13VariantID2][1]); //  ;
                     if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[question13VariantID2][2]); //  ;
                     sort(result.begin(), result.end(), std::greater<int>());
-                    int result_int = 0;
+                    char result_int = 0;
                     int dec = 1;
                     for (int i = 0; i < result.size() ; i++)
-                    {                            
-                        std::cout << result[i]<<std::endl;
+                    {      
+                        result_int = result_int | (1 << result[i]);
+                        
                     }
+                    std::cout << "result_int="  << (int)result_int << std::endl;
+
+                    if (question13Answers[question13VariantID1][question13VariantID2] == result_int) QuestComment.settext(CommentsDic[1]);
+                    else QuestComment.settext(CommentsDic[2]);
+
                  /*   if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
                         checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
                     else
@@ -3400,12 +3406,12 @@ QuestType13::QuestType13(int w, int h) :
                         else
                             if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && !checkbutton.getSprite()[i].getActive())
                                 checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");*/
-
-                    switch (countofBALL) {
-                    case 0: QuestComment.settext(CommentsDic[11]); break; //L"Ошибка. Баллы не засчитаны :(" 
-                    case 1: QuestComment.settext(CommentsDic[10]); break; //
-                    case 2: QuestComment.settext(CommentsDic[9]);  break;  //
-                    }
+                    
+                    //switch (countofBALL) {
+                    //case 0: QuestComment.settext(CommentsDic[11]); break; //L"Ошибка. Баллы не засчитаны :(" 
+                    //case 1: QuestComment.settext(CommentsDic[10]); break; //
+                    //case 2: QuestComment.settext(CommentsDic[9]);  break;  //
+                    //}
 
 
 
