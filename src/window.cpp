@@ -3393,16 +3393,29 @@ QuestType13::QuestType13(int w, int h,int a, int b) :
                     if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[ question13VariantID3][1]); //  ;
                     if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[ question13VariantID3][2]); //  ;
                     sort(result.begin(), result.end(), std::greater<int>());
-                    char result_int = 0;
+                    unsigned char result_int = 0;
                     int dec = 1;
                     for (int i = 0; i < result.size() ; i++)
                     {      
-                        result_int = result_int | (1 << result[i]);                       
+                        result_int = result_int | (1 << result[i]);  
+                        //std::cout << "i=" << i << " " <<(int)(1 << result[i]) << " " << (question13Answers[question13VariantID1][question13VariantID2] & (1 << i)) << std::endl;
+
                     }
-                    std::cout << "result_int="  << (int)result_int << " " << question13Answers[question13VariantID1][question13VariantID2]<< std::endl;
+                    std::cout << std::endl;
 
                     if (question13Answers[question13VariantID1][question13VariantID2] == result_int) QuestComment.settext(CommentsDic[1]);
-                    else QuestComment.settext(CommentsDic[2]);
+                    else {
+
+                        QuestComment.settext(CommentsDic[2]);
+
+                    }
+
+                    for (int i = 0; i < 3; i++)
+                    {
+ std::cout << "i=" << i << " " << " "<<(int)result_int<< " "
+     << ( result_int & (i << 1)) << ( question13Answers[question13VariantID1][question13VariantID2] & (i << 1))
+     << std::endl;
+                    }
 
                  /*   if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
                         checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
