@@ -3413,8 +3413,12 @@ QuestType13::QuestType13(int w, int h,int a, int b) :
                     for (int i = 0; i < 3; i++)
                     {
  std::cout << "i=" << i << " " << " "<<(int)result_int<< " "
-     << ( result_int & (i << 1)) << ( question13Answers[question13VariantID1][question13VariantID2] & (i << 1))
-     << std::endl;
+     << ( result_int & (1 << i)) << ( question13Answers[question13VariantID1][question13VariantID2] & (1 << i))
+     <<" " << (question13VariantofRandom[question13VariantID3][i])<<std::endl;
+
+ if ((result_int & (1 << i)) == (question13Answers[question13VariantID1][question13VariantID2] & (1 << i)) && (result_int & (1 << i))>0) {
+     checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+ }
                     }
 
                  /*   if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
