@@ -3346,6 +3346,7 @@ QuestType13::QuestType13(int w, int h,int a, int b) :
             window->draw(checkbutton.getSprite()[i]);
 
             std::wstring tmpStr = question13Variant[question13VariantID2][question13VariantofRandom[question13VariantID3][i]];
+            //std::cout << "iiii=" << i << " right=" << (question13Answers[question13VariantID1][question13VariantID2] & (1<< question13VariantofRandom[question13VariantID3][i])) << std::endl;
             checkbutton.setStrValue(i, tmpStr);
             tmpStr = checkbutton.getText()[i].getString();
             window->draw(checkbutton.getText()[i]);
@@ -3403,23 +3404,34 @@ QuestType13::QuestType13(int w, int h,int a, int b) :
                     }
                     std::cout << std::endl;
 
-                    if (question13Answers[question13VariantID1][question13VariantID2] == result_int) QuestComment.settext(CommentsDic[1]);
+                    if (question13Answers[question13VariantID1][question13VariantID2] == result_int) { QuestComment.settext(CommentsDic[1]); }
                     else {
 
                         QuestComment.settext(CommentsDic[2]);
 
-                    }
 
-                    for (int i = 0; i < 3; i++)
-                    {
- std::cout << "i=" << i << " " << " "<<(int)result_int<< " "
-     << ( result_int & (1 << i)) << ( question13Answers[question13VariantID1][question13VariantID2] & (1 << i))
-     <<" " << (question13VariantofRandom[question13VariantID3][i])<<std::endl;
 
- if ((result_int & (1 << i)) == (question13Answers[question13VariantID1][question13VariantID2] & (1 << i)) && (result_int & (1 << i))>0) {
-     checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
- }
-                    }
+                        for (int i = 0; i < 3; i++)
+                        {
+                            int ismustClick = (question13Answers[question13VariantID1][question13VariantID2] & (1 << question13VariantofRandom[question13VariantID3][i]));
+
+                            if (ismustClick > 0 && checkbutton.getSprite()[i].getActive())
+                            {
+                                checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+                            }
+
+                            else {
+                                if (ismustClick == 0 && checkbutton.getSprite()[i].getActive()) {
+                                    checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
+                                }
+                                else {
+                                    if (ismustClick > 0 && !checkbutton.getSprite()[i].getActive())
+                                        checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+
+                                }
+                            }
+                        }
+                    };
 
                  /*   if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
                         checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");

@@ -262,16 +262,11 @@ extern const int question11ALLVariants[24][4] = {
 extern const int question13VariantofRandom[4][3] =
 {
     {0,1,2},
-    {1,2,0},
+    {1,2,0}, //!
     {0,2,1},
     {2,0,1}
 };
-extern const int question13Answers[4][4] = { 
-4,2,6,4,
-6,6,2,0,
-4,6,2,0,
-4,2,6,0
-};
+extern const int question13Answers[4][4] = {4,2,6,4,6,6,2,0,4,6,2,0,4,2,6,0};
 
 extern const std::string question11pictureFN[4][2] =
 {
