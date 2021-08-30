@@ -20,23 +20,23 @@ int main() {
         int width = 1024; int height = 600;
 
         srand(time(0));
-
-        QuestType13(width, height, 0, 3);
-        QuestType13(width, height, 0, 0);
-        QuestType13(width, height, 0, 1);
-        QuestType13(width, height, 0, 2);
-        QuestType13(width, height, 0, 3);
-        QuestType13(width, height, 1, 0);
-        QuestType13(width, height, 1, 1);
-        QuestType13(width, height, 1, 2);
-        QuestType13(width, height, 1, 3);
-        QuestType13(width, height, 2, 1);
-        QuestType13(width, height, 2, 2);
-        QuestType13(width, height, 2, 3);
-        QuestType13(width, height, 3, 0);
-        QuestType13(width, height, 3, 1);
-        QuestType13(width, height, 3, 2);
-        QuestType13(width, height, 3, 3);
+        QuestType14(width, height,21);
+/*        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);
+        QuestType13(width, height);*/
 
      //    width = 1024;  height = 600;
      //    QuestType13( width ,height);
