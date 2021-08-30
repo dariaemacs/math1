@@ -669,4 +669,20 @@ public:
     int getquestion13VariantID3() { return question13VariantID3; }
 };
 
+class QuestType14 : public Window {
+    Buttons buttons;
+    int question13VariantID1;
+    int question13VariantID2;
+    int question13VariantID3;
+    int question13VariantID4;
+    int question13VariantID5;
+public:
+    QuestType14(int , int , int );
+    int getquestion13VariantID1() { return question13VariantID1; }
+    int getquestion13VariantID2() { return question13VariantID2; }
+    int getquestion13VariantID3() { return question13VariantID3; }
+    int getquestion13VariantID4() { return question13VariantID4; }
+    int getquestion13VariantID5() { return question13VariantID5; }
+};
+
 #endif 

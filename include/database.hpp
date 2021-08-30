@@ -7,6 +7,7 @@
 
 struct figureQestions {
 	
+
 	std::wstring questionText;
 	types key;
 	
@@ -48,6 +49,13 @@ extern const figureQestions question10Text[];
 extern const figureQestions question11Text[];
 extern const figureQestions question12Text[];
 extern const figureQestions question13Text[];
+extern const figureQestions question14Text[];
+
+extern const std::wstring question14Text1[];
+extern const std::wstring question14Text2[3][3];
+extern const std::wstring question14TextColumn[3][4];
+extern const std::wstring question14TextVariant[3][3];
+extern const std::wstring question14DigitsInTable[3][2][3];
 
 extern const std::wstring question13Variant[4][3];
 

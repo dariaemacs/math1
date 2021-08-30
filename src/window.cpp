@@ -3299,8 +3299,7 @@ QuestType13::QuestType13(int w, int h,int a, int b) :
     question13VariantID1 = a;
     question13VariantID2 = b;
 
-    std::cout << "question13VariantID1=" << question13VariantID1 << std::endl;
-    std::cout << "question13VariantID2=" << question13VariantID2 << std::endl;
+
 
 
 
@@ -3464,5 +3463,23 @@ QuestType13::QuestType13(int w, int h,int a, int b) :
     }
 
  
+
+}
+QuestType14::QuestType14(int w, int h, int qtyButtons) :
+    Window(w, h, 0, 13),
+    buttons(qtyButtons, *this){
+
+    int SIZE = sizeof(question14Text2) / sizeof(*question14Text2);
+    question13VariantID1 = rand() % SIZE;
+    SIZE = sizeof(question14Text2) / sizeof(*question14Text2);
+    question13VariantID2 = rand() % SIZE;
+    SIZE = sizeof(question14Text2) / sizeof(*question14Text2);
+    question13VariantID3 = rand() % SIZE;
+    SIZE = sizeof(question14Text2) / sizeof(*question14Text2);
+    question13VariantID4 =  rand() % SIZE;
+    SIZE = sizeof(question14Text2) / sizeof(*question14Text2);
+    question13VariantID5 =  rand() % SIZE;
+
+
 
 }
