@@ -575,17 +575,21 @@ public:
   
 };
 class table {
-    std::array < sf::VertexArray,5> verticalline;
-    std::array < sf::VertexArray,4> horizline;
-    std::array < sf::Text, 6> text;
-    sf::Font font;
-    Window& WindowLink;
+
     float mash_koeff;
     float mash_width;
     float mash_height;
     float mash_x;
     float mash_y;
     float tablemax_y;
+
+protected:
+
+    std::array < sf::VertexArray, 5> verticalline;
+    std::array < sf::VertexArray, 5> horizline;
+    std::array < sf::Text, 6> text;
+    sf::Font font;
+    Window& WindowLink;
     public:
         table(Window&);
         void draw();
@@ -605,6 +609,16 @@ class table {
         float getmash_x() { return  mash_x; }
         float getmash_y() { return  mash_y; }
 };
+
+
+class table14: public table {
+    std::array < sf::Text, 6> Celltext;
+    public: 
+        table14(Window&);
+        void draw();
+
+};
+
 class QuestType9 : public Window {
     table tab;
     Buttons Buttons;
@@ -671,11 +685,13 @@ public:
 
 class QuestType14 : public Window {
     Buttons buttons;
+    table14 tab;
     int question13VariantID1;
     int question13VariantID2;
     int question13VariantID3;
     int question13VariantID4;
     int question13VariantID5;
+    questanswerClass questanswer;
 public:
     QuestType14(int , int , int );
     int getquestion13VariantID1() { return question13VariantID1; }

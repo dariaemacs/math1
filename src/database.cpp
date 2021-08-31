@@ -303,7 +303,7 @@ extern const unsigned char question11BALL[2][16] = {
 };
 
 extern const figureQestions* qestionarrayList[] = { question1Text ,question2Text,question3Text,question4Text,question5Text,question6Text,question7Text,question8Text ,question9Text,question10Text ,question11Text 
-,question12Text,question13Text };
+,question12Text,question13Text,question14Text };
 extern const std::array<std::string, N3> filenamesforPicaQuest3 = {
     std::string("chicken"),
     std::string("pencil"),

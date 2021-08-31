@@ -2523,6 +2523,32 @@ void table::draw() {
     
     
 }
+table14::table14(Window& w):table(w) {
+
+
+}
+void table14::draw() {
+
+    for (int i = 0; i < 6; i++)
+    {
+
+        //if (i < 5) WindowLink.getWindow()->draw(verticalline[i]);
+        if (i < 3)
+            WindowLink.getWindow()->draw(verticalline[i]);
+        if (i < 4)
+            WindowLink.getWindow()->draw(horizline[i]);
+        
+     
+            
+     
+        WindowLink.getWindow()->draw(text[i]);
+    }
+
+    //WindowLink.getWindow()->draw(horizline[5]);
+    //WindowLink.getWindow()->draw(verticalline[5]);
+
+
+}
 
 QuestType9::QuestType9( int w, int h, int qtyButtons) :
     Window(w, h, ((rand() % 4)), 8),
@@ -3432,13 +3458,104 @@ QuestType13::QuestType13(int w, int h) :
 }
 QuestType14::QuestType14(int w, int h, int qtyButtons) :
     Window(w, h, 0, 13),
-    buttons(qtyButtons, *this) {
+    buttons(qtyButtons, *this),
+    tab(*this){
 
     int SIZE = sizeof(question14Text2) / sizeof(*question14Text2);
     question13VariantID1 = rand() % SIZE;
 
     question13VariantID2 = rand() % 3;
 
+    bool first = true;
+
+    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    CheckButtonSprite.setTexture(CheckButtonTexture);
+    sf::Event event;
+    //questanswer[0].loadFromFile("resources/images/arrow_disable.png");
+
+    textFrame.settext(question14Text[0].questionText + L" " + question14Text1[question13VariantID1] + L"\n" +
+        question14Text2[question13VariantID1][question13VariantID2]
+    );
+    textFrame.CalcucateCoordinate(w  - w*10/100 , h /3);
+
+
+    while (window->isOpen()) {
+        window->clear();
+
+        window->draw(List);
+     
+        if (first) {
+
+            first = false;
+
+            buttons.CalcucateCoordinate((h - 100) / 1.4);
+            first = false;
+            QuestComment.setmargin_top(buttons.getMarginTop());
+            QuestComment.CalcucateCoordinate(h / 3, w / 2);
+            first = false;
+
+
+
+
+
+
+
+        }
+
+        tab.draw();
+        window->draw(QuestComment.gettext());
+        window->draw(textFrame.gettext());
+        for (int bc = 0; bc < buttons.getButtonCount(); bc++) {
+            window->draw(*buttons.getButtons()[bc]);
+        }
+        window->draw(CheckButtonSprite);
+
+
+        if (badAnswer) {
+            sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            sprite.setPosition((w - questanswer.getWidth()) / 2, (h - questanswer.getHeight()) / 2);
+            window->draw(sprite);
+
+        }
+        window->display();
+        while (window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
+                window->close();
+            }
+
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+                if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
+                    if (question9AnswersSquare[questNumber] == buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[1]);
+                    else {
+                        QuestComment.settext(CommentsDic[2]);
+                        badAnswer = true;
+                        questanswer.setParams(buttons.getWidth() * 5, buttons.getHeight(), 5, buttons.getScale());
+
+                        questanswer[0].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2]) + ".jpg");
+                        questanswer[1].loadFromFile(res_path + "digit_plus.jpg");
+                        questanswer[2].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2 + 1]) + ".jpg");
+                        questanswer[3].loadFromFile(res_path + "digit_equal.jpg");
+                        questanswer[4].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2] +
+                            question9AnswerDetails[questNumber * 2 + 1]
+                        ) + ".jpg");
+
+                        //questanswer[0].setScale(Buttons.getScale(), Buttons.getScale());
+                        questanswer.draw();
+                    }
+
+                if (buttons.click()) {
+                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                }
+
+            }
+
+
+        }
+    }
+
+    srand(time(0));
 
 
 }
