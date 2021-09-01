@@ -312,6 +312,13 @@ public:
   int getordQuestNumber() { return ordQuestNumber; }
   TextFrameBase gettextFrame() { return textFrame; }
   std::shared_ptr<sf::RenderWindow> getWindow() { return window; }
+
+  virtual   int getquestion13VariantID1() = 0;
+  virtual   int getquestion13VariantID2() = 0;
+  virtual   int getquestion13VariantID3() = 0;
+  virtual   int getquestion13VariantID4() = 0;
+  virtual   int getquestion13VariantID5() = 0;
+
   ~Window() {
       int yyy = 0;
   }
@@ -611,10 +618,44 @@ protected:
 };
 
 
-class table14: public table {
+class table3_5  {
     std::array < sf::Text, 6> Celltext;
+    float mash_koeff;
+    float mash_width;
+    float mash_height;
+    float mash_x;
+    float mash_y;
+    float tablemax_y;
+    float fontSize;
+
+protected:
+
+    std::array < sf::VertexArray, 5> verticalline;
+    std::array < sf::VertexArray, 5> horizline;
+    std::array < sf::Text, 6> text;
+    sf::Font font;
+    Window& WindowLink;
+public:
+
+    float getmash_koeff() {
+        return mash_koeff;
+    };
+
+    float getmash_width() {
+        return mash_width;
+    };
+    float getmash_height() {
+        return mash_height;
+    };
+    float gettablemax_y() {
+        return tablemax_y;
+    };
+    float getmash_x() { return  mash_x; }
+    float getmash_y() { return  mash_y; }
+
     public: 
-        table14(Window&);
+        table3_5(Window&);
+        void calcFontSize(const int w, const int h);
         void draw();
 
 };
@@ -685,13 +726,13 @@ public:
 
 class QuestType14 : public Window {
     Buttons buttons;
-    table14 tab;
     int question13VariantID1;
     int question13VariantID2;
     int question13VariantID3;
     int question13VariantID4;
     int question13VariantID5;
     questanswerClass questanswer;
+    table3_5 tab;
 public:
     QuestType14(int , int , int );
     int getquestion13VariantID1() { return question13VariantID1; }
