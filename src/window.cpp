@@ -2537,11 +2537,11 @@ table3_5::table3_5(Window& w) :WindowLink(w){
             horizline[i].setPrimitiveType(sf::LineStrip);
         }
     }
-    w.getquestion13VariantID1();
-    float margintop = w.gettextFrame().getHeight() + w.gettextFrame().getmargin_top() + 15;
+    //w.getquestion13VariantID1();
+    float margintop = w.getHeight()/3 ;
 
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-    text[0].setString(question14TextVariant[w.getquestion13VariantID1()][0] );
+    text[0].setString(question14TextColumn[w.getquestion13VariantID1()][0]);
     text[0].setFont(font);
     text[0].setFillColor(sf::Color::Black);
     text[0].setPosition(sf::Vector2f(0, 0));
@@ -2549,14 +2549,14 @@ table3_5::table3_5(Window& w) :WindowLink(w){
 
 
     float height0Row = text[0].getLocalBounds().height + 10;
-    float width0Row = (text[0].getLocalBounds().width + 30)*2;
+    float width0Row = (w.getWidth()/5);
     float tableWidth = w.getWidth() * 2 / 3 - 10;
     float objectsrowWidth = (tableWidth + 10 - width0Row) / 3;
     mash_koeff = (objectsrowWidth / 4) / 310;
     mash_width = objectsrowWidth / 4;
     mash_height = mash_width;
 
-    calcFontSize(width0Row, height0Row);
+    calcFontSize(width0Row-10, height0Row);
 
 
 
@@ -2608,11 +2608,12 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     verticalline[1][1].position = sf::Vector2f(width0Row, margintop + height0Row * 4);
     verticalline[1][0].color = sf::Color::Black;
     verticalline[1][1].color = sf::Color::Black;
-    text[1].setString(CommentsDic[4]);
+    text[1].setString(CommentsDic[11]);
     text[1].setFont(font);
+    text[1].setCharacterSize(fontSize);
     text[1].setFillColor(sf::Color::Black);
     text[1].setPosition(sf::Vector2f(width0Row, margintop - 3));
-    text[1].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    text[1].setCharacterSize(fontSize);
     mash_x = width0Row;
     mash_y = margintop + height0Row;
 
@@ -2622,11 +2623,11 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     verticalline[2][0].color = sf::Color::Black;
     verticalline[2][1].color = sf::Color::Black;
 
-    text[2].setString(question14TextVariant[w.getquestion13VariantID1()][2]);
+    text[2].setString(CommentsDic[12]);
     text[2].setFont(font);
     text[2].setFillColor(sf::Color::Black);
-    text[2].setPosition(sf::Vector2f(width0Row + objectsrowWidth, margintop - 3));
-    text[2].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    text[2].setPosition(sf::Vector2f(width0Row * 2, margintop - 3));
+    text[2].setCharacterSize(fontSize);
 
 
     verticalline[3][0].position = sf::Vector2f(width0Row * 3, margintop - 3);
@@ -2635,22 +2636,22 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     verticalline[3][1].color = sf::Color::Black;
     tablemax_y = margintop + 6 * mash_height;
 
-    text[3].setString(CommentsDic[5]);
+    text[3].setString(question14TextVariant[w.getquestion13VariantID1()][3]);
     text[3].setFont(font);
     text[3].setFillColor(sf::Color::Black);
-    text[3].setPosition(sf::Vector2f(width0Row + 2 * objectsrowWidth, margintop - 3));
+    text[3].setPosition(sf::Vector2f(10, margintop - 3 + height0Row )); // setPosition(sf::Vector2f(width0Row * 3, margintop - 3));
     text[3].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-
+    text[3].setCharacterSize(fontSize);
 
     //verticalline[4][0].position = sf::Vector2f(width0Row + 3 * objectsrowWidth - 10, margintop);
     //verticalline[4][1].position = sf::Vector2f(width0Row + 3 * objectsrowWidth - 10, margintop + height0Row * 4);
     //verticalline[4][0].color = sf::Color::Black;
     //verticalline[4][1].color = sf::Color::Black;
 
-    text[5].setString(CommentsDic[7]);
+    text[5].setString(question14TextVariant[w.getquestion13VariantID1()][4]);
     text[5].setFont(font);
     text[5].setFillColor(sf::Color::Black);
-    text[5].setPosition(sf::Vector2f(10, margintop + height0Row + 3 * mash_height));
+    text[5].setPosition(sf::Vector2f(10, margintop - 3 + height0Row*2));
     text[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
 
 
@@ -2672,7 +2673,7 @@ void table3_5::draw() {
 
             WindowLink.getWindow()->draw(verticalline[i]);
             WindowLink.getWindow()->draw(horizline[i]);
-            if (i == 0) WindowLink.getWindow()->draw(text[i]);
+            if (i < 5) WindowLink.getWindow()->draw(text[i]);
     };
 
     //WindowLink.getWindow()->draw(horizline[5]);
@@ -3637,10 +3638,10 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
             first = false;
 
             buttons.CalcucateCoordinate((h - 100) / 1.4);
-            first = false;
+            
             QuestComment.setmargin_top(buttons.getMarginTop());
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
-            first = false;
+            
 
 
 
@@ -3649,7 +3650,7 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
 
 
         }
-
+        
         tab.draw();
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
