@@ -2541,7 +2541,8 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     float margintop = w.getHeight()/3 ;
 
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-    text[0].setString(question14TextColumn[w.getquestion13VariantID1()][0]);
+    if (maximal(question14TextColumn[w.getquestion13VariantID1()][0].length(), 17)==17)
+    text[0].setString(CommentsDic[11]); else  text[0].setString(question14TextColumn[w.getquestion13VariantID1()][0]);
     text[0].setFont(font);
     text[0].setFillColor(sf::Color::Black);
     text[0].setPosition(sf::Vector2f(0, 0));
@@ -2560,14 +2561,13 @@ table3_5::table3_5(Window& w) :WindowLink(w){
 
 
 
-
+    std::cout << w.getquestion13VariantID1() << std::endl;
     text[0].setString(question14TextColumn[w.getquestion13VariantID1()][0]);
     text[0].setFont(font);
     text[0].setFillColor(sf::Color::Black);
     text[0].setPosition(sf::Vector2f(10, margintop - 3));
     //text[0].setPosition(sf::Vector2f(200,200));
     text[0].setCharacterSize(fontSize);
-
     horizline[0][0].position = sf::Vector2f(10,         margintop);
     horizline[0][1].position = sf::Vector2f(width0Row * 3, margintop);
     horizline[0][0].color = sf::Color::Black;
@@ -2578,11 +2578,6 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     horizline[1][0].color = sf::Color::Black;
     horizline[1][1].color = sf::Color::Black;
 
-    text[4].setString(question14TextVariant[w.getquestion13VariantID1()][1]);
-    text[4].setFont(font);
-    text[4].setFillColor(sf::Color::Black);
-    text[4].setPosition(sf::Vector2f(10, margintop + height0Row));
-    text[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
 
 
     horizline[2][0].position = sf::Vector2f(10, margintop + height0Row*2 );
@@ -2636,23 +2631,36 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     verticalline[3][1].color = sf::Color::Black;
     tablemax_y = margintop + 6 * mash_height;
 
-    text[3].setString(question14TextVariant[w.getquestion13VariantID1()][3]);
+
+
+    text[3].setString(question14TextVariant[w.getquestion13VariantID1()][0]);
     text[3].setFont(font);
     text[3].setFillColor(sf::Color::Black);
-    text[3].setPosition(sf::Vector2f(10, margintop - 3 + height0Row )); // setPosition(sf::Vector2f(width0Row * 3, margintop - 3));
+    text[3].setPosition(sf::Vector2f(10, margintop + height0Row));
     text[3].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     text[3].setCharacterSize(fontSize);
 
-    //verticalline[4][0].position = sf::Vector2f(width0Row + 3 * objectsrowWidth - 10, margintop);
-    //verticalline[4][1].position = sf::Vector2f(width0Row + 3 * objectsrowWidth - 10, margintop + height0Row * 4);
-    //verticalline[4][0].color = sf::Color::Black;
-    //verticalline[4][1].color = sf::Color::Black;
+    text[4].setString(question14TextVariant[w.getquestion13VariantID1()][1]);
+    text[4].setFont(font);
+    text[4].setFillColor(sf::Color::Black);
+    text[4].setPosition(sf::Vector2f(10, margintop + 2 * height0Row));
+    text[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    text[4].setCharacterSize(fontSize);
 
-    text[5].setString(question14TextVariant[w.getquestion13VariantID1()][4]);
+
+    text[5].setString(question14TextVariant[w.getquestion13VariantID1()][2]);
     text[5].setFont(font);
     text[5].setFillColor(sf::Color::Black);
-    text[5].setPosition(sf::Vector2f(10, margintop - 3 + height0Row*2));
+    text[5].setPosition(sf::Vector2f(10, margintop - 3 + height0Row * 3));
     text[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    text[5].setCharacterSize(fontSize);
+
+
+
+
+
+
+
 
 
 
@@ -2673,8 +2681,9 @@ void table3_5::draw() {
 
             WindowLink.getWindow()->draw(verticalline[i]);
             WindowLink.getWindow()->draw(horizline[i]);
-            if (i < 5) WindowLink.getWindow()->draw(text[i]);
+             WindowLink.getWindow()->draw(text[i]);
     };
+    WindowLink.getWindow()->draw(text[5]);
 
     //WindowLink.getWindow()->draw(horizline[5]);
     //WindowLink.getWindow()->draw(verticalline[5]);
@@ -3654,9 +3663,8 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
         tab.draw();
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
-        for (int bc = 0; bc < buttons.getButtonCount(); bc++) {
-            window->draw(*buttons.getButtons()[bc]);
-        }
+        for (int bc = 0; bc < buttons.getButtonCount(); bc++) 
+            window->draw(*buttons.getButtons()[bc]);        
         window->draw(CheckButtonSprite);
 
 
