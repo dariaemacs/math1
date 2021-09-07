@@ -2537,15 +2537,15 @@ table3_5::table3_5(Window& w) :WindowLink(w){
             horizline[i].setPrimitiveType(sf::LineStrip);
         }
     }
-    //w.getquestion13VariantID1();
+
     float margintop = w.getHeight()/3 ;
 
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
     if (maximal(question14TextColumn[w.getquestion13VariantID1()][0].length(), 17)==17)
     text[0].setString(CommentsDic[11]); else  text[0].setString(question14TextColumn[w.getquestion13VariantID1()][0]);
     text[0].setFont(font);
-    text[0].setFillColor(sf::Color::Black);
-    text[0].setPosition(sf::Vector2f(0, 0));
+    /*text[0].setFillColor(sf::Color::Black);
+    text[0].setPosition(sf::Vector2f(0, 0));*/
 
 
 
@@ -2557,15 +2557,15 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     mash_width = objectsrowWidth / 4;
     mash_height = mash_width;
 
-    calcFontSize(width0Row-10, height0Row);
+    calcFontSize(width0Row-10, height0Row-8);
 
-
+    float k = 5;
 
     std::cout << w.getquestion13VariantID1() << std::endl;
     text[0].setString(question14TextColumn[w.getquestion13VariantID1()][0]);
     text[0].setFont(font);
     text[0].setFillColor(sf::Color::Black);
-    text[0].setPosition(sf::Vector2f(10, margintop - 3));
+    text[0].setPosition(sf::Vector2f(10+ k, margintop - 3));
     //text[0].setPosition(sf::Vector2f(200,200));
     text[0].setCharacterSize(fontSize);
     horizline[0][0].position = sf::Vector2f(10,         margintop);
@@ -2607,7 +2607,7 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     text[1].setFont(font);
     text[1].setCharacterSize(fontSize);
     text[1].setFillColor(sf::Color::Black);
-    text[1].setPosition(sf::Vector2f(width0Row, margintop - 3));
+    text[1].setPosition(sf::Vector2f(width0Row + k, margintop - 3));
     text[1].setCharacterSize(fontSize);
     mash_x = width0Row;
     mash_y = margintop + height0Row;
@@ -2621,7 +2621,7 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     text[2].setString(CommentsDic[12]);
     text[2].setFont(font);
     text[2].setFillColor(sf::Color::Black);
-    text[2].setPosition(sf::Vector2f(width0Row * 2, margintop - 3));
+    text[2].setPosition(sf::Vector2f(width0Row * 2+k, margintop - 3));
     text[2].setCharacterSize(fontSize);
 
 
@@ -2636,14 +2636,14 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     text[3].setString(question14TextVariant[w.getquestion13VariantID1()][0]);
     text[3].setFont(font);
     text[3].setFillColor(sf::Color::Black);
-    text[3].setPosition(sf::Vector2f(10, margintop + height0Row));
+    text[3].setPosition(sf::Vector2f(10 + k, margintop + height0Row));
     text[3].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     text[3].setCharacterSize(fontSize);
 
     text[4].setString(question14TextVariant[w.getquestion13VariantID1()][1]);
     text[4].setFont(font);
     text[4].setFillColor(sf::Color::Black);
-    text[4].setPosition(sf::Vector2f(10, margintop + 2 * height0Row));
+    text[4].setPosition(sf::Vector2f(10 + k, margintop + 2 * height0Row));
     text[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     text[4].setCharacterSize(fontSize);
 
@@ -2651,7 +2651,7 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     text[5].setString(question14TextVariant[w.getquestion13VariantID1()][2]);
     text[5].setFont(font);
     text[5].setFillColor(sf::Color::Black);
-    text[5].setPosition(sf::Vector2f(10, margintop - 3 + height0Row * 3));
+    text[5].setPosition(sf::Vector2f(10 + k, margintop - 3 + height0Row * 3));
     text[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     text[5].setCharacterSize(fontSize);
 
@@ -3610,6 +3610,7 @@ void table3_5::calcFontSize(const int w, const int h) {
         width = text[0].getLocalBounds().width;
         height = text[0].getLocalBounds().height;
     }
+    fontSize--;
     //margin_top = text[0].getLocalBounds().top;
 }
 QuestType14::QuestType14(int w, int h, int qtyButtons) :
