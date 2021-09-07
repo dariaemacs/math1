@@ -2654,23 +2654,55 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     text[5].setPosition(sf::Vector2f(10 + k, margintop - 3 + height0Row * 3));
     text[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     text[5].setCharacterSize(fontSize);
-
-
-
-
-
-
-
-
-
-
-
     horizline[4].resize(2);
     horizline[4].setPrimitiveType(sf::LineStrip);
     horizline[4][0].position = sf::Vector2f(10, margintop + height0Row * 4);
     horizline[4][1].position = sf::Vector2f(width0Row * 3, margintop + height0Row * 4);
     horizline[4][0].color = sf::Color::Black;
     horizline[4][1].color = sf::Color::Black;
+
+    Celltext[0].setString(question14DigitsInTable[w.getquestion13VariantID1()][0][0]);
+    Celltext[0].setFont(font);
+    Celltext[0].setFillColor(sf::Color::Black);
+    Celltext[0].setPosition(sf::Vector2f(width0Row + width0Row/2 , margintop - 3 + height0Row ));
+    Celltext[0].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    Celltext[0].setCharacterSize(fontSize);
+
+    Celltext[1].setString(question14DigitsInTable[w.getquestion13VariantID1()][0][1]);
+    Celltext[1].setFont(font);
+    Celltext[1].setFillColor(sf::Color::Black);
+    Celltext[1].setPosition(sf::Vector2f(width0Row + width0Row / 2, margintop - 3 + 2*height0Row));
+    Celltext[1].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    Celltext[1].setCharacterSize(fontSize);
+
+    Celltext[2].setString(question14DigitsInTable[w.getquestion13VariantID1()][0][2]);
+    Celltext[2].setFont(font);
+    Celltext[2].setFillColor(sf::Color::Black);
+    Celltext[2].setPosition(sf::Vector2f(width0Row + width0Row / 2, margintop - 3 + 3 * height0Row));
+    Celltext[2].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    Celltext[2].setCharacterSize(fontSize);
+
+    Celltext[3].setString(question14DigitsInTable[w.getquestion13VariantID1()][1][0]);
+    Celltext[3].setFont(font);
+    Celltext[3].setFillColor(sf::Color::Black);
+    Celltext[3].setPosition(sf::Vector2f(width0Row*2 + width0Row / 2, margintop - 3 + height0Row));
+    Celltext[3].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    Celltext[3].setCharacterSize(fontSize);
+
+    Celltext[4].setString(question14DigitsInTable[w.getquestion13VariantID1()][1][1]);
+    Celltext[4].setFont(font);
+    Celltext[4].setFillColor(sf::Color::Black);
+    Celltext[4].setPosition(sf::Vector2f(width0Row*2 + width0Row / 2, margintop - 3 + 2 * height0Row));
+    Celltext[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    Celltext[4].setCharacterSize(fontSize);
+
+    Celltext[5].setString(question14DigitsInTable[w.getquestion13VariantID1()][1][2]);
+    Celltext[5].setFont(font);
+    Celltext[5].setFillColor(sf::Color::Black);
+    Celltext[5].setPosition(sf::Vector2f(width0Row*2 + width0Row / 2, margintop - 3 + 3 * height0Row));
+    Celltext[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    Celltext[5].setCharacterSize(fontSize);
+
 
 }
 void table3_5::draw() {
@@ -2682,8 +2714,13 @@ void table3_5::draw() {
             WindowLink.getWindow()->draw(verticalline[i]);
             WindowLink.getWindow()->draw(horizline[i]);
              WindowLink.getWindow()->draw(text[i]);
+             WindowLink.getWindow()->draw(Celltext[i]);
+
+
+
     };
     WindowLink.getWindow()->draw(text[5]);
+    WindowLink.getWindow()->draw(Celltext[5]);
 
     //WindowLink.getWindow()->draw(horizline[5]);
     //WindowLink.getWindow()->draw(verticalline[5]);
