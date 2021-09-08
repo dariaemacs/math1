@@ -2882,7 +2882,7 @@ tab(*this)
 
         if (badAnswer) {
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
-            sprite.setPosition((w-questanswer.getWidth()) /2 , (h - questanswer.getHeight()) / 2);
+            //sprite.setPosition((w-questanswer.getWidth()) /2 , Buttons.getMarginTop());
             window->draw(sprite);
            
         }
@@ -2908,7 +2908,7 @@ tab(*this)
                                       questanswer[4].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2]+
                                           question9AnswerDetails[questNumber * 2+1]
                                       ) + ".jpg");
-
+                                      
                         //questanswer[0].setScale(Buttons.getScale(), Buttons.getScale());
                         questanswer.draw();
                     }
@@ -3703,7 +3703,7 @@ QuestType15::QuestType15(int w, int h, int qtyButtons) :
 
         if (badAnswer) {
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
-            sprite.setPosition((w - questanswer.getWidth()) / 2, (h - questanswer.getHeight()) / 2);
+            sprite.setPosition((w - questanswer.getWidth()) / 2, buttons.getMarginTop()- 2*questanswer.getWidth()* questanswer.getScale());
             window->draw(sprite);
 
         }
@@ -3716,18 +3716,19 @@ QuestType15::QuestType15(int w, int h, int qtyButtons) :
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
-                    if (question15Answer[questionVariantID1] == buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[1]);
+                    if (question15Answer[questionVariantID1] == buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[13]);
                     else {
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
                         questanswer.setParams(buttons.getWidth() * 5, buttons.getHeight(), 5, buttons.getScale());
 
-                        questanswer[0].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2]) + ".jpg");
+                        questanswer[0].loadFromFile(res_path + "digit" + question14DigitsInTable[questionVariantID1][0][question15AnswerString[questionVariantID1]] + ".jpg");
                         questanswer[1].loadFromFile(res_path + "digit_plus.jpg");
-                        questanswer[2].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2 + 1]) + ".jpg");
+                        questanswer[2].loadFromFile(res_path + "digit" + question14DigitsInTable[questionVariantID1][1][question15AnswerString[questionVariantID1]] + ".jpg");
                         questanswer[3].loadFromFile(res_path + "digit_equal.jpg");
-                        questanswer[4].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2] +
-                            question9AnswerDetails[questNumber * 2 + 1]
+                        questanswer[4].loadFromFile(res_path + "digit" + std::to_string(
+                            question15Answer[questionVariantID1]
+
                         ) + ".jpg");
 
                         //questanswer[0].setScale(Buttons.getScale(), Buttons.getScale());

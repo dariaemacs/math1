@@ -447,20 +447,22 @@ extern const std::wstring question14TextVariant[3][3] = {
             {L"Хомяк",  L"Кошка", L"Собака"},
             {L"Красные",L"Синие", L"Зеленые"},
 };
-extern const std::wstring question14DigitsInTable[3][2][3] = {
+extern const std::string question14DigitsInTable[3][2][3] = {
     {
-     {L"12", L"4", L"9"},
-     {L"7", L"4", L"3"},
+     {"12", "4", "9"},
+     {"7" , "4", "3"},
     },
             {
-                    {L"3", L"6", L"18"},
-                    {L"14",L"6", L"12"},
+                    {"3", "6", "18"},
+                    {"14","6", "12"},
             },
             {
-                    {L"3", L"8", L"9"},
-                    {L"15",L"5", L"9"}
+                    {"3", "8", "9"},
+                    {"15","5", "9"}
             }
 };
+
+extern const int question15AnswerString[3] = { 0,0,1 };
 
 extern const int question15Answer[3] = { 19,17,13 };
 
@@ -471,7 +473,6 @@ const std::wstring CommentsDic[] =
     {L"Выбери ответ" },
     {L"Верно. Молодец, +1 балл" },
     {L"Неверно. Ошибка :(" },
-
     {L"Имя" },
     {L"Грибы" },
     {L"Листья" },
@@ -482,6 +483,7 @@ const std::wstring CommentsDic[] =
     {L"Засчитан +1 балл." },
     {L"Мальчики(человек)" },
     {L"Девочки(человек)" },
+    {L"Верно. Молодец,\n+1 балл" }
 
 
 };
