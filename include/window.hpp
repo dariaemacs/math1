@@ -313,11 +313,11 @@ public:
   TextFrameBase gettextFrame() { return textFrame; }
   std::shared_ptr<sf::RenderWindow> getWindow() { return window; }
 
-  virtual   int getquestion13VariantID1() = 0;
-  virtual   int getquestion13VariantID2() = 0;
-  virtual   int getquestion13VariantID3() = 0;
-  virtual   int getquestion13VariantID4() = 0;
-  virtual   int getquestion13VariantID5() = 0;
+  virtual   int getquestionVariantID1() = 0;
+  virtual   int getquestionVariantID2() = 0;
+  virtual   int getquestionVariantID3() = 0;
+  virtual   int getquestionVariantID4() = 0;
+  virtual   int getquestionVariantID5() = 0;
 
   ~Window() {
       int yyy = 0;
@@ -724,22 +724,22 @@ public:
     int getquestion13VariantID3() { return question13VariantID3; }
 };
 
-class QuestType14 : public Window {
+class QuestType15 : public Window {
     Buttons buttons;
-    int question13VariantID1;
-    int question13VariantID2;
-    int question13VariantID3;
-    int question13VariantID4;
-    int question13VariantID5;
+    int questionVariantID1;
+    int questionVariantID2;
+    int questionVariantID3;
+    int questionVariantID4;
+    int questionVariantID5;
     questanswerClass questanswer;
     table3_5 tab;
 public:
-    QuestType14(int , int , int );
-    int getquestion13VariantID1() { return question13VariantID1; }
-    int getquestion13VariantID2() { return question13VariantID2; }
-    int getquestion13VariantID3() { return question13VariantID3; }
-    int getquestion13VariantID4() { return question13VariantID4; }
-    int getquestion13VariantID5() { return question13VariantID5; }
+    QuestType15(int , int , int );
+    int getquestionVariantID1() { return questionVariantID1; }
+    int getquestionVariantID2() { return questionVariantID2; }
+    int getquestionVariantID3() { return questionVariantID3; }
+    int getquestionVariantID4() { return questionVariantID4; }
+    int getquestionVariantID5() { return questionVariantID5; }
 };
 
 #endif 

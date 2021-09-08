@@ -2541,8 +2541,8 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     float margintop = w.getHeight()/3 ;
 
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-    if (maximal(question14TextColumn[w.getquestion13VariantID1()][0].length(), 17)==17)
-    text[0].setString(CommentsDic[11]); else  text[0].setString(question14TextColumn[w.getquestion13VariantID1()][0]);
+    if (maximal(question14TextColumn[w.getquestionVariantID1()][0].length(), 17)==17)
+    text[0].setString(CommentsDic[11]); else  text[0].setString(question14TextColumn[w.getquestionVariantID1()][0]);
     text[0].setFont(font);
     /*text[0].setFillColor(sf::Color::Black);
     text[0].setPosition(sf::Vector2f(0, 0));*/
@@ -2560,9 +2560,9 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     calcFontSize(width0Row-10, height0Row-8);
 
     float k = 5;
+    //getquestion14VariantID1();
 
-    std::cout << w.getquestion13VariantID1() << std::endl;
-    text[0].setString(question14TextColumn[w.getquestion13VariantID1()][0]);
+    text[0].setString(question14TextColumn[w.getquestionVariantID1()][0]);
     text[0].setFont(font);
     text[0].setFillColor(sf::Color::Black);
     text[0].setPosition(sf::Vector2f(10+ k, margintop - 3));
@@ -2633,14 +2633,14 @@ table3_5::table3_5(Window& w) :WindowLink(w){
 
 
 
-    text[3].setString(question14TextVariant[w.getquestion13VariantID1()][0]);
+    text[3].setString(question14TextVariant[w.getquestionVariantID1()][0]);
     text[3].setFont(font);
     text[3].setFillColor(sf::Color::Black);
     text[3].setPosition(sf::Vector2f(10 + k, margintop + height0Row));
     text[3].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     text[3].setCharacterSize(fontSize);
 
-    text[4].setString(question14TextVariant[w.getquestion13VariantID1()][1]);
+    text[4].setString(question14TextVariant[w.getquestionVariantID1()][1]);
     text[4].setFont(font);
     text[4].setFillColor(sf::Color::Black);
     text[4].setPosition(sf::Vector2f(10 + k, margintop + 2 * height0Row));
@@ -2648,7 +2648,7 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     text[4].setCharacterSize(fontSize);
 
 
-    text[5].setString(question14TextVariant[w.getquestion13VariantID1()][2]);
+    text[5].setString(question14TextVariant[w.getquestionVariantID1()][2]);
     text[5].setFont(font);
     text[5].setFillColor(sf::Color::Black);
     text[5].setPosition(sf::Vector2f(10 + k, margintop - 3 + height0Row * 3));
@@ -2661,42 +2661,42 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     horizline[4][0].color = sf::Color::Black;
     horizline[4][1].color = sf::Color::Black;
 
-    Celltext[0].setString(question14DigitsInTable[w.getquestion13VariantID1()][0][0]);
+    Celltext[0].setString(question14DigitsInTable[w.getquestionVariantID1()][0][0]);
     Celltext[0].setFont(font);
     Celltext[0].setFillColor(sf::Color::Black);
     Celltext[0].setPosition(sf::Vector2f(width0Row + width0Row/2 , margintop - 3 + height0Row ));
     Celltext[0].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     Celltext[0].setCharacterSize(fontSize);
 
-    Celltext[1].setString(question14DigitsInTable[w.getquestion13VariantID1()][0][1]);
+    Celltext[1].setString(question14DigitsInTable[w.getquestionVariantID1()][0][1]);
     Celltext[1].setFont(font);
     Celltext[1].setFillColor(sf::Color::Black);
     Celltext[1].setPosition(sf::Vector2f(width0Row + width0Row / 2, margintop - 3 + 2*height0Row));
     Celltext[1].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     Celltext[1].setCharacterSize(fontSize);
 
-    Celltext[2].setString(question14DigitsInTable[w.getquestion13VariantID1()][0][2]);
+    Celltext[2].setString(question14DigitsInTable[w.getquestionVariantID1()][0][2]);
     Celltext[2].setFont(font);
     Celltext[2].setFillColor(sf::Color::Black);
     Celltext[2].setPosition(sf::Vector2f(width0Row + width0Row / 2, margintop - 3 + 3 * height0Row));
     Celltext[2].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     Celltext[2].setCharacterSize(fontSize);
 
-    Celltext[3].setString(question14DigitsInTable[w.getquestion13VariantID1()][1][0]);
+    Celltext[3].setString(question14DigitsInTable[w.getquestionVariantID1()][1][0]);
     Celltext[3].setFont(font);
     Celltext[3].setFillColor(sf::Color::Black);
     Celltext[3].setPosition(sf::Vector2f(width0Row*2 + width0Row / 2, margintop - 3 + height0Row));
     Celltext[3].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     Celltext[3].setCharacterSize(fontSize);
 
-    Celltext[4].setString(question14DigitsInTable[w.getquestion13VariantID1()][1][1]);
+    Celltext[4].setString(question14DigitsInTable[w.getquestionVariantID1()][1][1]);
     Celltext[4].setFont(font);
     Celltext[4].setFillColor(sf::Color::Black);
     Celltext[4].setPosition(sf::Vector2f(width0Row*2 + width0Row / 2, margintop - 3 + 2 * height0Row));
     Celltext[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     Celltext[4].setCharacterSize(fontSize);
 
-    Celltext[5].setString(question14DigitsInTable[w.getquestion13VariantID1()][1][2]);
+    Celltext[5].setString(question14DigitsInTable[w.getquestionVariantID1()][1][2]);
     Celltext[5].setFont(font);
     Celltext[5].setFillColor(sf::Color::Black);
     Celltext[5].setPosition(sf::Vector2f(width0Row*2 + width0Row / 2, margintop - 3 + 3 * height0Row));
@@ -3650,17 +3650,12 @@ void table3_5::calcFontSize(const int w, const int h) {
     fontSize--;
     //margin_top = text[0].getLocalBounds().top;
 }
-QuestType14::QuestType14(int w, int h, int qtyButtons) :
-    question13VariantID1(rand() % 3),
-    question13VariantID2( rand() % 3),
+QuestType15::QuestType15(int w, int h, int qtyButtons) :
+    questionVariantID1(rand() % 3),
+    questionVariantID2( rand() % 3),
     Window(w, h, 0, 13),
     buttons(qtyButtons, *this),
     tab(*this){
-
-    int SIZE = sizeof(question14Text2) / sizeof(*question14Text2);
-    question13VariantID1 = rand() % SIZE;
-
-    question13VariantID2 = rand() % 3;
 
     bool first = true;
 
@@ -3669,8 +3664,8 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
     sf::Event event;
     //questanswer[0].loadFromFile("resources/images/arrow_disable.png");
 
-    textFrame.settext(question14Text[0].questionText + L" " + question14Text1[question13VariantID1] + L"\n" +
-        question14Text2[question13VariantID1][question13VariantID2]
+    textFrame.settext(question14Text[0].questionText + L" " + question14Text1[questionVariantID1] + L"\n" +
+        question14Text2[questionVariantID1][1]
     );
     textFrame.CalcucateCoordinate(w  - w*10/100 , h /3);
 
@@ -3721,7 +3716,7 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
-                    if (question9AnswersSquare[questNumber] == buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[1]);
+                    if (question15Answer[questionVariantID1] == buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[1]);
                     else {
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
