@@ -109,11 +109,11 @@ class questanswerClass {
     float height ;
     float scale;
 public:
-    void setParams(float ww, float hh, int q, float sscale) {
+    void setParams(float ww, float hh, int q, float scale) {
         width = ww;
         height = hh;
         quadroQTY = q;
-        scale = sscale;
+        scale = scale;
         miniwindow.create(ww, hh);
         
         for (int i = 0; i < quadroQTY; i++) {
@@ -138,12 +138,7 @@ public:
         miniwindow.display();
         return miniwindow; }
     float getHeight() { return height; }
-    float getWidth() { 
-        return width; 
-    }
-    float getScale() {
-        return scale;
-    }
+    float getWidth() { return width; }
 
 };
 class Buttons {
