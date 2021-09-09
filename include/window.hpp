@@ -109,12 +109,12 @@ class questanswerClass {
     float height ;
     float scale;
 public:
-    void setParams(float ww, float hh, int q, float scale) {
+    void setParams(float ww, float hh, int q, float sscale) {
         width = ww;
         height = hh;
         quadroQTY = q;
-        scale = scale;
-        miniwindow.create(ww, hh);
+        scale = sscale;
+        miniwindow.create(static_cast<int>(ww), static_cast<int>(hh));
         
         for (int i = 0; i < quadroQTY; i++) {
             quadroTexture.push_back(sf::Texture());
@@ -138,7 +138,12 @@ public:
         miniwindow.display();
         return miniwindow; }
     float getHeight() { return height; }
-    float getWidth() { return width; }
+    float getWidth() { 
+        return width; 
+    }
+    float getScale() {
+        return scale;
+    }
 
 };
 class Buttons {
@@ -512,10 +517,10 @@ class squareBoard {
        int getquestFigure() {
            return questFigure;
        }
-       int getResult() { return result; }
+       unsigned long long getResult() { return result; }
        float getsquareWidth();
        void setquestFigure(int);
-       int getwidthsqareBord() { return widthsqareBord; };
+       float getwidthsqareBord() { return widthsqareBord; };
        int getCurrentClickpoint(){ return CurrentClickpoint; };
        std::array<point, 6>& getCheckPoint() { return CheckPoint; }
        //std::vector<sf::VertexArray>& getUserInputLine() {return  UserInputLine;}
@@ -735,6 +740,24 @@ class QuestType15 : public Window {
     table3_5 tab;
 public:
     QuestType15(int , int , int );
+    int getquestionVariantID1() { return questionVariantID1; }
+    int getquestionVariantID2() { return questionVariantID2; }
+    int getquestionVariantID3() { return questionVariantID3; }
+    int getquestionVariantID4() { return questionVariantID4; }
+    int getquestionVariantID5() { return questionVariantID5; }
+};
+
+class QuestType16 : public Window {
+    Buttons buttons;
+    int questionVariantID1;
+    int questionVariantID2;
+    int questionVariantID3;
+    int questionVariantID4;
+    int questionVariantID5;
+    questanswerClass questanswer;
+    table3_5 tab;
+public:
+    QuestType16(int, int, int);
     int getquestionVariantID1() { return questionVariantID1; }
     int getquestionVariantID2() { return questionVariantID2; }
     int getquestionVariantID3() { return questionVariantID3; }

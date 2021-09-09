@@ -55,12 +55,12 @@ extern const std::wstring question14Text1[];
 extern const std::wstring question14Text2[3][3];
 extern const std::wstring question14TextColumn[3][4];
 extern const std::wstring question14TextVariant[3][3];
-extern const std::wstring question14DigitsInTable[3][2][3];
+extern const std::string question14DigitsInTable[3][2][3];
 extern const int question15Answer[3];
 
 extern const std::wstring question13Variant[4][3];
 
-
+extern const int question15AnswerString[3];
 
 
 
@@ -105,6 +105,9 @@ extern const int question13VariantofRandom[4][3];
 extern const std::vector<pica> tree;
 extern const std::vector<std::string> iconsFilename;
 extern const std::vector<FrameFigure*> figures;
+
+extern const int question16Answer[3];
+extern const int question16AnswerString[3];
 
 struct phrasetoReplace {
 	std::wstring find;

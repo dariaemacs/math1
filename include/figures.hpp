@@ -51,16 +51,16 @@
         int gettriangleQTY()  { return triangleQTY; }
         int getcircleQTY()       { return circleQTY; }
 
-        int getxmin() { 
+        float getxmin() { 
             return xmin; 
         }
-        int getxmax() { 
+        float getxmax() { 
             return xmax; 
         }
-        int getymin() { 
+        float getymin() { 
             return ymin; 
         }
-        int getymax() { 
+       float getymax() { 
             return ymax; 
         }
         int getmargin_top() { 
@@ -193,14 +193,14 @@ class Rectangle  {
   }
 
   void set_coords(float x0, float y0){
-      x = x0 ;
-      y = y0 ;
+      x = static_cast<int>(x0) ;
+      y = static_cast<int>(y0 );
     rectangle->setPosition((x* owner->getkoef() - (owner->getxmin() * owner->getkoef()))+ owner->getmargin_left(), (y* owner->getkoef() - (owner->getymin() * owner->getkoef())) + owner->getmargin_top());
   }
 
   void set_size(float width, float height) {
-      w = width;
-      h = height;
+      w = static_cast<int>(width);
+      h = static_cast<int>(height);
       rectangle->setSize(sf::Vector2f(width * owner->getkoef(), height * owner->getkoef()));
   };
   

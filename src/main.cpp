@@ -40,56 +40,56 @@ int main() {
         QuestType13(width, height);*/
     
     width = 1024;  height = 600;
-    QuestType15( width ,height,20);
+    QuestType16( width ,height,20);
 
      width = 1152; height = 864;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
 
      width = 1200; height = 600;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
 
      width = 1280; height = 720;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
 
      width = 1280; height = 768;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
      width = 1280; height = 1024;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
 
      width = 1408; height = 1152;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
      width = 1440; height = 900;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
      width = 1400; height = 1050;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
 
 
      width = 1440; height = 1080;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
 
      width = 1536; height = 960;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
      width = 1536; height = 1024;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
 
      width = 1600; height = 900;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
      width = 1600; height = 1024;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
      width = 1600; height = 1200;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
 
      width = 1680; height = 1050;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
     
      width = 1920; height = 1080;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
      
      width = 1920; height = 1200;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
      
      width = 2048; height = 1080;
-     QuestType15( width ,height,20);
+     QuestType16( width ,height,20);
      
     
 

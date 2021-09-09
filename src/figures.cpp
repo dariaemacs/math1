@@ -179,7 +179,7 @@ void FrameFigure::calcKoeff() {
         frameWidthNew = frameHeight * koef;
     } while (frameHeightNew > (int)((float)winHeigt / 2.8) || frameWidth > winWidth / 2);
      
-     margin_left = number_of_figure * winWidth / 2 + abs((winWidth / 2 - frameWidthNew) / 2);
+     margin_left = static_cast<int>(number_of_figure * winWidth / 2 + abs((winWidth / 2 - frameWidthNew) / 2));
      margin_top = winHeigt / 3;
 
      std::cout << "picture size :" << frameWidthNew <<"x" << frameWidthNew  << std::endl;
