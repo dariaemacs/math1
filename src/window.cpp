@@ -3493,13 +3493,13 @@ QuestType13::QuestType13(int w, int h) :
     srand(time(0));
     int SIZE = sizeof(pica) / sizeof(*pica);
     srand(time(0));
-    question13VariantID1 = rand() % SIZE;
+    questionVariantID1 = rand() % SIZE;
     SIZE = sizeof(question13Variant) / sizeof(*question13Variant);
     srand(time(0));
-    question13VariantID2 = rand() % SIZE;
+    questionVariantID2 = rand() % SIZE;
     SIZE = sizeof(question13VariantofRandom) / sizeof(*question13VariantofRandom);
     srand(time(0));
-    question13VariantID3 = rand() % SIZE;
+    questionVariantID3 = rand() % SIZE;
 
     CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     CheckButtonSprite.setTexture(CheckButtonTexture);
@@ -3537,7 +3537,7 @@ QuestType13::QuestType13(int w, int h) :
         for (int i = 0; i < 3; i++) {
             window->draw(checkbutton.getSprite()[i]);
 
-            std::wstring tmpStr = question13Variant[question13VariantID2][question13VariantofRandom[question13VariantID3][i]];
+            std::wstring tmpStr = question13Variant[questionVariantID2][question13VariantofRandom[questionVariantID3][i]];
             //std::cout << "iiii=" << i << " right=" << (question13Answers[question13VariantID1][question13VariantID2] & (1<< question13VariantofRandom[question13VariantID3][i])) << std::endl;
             checkbutton.setStrValue(i, tmpStr);
             tmpStr = checkbutton.getText()[i].getString();
@@ -3547,7 +3547,7 @@ QuestType13::QuestType13(int w, int h) :
   
       
         window->draw(QuestComment.gettext());
-        pica[question13VariantID1]->draw();
+        pica[questionVariantID1]->draw();
         window->draw(textFrame.gettext());
 
 
@@ -3571,9 +3571,9 @@ QuestType13::QuestType13(int w, int h) :
 
                     //char tmp = 1 << 0;
                     std::vector <int> result;
-                    if (((checkbutton.getClickID() & (1 << 0)) >> 0) > 0) result.push_back(question13VariantofRandom[question13VariantID3][0]); //  ;
-                    if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[ question13VariantID3][1]); //  ;
-                    if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[ question13VariantID3][2]); //  ;
+                    if (((checkbutton.getClickID() & (1 << 0)) >> 0) > 0) result.push_back(question13VariantofRandom[questionVariantID3][0] ); //  ;
+                    if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[ questionVariantID3][1]); //  ;
+                    if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[ questionVariantID3][2]); //  ;
                     sort(result.begin(), result.end(), std::greater<int>());
                     unsigned char result_int = 0;
                     int dec = 1;
@@ -3585,7 +3585,7 @@ QuestType13::QuestType13(int w, int h) :
                     }
                     std::cout << std::endl;
 
-                    if (question13Answers[question13VariantID1][question13VariantID2] == result_int) { QuestComment.settext(CommentsDic[1]); }
+                    if (question13Answers[questionVariantID1][questionVariantID2] == result_int) { QuestComment.settext(CommentsDic[1]); }
                     else {
 
                         QuestComment.settext(CommentsDic[2]);
@@ -3594,7 +3594,7 @@ QuestType13::QuestType13(int w, int h) :
 
                         for (int i = 0; i < 3; i++)
                         {
-                            int ismustClick = (question13Answers[question13VariantID1][question13VariantID2] & (1 << question13VariantofRandom[question13VariantID3][i]));
+                            int ismustClick = (question13Answers[questionVariantID1][questionVariantID2] & (1 << question13VariantofRandom[questionVariantID3][i]));
 
                             if (ismustClick > 0 && checkbutton.getSprite()[i].getActive())
                             {

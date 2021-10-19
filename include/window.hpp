@@ -718,15 +718,17 @@ public:
 
 class QuestType13 : public Window {
     CheckButton11 checkbutton;
-    int question13VariantID1;
-    int question13VariantID2;
-    int question13VariantID3;
+    int questionVariantID1;
+    int questionVariantID2;
+    int questionVariantID3;
 public:
     QuestType13(int, int);
     QuestType13(int w, int h, int a, int b);
-    int getquestion13VariantID1() { return question13VariantID1; }
-    int getquestion13VariantID2() { return question13VariantID2; }
-    int getquestion13VariantID3() { return question13VariantID3; }
+    int getquestionVariantID1() { return questionVariantID1; }
+    int getquestionVariantID2() { return questionVariantID2; }
+    int getquestionVariantID3() { return questionVariantID3; }
+    int getquestionVariantID4() { return 0; }
+    int getquestionVariantID5() { return 0; }
 };
 
 class QuestType15 : public Window {
