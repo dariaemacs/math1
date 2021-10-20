@@ -301,8 +301,8 @@ protected:
   TextFrameBase textFrame;
   bool checkandnextQuest(float);
   std::shared_ptr<sf::RenderWindow> window; 
-  sf::Texture CheckButtonTexture;
-  sf::Sprite CheckButtonSprite;
+  sf::Texture ArrowButtonTexture;
+  sf::Sprite ArrowButtonSprite;
   sf::RectangleShape List;
   TextFrameBase QuestComment;
   int countofBALL;
@@ -632,7 +632,8 @@ class table3_5  {
     float mash_y;
     float tablemax_y;
     float fontSize;
-
+    float height0Row;
+    float margintop;
 protected:
 
     std::array < sf::VertexArray, 5> verticalline;
@@ -641,11 +642,15 @@ protected:
     sf::Font font;
     Window& WindowLink;
 public:
-
+    float getheight0Row() {
+        return height0Row;
+    };
     float getmash_koeff() {
         return mash_koeff;
     };
-
+    float getmargintop() {
+        return margintop;
+    };
     float getmash_width() {
         return mash_width;
     };

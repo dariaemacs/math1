@@ -235,8 +235,8 @@ bool PicturetoView::click() {
         if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
             std::string fileName = "";
             ////std::cout << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
-            sf::Texture CheckButtonTexture;
-            sf::Sprite CheckButtonSprite(CheckButtonTexture);
+            sf::Texture ArrowButtonTexture;
+            sf::Sprite ArrowButtonSprite(ArrowButtonTexture);
 
             //if (ButtonPressID >= 0) {
             if (isblackSide[i])
@@ -274,8 +274,8 @@ bool Buttons::click() {
     if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
       std::string fileName = "";
       ////std::cout << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
-      sf::Texture CheckButtonTexture;
-        sf::Sprite CheckButtonSprite(CheckButtonTexture);
+      sf::Texture ArrowButtonTexture;
+        sf::Sprite ArrowButtonSprite(ArrowButtonTexture);
 
       if (ButtonPressID >= 0) {
         fileName = "resources/images/digit" + std::to_string(ButtonPressID + 1) + ".jpg";
@@ -502,12 +502,12 @@ Window::Window(int w, int h, int numberQuest,int ord)
     height = h;
     ////std::cout << "numberQuest="<<numberQuest << std::endl;
   std::string CheckButtonPictureFileName = "resources/images/arrow_disable.png";
-  CheckButtonTexture.loadFromFile(CheckButtonPictureFileName);
-  CheckButtonSprite.setTexture(CheckButtonTexture);
-  CheckButtonSprite.scale(Settings::ButtonFactor, Settings::ButtonFactor);
-  const sf::IntRect& CheckButtonRect = CheckButtonSprite.getTextureRect();
+  ArrowButtonTexture.loadFromFile(CheckButtonPictureFileName);
+  ArrowButtonSprite.setTexture(ArrowButtonTexture);
+  ArrowButtonSprite.scale(Settings::ButtonFactor, Settings::ButtonFactor);
+  const sf::IntRect& CheckButtonRect = ArrowButtonSprite.getTextureRect();
   int CheckButtonWidth = CheckButtonRect.width * Settings::ButtonFactor;
-  CheckButtonSprite.move(width - CheckButtonWidth, 0);
+  ArrowButtonSprite.move(width - CheckButtonWidth, 0);
   //
   List.setSize(sf::Vector2f(width, height));
   List.setPosition(0, 0);
@@ -560,8 +560,8 @@ int QuestType1::check(int c,int t, int r ) {
 bool Window::checkandnextQuest(float scale) {
     
     const sf::Vector2i& M = sf::Mouse::getPosition(*window);
-  const sf::Vector2f& position = CheckButtonSprite.getPosition();
-  const sf::IntRect& rect =      CheckButtonSprite.getTextureRect();
+  const sf::Vector2f& position = ArrowButtonSprite.getPosition();
+  const sf::IntRect& rect =      ArrowButtonSprite.getTextureRect();
   ////std::cout << scale << rect.width << std::endl;
   int x0 = position.x;
   int y0 = position.y;
@@ -584,8 +584,8 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
     bool first = true;
     int margintopSlideButton = 0;
     FrameFigure::resetnumber_of_figure();
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
 
     const std::vector<FrameFigure*> figures =
     {
@@ -622,7 +622,7 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
             window->draw(*Buttons.getButtons()[bc]);
         }
@@ -650,8 +650,8 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
                 }
                 if (Buttons.click()) {
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
             }
         }
@@ -675,8 +675,8 @@ QuestType2::QuestType2( int w, int h,  int qtyButtons):
     bool first = true;
     int margintopSlideButton = 0;
    
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
     
 
     int N = (rand() % 20);
@@ -718,7 +718,7 @@ Buttons.setButtonCount(N);
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
         {
             window->draw(*Buttons.getButtons()[bc]);
@@ -756,8 +756,8 @@ Buttons.setButtonCount(N);
                 }
                 if (Buttons.click()) {
                     ////std::cout << "Button.click" << std::endl;
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
                 if (Picture.click()) {
                     ////std::cout << "Picture.click" << std::endl;
@@ -778,8 +778,8 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
     bool first = true;
     int margintopSlideButton = 0;
     FrameFigure::resetnumber_of_figure();
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
     ////std::cout << fig1 << "," << fig2 << std::endl;
 
     const std::vector<FrameFigure*> figures =
@@ -839,7 +839,7 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         
        for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
        
@@ -883,8 +883,8 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
 
                 if (Buttons.click()) {
 
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
 
 
                 }
@@ -1047,8 +1047,8 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
     bool first = true;
     int margintopSlideButton = 0;
     ////std::cout << qtyButtons << std::endl;
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
 
 
     int N = (rand() % 10);
@@ -1090,7 +1090,7 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
         {
             window->draw(*Buttons.getButtons()[bc]);
@@ -1128,8 +1128,8 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
                 }
                 if (Buttons.click()) {
                     ////std::cout << "Button.click" << std::endl;
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
                 if (PictureAndBasket.click()) {
                     ////std::cout << "Picture.click" << std::endl;
@@ -1152,8 +1152,8 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
     int margintopSlideButton = 0;
     int numberInTrainCharactersize = 0;
     FrameFigure::resetnumber_of_figure();
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
     float squareWidth = 0;
     int opennumbaerCount = 0;
     TrainForQuest  TrainForQuest(window);
@@ -1221,7 +1221,7 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
 
         
         
@@ -1324,11 +1324,11 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
                     numberInTrain[closeNumber[currentusercloseNumberIndex]]->setCharacterSize(numberInTrainCharactersize);
                     currentusercloseNumberIndex++;
                     if (currentusercloseNumberIndex > 2) currentusercloseNumberIndex = 0;                    
-                                                     CheckButtonSprite.setTexture(CheckButtonTexture);
+                                                     ArrowButtonSprite.setTexture(ArrowButtonTexture);
                     opennumbaerCount++;
                     if (opennumbaerCount == 3) {
                         readyforCheck = true;
-                        CheckButtonTexture.loadFromFile("resources/images/arrow_up.png");
+                        ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png");
                     }
 
                 }
@@ -1361,8 +1361,8 @@ QuestType5::QuestType5(int w, int h, int qtyButtons) :
     bool first = true;
     int margintopSlideButton = 0;
 
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
 
 
 
@@ -1390,7 +1390,7 @@ QuestType5::QuestType5(int w, int h, int qtyButtons) :
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
         {
             window->draw(*Buttons.getButtons()[bc]);
@@ -1426,8 +1426,8 @@ QuestType5::QuestType5(int w, int h, int qtyButtons) :
                 }
                 if (Buttons.click()) {
                     ////std::cout << "Button.click" << std::endl;
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
 
 
@@ -1571,8 +1571,8 @@ bool PicturetAndFilmtoView::click() {
         if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
             std::string fileName = "";
             ////std::cout << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
-            sf::Texture CheckButtonTexture;
-            sf::Sprite CheckButtonSprite(CheckButtonTexture);
+            sf::Texture ArrowButtonTexture;
+            sf::Sprite ArrowButtonSprite(ArrowButtonTexture);
 
 
             //for film coin rotate
@@ -1669,8 +1669,8 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
     bool first = true;
     int margintopSlideButton = 0;
 
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
 
     int coinRandomIndex = rand() % 2;
     coin1.setButtonCount(1);
@@ -1733,7 +1733,7 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
         {
             window->draw(*Buttons.getButtons()[bc]);
@@ -1773,8 +1773,8 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
                 }
                 if (Buttons.click()) {
                     ////std::cout << "Button.click" << std::endl;
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
                 if (coin1.click() || coin2.click()) {
                     
@@ -1811,8 +1811,8 @@ int setofpictureObject::click(int qty, setofpictureObject& lastpic) {
 
         if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
             std::string fileName = "";
-            sf::Texture CheckButtonTexture;
-            sf::Sprite CheckButtonSprite(CheckButtonTexture);
+            sf::Texture ArrowButtonTexture;
+            sf::Sprite ArrowButtonSprite(ArrowButtonTexture);
             std::cout <<"**" << std::to_string(qty) << std::endl;
             if (isAdd ) qty++; else qty--;
             if (qty >= 0) {
@@ -2141,8 +2141,8 @@ QuestType7::QuestType7(int w, int h) :
     sB(w,h,*this) {
 bool first = true;
     int margintopSlideButton = 0;    
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
     
     EraseButtonTexture.loadFromFile("resources/images/clear.png");
     EraseButtonSprite.setTexture(EraseButtonTexture);
@@ -2165,7 +2165,7 @@ bool first = true;
 
 
         window->draw(textFrame.gettext());
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         window->draw(EraseButtonSprite);
         window->draw(QuestComment.gettext());
         sB.draw();
@@ -2217,9 +2217,9 @@ bool first = true;
 
                 };
                 sB.clickPoint(trydrawLine); trydrawLine = false;
-                CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); 
+                ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); 
                 readyforCheck = true;
-                CheckButtonSprite.setTexture(CheckButtonTexture);
+                ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 
 
 
@@ -2262,8 +2262,8 @@ QuestType8::QuestType8(int w, int h)
     bool first = true;
     int margintopSlideButton = 0;
 
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
 
    
     setofpic0.setButtonCount(1);
@@ -2324,7 +2324,7 @@ QuestType8::QuestType8(int w, int h)
         window->draw(*setofpic3.getButtons()[0]);
         window->draw(*plus.getButtons()[0]);
         window->draw(*minus.getButtons()[0]);
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         window->display();
         while (window->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
@@ -2344,7 +2344,7 @@ QuestType8::QuestType8(int w, int h)
         
                     thingsCount = plus.click(thingsCount, setofpic3) ;
                     if (thingsCounttmp != thingsCount) {
-                        CheckButtonTexture.loadFromFile("resources/images/arrow_up.png");
+                        ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png");
                         readyforCheck = true;
                     }
                 
@@ -2538,7 +2538,7 @@ table3_5::table3_5(Window& w) :WindowLink(w){
         }
     }
 
-    float margintop = w.getHeight()/3 ;
+    margintop = w.getHeight()/3 ;
 
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
     if (maximal(question14TextColumn[w.getquestionVariantID1()][0].length(), 17)==17)
@@ -2549,7 +2549,7 @@ table3_5::table3_5(Window& w) :WindowLink(w){
 
 
 
-    float height0Row = text[0].getLocalBounds().height + 10;
+    height0Row = text[0].getLocalBounds().height + 10;
     float width0Row = (w.getWidth()/5);
     float tableWidth = w.getWidth() * 2 / 3 - 10;
     float objectsrowWidth = (tableWidth + 10 - width0Row) / 3;
@@ -2736,8 +2736,8 @@ tab(*this)
 
     bool first=true;
 
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
     sf::Event event;
     //questanswer[0].loadFromFile("resources/images/arrow_disable.png");
 
@@ -2869,7 +2869,7 @@ tab(*this)
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
             window->draw(*Buttons.getButtons()[bc]);
         }
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         for (int i = 0; i < 13; i++) {
             window->draw(MashSprite[i]);
             window->draw(BerrySprite[i]);
@@ -2914,8 +2914,8 @@ tab(*this)
                     }
 
                             if (Buttons.click()) {
-                CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                CheckButtonSprite.setTexture(CheckButtonTexture);
+                ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                ArrowButtonSprite.setTexture(ArrowButtonTexture);
             }
 
             }
@@ -3059,8 +3059,8 @@ QuestType10::QuestType10(int w, int h) :
 
 
     std::cout << question10Variant1ID << std::endl;
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
     sf::Event event;
     checkbutton.setTextValue(question10Variant2ID);
 
@@ -3070,7 +3070,7 @@ QuestType10::QuestType10(int w, int h) :
         window->clear();
 
         window->draw(List);
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         if (first) {
             first = false;
             
@@ -3131,8 +3131,8 @@ QuestType10::QuestType10(int w, int h) :
 
                if (checkbutton.click()) {
                    
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
 
             }
@@ -3229,8 +3229,8 @@ QuestType11::QuestType11(int w, int h) :
 
 
     std::cout << question11Variant1ID << std::endl;
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
     sf::Event event;
     checkbutton.SetqudroSize(35);
    
@@ -3249,7 +3249,7 @@ QuestType11::QuestType11(int w, int h) :
         window->clear();
 
         window->draw(List);
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         if (first) {
 
             first = false;
@@ -3346,9 +3346,9 @@ QuestType11::QuestType11(int w, int h) :
 
                 if (checkbutton.click(question11Variant3ID)) {
 
-                   CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); 
+                   ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); 
                    readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
 
             }
@@ -3376,8 +3376,8 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
     bool first = true;
     int margintopSlideButton = 0;
 
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
 
 
     sf::Sprite sprite(questanswer.getminiwindow().getTexture());
@@ -3406,7 +3406,7 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
         {
             window->draw(*Buttons.getButtons()[bc]);
@@ -3462,8 +3462,8 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
                 }
                 if (Buttons.click()) {
                     ////std::cout << "Button.click" << std::endl;
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
 
 
@@ -3501,8 +3501,8 @@ QuestType13::QuestType13(int w, int h) :
     srand(time(0));
     questionVariantID3 = rand() % SIZE;
 
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
     sf::Event event;
     checkbutton.SetqudroSize(35);
 
@@ -3513,7 +3513,7 @@ QuestType13::QuestType13(int w, int h) :
         window->clear();
 
         window->draw(List);
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
         if (first) {
 
             first = false;
@@ -3528,9 +3528,9 @@ QuestType13::QuestType13(int w, int h) :
             checkbutton.SetSpacing(11);
 
             checkbutton.resetclickID();
-            CheckButtonTexture.loadFromFile("resources/images/arrow_up.png");
+            ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png");
             readyforCheck = true;
-            CheckButtonSprite.setTexture(CheckButtonTexture);
+            ArrowButtonSprite.setTexture(ArrowButtonTexture);
         }
 
 
@@ -3659,8 +3659,8 @@ QuestType15::QuestType15(int w, int h, int qtyButtons) :
 
     bool first = true;
 
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
     sf::Event event;
     //questanswer[0].loadFromFile("resources/images/arrow_disable.png");
 
@@ -3698,7 +3698,7 @@ QuestType15::QuestType15(int w, int h, int qtyButtons) :
         window->draw(textFrame.gettext());
         for (int bc = 0; bc < buttons.getButtonCount(); bc++) 
             window->draw(*buttons.getButtons()[bc]);        
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
 
 
         if (badAnswer) {
@@ -3742,8 +3742,8 @@ QuestType15::QuestType15(int w, int h, int qtyButtons) :
                     }
 
                 if (buttons.click()) {
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
 
             }
@@ -3766,8 +3766,8 @@ QuestType16::QuestType16(int w, int h, int qtyButtons) :
 
     bool first = true;
 
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+    ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
     sf::Event event;
     //questanswer[0].loadFromFile("resources/images/arrow_disable.png");
 
@@ -3805,7 +3805,7 @@ QuestType16::QuestType16(int w, int h, int qtyButtons) :
         window->draw(textFrame.gettext());
         for (int bc = 0; bc < buttons.getButtonCount(); bc++)
             window->draw(*buttons.getButtons()[bc]);
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
 
 
         if (badAnswer) {
@@ -3859,8 +3859,8 @@ QuestType16::QuestType16(int w, int h, int qtyButtons) :
                     }
 
                 if (buttons.click()) {
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
 
             }
@@ -3884,8 +3884,7 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
 
     bool first = true;
 
-    CheckButtonTexture.loadFromFile("resources/images/arrow_disable.png");
-    CheckButtonSprite.setTexture(CheckButtonTexture);
+
     sf::Event event;
     //questanswer[0].loadFromFile("resources/images/arrow_disable.png");
 
@@ -3904,33 +3903,38 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
 
             first = false;
 
-            //buttons.CalcucateCoordinate((h - 100) / 1.4);
 
+            ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
+            ArrowButtonSprite.setTexture(ArrowButtonTexture);
             QuestComment.setmargin_top(100);
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
-
-
-
-
-
-
-
+            checkbutton.Set_margitop( tab.getmargintop() + tab.getheight0Row()*4);
+            checkbutton.SetSpacing(11);
+            checkbutton.resetclickID();
+            for (int i = 0; i < 3; i++) {
+                std::wstring tmpStr = question14TextVariant[questionVariantID2][i];                                        
+                checkbutton.setStrValue(i, tmpStr);
+                tmpStr = checkbutton.getText()[i].getString();          
+                //checkbutton.SetqudroSize()
+            }
 
         }
 
+        for (int i = 0; i < 3; i++) {
+            window->draw(checkbutton.getSprite()[i]);           
+            window->draw(checkbutton.getText()[i]);
+        } 
         tab.draw();
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
  
-        window->draw(CheckButtonSprite);
+        window->draw(ArrowButtonSprite);
 
 
         if (badAnswer) {
-            sf::Sprite sprite(questanswer.getminiwindow().getTexture());
-            //sprite.setPosition((w - questanswer.getWidth()) / 2, buttons.getMarginTop() - 2 * questanswer.getWidth() * questanswer.getScale());
+            sf::Sprite sprite(questanswer.getminiwindow().getTexture());            
             sprite.setPosition(0,0);
             window->draw(sprite);
-
         }
         window->display();
         while (window->pollEvent(event)) {
@@ -3977,10 +3981,10 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
                     }*/
 
              /*   if (buttons.click()) {
-                    CheckButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    CheckButtonSprite.setTexture(CheckButtonTexture);
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
-*/
+             */
             }
 
 
