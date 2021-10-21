@@ -70,6 +70,7 @@ protected:
     bool  click();
     sf::Font& getFont();
     float getQudroSize();
+    float getcoeff();
     void Set_margitop(float);
     void SetqudroSize(float);
     void setStrValue(int, std::wstring,int);

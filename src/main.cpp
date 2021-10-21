@@ -42,8 +42,8 @@ int main() {
     width = 1024;  height = 600;
     QuestType14( width ,height,25);
 
-     width = 1152; height = 864;
-     QuestType15( width ,height,20);
+    width = 1024;  height = 600;
+     QuestType13( width ,height);
 
      width = 1200; height = 600;
      QuestType15( width ,height,20);

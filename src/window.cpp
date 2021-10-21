@@ -2998,8 +2998,11 @@ void  CheckButton::Set_margitop(float mt) {
 }
 CheckButton::CheckButton(Window& wl):wLnk(wl), textmarginleft(10), clickID(-1), margin_top(0) {
      coeff = (452.0f / ((wl.getHeight()- wl.gettextFrame().getHeight())))/5;
+     coeff = 25.0f / wl.getHeight();
+     float tmp = wl.gettextFrame().getHeight();
+     tmp = wl.getHeight();
      qudroSize = coeff * 452.0f;
-    float margin = (((wl.getHeight() - wl.gettextFrame().getHeight()) ) - qudroSize * 4) / 4;
+    float margin = qudroSize / 6;
     for (int i = 0; i < quadroTexture.size(); i++) {
         quadroTexture[i].loadFromFile(res_path + "empty.jpg");
         quadroSprite[i].setTexture(quadroTexture[i]);
@@ -3473,7 +3476,9 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
         srand(time(0));
     }
 }
-
+float CheckButton::getcoeff() {
+    return coeff;
+}
 QuestType13::QuestType13(int w, int h) :
     Window(w, h, 0, 12),
     checkbutton(*this)
@@ -3536,9 +3541,7 @@ QuestType13::QuestType13(int w, int h) :
 
         for (int i = 0; i < 3; i++) {
             window->draw(checkbutton.getSprite()[i]);
-
             std::wstring tmpStr = question13Variant[questionVariantID2][question13VariantofRandom[questionVariantID3][i]];
-            //std::cout << "iiii=" << i << " right=" << (question13Answers[question13VariantID1][question13VariantID2] & (1<< question13VariantofRandom[question13VariantID3][i])) << std::endl;
             checkbutton.setStrValue(i, tmpStr);
             tmpStr = checkbutton.getText()[i].getString();
             window->draw(checkbutton.getText()[i]);
@@ -3886,7 +3889,7 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
 
 
     sf::Event event;
-    //questanswer[0].loadFromFile("resources/images/arrow_disable.png");
+
 
     textFrame.settext(question14Text[0].questionText + L" " + question14Text1[questionVariantID1] + L"\n" +
         question14Text2[questionVariantID1][2]
@@ -3915,7 +3918,6 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
                 std::wstring tmpStr = question14TextVariant[questionVariantID2][i];                                        
                 checkbutton.setStrValue(i, tmpStr);
                 tmpStr = checkbutton.getText()[i].getString();          
-                //checkbutton.SetqudroSize()
             }
 
         }
