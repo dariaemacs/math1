@@ -3892,7 +3892,7 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
     checkbutton.SetqudroSize(35);
 
     textFrame.settext(question14Text[0].questionText + L" " + question14Text1[questionVariantID1] + L"\n" +
-        question14Text2[questionVariantID1][2]
+        question14Text2[questionVariantID1][0]
     );
     textFrame.CalcucateCoordinate(w - w * 10 / 100, h / 3);
 
@@ -3911,31 +3911,31 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
             ArrowButtonSprite.setTexture(ArrowButtonTexture);
             QuestComment.setmargin_top(100);
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
-            checkbutton.Set_margitop( tab.getmargintop() + tab.getheight0Row()*4);
+            checkbutton.Set_margitop(tab.getmargintop() + tab.getheight0Row() * 4);
             checkbutton.SetSpacing(11);
             checkbutton.resetclickID();
             for (int i = 0; i < 3; i++) {
-                std::wstring tmpStr = question14TextVariant[questionVariantID2][i];                                        
+                std::wstring tmpStr = question14TextVariant[questionVariantID1][i];
                 checkbutton.setStrValue(i, tmpStr);
-                tmpStr = checkbutton.getText()[i].getString();          
+                tmpStr = checkbutton.getText()[i].getString();
             }
 
         }
 
         for (int i = 0; i < 3; i++) {
-            window->draw(checkbutton.getSprite()[i]);           
+            window->draw(checkbutton.getSprite()[i]);
             window->draw(checkbutton.getText()[i]);
-        } 
+        }
         tab.draw();
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
- 
+
         window->draw(ArrowButtonSprite);
 
 
         if (badAnswer) {
-            sf::Sprite sprite(questanswer.getminiwindow().getTexture());            
-            sprite.setPosition(0,0);
+            sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            sprite.setPosition(0, 0);
             window->draw(sprite);
         }
         window->display();
@@ -3944,55 +3944,66 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
                 window->close();
             }
 
+
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
-                //if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
-                    /*if (question15Answer[questionVariantID1] == buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[13]);
+                if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
+                {
+
+                    countofBALL = 0;
+
+
+                    //char tmp = 1 << 0;
+                    std::vector <int> result;
+                    if (((checkbutton.getClickID() & (1 << 0)) >> 0) > 0) result.push_back(question13VariantofRandom[questionVariantID3][0]); //  ;
+                    if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[questionVariantID3][1]); //  ;
+                    if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[questionVariantID3][2]); //  ;
+                    sort(result.begin(), result.end(), std::greater<int>());
+                    unsigned char result_int = 0;
+                    int dec = 1;
+                    for (int i = 0; i < result.size(); i++)
+                    {
+                        result_int = result_int | (1 << result[i]);
+                        //std::cout << "i=" << i << " " <<(int)(1 << result[i]) << " " << (question13Answers[question13VariantID1][question13VariantID2] & (1 << i)) << std::endl;
+
+                    }
+                    std::cout << std::endl;
+
+                    if (question13Answers[questionVariantID1][questionVariantID2] == result_int) { QuestComment.settext(CommentsDic[1]); }
                     else {
+
                         QuestComment.settext(CommentsDic[2]);
-                        badAnswer = true;
-                        questanswer.setParams(buttons.getWidth() * 5, buttons.getHeight(), 5, buttons.getScale());
-                        int a = atoi(question14DigitsInTable[questionVariantID1][0][question16AnswerString[questionVariantID1]].c_str());
-                        int b = atoi(question14DigitsInTable[questionVariantID1][1][question16AnswerString[questionVariantID1]].c_str());
-                        if (a > b) {
-                            questanswer[0].loadFromFile(res_path + "digit" + std::to_string(a) + ".jpg");
-                            questanswer[2].loadFromFile(res_path + "digit" + std::to_string(b) + ".jpg");
-                        }
-                        else
-                        {
-                            questanswer[0].loadFromFile(res_path + "digit" + std::to_string(b) + ".jpg");
-                            questanswer[2].loadFromFile(res_path + "digit" + std::to_string(a) + ".jpg");
-                        }
 
-                        questanswer[1].loadFromFile(res_path + "digit_minus.jpg");
-
-                        questanswer[3].loadFromFile(res_path + "digit_equal.jpg");
-                        questanswer[4].loadFromFile(res_path + "digit" + std::to_string(
-                            question16Answer[questionVariantID1]
-
-                        ) + ".jpg");
-
-                        buttons.getButtonTexture()[buttons.GetButtonsClickID()]->loadFromFile(
-                            "resources/images/digit" + std::to_string(buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
-
-                        buttons.getButtonTexture()[question15Answer[questionVariantID1] - 1]->loadFromFile(
-                            "resources/images/digit" + std::to_string(question15Answer[questionVariantID1]) + "_right.jpg"
-                        );
-
-                        questanswer.draw();
-                    }*/
-
-             /*   if (buttons.click()) {
-                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
+                    };
                 }
-             */
-            }
+                    for (int i = 0; i < 3; i++)
+                    {
+                        int ismustClick = (question14Answers[questionVariantID1][questionVariantID2] & (1 << question13VariantofRandom[questionVariantID4][i]));
 
+                        if (ismustClick > 0 && checkbutton.getSprite()[i].getActive())
+                        {
+                            checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+                        }
+
+                        else {
+                            if (ismustClick == 0 && checkbutton.getSprite()[i].getActive()) {
+                                checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
+                            }
+                            else {
+                                if (ismustClick > 0 && !checkbutton.getSprite()[i].getActive())
+                                    checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+
+                            }
+                        }
+                    }
+
+
+
+                
+            }
 
         }
     }
-
     srand(time(0));
 
 
