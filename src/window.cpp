@@ -3889,7 +3889,7 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
 
 
     sf::Event event;
-
+    checkbutton.SetqudroSize(35);
 
     textFrame.settext(question14Text[0].questionText + L" " + question14Text1[questionVariantID1] + L"\n" +
         question14Text2[questionVariantID1][2]
