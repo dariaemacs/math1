@@ -39,7 +39,7 @@ int CheckButton::GenerateRandomSetNumber() {
     return rand() % SIZE;
 }
 float CheckButton::getHeightText() {
-        return str[0].getLocalBounds().height;
+    return str[0].getLocalBounds().height;
 }
 float CheckButton::getWidthText(int index) {
     return str[index].getLocalBounds().width;
@@ -54,17 +54,17 @@ bool CheckButton::click() {
         int x1 = (float)x0 + (float)rect.width * coeff;
         int y1 = (float)y0 + (float)rect.height * coeff;
         const sf::Vector2i& M = sf::Mouse::getPosition(*wLnk.getWindow());
-        if (M.x >= x0 && M.x <= x1+ getWidthText(i) + textmarginleft && M.y >= y0 && M.y <= y1) {
+        if (M.x >= x0 && M.x <= x1 + getWidthText(i) + textmarginleft && M.y >= y0 && M.y <= y1) {
             std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
             if (clickID >= 0) {
                 quadroSprite[clickID].setActive();
                 quadroTexture[clickID].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + quadroSprite[i].getFN());
             }
             clickID = i;
-                quadroSprite[i].setActive();
-                quadroTexture[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + quadroSprite[i].getFN());
-                if (!quadroSprite[i].getActive()) clickID = -1;
-            
+            quadroSprite[i].setActive();
+            quadroTexture[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + quadroSprite[i].getFN());
+            if (!quadroSprite[i].getActive()) clickID = -1;
+
             return true;
         }
     }
@@ -72,9 +72,9 @@ bool CheckButton::click() {
     return false;
 }
 unsigned char CheckButton11::getanswerNUMBER() {
-		return answerNUMBER;
+    return answerNUMBER;
 };
-bool CheckButton11::isAnswerRight(int i , int question11Variant3ID,  int question11Variant1ID) {
+bool CheckButton11::isAnswerRight(int i, int question11Variant3ID, int question11Variant1ID) {
 
     if (question11Variant1ID == 0)  //увеличение
     {
@@ -104,24 +104,24 @@ bool CheckButton11::click(int question11Variant3ID) {
             unsigned char tmp = question11ALLVariants[question11Variant3ID][i];
             answerNUMBER = ((1 << tmp)) ^ answerNUMBER;
             clickID = ((1 << i)) ^ clickID;
-            std::cout << "clickID=" << clickID << std::endl;
+            //std::cout << "clickID=" << clickID << std::endl;
             return true;
         }
     };
-    
+
     return false;
 };
 void CheckButton11::resetclickID() { clickID = 0; };
-std::wstring get_wstr(int questvariantIndex,int ordNumber) {
-//    setlocale(LC_ALL, "Russian");
-  std::stringstream ss;
-  ss << 1 << ". ";
-  std::string str = ss.str();
+std::wstring get_wstr(int questvariantIndex, int ordNumber) {
+    //    setlocale(LC_ALL, "Russian");
+    std::stringstream ss;
+    ss << 1 << ". ";
+    std::string str = ss.str();
 
-  std::wstring ws(str.begin(), str.end());
-  ws += qestionarrayList[ordNumber][questvariantIndex].questionText.c_str();
+    std::wstring ws(str.begin(), str.end());
+    ws += qestionarrayList[ordNumber][questvariantIndex].questionText.c_str();
 
-  return ws;
+    return ws;
 }
 int TextFrameBase::getHeight() {
     std::cout << "h=" << text.getLocalBounds().height << std::endl;
@@ -129,16 +129,16 @@ int TextFrameBase::getHeight() {
 }
 
 
-void PicturetoView::CalcucateCoordinate( ) {
+void PicturetoView::CalcucateCoordinate() {
     using namespace std;
     sf::Texture tmp;
 
     int button_margin_left = margin_left;
-    tmp.loadFromFile(pictureFilename+".png");
+    tmp.loadFromFile(pictureFilename + ".png");
     sf::Vector2u PICTURESIZE = tmp.getSize();
-    if (PICTURESIZE.x > PICTURESIZE.y && PICTURESIZE.x / PICTURESIZE.y >= 2)  PICTURESIZE.x /=  2;
+    if (PICTURESIZE.x > PICTURESIZE.y&& PICTURESIZE.x / PICTURESIZE.y >= 2)  PICTURESIZE.x /= 2;
     int ButtonSlideHeght = WindowLink.getHeight() / 3;
-    
+
     float PICTURESIZE_W = PICTURESIZE.x;
     width = PICTURESIZE.x;
     float PICTURESIZE_H = PICTURESIZE.y;
@@ -153,16 +153,16 @@ void PicturetoView::CalcucateCoordinate( ) {
             PICTURESIZE_H = PICTURESIZE.y * scale;
             ////std::cout << "k=" << scale << std::endl;
             ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
-        } while (((PICTURESIZE_W * round(ButtonCount ) + round((ButtonCount)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
+        } while (((PICTURESIZE_W * round(ButtonCount) + round((ButtonCount)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
 
         for (int i = 0; i < ButtonCount; i++) {
             std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
-            txt->loadFromFile(pictureFilename+".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            txt->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
             std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
             sprite->setTexture(*txt.get());
             sprite->setScale(scale, scale);
             sprite->move(button_margin_left, ButtonSlideHeght);
-            button_margin_left = button_margin_left + 5 + PICTURESIZE.x* scale;
+            button_margin_left = button_margin_left + 5 + PICTURESIZE.x * scale;
             MyTexture.emplace_back(std::move(txt));
             ButtonsList.emplace_back(std::move(sprite));
             isblackSide.push_back(true);
@@ -172,34 +172,34 @@ void PicturetoView::CalcucateCoordinate( ) {
     {
         ////std::cout<<"here"<<std::endl;
         //2 rows
-        
+
         float PICTURESIZE_W = PICTURESIZE.x;
         float PICTURESIZE_H = PICTURESIZE.y;
         ////std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
-         scale = PICTURESIZE_W  / (PICTURESIZE_W - 5);
-        cout << "scale = "<<scale << endl;
+        scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
+        cout << "scale = " << scale << endl;
         do {
             scale = scale - 0.01;
             PICTURESIZE_W = PICTURESIZE.x * scale;
             PICTURESIZE_H = PICTURESIZE.y * scale;
             ////std::cout << "k=" << scale << std::endl;
             ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
-        } while (((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount ) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
+        } while (((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
 
 
         for (int i = 0; i < ButtonCount; i++) {
             std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
-            txt->loadFromFile(pictureFilename+".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+            txt->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
             std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
             sprite->setTexture(*txt.get());
             sprite->setScale(scale, scale);
             sprite->move(button_margin_left, ButtonSlideHeght);
-            
-
-            button_margin_left = button_margin_left + 5 + PICTURESIZE.x* scale;
 
 
-            if (i+1 == (int)(ButtonCount / 2)) {
+            button_margin_left = button_margin_left + 5 + PICTURESIZE.x * scale;
+
+
+            if (i + 1 == (int)(ButtonCount / 2)) {
                 button_margin_left = 0; ButtonSlideHeght = ButtonSlideHeght + PICTURESIZE.y * scale + 5;
             }
             MyTexture.emplace_back(std::move(txt));
@@ -208,7 +208,7 @@ void PicturetoView::CalcucateCoordinate( ) {
 
         }
     }
-       
+
     //setScale(scale);
 
 }
@@ -217,7 +217,7 @@ bool PicturetoView::click() {
 
 
 
-    
+
 
     for (int i = 0; i < ButtonCount; ++i) {
         const sf::Vector2f& position = ButtonsList[i]->getPosition();
@@ -227,9 +227,9 @@ bool PicturetoView::click() {
         int x1 = (float)x0 + (float)rect.width * scale;
         int y1 = (float)y0 + (float)rect.height * scale;
 
-        
+
         const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
-        
+
         x1 = x1;
         ////std::cout << "pica: scale=" << scale << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<" " <<(x1 - x0) << "x"<<(y1 - y0) << std::endl;
         if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
@@ -241,10 +241,10 @@ bool PicturetoView::click() {
             //if (ButtonPressID >= 0) {
             if (isblackSide[i])
                 fileName = pictureFilename + "_black.png"; else fileName = pictureFilename + ".png";
-                MyTexture[i]->loadFromFile(fileName); //ButtonPressID = -1;
-                isblackSide[i] = !isblackSide[i];
+            MyTexture[i]->loadFromFile(fileName); //ButtonPressID = -1;
+            isblackSide[i] = !isblackSide[i];
             return true;
-        } 
+        }
 
     }
     return false;
@@ -258,49 +258,49 @@ bool Buttons::click() {
 
 
 
-  for (int i = 0; i < ButtonCount; ++i) {
-    const sf::Vector2f& position = ButtonsList[i]->getPosition();
-    const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
-    int x0 = position.x;
-    int y0 = position.y;
-    int x1 = (float)x0 + (float)rect.width* scale;
-    int y1 = (float)y0 + (float)rect.height * scale;
+    for (int i = 0; i < ButtonCount; ++i) {
+        const sf::Vector2f& position = ButtonsList[i]->getPosition();
+        const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
+        int x0 = position.x;
+        int y0 = position.y;
+        int x1 = (float)x0 + (float)rect.width * scale;
+        int y1 = (float)y0 + (float)rect.height * scale;
 
 
 
-    const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
-    x1 = x1;
-    ////std::cout << "scale" <<scale << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
-    if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
-      std::string fileName = "";
-      ////std::cout << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
-      sf::Texture ArrowButtonTexture;
-        sf::Sprite ArrowButtonSprite(ArrowButtonTexture);
+        const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
+        x1 = x1;
+        ////std::cout << "scale" <<scale << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
+        if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
+            std::string fileName = "";
+            ////std::cout << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
+            sf::Texture ArrowButtonTexture;
+            sf::Sprite ArrowButtonSprite(ArrowButtonTexture);
 
-      if (ButtonPressID >= 0) {
-        fileName = "resources/images/digit" + std::to_string(ButtonPressID + 1) + ".jpg";
-        MyTexture[ButtonPressID]->loadFromFile(fileName); ButtonPressID = -1;
-      }
-      fileName = "resources/images/digit" + std::to_string(i + 1) + "_select.jpg";
-      ButtonPressID = i;
+            if (ButtonPressID >= 0) {
+                fileName = "resources/images/digit" + std::to_string(ButtonPressID + 1) + ".jpg";
+                MyTexture[ButtonPressID]->loadFromFile(fileName); ButtonPressID = -1;
+            }
+            fileName = "resources/images/digit" + std::to_string(i + 1) + "_select.jpg";
+            ButtonPressID = i;
 
-      MyTexture[i]->loadFromFile(fileName);
-      
-          //w->draw(*Buttons[i]);
-          //w->display();
-      return true;
+            MyTexture[i]->loadFromFile(fileName);
 
-    } //else //std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
-    //Buttons = Buttons.get()+1;
+            //w->draw(*Buttons[i]);
+            //w->display();
+            return true;
 
-  }
-  return false;
+        } //else //std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
+        //Buttons = Buttons.get()+1;
+
+    }
+    return false;
 
 }
-Buttons::Buttons( int qtyButton, Window& w) :WindowLink(w), ButtonCount(qtyButton){
- 
+Buttons::Buttons(int qtyButton, Window& w) :WindowLink(w), ButtonCount(qtyButton) {
+
 }
-Buttons::Buttons( Window& w) : WindowLink(w){}
+Buttons::Buttons(Window& w) : WindowLink(w) {}
 
 void TextFrameBase::setWidth(int) {
     //text.se
@@ -311,7 +311,7 @@ void Mysf_text::CalcucateCoordinate(float w, float h) {
     sf::String  tmp = getString();
     setString("99");
     setCharacterSize(size);
-    float width = getLocalBounds().width; 
+    float width = getLocalBounds().width;
     float height = getLocalBounds().height;
     while (width >= w || height >= h)
     {
@@ -325,40 +325,40 @@ void Mysf_text::CalcucateCoordinate(float w, float h) {
 }
 
 void TextFrameBase::CalcucateCoordinate(const int w, const int h) {
-    
-    
+
+
     size = 50;
     text.setCharacterSize(size);
     int width = text.getLocalBounds().width; int height = text.getLocalBounds().height;
-    while (width  > w || height > h)
-    {  
-        if (size > 0) text.setCharacterSize(size--); else return; 
+    while (width > w || height > h)
+    {
+        if (size > 0) text.setCharacterSize(size--); else return;
         width = text.getLocalBounds().width;
         height = text.getLocalBounds().height;
     }
     margin_top = text.getLocalBounds().top;
 }
 
-PicturetoView::PicturetoView(QuestType2& qtl, std::string fn) : Buttons(0, qtl), pictureFilename(fn){};
+PicturetoView::PicturetoView(QuestType2& qtl, std::string fn) : Buttons(0, qtl), pictureFilename(fn) {};
 //PicturetoView(QuestType2&, std::string)
 void Buttons::CalcucateCoordinate(float hieght) {
-    float ButtonSize = (WindowLink.getWidth()*2/3-50) / 10 ;
+    float ButtonSize = (WindowLink.getWidth() * 2 / 3 - 50) / 10;
     float step = 5;
     float margin_left_button;
     float margin_top_button;
-     if (ButtonCount >= 10)
-     {
-         while (ButtonSize + 10 > hieght / 2) ButtonSize--;
-         margin_left_button = WindowLink.getWidth() - (ButtonSize * 10 + 50);
-         margin_top_button = WindowLink.getHeight() - ButtonSize*2-5;
-     }
-     else {
-         while (ButtonSize + 10 > hieght) ButtonSize--;
-         margin_left_button = WindowLink.getWidth() - (ButtonSize * ButtonCount + 50);
-         margin_top_button = WindowLink.getHeight() - hieght;
-     };
-     margin_left = margin_left_button;
-     margin_top = margin_top_button;
+    if (ButtonCount >= 10)
+    {
+        while (ButtonSize + 10 > hieght / 2) ButtonSize--;
+        margin_left_button = WindowLink.getWidth() - (ButtonSize * 10 + 50);
+        margin_top_button = WindowLink.getHeight() - ButtonSize * 2 - 5;
+    }
+    else {
+        while (ButtonSize + 10 > hieght) ButtonSize--;
+        margin_left_button = WindowLink.getWidth() - (ButtonSize * ButtonCount + 50);
+        margin_top_button = WindowLink.getHeight() - hieght;
+    };
+    margin_left = margin_left_button;
+    margin_top = margin_top_button;
     for (int i = 0; i < ButtonCount; i++) {
         std::string pictureFilename = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
         std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
@@ -368,14 +368,14 @@ void Buttons::CalcucateCoordinate(float hieght) {
         sprite->setTexture(*txt.get());
         if (i == 0) scale = (float)ButtonSize / PICTURESIZE.y;
         sprite->setScale(scale, scale);
-       
+
         sprite->move(margin_left_button, margin_top_button);
         if ((i + 1) % 10 == 0 && i + 1 > 0) {
             margin_left_button = margin_left;
             margin_top_button += (ButtonSize + 5);
         }
         else
-        margin_left_button += (5 + ButtonSize);
+            margin_left_button += (5 + ButtonSize);
         MyTexture.emplace_back(std::move(txt));
         ButtonsList.emplace_back(std::move(sprite));
     }
@@ -384,10 +384,10 @@ void Buttons::CalcucateCoordinate(float hieght) {
 }
 void Buttons::CalcucateCoordinate() {
     using namespace std;
-    int ButtonSlideHeght = WindowLink.getHeight()/3;
+    int ButtonSlideHeght = WindowLink.getHeight() / 3;
     int step = 0;
     int  ButtonSize = (WindowLink.getWidth() / 11) * 2 / 3;
-    height = ButtonSize; 
+    height = ButtonSize;
     while (ButtonSize + 10 > ButtonSlideHeght / 2) ButtonSize--;
     step = ButtonSize / 5;
     if (ButtonCount > 11) margin_top = WindowLink.getHeight() - (ButtonSize + step) * 2; else margin_top = WindowLink.getHeight() - (ButtonSize + step);
@@ -399,7 +399,7 @@ void Buttons::CalcucateCoordinate() {
         ////std::cout << "here2" << std::endl;
         std::string pictureFilename = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
         //if (pictureFilename == "") std::string pictureFilename = picaFilename;
-            
+
         std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
         txt->loadFromFile(pictureFilename);
         static sf::Vector2u PICTURESIZE = txt->getSize();
@@ -409,10 +409,11 @@ void Buttons::CalcucateCoordinate() {
         sprite->setScale(scale, scale);
         cout << i % 10 << std::endl;
         sprite->move(margin_left_button, margin_top_button);
-        if (i % 10 == 0 && i > 0 ) {
+        if (i % 10 == 0 && i > 0) {
             //cout << "here***rr" << ButtonCount << std::endl;
-            margin_top_button = margin_top_button + ButtonSize+ 10; margin_left_button = WindowLink.getWidth() - 11 * (ButtonSize + step);
-        } else margin_left_button = margin_left_button + ButtonSize + step;
+            margin_top_button = margin_top_button + ButtonSize + 10; margin_left_button = WindowLink.getWidth() - 11 * (ButtonSize + step);
+        }
+        else margin_left_button = margin_left_button + ButtonSize + step;
         MyTexture.emplace_back(std::move(txt));
         ButtonsList.emplace_back(std::move(sprite));
     };
@@ -422,20 +423,20 @@ void Buttons::CalcucateCoordinate() {
 }
 
 
-TextFrameBase::TextFrameBase(int s, Window& winLink,char ):size(s), WindowLink(winLink) { //delegate
+TextFrameBase::TextFrameBase(int s, Window& winLink, char) :size(s), WindowLink(winLink) { //delegate
     ////std::cout << Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf" << std::endl;
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-    
+
     text = sf::Text("", font, s);
     text.setFillColor(sf::Color::Black);
     text.setPosition(Settings::PADDING, Settings::PADDING);
 }
 
 TextFrameBase::TextFrameBase(int s, std::wstring str, int w1, int h1, Window& winLink) :TextFrameBase(s, winLink, 'c') {
-    w= w1;
+    w = w1;
     h = h1;
-    text.setString(str); 
-    
+    text.setString(str);
+
 }
 
 void TextFrameBase::setmargin_top(int m) {
@@ -444,21 +445,21 @@ void TextFrameBase::setmargin_top(int m) {
     margin_top = m;
 }
 
-TextFrameBase::TextFrameBase(int s, int quest, int w,  int h, Window& winLink)
-    :TextFrameBase(s,  winLink,'c'){
+TextFrameBase::TextFrameBase(int s, int quest, int w, int h, Window& winLink)
+    :TextFrameBase(s, winLink, 'c') {
     questionNumber = quest;
-  text.setString(get_wstr(quest, winLink.getordQuestNumber()));
+    text.setString(get_wstr(quest, winLink.getordQuestNumber()));
 
 
-  CalcucateCoordinate(w * 18 / 19, h);
-  
+    CalcucateCoordinate(w * 18 / 19, h);
+
 
 
 }
 
 void TextFrameBase::setN_M(int N, int M) {
-    
-    
+
+
     size_t posn;
     std::wstring question = text.getString();
 
@@ -466,7 +467,7 @@ void TextFrameBase::setN_M(int N, int M) {
     std::wstring replaceTo = std::to_wstring(N);
     posn = question.find(replaceFrom);
     if (posn < question.length()) question.replace(posn, replaceFrom.length(), replaceTo);
-    
+
 
     replaceFrom = L"M";
     replaceTo = std::to_wstring(M);
@@ -474,112 +475,113 @@ void TextFrameBase::setN_M(int N, int M) {
     if (posn < question.length()) question.replace(posn, replaceFrom.length(), replaceTo);
     text.setString(question);
     ////std::cout << questionNumber << " "<< beginQuestion2Index << std::endl;
-    for (int x = 0; x<X - 1;x++) {
+    for (int x = 0; x < X - 1; x++) {
         replaceFrom = phrasestoReplace[questionNumber][x].find;
-        replaceTo = phrasestoReplace[questionNumber ][x].replace;
+        replaceTo = phrasestoReplace[questionNumber][x].replace;
         posn = question.find(replaceFrom);
         if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
-        
+
     }
-    
-        text.setString(question);
+
+    text.setString(question);
 
 }
 
-Window::Window(int w, int h, int numberQuest,int ord)
+Window::Window(int w, int h, int numberQuest, int ord)
 
-  : badAnswer(false),
+    : badAnswer(false),
     ordQuestNumber(ord),
     questNumber(numberQuest),
     readyforCheck(false),
     first(true),
-    textFrame(Settings::QUESTFONTSIZE, numberQuest,w,h,*this),   
-    QuestComment(Settings::QUESTFONTSIZE, CommentsDic[0] , w , h,*this),
+    textFrame(Settings::QUESTFONTSIZE, numberQuest, w, h, *this),
+    QuestComment(Settings::QUESTFONTSIZE, CommentsDic[0], w, h, *this),
     countofBALL(0)
+
 {
 
     width = w;
     height = h;
     ////std::cout << "numberQuest="<<numberQuest << std::endl;
-  std::string CheckButtonPictureFileName = "resources/images/arrow_disable.png";
-  ArrowButtonTexture.loadFromFile(CheckButtonPictureFileName);
-  ArrowButtonSprite.setTexture(ArrowButtonTexture);
-  ArrowButtonSprite.scale(Settings::ButtonFactor, Settings::ButtonFactor);
-  const sf::IntRect& CheckButtonRect = ArrowButtonSprite.getTextureRect();
-  int CheckButtonWidth = CheckButtonRect.width * Settings::ButtonFactor;
-  ArrowButtonSprite.move(width - CheckButtonWidth, 0);
-  //
-  List.setSize(sf::Vector2f(width, height));
-  List.setPosition(0, 0);
-  List.setFillColor(sf::Color::White);
-  sf::Clock clock;
-  
-  //sf::ContextSettings settings(0,0,8);
-  
+    std::string CheckButtonPictureFileName = "resources/images/arrow_disable.png";
+    ArrowButtonTexture.loadFromFile(CheckButtonPictureFileName);
+    ArrowButtonSprite.setTexture(ArrowButtonTexture);
+    ArrowButtonSprite.scale(Settings::ButtonFactor, Settings::ButtonFactor);
+    const sf::IntRect& CheckButtonRect = ArrowButtonSprite.getTextureRect();
+    int CheckButtonWidth = CheckButtonRect.width * Settings::ButtonFactor;
+    ArrowButtonSprite.move(width - CheckButtonWidth, 0);
+    //
+    List.setSize(sf::Vector2f(width, height));
+    List.setPosition(0, 0);
+    List.setFillColor(sf::Color::White);
+    sf::Clock clock;
 
-  //if (!first) {
-  std::string comment = std::string("Game "  )+ std::to_string(w) + "x" + std::to_string(h);
-  sf::ContextSettings settings;
-  settings.antialiasingLevel = 8;
+    //sf::ContextSettings settings(0,0,8);
 
-  window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), comment, sf::Style::Default, settings);//,  sf::Style::Fullscreen);
+
+    //if (!first) {
+    std::string comment = std::string("Game ") + std::to_string(w) + "x" + std::to_string(h);
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 8;
+
+    window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w, h), comment, sf::Style::Default, settings);//,  sf::Style::Fullscreen);
     window->setFramerateLimit(Settings::FPS);
     ////std::cout<<"Check point" << std::endl;
     //window->~RenderWindow();
 
 
-  
+
 }
 
 
-int QuestType1::check(int c,int t, int r ) {
-  switch (question1Text[questNumber].key)
+int QuestType1::check(int c, int t, int r) {
+    switch (question1Text[questNumber].key)
     {
     case circle:
-        
+
         if (c == Buttons.GetButtonsClickID() + 1)
             return -1; else  return c;
-      break;
+        break;
     case triangle:
-      if (t  == Buttons.GetButtonsClickID() + 1)
-          return -1; else  return t;
-      break;
+        if (t == Buttons.GetButtonsClickID() + 1)
+            return -1; else  return t;
+        break;
     case rectangle:
         if (r == Buttons.GetButtonsClickID() + 1)
             return -1; else  return r;
         break;
     default:
-      break;
+        break;
     }
 
 
 
-  return -1;
+    return -1;
 }
 
 bool Window::checkandnextQuest(float scale) {
-    
+
     const sf::Vector2i& M = sf::Mouse::getPosition(*window);
-  const sf::Vector2f& position = ArrowButtonSprite.getPosition();
-  const sf::IntRect& rect =      ArrowButtonSprite.getTextureRect();
-  ////std::cout << scale << rect.width << std::endl;
-  int x0 = position.x;
-  int y0 = position.y;
-  int x1 = x0 + rect.width * Settings::ButtonFactor;
-  int y1 = y0 + rect.height * Settings::ButtonFactor;
- 
-  
-  if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
-      ////std::cout << "rect height = "<< rect.height <<" "<< M.x <<"*"<< x0 << " " << M.x <<"*"<< x1 <<" " << M.y <<"*"<< y0 <<" " << M.y <<"*"<< y1<< std::endl;
-    return true;
-  }
-  return false;
+    const sf::Vector2f& position = ArrowButtonSprite.getPosition();
+    const sf::IntRect& rect = ArrowButtonSprite.getTextureRect();
+    ////std::cout << scale << rect.width << std::endl;
+    int x0 = position.x;
+    int y0 = position.y;
+    int x1 = x0 + rect.width * Settings::ButtonFactor;
+    int y1 = y0 + rect.height * Settings::ButtonFactor;
+
+
+    if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
+        ////std::cout << "rect height = "<< rect.height <<" "<< M.x <<"*"<< x0 << " " << M.x <<"*"<< x1 <<" " << M.y <<"*"<< y0 <<" " << M.y <<"*"<< y1<< std::endl;
+        return true;
+    }
+    return false;
 }
 
-QuestType1::QuestType1(int w, int h,  int qtyButtons) :
-    
-  Window(w, h, (rand() % 3),0),
-  Buttons(qtyButtons,*this)
+QuestType1::QuestType1(int w, int h, int qtyButtons) :
+
+    Window(w, h, (rand() % 3), 0),
+    Buttons(qtyButtons, *this)
 {
     bool first = true;
     int margintopSlideButton = 0;
@@ -633,9 +635,9 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
                 window->close();
             }
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                
+
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
-                   
+
                     int rightfigurCount = check(circleQTY, triangleQTY, rectengleQTY);
                     if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
                         QuestComment.settext(CommentsDic[2]);
@@ -658,63 +660,63 @@ QuestType1::QuestType1(int w, int h,  int qtyButtons) :
     }
 }
 
-QuestType2::QuestType2( int w, int h,  int qtyButtons):
-    
-    Window(w, h,  
-   
-   ((rand() % 6))
-        
-        ,
-        
-        1),
-    Buttons(qtyButtons,*this),
-    Picture(*this)
-   {
+QuestType2::QuestType2(int w, int h, int qtyButtons) :
 
-   
+    Window(w, h,
+
+    ((rand() % 6))
+
+        ,
+
+        1),
+    Buttons(qtyButtons, *this),
+    Picture(*this)
+{
+
+
     bool first = true;
     int margintopSlideButton = 0;
-   
+
     ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     ArrowButtonSprite.setTexture(ArrowButtonTexture);
-    
+
 
     int N = (rand() % 20);
     int M = 0;
     while ((M = (rand() % 20) + 1) >= N) {
-        N = (rand() % 20);        
+        N = (rand() % 20);
     }
-  
-   
-   textFrame.setN_M(N, M);
-   Picture.setButtonCount(N);
- 
-   Picture.setpictureFilename("resources/images/"+filenamesforPicaQuest2[getQuestNumber()]);
-   Picture.setMargin_left(10);
-   Picture.setMargin_top(textFrame.getHeight()*2);
 
-   Picture.CalcucateCoordinate();
 
-Buttons.setButtonCount(N);
-   
-   sf::Event event;
+    textFrame.setN_M(N, M);
+    Picture.setButtonCount(N);
+
+    Picture.setpictureFilename("resources/images/" + filenamesforPicaQuest2[getQuestNumber()]);
+    Picture.setMargin_left(10);
+    Picture.setMargin_top(textFrame.getHeight() * 2);
+
+    Picture.CalcucateCoordinate();
+
+    Buttons.setButtonCount(N);
+
+    sf::Event event;
     while (window->isOpen()) {
         window->clear();
         window->draw(List);
 
-        if (first) {           
+        if (first) {
             Buttons.CalcucateCoordinate(); first = false;
-            
+
             QuestComment.setmargin_top(h - Buttons.getHeight());
-            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft()-10, Buttons.getHeight());
+            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getHeight());
             //Buttons.setMargin_top(100);
-            
+
             Buttons.CalcucateCoordinate(); first = false;
 
 
 
 
-            
+
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
@@ -722,11 +724,11 @@ Buttons.setButtonCount(N);
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
         {
             window->draw(*Buttons.getButtons()[bc]);
-            
+
         }
-       
+
         for (int bc = 0; bc < Picture.getButtonCount(); bc++) {
-            
+
             window->draw(*Picture.getButtons()[bc]);
         }
 
@@ -736,23 +738,23 @@ Buttons.setButtonCount(N);
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
                 window->close();
             }
-           
+
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-               
+
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
-                   
+
                     int rightfigurCount = 0;
                     ////std::cout << Buttons.GetButtonsClickID()+1 = N- << std::endl;
-                    if (Buttons.GetButtonsClickID()+1 == N-M)  QuestComment.settext(CommentsDic[1]);    else {
+                    if (Buttons.GetButtonsClickID() + 1 == N - M)  QuestComment.settext(CommentsDic[1]);    else {
                         QuestComment.settext(CommentsDic[2]);
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
-                        Buttons.getButtonTexture()[N - M-1]->loadFromFile(
+                        Buttons.getButtonTexture()[N - M - 1]->loadFromFile(
                             "resources/images/digit" + std::to_string(N - M) + "_right.jpg"
                         );
                     }
-                    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft()-10, Buttons.getMarginTop());
+                    QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
                 }
                 if (Buttons.click()) {
                     ////std::cout << "Button.click" << std::endl;
@@ -771,9 +773,9 @@ Buttons.setButtonCount(N);
     srand(time(0));
 }
 
-QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
-    Window(w, h, (rand() % 3),0),
-    Buttons(qtyButtons,*this)
+QuestType1::QuestType1(int fig1, int fig2, int w, int h, int qtyButtons) :
+    Window(w, h, (rand() % 3), 0),
+    Buttons(qtyButtons, *this)
 {
     bool first = true;
     int margintopSlideButton = 0;
@@ -791,7 +793,7 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
         new Plane(window),
         new Tower(window),
     };
-    
+
 
     int rectengleQTY = figures[fig1]->getrectengleQTY() + figures[fig2]->getrectengleQTY();
     int triangleQTY = figures[fig1]->gettriangleQTY() + figures[fig2]->gettriangleQTY();
@@ -802,7 +804,7 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
 
         ////std::cout << "yyy" << std::endl;
 
-     
+
 
 
 
@@ -815,7 +817,7 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
 
 
 
-        
+
         figures[fig1]->draw();
         figures[fig2]->draw();
         //if (first) //std::cout << "*QTY=" << QTY++ << std::endl;
@@ -827,27 +829,27 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
                 (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
                     ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());
             Buttons.setMargin_top(margintopSlideButton + 10);
-      
+
             Buttons.CalcucateCoordinate(); first = false;
 
-            QuestComment.setmargin_top(h-Buttons.getHeight());
+            QuestComment.setmargin_top(h - Buttons.getHeight());
 
-        
-            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() ,  Buttons.getMarginTop());
-        
+
+            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+
 
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
         window->draw(ArrowButtonSprite);
-        
-       for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
-       
-           window->draw(*Buttons.getButtons()[bc]);
-       }
+
+        for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
+
+            window->draw(*Buttons.getButtons()[bc]);
+        }
 
 
-  
+
         window->display();
 
         while (window->pollEvent(event)) {
@@ -860,15 +862,15 @@ QuestType1::QuestType1(int fig1, int fig2,int w, int h,  int qtyButtons) :
 
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-           
+
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
-                    
+
                     int rightfigurCount = check(circleQTY, triangleQTY, rectengleQTY);
-                    
+
                     if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
                         QuestComment.settext(CommentsDic[2]);
-                        
-                 
+
+
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
@@ -913,15 +915,15 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
     tmp.loadFromFile(pictureFilename + ".png");
     ////std::cout << "picture" << std::endl;
     sf::Vector2u PICTURESIZE = tmp.getSize();
-    
+
     ////std::cout << PICTURESIZE.x << std::endl;
     float PICTURESIZEy = PICTURESIZE.y;
     if (PICTURESIZE.x > PICTURESIZE.y && ((float)PICTURESIZE.x / (float)PICTURESIZE.y) >= 1.5) {
         PICTURESIZE.x /= 2;
     }
-  
+
     int ButtonSlideHeght = WindowLink.getHeight() / 3;
-  
+
     float PICTURESIZE_W = PICTURESIZE.x;
     float PICTURESIZE_H = PICTURESIZE.y;
     float BASKETPICTURESIZE_W = 0;
@@ -930,7 +932,7 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
 
     ////std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
     scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
- 
+
     if (ButtonCount < 7)  // 1 row of pictures
     {
         do {
@@ -939,7 +941,7 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
             PICTURESIZE_H = PICTURESIZE.y * scale;
             ////std::cout << "k=" << scale << std::endl;
             ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
-        } while (((PICTURESIZE_W * round(ButtonCount+2) + round((ButtonCount+2)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
+        } while (((PICTURESIZE_W * round(ButtonCount + 2) + round((ButtonCount + 2)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
 
         for (int i = 0; i < ButtonCount; i++) {
             std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
@@ -1022,24 +1024,24 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
 
     basketSprite.setTexture(basketTexture);
     basketSprite.setScale(BASKETSCALE, BASKETSCALE);
-    basketSprite.move(button_margin_left, (BASKETPICTURESIZE_H / BASKETPICTURESIZE_W>=1.5? 
-        (WindowLink.getHeight() - BASKETPICTURESIZE_H)/2 : WindowLink.getHeight() / 3) );
+    basketSprite.move(button_margin_left, (BASKETPICTURESIZE_H / BASKETPICTURESIZE_W >= 1.5 ?
+        (WindowLink.getHeight() - BASKETPICTURESIZE_H) / 2 : WindowLink.getHeight() / 3));
 }
 
 QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
     Window(w, h,
-        
-        ((rand() % 6))
+
+    ((rand() % 6))
 
         ,
 
         2)
-    
+
     ,
     Buttons(qtyButtons, *this),
-    PictureAndBasket(PicturetoViewQuestWithBasket(*this) )
-    
+    PictureAndBasket(PicturetoViewQuestWithBasket(*this))
+
 
 {
 
@@ -1145,7 +1147,7 @@ QuestType3::QuestType3(int w, int h, int qtyButtons) :
 
 QuestType4::QuestType4(int w, int h, int qtyButtons) :
     Window(w, h, 0, 3),
-    Buttons(qtyButtons, *this){
+    Buttons(qtyButtons, *this) {
 
     bool first = true;
     bool firstPrintTrain = true;
@@ -1158,16 +1160,16 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
     int opennumbaerCount = 0;
     TrainForQuest  TrainForQuest(window);
     //sf::CircleShape shape(1);
-    
+
     //shape.setFillColor(sf::Color::Red);
-    
+
     int numSeriesIndex = rand() % numSeries.size();
     struct closenumberStruct { int index; int closeNumber; };
     std::array< int, 3> closeNumber;
     std::array< closenumberStruct, 3 > usercloseNumberEnter;
 
-    
-        
+
+
     sf::Texture trainpictureTexture;
     sf::Sprite trainpictureSprite;
 
@@ -1181,7 +1183,7 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
     } while (closeNumber[0] == closeNumber[1] || closeNumber[1] == closeNumber[2] || closeNumber[0] == closeNumber[2]);
     std::sort(closeNumber.begin(), closeNumber.end());
 
-   int currentusercloseNumberIndex = 0;
+    int currentusercloseNumberIndex = 0;
     //currentusercloseNumberIndex = three_minimal(closeNumber1, closeNumber2, closeNumber3);
     //closeNumber.
     std::vector <Mysf_text*> numberInTrain;
@@ -1190,18 +1192,18 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
 
 
-    
+
     for (int i = 0; i < numSeries[0].size(); i++) {
         numberInTrain.push_back(new Mysf_text(50));
         numberInTrain[i]->setString(std::to_string(numSeries[numSeriesIndex][i]));
 
         numberInTrain[i]->setFont(font);
-        
+
         numberInTrain[i]->setFillColor(sf::Color::Black);
-   
+
 
     }
-    
+
     sf::Event event;
     while (window->isOpen()) {
         window->clear();
@@ -1223,9 +1225,9 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
         window->draw(textFrame.gettext());
         window->draw(ArrowButtonSprite);
 
-        
-        
-      
+
+
+
 
 
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
@@ -1236,58 +1238,58 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
         TrainForQuest.draw();
         float YnumberInTrain = TrainForQuest.getmargin_top();
 
-        YnumberInTrain = TrainForQuest.getmargin_top() + 
+        YnumberInTrain = TrainForQuest.getmargin_top() +
             TrainForQuest.getymin() * TrainForQuest.getkoef();
 
-       // //std::cout << "closeNumber1 " << closeNumber1 << " " << closeNumber2 << " " << closeNumber3 << std::endl;
-        
-     
+        // //std::cout << "closeNumber1 " << closeNumber1 << " " << closeNumber2 << " " << closeNumber3 << std::endl;
+
+
         for (int i = 0; i < numSeries[0].size(); i++) {
 
-           squareWidth = (float)(TrainForQuest.getxmax() - TrainForQuest.getxmin()) * (float)TrainForQuest.getkoef()
+            squareWidth = (float)(TrainForQuest.getxmax() - TrainForQuest.getxmin()) * (float)TrainForQuest.getkoef()
                 / (float)TrainForQuest.getrectengleQTY();
             numberInTrain[i]->setPosition(
-                TrainForQuest.getxmin() * TrainForQuest.getkoef() + TrainForQuest.getmargin_left()+
-                
-                
+                TrainForQuest.getxmin() * TrainForQuest.getkoef() + TrainForQuest.getmargin_left() +
+
+
                 squareWidth *
-                i   , YnumberInTrain );
+                i, YnumberInTrain);
             //*numberInTrain[i]->
             //if (i==1) shape.setPosition(TrainForQuest.getxmin() + TrainForQuest.getmargin_left() +
             //    squareWidth *
             //    i , YnumberInTrain);
             if ((!(i == closeNumber[0] ||
                 i == closeNumber[1] || i == closeNumber[2]
-                )) || i == usercloseNumberEnter[0].index || i == usercloseNumberEnter[1].index || i == usercloseNumberEnter[2].index){
+                )) || i == usercloseNumberEnter[0].index || i == usercloseNumberEnter[1].index || i == usercloseNumberEnter[2].index) {
                 if (firstPrintTrain) {
                     numberInTrain[i]->CalcucateCoordinate(squareWidth - 10, squareWidth - 10);
                     numberInTrainCharactersize = numberInTrain[i]->getSize();
-                    
+
                 }
                 firstPrintTrain = false;
                 numberInTrain[i]->setCharacterSize(numberInTrainCharactersize);
                 window->draw(*numberInTrain[i]);
-            }; 
-            
-            
+            };
+
+
 
             TrainForQuest.SetSquareColor(closeNumber[currentusercloseNumberIndex], true);
 
 
         }
-        float scaletrainpicture =  squareWidth / 185+0.1;
-            trainpictureSprite.setScale(scaletrainpicture, scaletrainpicture);
-            trainpictureSprite.setPosition(
-                TrainForQuest.getxmin()* TrainForQuest.getkoef() + TrainForQuest.getmargin_left() +
+        float scaletrainpicture = squareWidth / 185 + 0.1;
+        trainpictureSprite.setScale(scaletrainpicture, scaletrainpicture);
+        trainpictureSprite.setPosition(
+            TrainForQuest.getxmin() * TrainForQuest.getkoef() + TrainForQuest.getmargin_left() +
 
 
-                squareWidth *
-                6+3, (float)YnumberInTrain-185* scaletrainpicture+ squareWidth+3);
+            squareWidth *
+            6 + 3, (float)YnumberInTrain - 185 * scaletrainpicture + squareWidth + 3);
 
         window->draw(trainpictureSprite);
-        
+
         window->display();
-        
+
 
         while (window->pollEvent(event)) {
 
@@ -1305,7 +1307,7 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
                     if ((numSeries[numSeriesIndex][closeNumber[0]] == usercloseNumberEnter[0].closeNumber) &&
                         (numSeries[numSeriesIndex][closeNumber[1]] == usercloseNumberEnter[1].closeNumber) &&
                         (numSeries[numSeriesIndex][closeNumber[2]] == usercloseNumberEnter[2].closeNumber))
-                    QuestComment.settext(CommentsDic[1]);    
+                        QuestComment.settext(CommentsDic[1]);
                     else QuestComment.settext(CommentsDic[2]);
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
                 }
@@ -1313,7 +1315,7 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
                 if (Buttons.click()) {
                     TrainForQuest.SetSquareColor(closeNumber[currentusercloseNumberIndex], false);
 
-                    usercloseNumberEnter[currentusercloseNumberIndex].closeNumber = Buttons.GetButtonsClickID()+1;
+                    usercloseNumberEnter[currentusercloseNumberIndex].closeNumber = Buttons.GetButtonsClickID() + 1;
                     usercloseNumberEnter[currentusercloseNumberIndex].index = closeNumber[currentusercloseNumberIndex];
                     //closeNumber[currentusercloseNumberIndex] = -90;
                     //window->draw(*numberInTrain[i]);
@@ -1323,8 +1325,8 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
                     //numberInTrainCharactersize = numberInTrain[closeNumber[currentusercloseNumberIndex]]->getSize();
                     numberInTrain[closeNumber[currentusercloseNumberIndex]]->setCharacterSize(numberInTrainCharactersize);
                     currentusercloseNumberIndex++;
-                    if (currentusercloseNumberIndex > 2) currentusercloseNumberIndex = 0;                    
-                                                     ArrowButtonSprite.setTexture(ArrowButtonTexture);
+                    if (currentusercloseNumberIndex > 2) currentusercloseNumberIndex = 0;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
                     opennumbaerCount++;
                     if (opennumbaerCount == 3) {
                         readyforCheck = true;
@@ -1442,10 +1444,10 @@ void PicturetAndFilmtoView::CalcucateCoordinate() {
     using namespace std;
     sf::Texture tmp;
 
-    
+
     tmp.loadFromFile(pictureFilename + ".png");
     sf::Vector2u PICTURESIZE = tmp.getSize();
-    if (PICTURESIZE.x > PICTURESIZE.y && PICTURESIZE.x / PICTURESIZE.y >= 2) { PICTURESIZE.x /= 3; coinWidth = PICTURESIZE.x; coinHeight = PICTURESIZE.y; }
+    if (PICTURESIZE.x > PICTURESIZE.y&& PICTURESIZE.x / PICTURESIZE.y >= 2) { PICTURESIZE.x /= 3; coinWidth = PICTURESIZE.x; coinHeight = PICTURESIZE.y; }
     int ButtonSlideHeght = WindowLink.getHeight() / 3;
 
     float PICTURESIZE_W = PICTURESIZE.x;
@@ -1529,30 +1531,31 @@ void setofpictureObject::CalcucateCoordinate(int where) {
     scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
 
 
-        do {
-            scale = scale - 0.01;
-            PICTURESIZE_W = PICTURESIZE.x * scale;
-            PICTURESIZE_H = PICTURESIZE.y * scale;
-            ////std::cout << "k=" << scale << std::endl;
-            ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
-        } while (((PICTURESIZE_W * 6 + 6* 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
+    do {
+        scale = scale - 0.01;
+        PICTURESIZE_W = PICTURESIZE.x * scale;
+        PICTURESIZE_H = PICTURESIZE.y * scale;
+        ////std::cout << "k=" << scale << std::endl;
+        ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
+    } while (((PICTURESIZE_W * 6 + 6 * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
 
 
-            std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
-            txt->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
-            ////std::cout << "first loadFromFile" << std::endl;
-            std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
-            sprite->setTexture(*txt.get());
-            sprite->setScale(scale, scale);
-            if (where == 1) sprite->move(margin_left, ButtonSlideHeght); else
-                if (where == 2) { 
-                    if (isAdd) margin_left = (WindowLink.getWidth() - PICTURESIZE_W * 2) / 2;
-                    sprite->move(margin_left, WindowLink.getHeight() - PICTURESIZE_H); }
-            MyTexture.emplace_back(std::move(txt));
-            ButtonsList.emplace_back(std::move(sprite));
-            isblackSide.push_back(true);
-            width  = PICTURESIZE_W;
-            height = PICTURESIZE_H;
+    std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
+    txt->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, PICTURESIZE.x, PICTURESIZE.y));
+    ////std::cout << "first loadFromFile" << std::endl;
+    std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
+    sprite->setTexture(*txt.get());
+    sprite->setScale(scale, scale);
+    if (where == 1) sprite->move(margin_left, ButtonSlideHeght); else
+        if (where == 2) {
+            if (isAdd) margin_left = (WindowLink.getWidth() - PICTURESIZE_W * 2) / 2;
+            sprite->move(margin_left, WindowLink.getHeight() - PICTURESIZE_H);
+        }
+    MyTexture.emplace_back(std::move(txt));
+    ButtonsList.emplace_back(std::move(sprite));
+    isblackSide.push_back(true);
+    width = PICTURESIZE_W;
+    height = PICTURESIZE_H;
 }
 
 bool PicturetAndFilmtoView::click() {
@@ -1640,7 +1643,7 @@ bool PicturetAndFilmtoView::click() {
                         }
                         if (frame2 && start_time2 > end_time2) {
                             ////std::cout << "testFilm3" << std::endl;
-                            MyTexture[0]->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, coinWidth , coinHeight));
+                            MyTexture[0]->loadFromFile(pictureFilename + ".png", sf::IntRect(0, 0, coinWidth, coinHeight));
                             ButtonsList[0]->setTexture(*MyTexture[0]);
                             WindowLink.getWindow()->draw(*ButtonsList[0]);
                             WindowLink.getWindow()->display();
@@ -1648,21 +1651,21 @@ bool PicturetAndFilmtoView::click() {
                         }
                     }
                 }
-            ButtonPressID = -1;
+                ButtonPressID = -1;
+            }
+
+
+
         }
-
-          
-
-        } 
 
     }
     return false;
 }
 QuestType6::QuestType6(int w, int h, int qtyButtons)
-:Window(w, h,((rand() % 4)),5),
+    :Window(w, h, ((rand() % 4)), 5),
     Buttons(qtyButtons, *this),
     coin1(*this),
-    coin2(*this){
+    coin2(*this) {
 
 
 
@@ -1688,13 +1691,13 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
         }
     }
     else {
-     
+
         coinRandomIndex = rand() % 3;
         switch (coinRandomIndex)
-        {            
-            case 0:coin1.setpictureFilename("resources/images/moneta01"); break;
-            case 1:coin1.setpictureFilename("resources/images/moneta02"); break;
-            case 2:coin1.setpictureFilename("resources/images/moneta05"); break;
+        {
+        case 0:coin1.setpictureFilename("resources/images/moneta01"); break;
+        case 1:coin1.setpictureFilename("resources/images/moneta02"); break;
+        case 2:coin1.setpictureFilename("resources/images/moneta05"); break;
         default:
             break;
         }
@@ -1704,12 +1707,12 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
     coin1.setMargin_left(0);
     coin1.setMargin_top(textFrame.getHeight() * 2);
     coin1.CalcucateCoordinate();
-  
-    coin2.setMargin_left(coin1.getcoinWidth()+10);
+
+    coin2.setMargin_left(coin1.getcoinWidth() + 10);
     coin2.setMargin_top(textFrame.getHeight() * 2);
     coin2.CalcucateCoordinate();
-    
-  
+
+
 
 
     sf::Event event;
@@ -1740,8 +1743,8 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
 
         }
 
-            window->draw(*coin1.getButtons()[0]);
-            window->draw(*coin2.getButtons()[0]);
+        window->draw(*coin1.getButtons()[0]);
+        window->draw(*coin2.getButtons()[0]);
 
 
         window->display();
@@ -1753,7 +1756,7 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
-                    
+
 
 
                     if (Buttons.GetButtonsClickID() + 1 == question6Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
@@ -1777,7 +1780,7 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
                     ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
                 if (coin1.click() || coin2.click()) {
-                    
+
                 }
 
 
@@ -1788,8 +1791,8 @@ QuestType6::QuestType6(int w, int h, int qtyButtons)
     srand(time(0));
 }
 
-point::point(float sz) :x(0), y(0), i(0), j(0), Sb(0), size(sz), sf::RectangleShape(){
-    sf::RectangleShape::setPosition(0,0);
+point::point(float sz) :x(0), y(0), i(0), j(0), Sb(0), size(sz), sf::RectangleShape() {
+    sf::RectangleShape::setPosition(0, 0);
     sf::RectangleShape::setSize(sf::Vector2f(sz, sz));
 
 }
@@ -1813,15 +1816,15 @@ int setofpictureObject::click(int qty, setofpictureObject& lastpic) {
             std::string fileName = "";
             sf::Texture ArrowButtonTexture;
             sf::Sprite ArrowButtonSprite(ArrowButtonTexture);
-            std::cout <<"**" << std::to_string(qty) << std::endl;
-            if (isAdd ) qty++; else qty--;
+            std::cout << "**" << std::to_string(qty) << std::endl;
+            if (isAdd) qty++; else qty--;
             if (qty >= 0) {
-            fileName = "resources/images/" + filenamesforPicaQuest8[WindowLink.getQuestNumber()] + std::to_string(qty);
-            //WindowLink.setofpic3.loadFromFile(fileName + ".png"); //ButtonPressID = -1;
-            std::cout << std::to_string(qty) << std::endl;
-            (lastpic.getButtonTexture()[0])->loadFromFile(fileName + ".png"); //ButtonPressID = -1;;
-         
-        }
+                fileName = "resources/images/" + filenamesforPicaQuest8[WindowLink.getQuestNumber()] + std::to_string(qty);
+                //WindowLink.setofpic3.loadFromFile(fileName + ".png"); //ButtonPressID = -1;
+                std::cout << std::to_string(qty) << std::endl;
+                (lastpic.getButtonTexture()[0])->loadFromFile(fileName + ".png"); //ButtonPressID = -1;;
+
+            }
 
 
         }
@@ -1829,7 +1832,7 @@ int setofpictureObject::click(int qty, setofpictureObject& lastpic) {
     return qty;
 }
 
-squareBoard::squareBoard(float ww, float hh, Window& wl) : w(ww), h(hh),  questFigure(wl.getQuestNumber()), squareWidth(0), alreadyDraw(false), 
+squareBoard::squareBoard(float ww, float hh, Window& wl) : w(ww), h(hh), questFigure(wl.getQuestNumber()), squareWidth(0), alreadyDraw(false),
 CheckPoint{ 10,10,10,10,10,10 },
 WindowLink(wl), CurrentClickpoint(-1)
 
@@ -1841,10 +1844,10 @@ WindowLink(wl), CurrentClickpoint(-1)
         CheckPoint[i].setSb(this);
         CheckPoint[i].setFillColor(color::blue);
     }
-    for (int i = 0; i < NN+1; i++)
+    for (int i = 0; i < NN + 1; i++)
     {
         HorizLine.push_back(sf::RectangleShape());
-        HorizLine[i].setSize(sf::Vector2f(ww- 2* marginLeft, 1));
+        HorizLine[i].setSize(sf::Vector2f(ww - 2 * marginLeft, 1));
         HorizLine[i].setFillColor(color::slategray);
     }
     widthsqareBord = w - marginLeft * 2;
@@ -1857,9 +1860,9 @@ WindowLink(wl), CurrentClickpoint(-1)
         VertLine[i].setFillColor(color::slategray);
     };
     int VARIANT = 0;
-    
+
     for (int i = 0; i < CheckPoint.size(); i++)
-    CheckPoint[i].setFillColor(sf::Color::Blue);
+        CheckPoint[i].setFillColor(sf::Color::Blue);
 
     CheckPoint[0].setPosition(0, 0);
     CheckPoint[1].setPosition(0, 1);
@@ -1869,69 +1872,69 @@ WindowLink(wl), CurrentClickpoint(-1)
     CheckPoint[4].setPosition(1, 1);
     CheckPoint[5].setPosition(1, 2);
     ////std::cout << question7Text[questFigure].key << std::endl;
-    float ax,bx;
-    float ay,by;
+    float ax, bx;
+    float ay, by;
     int fig = question7Text[questFigure].key;
     //
     switch (fig) {
-       
-
-        case triangle:
-            VARIANT = rand() % 13;
-
-            ax = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().x + (CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
-            ay = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().y + (CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
-            //(int)(getSize() / 2)
-            bx = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().x + (CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
-            by = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().y + (CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
-            firstpointInput_i = question7trianglevariantOfFirstLine[VARIANT].i;
-            firstpointInput_j = question7trianglevariantOfFirstLine[VARIANT].j;
 
 
+    case triangle:
+        VARIANT = rand() % 13;
 
-            break;
-
-        case rectangle:
-            VARIANT = rand() % 7;
-            ax = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
-            ay = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
-           
-            bx = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
-            by = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
-            firstpointInput_i = question7rectanglevariantOfFirstLine[VARIANT].i;
-            firstpointInput_j = question7rectanglevariantOfFirstLine[VARIANT].j;
+        ax = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().x + (CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        ay = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().y + (CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        //(int)(getSize() / 2)
+        bx = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().x + (CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        by = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().y + (CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        firstpointInput_i = question7trianglevariantOfFirstLine[VARIANT].i;
+        firstpointInput_j = question7trianglevariantOfFirstLine[VARIANT].j;
 
 
-                      break;
 
-        case square:
-            VARIANT = rand() % 7;
-            ax = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
-            ay = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        break;
 
-            bx = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
-            by = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
-            firstpointInput_i = question7rectanglevariantOfFirstLine[VARIANT].i;
-            firstpointInput_j = question7rectanglevariantOfFirstLine[VARIANT].j;
-            break;
+    case rectangle:
+        VARIANT = rand() % 7;
+        ax = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        ay = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
 
-        
+        bx = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        by = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        firstpointInput_i = question7rectanglevariantOfFirstLine[VARIANT].i;
+        firstpointInput_j = question7rectanglevariantOfFirstLine[VARIANT].j;
+
+
+        break;
+
+    case square:
+        VARIANT = rand() % 7;
+        ax = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        ay = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+
+        bx = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().x + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        by = CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].j].getPixelCoord().y + (CheckPoint[question7rectanglevariantOfFirstLine[VARIANT].i].getSize() / 2);
+        firstpointInput_i = question7rectanglevariantOfFirstLine[VARIANT].i;
+        firstpointInput_j = question7rectanglevariantOfFirstLine[VARIANT].j;
+        break;
+
+
     }
     addLine(ax, ay, bx, by);
     addChekpointInput(firstpointInput_i, firstpointInput_j);
-    
+
 };
 
 void squareBoard::addLine(float ax, float ay, float bx, float by) {
     line.push_back(MyVertexArray());
-    int size = line.size()-1;
+    int size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
     line[size].resize(2);
     line[size][0].position = sf::Vector2f(ax, ay);
     line[size][0].color = sf::Color::Red;
     line[size][1].position = sf::Vector2f(bx, by);
     line[size][1].color = sf::Color::Red;
-    
+
 
     line.push_back(MyVertexArray());
     size = line.size() - 1;
@@ -1941,7 +1944,7 @@ void squareBoard::addLine(float ax, float ay, float bx, float by) {
     line[size][0].color = sf::Color::Red;
     line[size][1].position = sf::Vector2f(bx + 0.5, by + 0.5);
     line[size][1].color = sf::Color::Red;
-    
+
     line.push_back(MyVertexArray());
     size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
@@ -1950,7 +1953,7 @@ void squareBoard::addLine(float ax, float ay, float bx, float by) {
     line[size][0].color = sf::Color::Red;
     line[size][1].position = sf::Vector2f(bx - 0.5, by - 0.5);
     line[size][1].color = sf::Color::Red;
-    
+
     line.push_back(MyVertexArray());
     size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
@@ -1959,7 +1962,7 @@ void squareBoard::addLine(float ax, float ay, float bx, float by) {
     line[size][0].color = sf::Color::Red;
     line[size][1].position = sf::Vector2f(bx + 1, by + 1);
     line[size][1].color = sf::Color::Red;
-    
+
     line.push_back(MyVertexArray());
     size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
@@ -1972,12 +1975,12 @@ void squareBoard::addLine(float ax, float ay, float bx, float by) {
     ////std::cout << "sz of line="<<line.size() << std::endl;
 }
 
-void squareBoard::setMargintop(float mt) { 
+void squareBoard::setMargintop(float mt) {
     marginTop = mt;
 }
 
 float squareBoard::getMargintop() { return marginTop; }
-float squareBoard::getMarginLeft(){ return marginLeft; }
+float squareBoard::getMarginLeft() { return marginLeft; }
 float squareBoard::getsquareWidth() { return squareWidth; }
 void squareBoard::setquestFigure(int qf) { questFigure = qf; }
 coord point::getPixelCoord() {
@@ -1987,10 +1990,10 @@ coord point::getBoardCoord() {
     return coord(i, j);
 };
 
-bool squareBoard::clickPoint(bool trydrawLine){
+bool squareBoard::clickPoint(bool trydrawLine) {
 
-   for (int i = 0; i < 6; ++i) {
-        coord  position  = CheckPoint[i].getPixelCoord();
+    for (int i = 0; i < 6; ++i) {
+        coord  position = CheckPoint[i].getPixelCoord();
         int x0 = position.x;
         int y0 = position.y;
         int x1 = (float)x0 + CheckPoint[i].getSize();
@@ -2000,10 +2003,10 @@ bool squareBoard::clickPoint(bool trydrawLine){
 
         const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
         x1 = x1;
-        
-        if (M.x >= x0-25  && M.x<= x1+25  && M.y >= y0 - 25 && M.y <= y1 + 25) {
-            
-           
+
+        if (M.x >= x0 - 25 && M.x <= x1 + 25 && M.y >= y0 - 25 && M.y <= y1 + 25) {
+
+
             ////std::cout << "clickPoint #" << CurrentClickpoint << std::endl;
             if (trydrawLine) {
                 //std::cout << "line "<< i<<"->"<< getCurrentClickpoint() <<  std::endl;
@@ -2012,19 +2015,19 @@ bool squareBoard::clickPoint(bool trydrawLine){
                     (getCheckPoint())[getCurrentClickpoint()].getPixelCoord().y + +CheckPoint[i].getSize() / 2,
                     x0 + CheckPoint[i].getSize() / 2, y0 + CheckPoint[i].getSize() / 2
                 );
-                line[line.size()-1].setHold();
+                line[line.size() - 1].setHold();
                 if (i != CurrentClickpoint) {
                     addChekpointInput(i, CurrentClickpoint);
                     CurrentClickpoint = -1;
                 }
-                
+
             }
             else CurrentClickpoint = i;
 
 
             return true;
 
-        } 
+        }
 
     }
     return false;
@@ -2034,32 +2037,32 @@ bool squareBoard::clickPoint(bool trydrawLine){
 void squareBoard::draw() {
 
 
-  /*  sf::Vector2f y0 = UserInputLine[0].getPoint(0);
-    sf::Vector2f y1 = UserInputLine[0].getPoint(1);
-    sf::Vector2f y2 = UserInputLine[0].getPoint(2);*/
-    
-    
-  
+    /*  sf::Vector2f y0 = UserInputLine[0].getPoint(0);
+      sf::Vector2f y1 = UserInputLine[0].getPoint(1);
+      sf::Vector2f y2 = UserInputLine[0].getPoint(2);*/
+
+
+
     for (int i = 0; i < NN; i++) {
-        if (!alreadyDraw) HorizLine[i].move(marginLeft,marginTop+ i * squareWidth);
+        if (!alreadyDraw) HorizLine[i].move(marginLeft, marginTop + i * squareWidth);
         WindowLink.getWindow()->draw(HorizLine[i]);
-        
+
     }
     for (int i = 0; i < MM; i++) {
-        if (!alreadyDraw) VertLine[i].move(marginLeft+i* squareWidth, marginTop );
+        if (!alreadyDraw) VertLine[i].move(marginLeft + i * squareWidth, marginTop);
         WindowLink.getWindow()->draw(VertLine[i]);
 
     }
     for (int i = 0; i < CheckPoint.size(); i++)
         WindowLink.getWindow()->draw(CheckPoint[i]);
-  
+
     for (int i = 0; i < line.size(); i++)
     {
         ////std::cout << "drawline " << line[i].getVertexCount() << std::endl;
         WindowLink.getWindow()->draw(line[i]);
-        
+
     }
-    
+
 
 
 
@@ -2068,14 +2071,14 @@ void squareBoard::draw() {
 
 float point::getSize() { return size; }
 void point::setSb(squareBoard* sBB) { Sb = sBB; }
-void point::setPosition(float ii, float jj) { 
+void point::setPosition(float ii, float jj) {
     int tmp = Sb->getsquareWidth();
     float squarefromVertical = static_cast<int>(Sb->getwidthsqareBord() / Sb->getsquareWidth());
     int point0 = (squarefromVertical - 28) / 2;
     i = ii;
     j = jj;
-    x = Sb->getMarginLeft() + (point0+14*jj) * Sb->getsquareWidth() - (int)(getSize() / 2);
-    y = Sb->getMargintop() + (6+14*ii) * Sb->getsquareWidth() - (int)(getSize() / 2);
+    x = Sb->getMarginLeft() + (point0 + 14 * jj) * Sb->getsquareWidth() - (int)(getSize() / 2);
+    y = Sb->getMargintop() + (6 + 14 * ii) * Sb->getsquareWidth() - (int)(getSize() / 2);
     sf::RectangleShape::setPosition(x, y);
 }
 
@@ -2086,7 +2089,7 @@ bool QuestType7::IsclearButtonClick() {
     ////std::cout << scale << rect.width << std::endl;
     int x0 = position.x;
     int y0 = position.y;
-    int x1 = x0 + rect.width ;
+    int x1 = x0 + rect.width;
     int y1 = y0 + rect.height;
 
 
@@ -2127,7 +2130,7 @@ bool squareBoard::issegmentexsistinFigure(int segment) {
 }
 
 bool squareBoard::isfigureInputright(const unsigned long long* figureAnswer) {
-    if (!issegmentexsistinFigure(firstpointInput_i*10+ firstpointInput_j)) return false;
+    if (!issegmentexsistinFigure(firstpointInput_i * 10 + firstpointInput_j)) return false;
     int size = sizeof(question7AnswersTriangle) / sizeof(*question7AnswersTriangle);
     for (int i = 0; i < size; i++)
         if (figureAnswer[i] == result) return true;
@@ -2138,20 +2141,20 @@ bool squareBoard::isfigureInputright(const unsigned long long* figureAnswer) {
 
 QuestType7::QuestType7(int w, int h) :
     Window(w, h, ((rand() % 3)), 6),
-    sB(w,h,*this) {
-bool first = true;
-    int margintopSlideButton = 0;    
+    sB(w, h, *this) {
+    bool first = true;
+    int margintopSlideButton = 0;
     ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     ArrowButtonSprite.setTexture(ArrowButtonTexture);
-    
+
     EraseButtonTexture.loadFromFile("resources/images/clear.png");
     EraseButtonSprite.setTexture(EraseButtonTexture);
-    EraseButtonSprite.setPosition(sf::Vector2f(w-128, h - 128));
+    EraseButtonSprite.setPosition(sf::Vector2f(w - 128, h - 128));
 
     sB.setquestFigure(question7Text[getQuestNumber()].key);
     QuestComment.settext(L"");
-    
-    
+
+
 
     sf::Event event;
     bool trydrawLine = false;
@@ -2160,7 +2163,7 @@ bool first = true;
         window->clear();
 
 
-       
+
         window->draw(List);
 
 
@@ -2169,10 +2172,10 @@ bool first = true;
         window->draw(EraseButtonSprite);
         window->draw(QuestComment.gettext());
         sB.draw();
-       
-        
 
-     
+
+
+
 
 
         window->display();
@@ -2207,7 +2210,7 @@ bool first = true;
                         else QuestComment.settext(CommentsDic[2]);
                         break;
                     };
-                    QuestComment.setmargin_top(h - QuestComment.getHeight()-50);
+                    QuestComment.setmargin_top(h - QuestComment.getHeight() - 50);
 
 
                 }
@@ -2217,10 +2220,10 @@ bool first = true;
 
                 };
                 sB.clickPoint(trydrawLine); trydrawLine = false;
-                ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); 
+                ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png");
                 readyforCheck = true;
                 ArrowButtonSprite.setTexture(ArrowButtonTexture);
-                
+
 
 
             }
@@ -2228,14 +2231,14 @@ bool first = true;
             if (CurrentClickpointID >= 0) {
                 coord XY;
                 XY = sB.getCheckPoint()[CurrentClickpointID].getPixelCoord();
-                const sf::Vector2i& M = sf::Mouse::getPosition(*window);               
+                const sf::Vector2i& M = sf::Mouse::getPosition(*window);
                 sf::VertexArray VA = sB.getLastline();
                 ////std::cout << M.x << "x" << M.y << std::endl;
                 sB.dellLastline();
                 int szPoint = sB.getCheckPoint()[0].getSize() / 2;
-                sB.addLine(XY.x+ szPoint, XY.y+ szPoint, M.x+ szPoint, M.y+ szPoint);
+                sB.addLine(XY.x + szPoint, XY.y + szPoint, M.x + szPoint, M.y + szPoint);
                 trydrawLine = true;
-                
+
             }
         }
     }
@@ -2255,7 +2258,7 @@ QuestType8::QuestType8(int w, int h)
     minus(*this),
     thingsCount(0)
 {
-    
+
 
 
 
@@ -2265,7 +2268,7 @@ QuestType8::QuestType8(int w, int h)
     ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     ArrowButtonSprite.setTexture(ArrowButtonTexture);
 
-   
+
     setofpic0.setButtonCount(1);
     setofpic1.setButtonCount(1);
     setofpic2.setButtonCount(1);
@@ -2274,44 +2277,44 @@ QuestType8::QuestType8(int w, int h)
     minus.setButtonCount(1);
 
 
-    
+
 
     setofpic0.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "1");
     setofpic1.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "2");
     setofpic2.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "3");
     setofpic3.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "0");
 
-    plus.setpictureFilename("resources/images/" +  filenamesforPicaQuestPlus8[getQuestNumber()] );
+    plus.setpictureFilename("resources/images/" + filenamesforPicaQuestPlus8[getQuestNumber()]);
     minus.setpictureFilename("resources/images/" + filenamesforPicaQuestMinus8[getQuestNumber()]);
 
     setofpic0.setMargin_left(0);
     setofpic0.CalcucateCoordinate(1);
     setofpic1.setMargin_left(setofpic0.getWidth());
     setofpic1.CalcucateCoordinate(1);
-    setofpic2.setMargin_left(2*(setofpic1.getWidth() ));
+    setofpic2.setMargin_left(2 * (setofpic1.getWidth()));
     setofpic2.CalcucateCoordinate(1);
-    setofpic3.setMargin_left(3 * (setofpic2.getWidth()  ));
+    setofpic3.setMargin_left(3 * (setofpic2.getWidth()));
     setofpic3.CalcucateCoordinate(1);
 
     plus.setMargin_left(0);
     plus.setisAdd();
     plus.CalcucateCoordinate(2);
-    minus.setMargin_left(plus.getMarginLeft()+ plus.getWidth());
-    
-        minus.setMargin_top(500);
+    minus.setMargin_left(plus.getMarginLeft() + plus.getWidth());
+
+    minus.setMargin_top(500);
     minus.CalcucateCoordinate(2);
-    
+
     sf::Event event;
     while (window->isOpen()) {
         window->clear();
         window->draw(List);
 
         if (first) {
-            
+
             first = false;
 
-            
-            QuestComment.CalcucateCoordinate(h / 3,w/2);
+
+            QuestComment.CalcucateCoordinate(h / 3, w / 2);
             QuestComment.settext(L"");
             first = false;
             QuestComment.setmargin_top(h - minus.getHeight());
@@ -2334,21 +2337,21 @@ QuestType8::QuestType8(int w, int h)
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
-                    if (thingsCount==4) QuestComment.settext(CommentsDic[1]);
+                    if (thingsCount == 4) QuestComment.settext(CommentsDic[1]);
                     else QuestComment.settext(CommentsDic[2]);
 
 
                 int thingsCounttmp = thingsCount;
-                    thingsCount = minus.click(thingsCount, setofpic3) ; 
-  
-        
-                    thingsCount = plus.click(thingsCount, setofpic3) ;
-                    if (thingsCounttmp != thingsCount) {
-                        ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png");
-                        readyforCheck = true;
-                    }
-                
-                    window->draw(*setofpic3.getButtons()[0]);
+                thingsCount = minus.click(thingsCount, setofpic3);
+
+
+                thingsCount = plus.click(thingsCount, setofpic3);
+                if (thingsCounttmp != thingsCount) {
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png");
+                    readyforCheck = true;
+                }
+
+                window->draw(*setofpic3.getButtons()[0]);
 
 
             }
@@ -2358,10 +2361,10 @@ QuestType8::QuestType8(int w, int h)
     srand(time(0));
 }
 
-table::table( Window& wlink):WindowLink(wlink){
+table::table(Window& wlink) :WindowLink(wlink) {
     for (int i = 0; i < 6; i++)
     {
-        
+
         if (i < 5) {
             verticalline[i].resize(2);
             verticalline[i].setPrimitiveType(sf::LineStrip);
@@ -2378,13 +2381,13 @@ table::table( Window& wlink):WindowLink(wlink){
     text[0].setFont(font);
     text[0].setFillColor(sf::Color::Black);
     text[0].setPosition(sf::Vector2f(0, 0));
-    text[0].setCharacterSize(WindowLink.gettextFrame().getSize()-15);  //WindowLink.getWindow()->draw(text[4]);
+    text[0].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);  //WindowLink.getWindow()->draw(text[4]);
 
-    float height0Row = text[0].getLocalBounds().height+10;
-    float width0Row  = text[0].getLocalBounds().width + 30;
+    float height0Row = text[0].getLocalBounds().height + 10;
+    float width0Row = text[0].getLocalBounds().width + 30;
     float tableWidth = wlink.getWidth() * 2 / 3 - 10;
     float objectsrowWidth = (tableWidth + 10 - width0Row) / 3;
-    mash_koeff =  (objectsrowWidth / 4) / 310;
+    mash_koeff = (objectsrowWidth / 4) / 310;
     mash_width = objectsrowWidth / 4;
     mash_height = mash_width;
 
@@ -2395,20 +2398,20 @@ table::table( Window& wlink):WindowLink(wlink){
     text[0].setString(CommentsDic[3]);
     text[0].setFont(font);
     text[0].setFillColor(sf::Color::Black);
-    text[0].setPosition(sf::Vector2f(10, margintop-3));
+    text[0].setPosition(sf::Vector2f(10, margintop - 3));
     text[0].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
 
 
-    horizline[0][0].position= sf::Vector2f(10, margintop);
+    horizline[0][0].position = sf::Vector2f(10, margintop);
     horizline[0][1].position = sf::Vector2f(tableWidth, margintop);
     horizline[0][0].color = sf::Color::Black;
     horizline[0][1].color = sf::Color::Black;
 
-    horizline[1][0].position = sf::Vector2f(10, margintop+ height0Row);
+    horizline[1][0].position = sf::Vector2f(10, margintop + height0Row);
     horizline[1][1].position = sf::Vector2f(tableWidth, margintop + height0Row);
     horizline[1][0].color = sf::Color::Black;
     horizline[1][1].color = sf::Color::Black;
-    
+
     text[4].setString(CommentsDic[6]);
     text[4].setFont(font);
     text[4].setFillColor(sf::Color::Black);
@@ -2416,7 +2419,7 @@ table::table( Window& wlink):WindowLink(wlink){
     text[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
 
 
-    horizline[2][0].position = sf::Vector2f(10, margintop + height0Row+ 3 * mash_height);
+    horizline[2][0].position = sf::Vector2f(10, margintop + height0Row + 3 * mash_height);
     horizline[2][1].position = sf::Vector2f(tableWidth, margintop + height0Row + 3 * mash_height);
     horizline[2][0].color = sf::Color::Black;
     horizline[2][1].color = sf::Color::Black;
@@ -2429,14 +2432,14 @@ table::table( Window& wlink):WindowLink(wlink){
 
 
 
-    verticalline[0][0].position = sf::Vector2f(10, margintop );
+    verticalline[0][0].position = sf::Vector2f(10, margintop);
     verticalline[0][1].position = sf::Vector2f(10, margintop + 6 * mash_height);
     verticalline[0][0].color = sf::Color::Black;
     verticalline[0][1].color = sf::Color::Black;
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
 
     verticalline[1][0].position = sf::Vector2f(width0Row, margintop);
-    verticalline[1][1].position = sf::Vector2f(width0Row, margintop + 6*mash_height);
+    verticalline[1][1].position = sf::Vector2f(width0Row, margintop + 6 * mash_height);
     verticalline[1][0].color = sf::Color::Black;
     verticalline[1][1].color = sf::Color::Black;
     text[1].setString(CommentsDic[4]);
@@ -2464,8 +2467,8 @@ table::table( Window& wlink):WindowLink(wlink){
     //text[5].setFillColor(sf::Color::Black);
     //text[5].setPosition(sf::Vector2f(width0Row, margintop));
     //text[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-    verticalline[3][0].position = sf::Vector2f(width0Row + 2* objectsrowWidth, margintop - 3);
-    verticalline[3][1].position = sf::Vector2f(width0Row + 2* objectsrowWidth, margintop + 6 * mash_height);
+    verticalline[3][0].position = sf::Vector2f(width0Row + 2 * objectsrowWidth, margintop - 3);
+    verticalline[3][1].position = sf::Vector2f(width0Row + 2 * objectsrowWidth, margintop + 6 * mash_height);
     verticalline[3][0].color = sf::Color::Black;
     verticalline[3][1].color = sf::Color::Black;
     tablemax_y = margintop + 6 * mash_height;
@@ -2477,14 +2480,14 @@ table::table( Window& wlink):WindowLink(wlink){
     text[3].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
 
 
-    verticalline[4][0].position = sf::Vector2f(width0Row + 3 * objectsrowWidth-10, margintop);
-    verticalline[4][1].position = sf::Vector2f(width0Row + 3 * objectsrowWidth-10, margintop + 6 * mash_height);
+    verticalline[4][0].position = sf::Vector2f(width0Row + 3 * objectsrowWidth - 10, margintop);
+    verticalline[4][1].position = sf::Vector2f(width0Row + 3 * objectsrowWidth - 10, margintop + 6 * mash_height);
     verticalline[4][0].color = sf::Color::Black;
     verticalline[4][1].color = sf::Color::Black;
 
     text[5].setString(CommentsDic[7]);
     text[5].setFont(font);
-    text[5].setFillColor(sf::Color::Black); 
+    text[5].setFillColor(sf::Color::Black);
     text[5].setPosition(sf::Vector2f(10, margintop + height0Row + 3 * mash_height));
     text[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
 
@@ -2497,7 +2500,7 @@ table::table( Window& wlink):WindowLink(wlink){
     //text[6].setFillColor(sf::Color::Black);
     //text[6].setPosition(sf::Vector2f(width0Row, margintop));
     //text[6].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-  
+
 
 
 
@@ -2519,11 +2522,11 @@ void table::draw() {
         }
         WindowLink.getWindow()->draw(text[i]);
     }
-    
-    
-    
+
+
+
 }
-table3_5::table3_5(Window& w) :WindowLink(w){
+table3_5::table3_5(Window& w) :WindowLink(w) {
 
     for (int i = 0; i < 6; i++)
     {
@@ -2538,11 +2541,11 @@ table3_5::table3_5(Window& w) :WindowLink(w){
         }
     }
 
-    margintop = w.getHeight()/3 ;
+    margintop = w.getHeight() / 3;
 
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-    if (maximal(question14TextColumn[w.getquestionVariantID1()][0].length(), 17)==17)
-    text[0].setString(CommentsDic[11]); else  text[0].setString(question14TextColumn[w.getquestionVariantID1()][0]);
+    if (maximal(question14TextColumn[w.getquestionVariantID1()][0].length(), 17) == 17)
+        text[0].setString(CommentsDic[11]); else  text[0].setString(question14TextColumn[w.getquestionVariantID1()][0]);
     text[0].setFont(font);
     /*text[0].setFillColor(sf::Color::Black);
     text[0].setPosition(sf::Vector2f(0, 0));*/
@@ -2550,14 +2553,14 @@ table3_5::table3_5(Window& w) :WindowLink(w){
 
 
     height0Row = text[0].getLocalBounds().height + 10;
-    float width0Row = (w.getWidth()/5);
+    float width0Row = (w.getWidth() / 5);
     float tableWidth = w.getWidth() * 2 / 3 - 10;
     float objectsrowWidth = (tableWidth + 10 - width0Row) / 3;
     mash_koeff = (objectsrowWidth / 4) / 310;
     mash_width = objectsrowWidth / 4;
     mash_height = mash_width;
 
-    calcFontSize(width0Row-10, height0Row-8);
+    calcFontSize(width0Row - 10, height0Row - 8);
 
     float k = 5;
     //getquestion14VariantID1();
@@ -2565,23 +2568,23 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     text[0].setString(question14TextColumn[w.getquestionVariantID1()][0]);
     text[0].setFont(font);
     text[0].setFillColor(sf::Color::Black);
-    text[0].setPosition(sf::Vector2f(10+ k, margintop - 3));
+    text[0].setPosition(sf::Vector2f(10 + k, margintop - 3));
     //text[0].setPosition(sf::Vector2f(200,200));
     text[0].setCharacterSize(fontSize);
-    horizline[0][0].position = sf::Vector2f(10,         margintop);
+    horizline[0][0].position = sf::Vector2f(10, margintop);
     horizline[0][1].position = sf::Vector2f(width0Row * 3, margintop);
     horizline[0][0].color = sf::Color::Black;
     horizline[0][1].color = sf::Color::Black;
 
-    horizline[1][0].position = sf::Vector2f(10,         margintop + height0Row);
+    horizline[1][0].position = sf::Vector2f(10, margintop + height0Row);
     horizline[1][1].position = sf::Vector2f(width0Row * 3, margintop + height0Row);
     horizline[1][0].color = sf::Color::Black;
     horizline[1][1].color = sf::Color::Black;
 
 
 
-    horizline[2][0].position = sf::Vector2f(10, margintop + height0Row*2 );
-    horizline[2][1].position = sf::Vector2f(width0Row * 3, margintop + height0Row*2 );
+    horizline[2][0].position = sf::Vector2f(10, margintop + height0Row * 2);
+    horizline[2][1].position = sf::Vector2f(width0Row * 3, margintop + height0Row * 2);
     horizline[2][0].color = sf::Color::Black;
     horizline[2][1].color = sf::Color::Black;
 
@@ -2613,15 +2616,15 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     mash_y = margintop + height0Row;
 
 
-    verticalline[2][0].position = sf::Vector2f(width0Row*2 , margintop);
-    verticalline[2][1].position = sf::Vector2f(width0Row*2 , margintop + height0Row * 4);
+    verticalline[2][0].position = sf::Vector2f(width0Row * 2, margintop);
+    verticalline[2][1].position = sf::Vector2f(width0Row * 2, margintop + height0Row * 4);
     verticalline[2][0].color = sf::Color::Black;
     verticalline[2][1].color = sf::Color::Black;
 
     text[2].setString(CommentsDic[12]);
     text[2].setFont(font);
     text[2].setFillColor(sf::Color::Black);
-    text[2].setPosition(sf::Vector2f(width0Row * 2+k, margintop - 3));
+    text[2].setPosition(sf::Vector2f(width0Row * 2 + k, margintop - 3));
     text[2].setCharacterSize(fontSize);
 
 
@@ -2664,14 +2667,14 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     Celltext[0].setString(question14DigitsInTable[w.getquestionVariantID1()][0][0]);
     Celltext[0].setFont(font);
     Celltext[0].setFillColor(sf::Color::Black);
-    Celltext[0].setPosition(sf::Vector2f(width0Row + width0Row/2 , margintop - 3 + height0Row ));
+    Celltext[0].setPosition(sf::Vector2f(width0Row + width0Row / 2, margintop - 3 + height0Row));
     Celltext[0].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     Celltext[0].setCharacterSize(fontSize);
 
     Celltext[1].setString(question14DigitsInTable[w.getquestionVariantID1()][0][1]);
     Celltext[1].setFont(font);
     Celltext[1].setFillColor(sf::Color::Black);
-    Celltext[1].setPosition(sf::Vector2f(width0Row + width0Row / 2, margintop - 3 + 2*height0Row));
+    Celltext[1].setPosition(sf::Vector2f(width0Row + width0Row / 2, margintop - 3 + 2 * height0Row));
     Celltext[1].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     Celltext[1].setCharacterSize(fontSize);
 
@@ -2685,21 +2688,21 @@ table3_5::table3_5(Window& w) :WindowLink(w){
     Celltext[3].setString(question14DigitsInTable[w.getquestionVariantID1()][1][0]);
     Celltext[3].setFont(font);
     Celltext[3].setFillColor(sf::Color::Black);
-    Celltext[3].setPosition(sf::Vector2f(width0Row*2 + width0Row / 2, margintop - 3 + height0Row));
+    Celltext[3].setPosition(sf::Vector2f(width0Row * 2 + width0Row / 2, margintop - 3 + height0Row));
     Celltext[3].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     Celltext[3].setCharacterSize(fontSize);
 
     Celltext[4].setString(question14DigitsInTable[w.getquestionVariantID1()][1][1]);
     Celltext[4].setFont(font);
     Celltext[4].setFillColor(sf::Color::Black);
-    Celltext[4].setPosition(sf::Vector2f(width0Row*2 + width0Row / 2, margintop - 3 + 2 * height0Row));
+    Celltext[4].setPosition(sf::Vector2f(width0Row * 2 + width0Row / 2, margintop - 3 + 2 * height0Row));
     Celltext[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     Celltext[4].setCharacterSize(fontSize);
 
     Celltext[5].setString(question14DigitsInTable[w.getquestionVariantID1()][1][2]);
     Celltext[5].setFont(font);
     Celltext[5].setFillColor(sf::Color::Black);
-    Celltext[5].setPosition(sf::Vector2f(width0Row*2 + width0Row / 2, margintop - 3 + 3 * height0Row));
+    Celltext[5].setPosition(sf::Vector2f(width0Row * 2 + width0Row / 2, margintop - 3 + 3 * height0Row));
     Celltext[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
     Celltext[5].setCharacterSize(fontSize);
 
@@ -2711,10 +2714,10 @@ void table3_5::draw() {
     {
 
 
-            WindowLink.getWindow()->draw(verticalline[i]);
-            WindowLink.getWindow()->draw(horizline[i]);
-             WindowLink.getWindow()->draw(text[i]);
-             WindowLink.getWindow()->draw(Celltext[i]);
+        WindowLink.getWindow()->draw(verticalline[i]);
+        WindowLink.getWindow()->draw(horizline[i]);
+        WindowLink.getWindow()->draw(text[i]);
+        WindowLink.getWindow()->draw(Celltext[i]);
 
 
 
@@ -2728,13 +2731,13 @@ void table3_5::draw() {
 
 }
 
-QuestType9::QuestType9( int w, int h, int qtyButtons) :
+QuestType9::QuestType9(int w, int h, int qtyButtons) :
     Window(w, h, ((rand() % 4)), 8),
     Buttons(qtyButtons, *this),
-tab(*this)
+    tab(*this)
 {
 
-    bool first=true;
+    bool first = true;
 
     ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     ArrowButtonSprite.setTexture(ArrowButtonTexture);
@@ -2743,7 +2746,7 @@ tab(*this)
 
     for (int i = 0; i < 13; i++)
     {
-        MashTexture[i].loadFromFile(res_path + "mushroom.png" );
+        MashTexture[i].loadFromFile(res_path + "mushroom.png");
         MashSprite[i].setTexture(MashTexture[i]);
         BerryTexture[i].loadFromFile(res_path + "berry.png");
         BerrySprite[i].setTexture(BerryTexture[i]);
@@ -2769,36 +2772,36 @@ tab(*this)
 
             first = false;
 
-            Buttons.CalcucateCoordinate((h-tab.gettablemax_y())/1.4); 
+            Buttons.CalcucateCoordinate((h - tab.gettablemax_y()) / 1.4);
             first = false;
             QuestComment.setmargin_top(Buttons.getMarginTop());
-            QuestComment.CalcucateCoordinate(h / 3, w / 2);          
+            QuestComment.CalcucateCoordinate(h / 3, w / 2);
             first = false;
             for (int i = 0; i < 4; i++) {
-                MashSprite[i].setScale(tab.getmash_koeff(), tab.getmash_koeff());                
-                MashSprite[i].setPosition(sf::Vector2f(tab.getmash_x()+i*
-                    tab.getmash_width()
-                    , tab.getmash_y()   ));
-
-                BerrySprite[i].setScale(tab.getmash_koeff()+ 0.08, tab.getmash_koeff() + 0.08);
-                BerrySprite[i].setPosition(sf::Vector2f(4*tab.getmash_width() + tab.getmash_x() + i *
+                MashSprite[i].setScale(tab.getmash_koeff(), tab.getmash_koeff());
+                MashSprite[i].setPosition(sf::Vector2f(tab.getmash_x() + i *
                     tab.getmash_width()
                     , tab.getmash_y()));
-             
+
+                BerrySprite[i].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+                BerrySprite[i].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x() + i *
+                    tab.getmash_width()
+                    , tab.getmash_y()));
+
                 LeafSprite[i].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
                 LeafSprite[i].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() + i *
                     tab.getmash_width()
                     , tab.getmash_y()));
 
-                LeafSprite[i+6].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
-                LeafSprite[i+6].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() + i *
+                LeafSprite[i + 6].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+                LeafSprite[i + 6].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() + i *
                     tab.getmash_width()
-                    , tab.getmash_y()+ 3*tab.getmash_height()));
+                    , tab.getmash_y() + 3 * tab.getmash_height()));
 
             }
 
             LeafSprite[4].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
-            LeafSprite[4].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() 
+            LeafSprite[4].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x()
                 , tab.getmash_y() + tab.getmash_height()));
 
             LeafSprite[5].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
@@ -2809,36 +2812,36 @@ tab(*this)
 
             LeafSprite[10].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
             LeafSprite[10].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x()
-                , tab.getmash_y() + 4* tab.getmash_height()));
+                , tab.getmash_y() + 4 * tab.getmash_height()));
 
             LeafSprite[11].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
             LeafSprite[11].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() +
                 tab.getmash_width()
-                , tab.getmash_y() + 4*tab.getmash_height()));
+                , tab.getmash_y() + 4 * tab.getmash_height()));
 
 
             for (int i = 0; i < 4; i++) {
-                MashSprite[i+4].setScale(tab.getmash_koeff(), tab.getmash_koeff());
-                MashSprite[i+4].setPosition(sf::Vector2f(tab.getmash_x() + i *
+                MashSprite[i + 4].setScale(tab.getmash_koeff(), tab.getmash_koeff());
+                MashSprite[i + 4].setPosition(sf::Vector2f(tab.getmash_x() + i *
                     tab.getmash_width()
                     , tab.getmash_y() + tab.getmash_height()));
 
-                BerrySprite[i+4].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
-                BerrySprite[i+4].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x() + i *
+                BerrySprite[i + 4].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+                BerrySprite[i + 4].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x() + i *
                     tab.getmash_width()
                     , tab.getmash_y() + tab.getmash_height()));
 
             }
             BerrySprite[8].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
-            BerrySprite[8].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x()  
-                , tab.getmash_y() + tab.getmash_height()*2));
+            BerrySprite[8].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x()
+                , tab.getmash_y() + tab.getmash_height() * 2));
 
 
             for (int i = 0; i < 4; i++) {
                 MashSprite[i + 8].setScale(tab.getmash_koeff(), tab.getmash_koeff());
                 MashSprite[i + 8].setPosition(sf::Vector2f(tab.getmash_x() + i *
                     tab.getmash_width()
-                    , tab.getmash_y() + 3*tab.getmash_height()));
+                    , tab.getmash_y() + 3 * tab.getmash_height()));
 
 
                 BerrySprite[i + 9].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
@@ -2849,18 +2852,18 @@ tab(*this)
             }
 
             MashSprite[12].setScale(tab.getmash_koeff(), tab.getmash_koeff());
-            MashSprite[12].setPosition(sf::Vector2f(tab.getmash_x() 
+            MashSprite[12].setPosition(sf::Vector2f(tab.getmash_x()
                 , tab.getmash_y() + 4 * tab.getmash_height()));
             for (int i = 0; i < 3; i++) {
-                BerrySprite[13+i].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
-                BerrySprite[13+i].setPosition(sf::Vector2f(
+                BerrySprite[13 + i].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+                BerrySprite[13 + i].setPosition(sf::Vector2f(
                     4 * tab.getmash_width() + tab.getmash_x() + i *
                     tab.getmash_width()
 
                     , tab.getmash_y() + 4 * tab.getmash_height())
                 );
             }
-            
+
         }
 
 
@@ -2873,18 +2876,18 @@ tab(*this)
         for (int i = 0; i < 13; i++) {
             window->draw(MashSprite[i]);
             window->draw(BerrySprite[i]);
-            if (i<12) window->draw(LeafSprite[i]);
+            if (i < 12) window->draw(LeafSprite[i]);
         }
         window->draw(BerrySprite[13]);
         window->draw(BerrySprite[14]);
         window->draw(BerrySprite[15]);
-        
+
 
         if (badAnswer) {
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
             //sprite.setPosition((w-questanswer.getWidth()) /2 , Buttons.getMarginTop());
             window->draw(sprite);
-           
+
         }
         window->display();
         while (window->pollEvent(event)) {
@@ -2895,28 +2898,28 @@ tab(*this)
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
-                    if (question9AnswersSquare[questNumber] == Buttons.GetButtonsClickID()+1) QuestComment.settext(CommentsDic[1]);
+                    if (question9AnswersSquare[questNumber] == Buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[1]);
                     else {
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
-                        questanswer.setParams(Buttons.getWidth()* 5, Buttons.getHeight(), 5, Buttons.getScale());
+                        questanswer.setParams(Buttons.getWidth() * 5, Buttons.getHeight(), 5, Buttons.getScale());
 
                         questanswer[0].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2]) + ".jpg");
-                                      questanswer[1].loadFromFile(res_path + "digit_plus.jpg");
-                                      questanswer[2].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber*2+1]) + ".jpg");
-                                      questanswer[3].loadFromFile(res_path + "digit_equal.jpg");
-                                      questanswer[4].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2]+
-                                          question9AnswerDetails[questNumber * 2+1]
-                                      ) + ".jpg");
-                                      
+                        questanswer[1].loadFromFile(res_path + "digit_plus.jpg");
+                        questanswer[2].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2 + 1]) + ".jpg");
+                        questanswer[3].loadFromFile(res_path + "digit_equal.jpg");
+                        questanswer[4].loadFromFile(res_path + "digit" + std::to_string(question9AnswerDetails[questNumber * 2] +
+                            question9AnswerDetails[questNumber * 2 + 1]
+                        ) + ".jpg");
+
                         //questanswer[0].setScale(Buttons.getScale(), Buttons.getScale());
                         questanswer.draw();
                     }
 
-                            if (Buttons.click()) {
-                ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
-                ArrowButtonSprite.setTexture(ArrowButtonTexture);
-            }
+                if (Buttons.click()) {
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
+                }
 
             }
 
@@ -2930,10 +2933,10 @@ tab(*this)
 sf::Font& CheckButton::getFont() { return font; }
 
 std::array<sf::Texture, 4>& CheckButton::getquadroTexture() { return quadroTexture; }
-float CheckButton::getQudroSize() { 
-    return qudroSize; 
+float CheckButton::getQudroSize() {
+    return qudroSize;
 }
-float CheckButton::getTextmarginleft() {return textmarginleft;}
+float CheckButton::getTextmarginleft() { return textmarginleft; }
 void CheckButton::setStrValue(int index, std::wstring str1, int SIZE = 28) {
     getFont().loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
     getText()[index] = sf::Text(str1, getFont(), 28);
@@ -2942,74 +2945,74 @@ void CheckButton::setStrValue(int index, std::wstring str1, int SIZE = 28) {
     getText()[index].setPosition(x + getQudroSize() + getTextmarginleft(), y);
     getText()[index].setFillColor(sf::Color::Black);
     getText()[index].setOutlineColor(sf::Color::Red);
-    
+
 };
-void CheckButton::SetqudroSize(float q) { 
-    qudroSize = q; 
-    coeff = qudroSize / 500; 
-    for (int i = 0; i < 4;i++)
-    getSprite()[i].setScale(coeff, coeff); 
+void CheckButton::SetqudroSize(float q) {
+    qudroSize = q;
+    coeff = qudroSize / 500;
+    for (int i = 0; i < 4; i++)
+        getSprite()[i].setScale(coeff, coeff);
 };
 void CheckButton::setTextValue(int index) {
-    
+
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-  
+
     sf::RectangleShape rectangle;
     //std::cout << wLnk.gettextFrame().getSize() << std::endl;
     int question10Variant1IDRandom1 = rand() % (sizeof(question10VariantForRandom1) / sizeof(question10VariantForRandom1[0]));
 
     for (int i = 0; i < 4; i++) {
 
-        str[i]= sf::Text(
-            
+        str[i] = sf::Text(
+
             question10Variant2[index][question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][0]]
             +
             question10Variant2[index][question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][1]]
             +
             question10Variant2[index][question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][2]]
-            
+
             , font, 35);
 
         if (question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][0] == 0 &&
             question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][1] == 1 &&
             question10VariantForRandom2[question10VariantForRandom1[question10Variant1IDRandom1][i]][2] == 2) rightQuestNum = i;
-        
+
 
         float x = quadroSprite[i].getPosition().x; // +qudroSize;
         float tmiii = quadroSprite[i].getLocalBounds().width;
         str[i].setLineSpacing(0.001);
         float huuu = str[i].getLineSpacing();
 
-        float y = quadroSprite[i].getPosition().y +(qudroSize - getHeightText()) / 2;
-           str[i].setPosition(x+ qudroSize  + textmarginleft,y-10);
-           str[i].setFillColor(sf::Color::Black);
-           str[i].setOutlineColor(sf::Color::Red);
-           
-         }
-    
+        float y = quadroSprite[i].getPosition().y + (qudroSize - getHeightText()) / 2;
+        str[i].setPosition(x + qudroSize + textmarginleft, y - 10);
+        str[i].setFillColor(sf::Color::Black);
+        str[i].setOutlineColor(sf::Color::Red);
 
-    
- 
+    }
+
+
+
+
 }
 void  CheckButton::Set_margitop(float mt) {
     margin_top = mt;
     for (int i = 0; i < getSprite().size(); i++)
         getSprite()[i].setPosition(getSprite()[i].getPosition().x, i * getQudroSize() + margin_top);
 }
-CheckButton::CheckButton(Window& wl):wLnk(wl), textmarginleft(10), clickID(-1), margin_top(0) {
-     coeff = (452.0f / ((wl.getHeight()- wl.gettextFrame().getHeight())))/5;
-     coeff = 25.0f / wl.getHeight();
-     float tmp = wl.gettextFrame().getHeight();
-     tmp = wl.getHeight();
-     qudroSize = coeff * 452.0f;
+CheckButton::CheckButton(Window& wl) :wLnk(wl), textmarginleft(10), clickID(-1), margin_top(0) {
+    coeff = (452.0f / ((wl.getHeight() - wl.gettextFrame().getHeight()))) / 5;
+    coeff = 25.0f / wl.getHeight();
+    float tmp = wl.gettextFrame().getHeight();
+    tmp = wl.getHeight();
+    qudroSize = coeff * 452.0f;
     float margin = qudroSize / 6;
     for (int i = 0; i < quadroTexture.size(); i++) {
         quadroTexture[i].loadFromFile(res_path + "empty.jpg");
         quadroSprite[i].setTexture(quadroTexture[i]);
         quadroSprite[i].setScale(coeff, coeff);
         //quadroSprite[i].setPosition(10, ( wl.gettextFrame().getHeight())+30 + (qudroSize+ margin) *i );
-        
-       
+
+
     }
 
 
@@ -3027,14 +3030,14 @@ bool mySpriteCheckButton::getActive() { return active; }
 QuestType10::QuestType10(int w, int h) :
     Window(w, h, 0, 9),
     checkbutton(*this)
-    {
+{
 
     bool first = true;
     question10Variant1ID = rand() % 2;
-    question10Variant2ID = rand() %  (sizeof(question10Variant2)/ sizeof(question10Variant2[0]) );
+    question10Variant2ID = rand() % (sizeof(question10Variant2) / sizeof(question10Variant2[0]));
 
     int question10Variant3ID = rand() % (sizeof(question10VariantForRandom2) / sizeof(question10VariantForRandom2[0]));
-   
+
     //std::cout << question10Variant3ID << std::endl;
 
     std::wstring  replaceFrom = L"N";
@@ -3042,23 +3045,23 @@ QuestType10::QuestType10(int w, int h) :
 
 
     std::wstring replaceTo(question10Variant2[question10Variant2ID][question10VariantForRandom2[question10Variant3ID][0]]
-    +
+        +
         question10Variant2[question10Variant2ID][question10VariantForRandom2[question10Variant3ID][1]]
-    +
+        +
         question10Variant2[question10Variant2ID][question10VariantForRandom2[question10Variant3ID][2]]
     );
     std::wstring question = question10Text[getQuestNumber()].questionText;
     int posn = question.find(replaceFrom);
     if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
 
-      replaceFrom = L"M";
-     replaceTo = question10Variant1[question10Variant1ID];
-    
+    replaceFrom = L"M";
+    replaceTo = question10Variant1[question10Variant1ID];
+
     posn = question.find(replaceFrom);
     if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
     checkbutton.SetqudroSize(40);
     textFrame.settext(question);
-    textFrame.CalcucateCoordinate(w-w*5/100, textFrame.getHeight());
+    textFrame.CalcucateCoordinate(w - w * 5 / 100, textFrame.getHeight());
 
 
     std::cout << question10Variant1ID << std::endl;
@@ -3067,7 +3070,7 @@ QuestType10::QuestType10(int w, int h) :
     sf::Event event;
     checkbutton.setTextValue(question10Variant2ID);
 
-    
+
 
     while (window->isOpen()) {
         window->clear();
@@ -3076,13 +3079,13 @@ QuestType10::QuestType10(int w, int h) :
         window->draw(ArrowButtonSprite);
         if (first) {
             first = false;
-            
+
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
-            QuestComment.setmargin_top((h - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y - checkbutton.getQudroSize()-10);
+            QuestComment.setmargin_top((h - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y - checkbutton.getQudroSize() - 10);
             //QuestComment.setmargin_top(0);
             checkbutton.Set_margitop((h - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y);
         }
-        
+
         //for (int i = 0; i < 3; i++) {
         //    window->draw(checkbutton.getSprite()[i]);
         //    //question13VariantID
@@ -3091,7 +3094,7 @@ QuestType10::QuestType10(int w, int h) :
         //    tmpStr = checkbutton.getText()[i].getString();
         //    window->draw(checkbutton.getText()[i]);
         //}
-     
+
         for (int i = 0; i < 4; i++) {
             window->draw(checkbutton.getSprite()[i]);
             sf::Text tmp1 = checkbutton.getText()[i];
@@ -3101,9 +3104,9 @@ QuestType10::QuestType10(int w, int h) :
         }
 
         window->draw(QuestComment.gettext());
-        
+
         window->draw(textFrame.gettext());
-        
+
 
 
         if (badAnswer) {
@@ -3125,15 +3128,15 @@ QuestType10::QuestType10(int w, int h) :
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
                     if (checkbutton.getrightQuestNum() == checkbutton.getClickID())
-                    QuestComment.settext(CommentsDic[1]); 
+                        QuestComment.settext(CommentsDic[1]);
                     else {
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
                     }
                 }
 
-               if (checkbutton.click()) {
-                   
+                if (checkbutton.click()) {
+
                     ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
                     ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
@@ -3153,7 +3156,7 @@ void CheckButton11::SetSpacing(float space) {
         float left = getSprite()[i].getPosition().x;;
         float wi = getSprite()[i].getLocalBounds().width;
         float top = getSprite()[i - 1].getPosition().y + qudroSize + space;
-            
+
         getSprite()[i].setPosition(left, top - space);
     }
 }
@@ -3180,8 +3183,8 @@ void PicturetoView11::CalcucateCoordinate(float w) {
             scale = scale - 0.01;
             PICTURESIZE_W = PICTURESIZE.x * scale;
             PICTURESIZE_H = PICTURESIZE.y * scale;
-        } while ((PICTURESIZE_W * round(ButtonCount) ) > WindowLink.getWidth()/2) ;
-        
+        } while ((PICTURESIZE_W * round(ButtonCount)) > WindowLink.getWidth() / 2);
+
 
         for (int i = 0; i < ButtonCount; i++) {
             std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
@@ -3236,7 +3239,7 @@ QuestType11::QuestType11(int w, int h) :
     ArrowButtonSprite.setTexture(ArrowButtonTexture);
     sf::Event event;
     checkbutton.SetqudroSize(35);
-   
+
     picture1.setButtonCount(4);
     picture2.setButtonCount(6);
 
@@ -3246,7 +3249,7 @@ QuestType11::QuestType11(int w, int h) :
     picture2.setMargin_left(10);
 
     picture1.setMargin_top(h / 3);
-    
+
 
     while (window->isOpen()) {
         window->clear();
@@ -3256,11 +3259,11 @@ QuestType11::QuestType11(int w, int h) :
         if (first) {
 
             first = false;
-           picture1.CalcucateCoordinate(2);
-           picture2.setMargin_top(h / 3 + picture1.getHeight()
-           //    textFrame.getHeight() + 15 + picture1.getHeight()+h/10
-           );
-           picture2.CalcucateCoordinate(12);
+            picture1.CalcucateCoordinate(2);
+            picture2.setMargin_top(h / 3 + picture1.getHeight()
+                //    textFrame.getHeight() + 15 + picture1.getHeight()+h/10
+            );
+            picture2.CalcucateCoordinate(12);
 
 
 
@@ -3268,8 +3271,8 @@ QuestType11::QuestType11(int w, int h) :
             QuestComment.settext(L"");
             checkbutton.SetSpacing(11);
 
-            checkbutton.Set_margitop(           
-                ((h - (checkbutton.getQudroSize() + 20) * 4) - checkbutton.getSprite()[0].getPosition().y )
+            checkbutton.Set_margitop(
+                ((h - (checkbutton.getQudroSize() + 20) * 4) - checkbutton.getSprite()[0].getPosition().y)
             );
             //QuestComment.setmargin_top((h - (checkbutton.getQudroSize() + 20) * 4) - checkbutton.getSprite()[0].getPosition().y - checkbutton.getQudroSize() - 10);
             checkbutton.resetclickID();
@@ -3278,18 +3281,18 @@ QuestType11::QuestType11(int w, int h) :
 
         for (int i = 0; i < 4; i++) {
             window->draw(checkbutton.getSprite()[i]);
-            
+
             std::wstring tmpStr = question11Variant2[question11Variant2ID][question11Variant1ID][question11ALLVariants[question11Variant3ID][i]];
             checkbutton.setStrValue(i, tmpStr);
             //const sf::Font F = tmp1.getFont();
-            
+
             tmpStr = checkbutton.getText()[i].getString();
 
             window->draw(checkbutton.getText()[i]);
-            
+
         }
         //QuestComment.setmargin_top(h - (checkbutton.getQudroSize() + 20) * 4);
-        QuestComment.setmargin_top(textFrame.getHeight()+15);
+        QuestComment.setmargin_top(textFrame.getHeight() + 15);
         window->draw(QuestComment.gettext());
 
 
@@ -3323,34 +3326,34 @@ QuestType11::QuestType11(int w, int h) :
 
                     countofBALL = question11BALL[question11Variant1ID][checkbutton.getanswerNUMBER()];
                     for (int i = 0; i < 4; i++) {
-                            if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
+                        if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
                             checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
                         else
                             if (!checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && checkbutton.getSprite()[i].getActive())
                                 checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
-                        else 
-                            if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && !checkbutton.getSprite()[i].getActive())
+                            else
+                                if (checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID) && !checkbutton.getSprite()[i].getActive())
                                     checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
 
                     }
-                        //std::cout << checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID);
+                    //std::cout << checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID);
                     switch (countofBALL) {
                     case 0: QuestComment.settext(CommentsDic[11]); break; //L"Ошибка. Баллы не засчитаны :(" 
                     case 1: QuestComment.settext(CommentsDic[10]); break; //
-                    case 2: QuestComment.settext(CommentsDic[9]) ;  break;  //
+                    case 2: QuestComment.settext(CommentsDic[9]);  break;  //
                     }
-                        
-                        
-                 //   badAnswer = true;
-                    //countofrightAnswer = 0;
-                    //unsigned char tmp;
-                    //if (question10Variant1ID==0) unsigned char tmp = 
+
+
+                    //   badAnswer = true;
+                       //countofrightAnswer = 0;
+                       //unsigned char tmp;
+                       //if (question10Variant1ID==0) unsigned char tmp = 
                 }
 
                 if (checkbutton.click(question11Variant3ID)) {
 
-                   ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); 
-                   readyforCheck = true;
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png");
+                    readyforCheck = true;
                     ArrowButtonSprite.setTexture(ArrowButtonTexture);
                 }
 
@@ -3367,7 +3370,7 @@ QuestType11::QuestType11(int w, int h) :
 QuestType12::QuestType12(int w, int h, int qtyButtons) :
     Window(w, h,
 
-        (rand() % 6)
+    (rand() % 6)
 
         ,
 
@@ -3398,7 +3401,7 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
 
             QuestComment.setmargin_top(h - Buttons.getHeight());
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getHeight());
-     
+
 
             Buttons.CalcucateCoordinate(); first = false;
 
@@ -3452,7 +3455,7 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
                         questanswer[5].loadFromFile(res_path + "digit_equal.jpg");
                         questanswer[6].loadFromFile(res_path + "digit" + std::to_string(question12Answers[questNumber]) + ".jpg");
                         questanswer.draw();
-                        
+
                         QuestComment.settext(CommentsDic[2]);
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
@@ -3487,11 +3490,11 @@ QuestType13::QuestType13(int w, int h) :
 {
 
 
- std::shared_ptr<FrameFigure> pica[] = 
- { std::make_shared<ThreePicture0>(window) ,
-     std::make_shared<ThreePicture1>(window),
-     std::make_shared<ThreePicture2>(window),
-     std::make_shared<ThreePicture3>(window)
+    std::shared_ptr<FrameFigure> pica[] =
+    { std::make_shared<ThreePicture0>(window) ,
+        std::make_shared<ThreePicture1>(window),
+        std::make_shared<ThreePicture2>(window),
+        std::make_shared<ThreePicture3>(window)
     };
     bool first = true;
     FrameFigure::resetnumber_of_figure();
@@ -3529,7 +3532,7 @@ QuestType13::QuestType13(int w, int h) :
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
             checkbutton.Set_margitop((h - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y);
 
-            QuestComment.setmargin_top(checkbutton.getSprite()[0].getPosition().y- checkbutton.getQudroSize()-25);
+            QuestComment.setmargin_top(checkbutton.getSprite()[0].getPosition().y - checkbutton.getQudroSize() - 25);
             checkbutton.SetSpacing(11);
 
             checkbutton.resetclickID();
@@ -3547,8 +3550,8 @@ QuestType13::QuestType13(int w, int h) :
             window->draw(checkbutton.getText()[i]);
         }
 
-  
-      
+
+
         window->draw(QuestComment.gettext());
         pica[questionVariantID1]->draw();
         window->draw(textFrame.gettext());
@@ -3568,21 +3571,21 @@ QuestType13::QuestType13(int w, int h) :
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
                 {
-                                 
+
                     countofBALL = 0;
 
 
                     //char tmp = 1 << 0;
                     std::vector <int> result;
-                    if (((checkbutton.getClickID() & (1 << 0)) >> 0) > 0) result.push_back(question13VariantofRandom[questionVariantID3][0] ); //  ;
-                    if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[ questionVariantID3][1]); //  ;
-                    if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[ questionVariantID3][2]); //  ;
+                    if (((checkbutton.getClickID() & (1 << 0)) >> 0) > 0) result.push_back(question13VariantofRandom[questionVariantID3][0]); //  ;
+                    if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[questionVariantID3][1]); //  ;
+                    if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[questionVariantID3][2]); //  ;
                     sort(result.begin(), result.end(), std::greater<int>());
                     unsigned char result_int = 0;
                     int dec = 1;
-                    for (int i = 0; i < result.size() ; i++)
-                    {      
-                        result_int = result_int | (1 << result[i]);  
+                    for (int i = 0; i < result.size(); i++)
+                    {
+                        result_int = result_int | (1 << result[i]);
                         //std::cout << "i=" << i << " " <<(int)(1 << result[i]) << " " << (question13Answers[question13VariantID1][question13VariantID2] & (1 << i)) << std::endl;
 
                     }
@@ -3595,27 +3598,27 @@ QuestType13::QuestType13(int w, int h) :
 
                     };
 
-                        for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 3; i++)
+                    {
+                        int ismustClick = (question13Answers[questionVariantID1][questionVariantID2] & (1 << question13VariantofRandom[questionVariantID3][i]));
+
+                        if (ismustClick > 0 && checkbutton.getSprite()[i].getActive())
                         {
-                            int ismustClick = (question13Answers[questionVariantID1][questionVariantID2] & (1 << question13VariantofRandom[questionVariantID3][i]));
+                            checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+                        }
 
-                            if (ismustClick > 0 && checkbutton.getSprite()[i].getActive())
-                            {
-                                checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+                        else {
+                            if (ismustClick == 0 && checkbutton.getSprite()[i].getActive()) {
+                                checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
                             }
-
                             else {
-                                if (ismustClick == 0 && checkbutton.getSprite()[i].getActive()) {
-                                    checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
-                                }
-                                else {
-                                    if (ismustClick > 0 && !checkbutton.getSprite()[i].getActive())
-                                        checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+                                if (ismustClick > 0 && !checkbutton.getSprite()[i].getActive())
+                                    checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
 
-                                }
                             }
                         }
-                  
+                    }
+
 
 
 
@@ -3634,7 +3637,7 @@ QuestType13::QuestType13(int w, int h) :
         }
     }
 
- 
+
 
 }
 
@@ -3655,10 +3658,10 @@ void table3_5::calcFontSize(const int w, const int h) {
 }
 QuestType15::QuestType15(int w, int h, int qtyButtons) :
     questionVariantID1(rand() % 3),
-    questionVariantID2( rand() % 3),
+    questionVariantID2(rand() % 3),
     Window(w, h, 0, 13),
     buttons(qtyButtons, *this),
-    tab(*this){
+    tab(*this) {
 
     bool first = true;
 
@@ -3670,23 +3673,23 @@ QuestType15::QuestType15(int w, int h, int qtyButtons) :
     textFrame.settext(question14Text[0].questionText + L" " + question14Text1[questionVariantID1] + L"\n" +
         question14Text2[questionVariantID1][1]
     );
-    textFrame.CalcucateCoordinate(w  - w*10/100 , h /3);
+    textFrame.CalcucateCoordinate(w - w * 10 / 100, h / 3);
 
 
     while (window->isOpen()) {
         window->clear();
 
         window->draw(List);
-     
+
         if (first) {
 
             first = false;
 
             buttons.CalcucateCoordinate((h - 100) / 1.4);
-            
+
             QuestComment.setmargin_top(buttons.getMarginTop());
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
-            
+
 
 
 
@@ -3695,18 +3698,18 @@ QuestType15::QuestType15(int w, int h, int qtyButtons) :
 
 
         }
-        
+
         tab.draw();
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
-        for (int bc = 0; bc < buttons.getButtonCount(); bc++) 
-            window->draw(*buttons.getButtons()[bc]);        
+        for (int bc = 0; bc < buttons.getButtonCount(); bc++)
+            window->draw(*buttons.getButtons()[bc]);
         window->draw(ArrowButtonSprite);
 
 
         if (badAnswer) {
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
-            sprite.setPosition((w - questanswer.getWidth()) / 2, buttons.getMarginTop()- 2*questanswer.getWidth()* questanswer.getScale());
+            sprite.setPosition((w - questanswer.getWidth()) / 2, buttons.getMarginTop() - 2 * questanswer.getWidth() * questanswer.getScale());
             window->draw(sprite);
 
         }
@@ -3737,7 +3740,7 @@ QuestType15::QuestType15(int w, int h, int qtyButtons) :
                         buttons.getButtonTexture()[buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
-                        buttons.getButtonTexture()[question15Answer[questionVariantID1]-1]->loadFromFile(
+                        buttons.getButtonTexture()[question15Answer[questionVariantID1] - 1]->loadFromFile(
                             "resources/images/digit" + std::to_string(question15Answer[questionVariantID1]) + "_right.jpg"
                         );
 
@@ -3831,11 +3834,11 @@ QuestType16::QuestType16(int w, int h, int qtyButtons) :
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
                         questanswer.setParams(buttons.getWidth() * 5, buttons.getHeight(), 5, buttons.getScale());
-                        int a = atoi(question14DigitsInTable[questionVariantID1][0][question16AnswerString[questionVariantID1]].c_str())   ;
+                        int a = atoi(question14DigitsInTable[questionVariantID1][0][question16AnswerString[questionVariantID1]].c_str());
                         int b = atoi(question14DigitsInTable[questionVariantID1][1][question16AnswerString[questionVariantID1]].c_str());
-                        if (a>b) {
-                        questanswer[0].loadFromFile(res_path + "digit" + std::to_string(a) + ".jpg");
-                        questanswer[2].loadFromFile(res_path + "digit" + std::to_string(b) + ".jpg");
+                        if (a > b) {
+                            questanswer[0].loadFromFile(res_path + "digit" + std::to_string(a) + ".jpg");
+                            questanswer[2].loadFromFile(res_path + "digit" + std::to_string(b) + ".jpg");
                         }
                         else
                         {
@@ -3844,7 +3847,7 @@ QuestType16::QuestType16(int w, int h, int qtyButtons) :
                         }
 
                         questanswer[1].loadFromFile(res_path + "digit_minus.jpg");
-                        
+
                         questanswer[3].loadFromFile(res_path + "digit_equal.jpg");
                         questanswer[4].loadFromFile(res_path + "digit" + std::to_string(
                             question16Answer[questionVariantID1]
@@ -3881,9 +3884,9 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
     questionVariantID1(rand() % 3),
     questionVariantID2(rand() % 3),
     Window(w, h, 0, 13),
-    tab(*this) ,
+    tab(*this),
     checkbutton(*this)
-        {
+{
 
     bool first = true;
 
@@ -3952,12 +3955,10 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
 
                     countofBALL = 0;
 
-
-                    //char tmp = 1 << 0;
                     std::vector <int> result;
-                    if (((checkbutton.getClickID() & (1 << 0)) >> 0) > 0) result.push_back(question13VariantofRandom[questionVariantID3][0]); //  ;
-                    if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[questionVariantID3][1]); //  ;
-                    if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[questionVariantID3][2]); //  ;
+                    //if (((checkbutton.getClickID() & (1 << 0)) >> 0) > 0) result.push_back(question13VariantofRandom[questionVariantID3][0]); //  ;
+                    //if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[questionVariantID3][1]); //  ;
+                    //if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[questionVariantID3][2]); //  ;
                     sort(result.begin(), result.end(), std::greater<int>());
                     unsigned char result_int = 0;
                     int dec = 1;
@@ -3976,30 +3977,22 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
 
                     };
                 }
-                    for (int i = 0; i < 3; i++)
-                    {
-                        int ismustClick = (question14Answers[questionVariantID1][questionVariantID2] & (1 << question13VariantofRandom[questionVariantID4][i]));
+                //for (int i = 0; i < 3; i++)
+                //{
+                //    int ismustClick = (question14AnswerString[questionVariantID1][questionVariantID2] & (1 << question13VariantofRandom[questionVariantID4][i]));
+                //    std::cout << checkbutton.getSprite()[i].getActive() << question14AnswerString[questionVariantID1] << std::endl;
+                //    checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+                //    
+                //    {
+                //        std::cout << "ok" << std::endl;
+                //        
+                //    }
 
-                        if (ismustClick > 0 && checkbutton.getSprite()[i].getActive())
-                        {
-                            checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
-                        }
-
-                        else {
-                            if (ismustClick == 0 && checkbutton.getSprite()[i].getActive()) {
-                                checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
-                            }
-                            else {
-                                if (ismustClick > 0 && !checkbutton.getSprite()[i].getActive())
-                                    checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
-
-                            }
-                        }
-                    }
+                //}
 
 
+                if (checkbutton.click(0)) readyforCheck = true;
 
-                
             }
 
         }

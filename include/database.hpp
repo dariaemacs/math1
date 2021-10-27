@@ -66,7 +66,7 @@ extern const int question15AnswerString[3];
 
 extern const std::wstring question10Variant1[];
 
-
+extern const int question14AnswerString[3];
 
 extern const std::wstring question11Variant1[2];
 extern const std::wstring question11Variant2[4][2][4];
