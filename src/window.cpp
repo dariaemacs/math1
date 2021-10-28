@@ -104,7 +104,7 @@ bool CheckButton11::click(int question11Variant3ID) {
             unsigned char tmp = question11ALLVariants[question11Variant3ID][i];
             answerNUMBER = ((1 << tmp)) ^ answerNUMBER;
             clickID = ((1 << i)) ^ clickID;
-            //std::cout << "clickID=" << clickID << std::endl;
+           std::cout << "clickID=" << clickID << std::endl;
             return true;
         }
     };
@@ -3955,25 +3955,32 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
 
                     countofBALL = 0;
 
-                    std::vector <int> result;
-                    //if (((checkbutton.getClickID() & (1 << 0)) >> 0) > 0) result.push_back(question13VariantofRandom[questionVariantID3][0]); //  ;
-                    //if (((checkbutton.getClickID() & (1 << 1)) >> 1) > 0) result.push_back(question13VariantofRandom[questionVariantID3][1]); //  ;
-                    //if (((checkbutton.getClickID() & (1 << 2)) >> 2) > 0) result.push_back(question13VariantofRandom[questionVariantID3][2]); //  ;
-                    sort(result.begin(), result.end(), std::greater<int>());
                     unsigned char result_int = 0;
                     int dec = 1;
-                    for (int i = 0; i < result.size(); i++)
-                    {
-                        result_int = result_int | (1 << result[i]);
-                        //std::cout << "i=" << i << " " <<(int)(1 << result[i]) << " " << (question13Answers[question13VariantID1][question13VariantID2] & (1 << i)) << std::endl;
-
-                    }
-                    std::cout << std::endl;
-
-                    if (question13Answers[questionVariantID1][questionVariantID2] == result_int) { QuestComment.settext(CommentsDic[1]); }
+                    //std::cout << std::endl;
+                    //std::cout << " getClickID="<<checkbutton.getClickID()<< " questionVariantID1="<<questionVariantID1 << " questionVariantID=" << questionVariantID2 << std::endl;
+                    if (question14AnswerString[questionVariantID1] == checkbutton.getClickID()) { QuestComment.settext(CommentsDic[1]); }
                     else {
 
                         QuestComment.settext(CommentsDic[2]);
+
+                        if ( ((checkbutton.getClickID() & (1 << 0)) >> 0)> 0 && ((checkbutton.getClickID() & (1 << 0)) >> 0) == ((question14AnswerString[questionVariantID1] & (1 << 0)) >> 0))
+                            checkbutton.getquadroTexture()[0].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+                        else
+                            checkbutton.getquadroTexture()[0].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
+
+
+                        if (((checkbutton.getClickID() & (1 << 1)) >> 1)>0 && ((checkbutton.getClickID() & (1 << 1)) >> 1) == ((question14AnswerString[questionVariantID1] & (1 << 1)) >> 1))
+                            checkbutton.getquadroTexture()[1].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+                        else
+                            checkbutton.getquadroTexture()[1].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
+
+
+                        if (((checkbutton.getClickID() & (1 << 2)) >> 2)>0 && ((checkbutton.getClickID() & (1 << 2)) >> 2) == ((question14AnswerString[questionVariantID1] & (1 << 2)) >> 2))
+                            checkbutton.getquadroTexture()[2].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+                        else 
+                            checkbutton.getquadroTexture()[2].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
+                        std::cout << ((checkbutton.getClickID() & (1 << 2)) >> 2) << " " << ((question14AnswerString[questionVariantID1] & (1 << 2)) >> 2);
 
                     };
                 }
@@ -3991,7 +3998,10 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
                 //}
 
 
-                if (checkbutton.click(0)) readyforCheck = true;
+                if (checkbutton.click(0)) {
+                    ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
+                    ArrowButtonSprite.setTexture(ArrowButtonTexture);
+                }
 
             }
 

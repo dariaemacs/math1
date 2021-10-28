@@ -464,7 +464,7 @@ extern const std::string question14DigitsInTable[3][2][3] = {
 
 extern const int question15AnswerString[3] = { 0,0,1 };
 
-extern const int question14AnswerString[3] = { 1,1,2 };
+extern const int question14AnswerString[3] = { 2,2,4 };
 
 
 
