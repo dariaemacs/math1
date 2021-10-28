@@ -2942,7 +2942,7 @@ void CheckButton::setStrValue(int index, std::wstring str1, int SIZE = 28) {
     getText()[index] = sf::Text(str1, getFont(), 28);
     float x = getSprite()[index].getPosition().x; // +qudroSize;
     float y = getSprite()[index].getPosition().y + (getQudroSize() - getHeightText()) / 2;
-    getText()[index].setPosition(x + getQudroSize() + getTextmarginleft(), y);
+    getText()[index].setPosition(x + getQudroSize() + getTextmarginleft(), y-5);
     getText()[index].setFillColor(sf::Color::Black);
     getText()[index].setOutlineColor(sf::Color::Red);
 
@@ -3913,9 +3913,12 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
             ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
             ArrowButtonSprite.setTexture(ArrowButtonTexture);
             QuestComment.setmargin_top(100);
+       
+            checkbutton.Set_margitop(tab.getmargintop() + tab.getheight0Row() * 6);
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
-            checkbutton.Set_margitop(tab.getmargintop() + tab.getheight0Row() * 4);
-            checkbutton.SetSpacing(11);
+             //QuestComment.
+            //checkbutton.SetSpacing(200);
+            QuestComment.setmargin_top(tab.getmargintop() + tab.getheight0Row() * 4);
             checkbutton.resetclickID();
             for (int i = 0; i < 3; i++) {
                 std::wstring tmpStr = question14TextVariant[questionVariantID1][i];
@@ -3963,24 +3966,19 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
                     else {
 
                         QuestComment.settext(CommentsDic[2]);
+                        for (int i = 0; i < 3; i++) {
 
-                        if ( ((checkbutton.getClickID() & (1 << 0)) >> 0)> 0 && ((checkbutton.getClickID() & (1 << 0)) >> 0) == ((question14AnswerString[questionVariantID1] & (1 << 0)) >> 0))
-                            checkbutton.getquadroTexture()[0].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
-                        else
-                            checkbutton.getquadroTexture()[0].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
+                            if (((checkbutton.getClickID() & (1 << i)) >> i) > 0 && ((checkbutton.getClickID() & (1 << i)) >> i) != ((question14AnswerString[questionVariantID1] & (1 << i)) >> i))
+                                checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
+
+                            if (((checkbutton.getClickID() & (1 << i)) >> i) == 0 && (((question14AnswerString[questionVariantID1] & (1 << i)) >> i)) >0)
+                                checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
+
+                            if (((checkbutton.getClickID() & (1 << i)) >> i) > 0 && ((checkbutton.getClickID() & (1 << i)) >> i) == ((question14AnswerString[questionVariantID1] & (1 << i)) >> i))
+                                checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
 
 
-                        if (((checkbutton.getClickID() & (1 << 1)) >> 1)>0 && ((checkbutton.getClickID() & (1 << 1)) >> 1) == ((question14AnswerString[questionVariantID1] & (1 << 1)) >> 1))
-                            checkbutton.getquadroTexture()[1].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
-                        else
-                            checkbutton.getquadroTexture()[1].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
-
-
-                        if (((checkbutton.getClickID() & (1 << 2)) >> 2)>0 && ((checkbutton.getClickID() & (1 << 2)) >> 2) == ((question14AnswerString[questionVariantID1] & (1 << 2)) >> 2))
-                            checkbutton.getquadroTexture()[2].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
-                        else 
-                            checkbutton.getquadroTexture()[2].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_wrong.png");
-                        std::cout << ((checkbutton.getClickID() & (1 << 2)) >> 2) << " " << ((question14AnswerString[questionVariantID1] & (1 << 2)) >> 2);
+                        }
 
                     };
                 }
