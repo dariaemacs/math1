@@ -341,10 +341,16 @@ class QuestType1: public Window {
   Buttons Buttons;
 
   int check(int,int,int);
+  int questionVariantID1;
+  int questionVariantID2;
 public:
     QuestType1(int w, int h,  int qtyButtons);
     QuestType1(int fig1, int fig2,  int w, int h,  int qtyButtons);
-    //~QuestType1();
+    int getquestionVariantID1();
+    int getquestionVariantID2();
+    int getquestionVariantID3();
+    int getquestionVariantID4();
+    int getquestionVariantID5();
 };
 
 
@@ -379,13 +385,19 @@ public:
 
 class QuestType2 : public Window {
 
-    //int QTY;
+
     Buttons Buttons;   
     PicturetoView Picture;
+    int questionVariantID1;
+    int questionVariantID2;
     
-    //int check(int, int, int);
 public:
     QuestType2(int w, int h,  int qtyButtons);
+    int getquestionVariantID1();
+    int getquestionVariantID2();
+    int getquestionVariantID3();
+    int getquestionVariantID4();
+    int getquestionVariantID5();
 
 };
 
@@ -402,6 +414,7 @@ public:
         return basketSprite;
     }
 
+
 };
 
 class QuestType3 : public Window {
@@ -413,7 +426,11 @@ class QuestType3 : public Window {
 
 public:
     QuestType3(int , int , int );
-
+    int getquestionVariantID1();
+        int getquestionVariantID2();
+        int getquestionVariantID3();
+        int getquestionVariantID4();
+        int getquestionVariantID5();
 };
 
 class TrainContainer {
@@ -431,12 +448,21 @@ class QuestType4 : public Window {
 
 public:
     QuestType4(int, int, int);
-
+    int getquestionVariantID1() ;
+    int getquestionVariantID2() ;
+    int getquestionVariantID3() ;
+    int getquestionVariantID4() ;
+    int getquestionVariantID5() ;
 };
 class QuestType5 : public Window {
     Buttons Buttons;
 public:
     QuestType5(int, int, int);
+    int getquestionVariantID1();
+    int getquestionVariantID2();
+    int getquestionVariantID3();
+    int getquestionVariantID4();
+    int getquestionVariantID5();
 };
 //class QuestType6;
 class PicturetAndFilmtoView : public PicturetoView {
@@ -468,6 +494,11 @@ class QuestType6 : public Window {
     PicturetAndFilmtoView coin2;
 public:
     QuestType6(int, int, int);
+    int getquestionVariantID1();
+    int getquestionVariantID2();
+    int getquestionVariantID3();
+    int getquestionVariantID4();
+    int getquestionVariantID5();
 
 };
 class squareBoard;
@@ -566,6 +597,11 @@ public:
     QuestType7(int, int);
     squareBoard& getsB() { return sB; }
     bool IsclearButtonClick();
+    int getquestionVariantID1();
+    int getquestionVariantID2();
+    int getquestionVariantID3();
+    int getquestionVariantID4();
+    int getquestionVariantID5();
 };
 
 
@@ -585,7 +621,11 @@ class QuestType8 : public Window {
     
 public:
     QuestType8(int, int);
-  
+    int getquestionVariantID1();
+    int getquestionVariantID2();
+    int getquestionVariantID3();
+    int getquestionVariantID4();
+    int getquestionVariantID5();
 };
 class table {
 
@@ -621,6 +661,7 @@ protected:
         };
         float getmash_x() { return  mash_x; }
         float getmash_y() { return  mash_y; }
+
 };
 
 
@@ -688,6 +729,11 @@ public:
     std::array<sf::Sprite,13> getMashsprite() { return MashSprite; }
     std::array<sf::Sprite,16> getMBerryprite() { return BerrySprite; }
     std::array<sf::Sprite,12> getLeafsprite() { return LeafSprite; }
+    int getquestionVariantID1();
+    int getquestionVariantID2();
+    int getquestionVariantID3();
+    int getquestionVariantID4();
+    int getquestionVariantID5();
 };
 
 class QuestType10 : public Window {
@@ -699,6 +745,12 @@ public:
     QuestType10(int, int);
     int getquestion10Variant1ID() { return question10Variant1ID; }
     int getquestion10Variant2ID() { return question10Variant2ID; }
+
+    int getquestionVariantID1();
+    int getquestionVariantID2();
+    int getquestionVariantID3();
+    int getquestionVariantID4();
+    int getquestionVariantID5();
 };
 
 class QuestType11 : public Window {
@@ -713,6 +765,11 @@ public:
     QuestType11(int, int);
     int getquestion11Variant1ID() { return question11Variant1ID; }
     int getquestion11Variant2ID() { return question11Variant2ID; }
+    int getquestionVariantID1();
+    int getquestionVariantID2();
+    int getquestionVariantID3();
+    int getquestionVariantID4();
+    int getquestionVariantID5();
 };
 
 class QuestType12 : public Window {
@@ -720,6 +777,11 @@ class QuestType12 : public Window {
     questanswerClass questanswer;
 public:
     QuestType12(int, int, int);
+    int getquestionVariantID1();
+    int getquestionVariantID2();
+    int getquestionVariantID3();
+    int getquestionVariantID4();
+    int getquestionVariantID5();
 };
 
 class QuestType13 : public Window {

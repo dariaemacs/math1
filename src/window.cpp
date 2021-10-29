@@ -577,6 +577,80 @@ bool Window::checkandnextQuest(float scale) {
     }
     return false;
 }
+int QuestType1::getquestionVariantID1() { return questionVariantID1;}
+int QuestType1::getquestionVariantID2() { return questionVariantID2;}
+int QuestType1::getquestionVariantID3() { return 0;}
+int QuestType1::getquestionVariantID4() { return 0;}
+int QuestType1::getquestionVariantID5() { return 0;}
+
+int QuestType2::getquestionVariantID1() { return 0; }
+int QuestType2::getquestionVariantID2() { return 0; }
+int QuestType2::getquestionVariantID3() { return 0; }
+int QuestType2::getquestionVariantID4() { return 0; }
+int QuestType2::getquestionVariantID5() { return 0; }
+
+int QuestType3::getquestionVariantID1() { return 0; }
+int QuestType3::getquestionVariantID2() { return 0; }
+int QuestType3::getquestionVariantID3() { return 0; }
+int QuestType3::getquestionVariantID4() { return 0; }
+int QuestType3::getquestionVariantID5() { return 0; }
+
+int QuestType4::getquestionVariantID1() { return 0; }
+int QuestType4::getquestionVariantID2() { return 0; }
+int QuestType4::getquestionVariantID3() { return 0; }
+int QuestType4::getquestionVariantID4() { return 0; }
+int QuestType4::getquestionVariantID5() { return 0; }
+
+int QuestType5::getquestionVariantID1() { return 0; }
+int QuestType5::getquestionVariantID2() { return 0; }
+int QuestType5::getquestionVariantID3() { return 0; }
+int QuestType5::getquestionVariantID4() { return 0; }
+int QuestType5::getquestionVariantID5() { return 0; }
+
+int QuestType6::getquestionVariantID1() { return 0; }
+int QuestType6::getquestionVariantID2() { return 0; }
+int QuestType6::getquestionVariantID3() { return 0; }
+int QuestType6::getquestionVariantID4() { return 0; }
+int QuestType6::getquestionVariantID5() { return 0; }
+
+int QuestType7::getquestionVariantID1() { return 0; }
+int QuestType7::getquestionVariantID2() { return 0; }
+int QuestType7::getquestionVariantID3() { return 0; }
+int QuestType7::getquestionVariantID4() { return 0; }
+int QuestType7::getquestionVariantID5() { return 0; }
+
+int QuestType8::getquestionVariantID1() { return 0; }
+int QuestType8::getquestionVariantID2() { return 0; }
+int QuestType8::getquestionVariantID3() { return 0; }
+int QuestType8::getquestionVariantID4() { return 0; }
+int QuestType8::getquestionVariantID5() { return 0; }
+
+int QuestType9::getquestionVariantID1() { return 0; }
+int QuestType9::getquestionVariantID2() { return 0; }
+int QuestType9::getquestionVariantID3() { return 0; }
+int QuestType9::getquestionVariantID4() { return 0; }
+int QuestType9::getquestionVariantID5() { return 0; }
+
+int QuestType10::getquestionVariantID1() { return 0; }
+int QuestType10::getquestionVariantID2() { return 0; }
+int QuestType10::getquestionVariantID3() { return 0; }
+int QuestType10::getquestionVariantID4() { return 0; }
+int QuestType10::getquestionVariantID5() { return 0; }
+
+int QuestType11::getquestionVariantID1() { return 0; }
+int QuestType11::getquestionVariantID2() { return 0; }
+int QuestType11::getquestionVariantID3() { return 0; }
+int QuestType11::getquestionVariantID4() { return 0; }
+int QuestType11::getquestionVariantID5() { return 0; }
+
+
+
+int QuestType12::getquestionVariantID1() { return 0; }
+int QuestType12::getquestionVariantID2() { return 0; }
+int QuestType12::getquestionVariantID3() { return 0; }
+int QuestType12::getquestionVariantID4() { return 0; }
+int QuestType12::getquestionVariantID5() { return 0; }
+
 
 QuestType1::QuestType1(int w, int h, int qtyButtons) :
 
@@ -599,24 +673,24 @@ QuestType1::QuestType1(int w, int h, int qtyButtons) :
         new Tower(window),
     };
 
-    int fig1 = (rand() % figures.size());
-    int fig2 = 0;
-    while ((fig2 = (rand() % figures.size())) == fig1);
+     questionVariantID1 = (rand() % figures.size());
+     questionVariantID2 = 0;
+    while ((questionVariantID2 = (rand() % figures.size())) == questionVariantID1);
 
-    int rectengleQTY = figures[fig1]->getrectengleQTY() + figures[fig2]->getrectengleQTY();
-    int triangleQTY = figures[fig1]->gettriangleQTY() + figures[fig2]->gettriangleQTY();
-    int circleQTY = figures[fig1]->getcircleQTY() + figures[fig2]->getcircleQTY();
+    int rectengleQTY = figures[questionVariantID1]->getrectengleQTY() + figures[questionVariantID2]->getrectengleQTY();
+    int triangleQTY = figures[questionVariantID1]->gettriangleQTY() + figures[questionVariantID2]->gettriangleQTY();
+    int circleQTY = figures[questionVariantID1]->getcircleQTY() + figures[questionVariantID2]->getcircleQTY();
     sf::Event event;
     while (window->isOpen()) {
         window->clear();
         window->draw(List);
-        figures[fig1]->draw();
-        figures[fig2]->draw();
+        figures[questionVariantID1]->draw();
+        figures[questionVariantID2]->draw();
         if (first) {
             margintopSlideButton =
                 (
-                (figures[fig1]->getymax() * figures[fig1]->getkoef() > figures[fig2]->getymax()* figures[fig2]->getkoef() ? figures[fig1]->getymax() * figures[fig1]->getkoef() : figures[fig2]->getymax() * figures[fig2]->getkoef())
-                    ) + (figures[fig1]->getmargin_top() > figures[fig2]->getmargin_top() ? figures[fig1]->getmargin_top() : figures[fig2]->getmargin_top());
+                (figures[questionVariantID1]->getymax() * figures[questionVariantID1]->getkoef() > figures[questionVariantID2]->getymax()* figures[questionVariantID2]->getkoef() ? figures[questionVariantID1]->getymax() * figures[questionVariantID1]->getkoef() : figures[questionVariantID2]->getymax() * figures[questionVariantID2]->getkoef())
+                    ) + (figures[questionVariantID1]->getmargin_top() > figures[questionVariantID2]->getmargin_top() ? figures[questionVariantID1]->getmargin_top() : figures[questionVariantID2]->getmargin_top());
             Buttons.setMargin_top(margintopSlideButton + 10);
             Buttons.CalcucateCoordinate(); first = false;
             QuestComment.setmargin_top(h - Buttons.getHeight());
@@ -681,15 +755,15 @@ QuestType2::QuestType2(int w, int h, int qtyButtons) :
     ArrowButtonSprite.setTexture(ArrowButtonTexture);
 
 
-    int N = (rand() % 20);
-    int M = 0;
-    while ((M = (rand() % 20) + 1) >= N) {
-        N = (rand() % 20);
+     questionVariantID1 = (rand() % 20);
+     questionVariantID2 = 0;
+    while ((questionVariantID2 = (rand() % 20) + 1) >= questionVariantID1) {
+        questionVariantID1 = (rand() % 20);
     }
 
 
-    textFrame.setN_M(N, M);
-    Picture.setButtonCount(N);
+    textFrame.setN_M(questionVariantID1, questionVariantID2);
+    Picture.setButtonCount(questionVariantID1);
 
     Picture.setpictureFilename("resources/images/" + filenamesforPicaQuest2[getQuestNumber()]);
     Picture.setMargin_left(10);
@@ -697,7 +771,7 @@ QuestType2::QuestType2(int w, int h, int qtyButtons) :
 
     Picture.CalcucateCoordinate();
 
-    Buttons.setButtonCount(N);
+    Buttons.setButtonCount(questionVariantID1);
 
     sf::Event event;
     while (window->isOpen()) {
@@ -745,13 +819,13 @@ QuestType2::QuestType2(int w, int h, int qtyButtons) :
 
                     int rightfigurCount = 0;
                     ////std::cout << Buttons.GetButtonsClickID()+1 = N- << std::endl;
-                    if (Buttons.GetButtonsClickID() + 1 == N - M)  QuestComment.settext(CommentsDic[1]);    else {
+                    if (Buttons.GetButtonsClickID() + 1 == questionVariantID1 - questionVariantID2)  QuestComment.settext(CommentsDic[1]);    else {
                         QuestComment.settext(CommentsDic[2]);
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
-                        Buttons.getButtonTexture()[N - M - 1]->loadFromFile(
-                            "resources/images/digit" + std::to_string(N - M) + "_right.jpg"
+                        Buttons.getButtonTexture()[questionVariantID1 - questionVariantID2 - 1]->loadFromFile(
+                            "resources/images/digit" + std::to_string(questionVariantID1 - questionVariantID2) + "_right.jpg"
                         );
                     }
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
@@ -772,7 +846,7 @@ QuestType2::QuestType2(int w, int h, int qtyButtons) :
 
     srand(time(0));
 }
-
+/*
 QuestType1::QuestType1(int fig1, int fig2, int w, int h, int qtyButtons) :
     Window(w, h, (rand() % 3), 0),
     Buttons(qtyButtons, *this)
@@ -903,7 +977,7 @@ QuestType1::QuestType1(int fig1, int fig2, int w, int h, int qtyButtons) :
 
     }
 }
-
+*/
 PicturetoViewQuestWithBasket::PicturetoViewQuestWithBasket(Window& w) : PicturetoView(w) {};
 
 void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
