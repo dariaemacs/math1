@@ -1237,7 +1237,7 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
 
     //shape.setFillColor(sf::Color::Red);
 
-    int numSeriesIndex = rand() % numSeries.size();
+    questionVariantID1 = rand() % numSeries.size();
     struct closenumberStruct { int index; int closeNumber; };
     std::array< int, 3> closeNumber;
     std::array< closenumberStruct, 3 > usercloseNumberEnter;
@@ -1269,7 +1269,7 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
 
     for (int i = 0; i < numSeries[0].size(); i++) {
         numberInTrain.push_back(new Mysf_text(50));
-        numberInTrain[i]->setString(std::to_string(numSeries[numSeriesIndex][i]));
+        numberInTrain[i]->setString(std::to_string(numSeries[questionVariantID1][i]));
 
         numberInTrain[i]->setFont(font);
 
@@ -1378,9 +1378,9 @@ QuestType4::QuestType4(int w, int h, int qtyButtons) :
 
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
 
-                    if ((numSeries[numSeriesIndex][closeNumber[0]] == usercloseNumberEnter[0].closeNumber) &&
-                        (numSeries[numSeriesIndex][closeNumber[1]] == usercloseNumberEnter[1].closeNumber) &&
-                        (numSeries[numSeriesIndex][closeNumber[2]] == usercloseNumberEnter[2].closeNumber))
+                    if ((numSeries[questionVariantID1][closeNumber[0]] == usercloseNumberEnter[0].closeNumber) &&
+                        (numSeries[questionVariantID1][closeNumber[1]] == usercloseNumberEnter[1].closeNumber) &&
+                        (numSeries[questionVariantID1][closeNumber[2]] == usercloseNumberEnter[2].closeNumber))
                         QuestComment.settext(CommentsDic[1]);
                     else QuestComment.settext(CommentsDic[2]);
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());

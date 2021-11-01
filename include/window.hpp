@@ -444,15 +444,17 @@ class QuestType4 : public Window {
 
     Buttons Buttons;
 
-
+    int questionVariantID1;
+    int questionVariantID2;
 
 public:
     QuestType4(int, int, int);
-    int getquestionVariantID1() ;
-    int getquestionVariantID2() ;
-    int getquestionVariantID3() ;
-    int getquestionVariantID4() ;
-    int getquestionVariantID5() ;
+    int getquestionVariantID1();
+    int getquestionVariantID2();
+    int getquestionVariantID3();
+    int getquestionVariantID4();
+    int getquestionVariantID5();
+
 };
 class QuestType5 : public Window {
     Buttons Buttons;
@@ -568,7 +570,8 @@ class squareBoard {
        }
        void printChekpointInput() {
            result = 0;
-           if (ChekpointInput.size() > 0) for (int i = 0; i < ChekpointInput.size(); i++) {
+           if (ChekpointInput.size() > 0) 
+               for (unsigned int i = 0; i < ChekpointInput.size(); i++) {
                result = result * 100 + ChekpointInput[i] ;
            }
                

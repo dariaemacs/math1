@@ -1,6 +1,6 @@
 git add --all 
 
-git commit -m 'testing_version_1' 
+git commit -m 'check_point1' 
 
 git push -u 
 pause
