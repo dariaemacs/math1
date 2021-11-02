@@ -147,8 +147,8 @@ void PicturetoView::CalcucateCoordinate() {
     {
         do {
             scale = scale - 0.01f;
-            PICTURESIZE_W = PICTURESIZE.x * static_cast<unsigned int>(scale);
-            PICTURESIZE_H = PICTURESIZE.y * static_cast<unsigned int>(scale);
+            PICTURESIZE_W = static_cast<unsigned int>(PICTURESIZE.x * scale);
+            PICTURESIZE_H = static_cast<unsigned int>(PICTURESIZE.y * scale);
             ////std::cout << "k=" << scale << std::endl;
             ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
         } while (((PICTURESIZE_W * round(ButtonCount) + round((ButtonCount)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
@@ -178,8 +178,8 @@ void PicturetoView::CalcucateCoordinate() {
         cout << "scale = " << scale << endl;
         do {
             scale = scale - 0.01f;
-            PICTURESIZE_W = PICTURESIZE.x * static_cast<unsigned int>(scale);
-            PICTURESIZE_H = PICTURESIZE.y * static_cast<unsigned int>(scale);
+            PICTURESIZE_W = static_cast<unsigned int>(PICTURESIZE.x * scale);
+            PICTURESIZE_H = static_cast<unsigned int>(PICTURESIZE.y * scale);
             ////std::cout << "k=" << scale << std::endl;
             ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
         } while (((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
@@ -332,6 +332,7 @@ void TextFrameBase::CalcucateCoordinate(const float w, const float h) {
         width =  text.getLocalBounds().width;
         height = text.getLocalBounds().height;
     }
+  
     margin_top = text.getLocalBounds().top;
 }
 
@@ -689,7 +690,7 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
             Buttons.setMargin_top(margintopSlideButton + 10);
             Buttons.CalcucateCoordinate(); first = false;
             QuestComment.setmargin_top(h - Buttons.getHeight());
-            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft()-10, Buttons.getMarginTop());
         }
         window->draw(QuestComment.gettext());
         window->draw(textFrame.gettext());
@@ -1996,7 +1997,7 @@ WindowLink(wl), CurrentClickpoint(-1)
 
 void squareBoard::addLine(float ax, float ay, float bx, float by) {
     line.push_back(MyVertexArray());
-    int size = line.size() - 1;
+    size_t size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
     line[size].resize(2);
     line[size][0].position = sf::Vector2f(ax, ay);
@@ -2142,7 +2143,7 @@ float point::getSize() { return size; }
 void point::setSb(squareBoard* sBB) { Sb = sBB; }
 void point::setPosition(float ii, float jj) {
     float tmp = Sb->getsquareWidth();
-    float squarefromVertical = static_cast<int>(Sb->getwidthsqareBord() / Sb->getsquareWidth());
+    float squarefromVertical = Sb->getwidthsqareBord() / Sb->getsquareWidth();
     float point0 = (squarefromVertical - 28) / 2;
     i = ii;
     j = jj;
@@ -2208,7 +2209,7 @@ bool squareBoard::isfigureInputright(const unsigned long long* figureAnswer) {
 }
 
 
-QuestType7::QuestType7(int w, int h) :
+QuestType7::QuestType7(float w, float h) :
     Window(w, h, ((rand() % 3)), 6),
     sB(w, h, *this) {
     bool first = true;
@@ -2304,7 +2305,7 @@ QuestType7::QuestType7(int w, int h) :
                 sf::VertexArray VA = sB.getLastline();
                 ////std::cout << M.x << "x" << M.y << std::endl;
                 sB.dellLastline();
-                int szPoint = sB.getCheckPoint()[0].getSize() / 2;
+                float szPoint = sB.getCheckPoint()[0].getSize() / 2;
                 sB.addLine(XY.x + szPoint, XY.y + szPoint, M.x + szPoint, M.y + szPoint);
                 trydrawLine = true;
 
@@ -2316,7 +2317,7 @@ QuestType7::QuestType7(int w, int h) :
 }
 
 
-QuestType8::QuestType8(int w, int h)
+QuestType8::QuestType8(float w, float h)
     :Window(w, h, ((rand() % 4)), 7),
     setofpic0(*this),
     setofpic1(*this),
@@ -2427,7 +2428,7 @@ QuestType8::QuestType8(int w, int h)
         }
     }
 
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(NULL)));
 }
 
 table::table(Window& wlink) :WindowLink(wlink) {
@@ -2450,7 +2451,7 @@ table::table(Window& wlink) :WindowLink(wlink) {
     text[0].setFont(font);
     text[0].setFillColor(sf::Color::Black);
     text[0].setPosition(sf::Vector2f(0, 0));
-    text[0].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);  //WindowLink.getWindow()->draw(text[4]);
+    text[0].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);  //WindowLink.getWindow()->draw(text[4]);
 
     float height0Row = text[0].getLocalBounds().height + 10;
     float width0Row = text[0].getLocalBounds().width + 30;
@@ -2468,7 +2469,7 @@ table::table(Window& wlink) :WindowLink(wlink) {
     text[0].setFont(font);
     text[0].setFillColor(sf::Color::Black);
     text[0].setPosition(sf::Vector2f(10, margintop - 3));
-    text[0].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    text[0].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
 
 
     horizline[0][0].position = sf::Vector2f(10, margintop);
@@ -2485,7 +2486,7 @@ table::table(Window& wlink) :WindowLink(wlink) {
     text[4].setFont(font);
     text[4].setFillColor(sf::Color::Black);
     text[4].setPosition(sf::Vector2f(10, margintop + height0Row));
-    text[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    text[4].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
 
 
     horizline[2][0].position = sf::Vector2f(10, margintop + height0Row + 3 * mash_height);
@@ -2515,7 +2516,7 @@ table::table(Window& wlink) :WindowLink(wlink) {
     text[1].setFont(font);
     text[1].setFillColor(sf::Color::Black);
     text[1].setPosition(sf::Vector2f(width0Row, margintop - 3));
-    text[1].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    text[1].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
     mash_x = width0Row;
     mash_y = margintop + height0Row;
 
@@ -2529,7 +2530,7 @@ table::table(Window& wlink) :WindowLink(wlink) {
     text[2].setFont(font);
     text[2].setFillColor(sf::Color::Black);
     text[2].setPosition(sf::Vector2f(width0Row + objectsrowWidth, margintop - 3));
-    text[2].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    text[2].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
 
     //text[5].setString(CommentsDic[4]);
     //text[5].setFont(font);
@@ -2546,7 +2547,7 @@ table::table(Window& wlink) :WindowLink(wlink) {
     text[3].setFont(font);
     text[3].setFillColor(sf::Color::Black);
     text[3].setPosition(sf::Vector2f(width0Row + 2 * objectsrowWidth, margintop - 3));
-    text[3].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    text[3].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
 
 
     verticalline[4][0].position = sf::Vector2f(width0Row + 3 * objectsrowWidth - 10, margintop);
@@ -2558,7 +2559,7 @@ table::table(Window& wlink) :WindowLink(wlink) {
     text[5].setFont(font);
     text[5].setFillColor(sf::Color::Black);
     text[5].setPosition(sf::Vector2f(10, margintop + height0Row + 3 * mash_height));
-    text[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
+    text[5].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
 
     //objectsrowWidth / 4 
 
@@ -2629,7 +2630,7 @@ table3_5::table3_5(Window& w) :WindowLink(w) {
     mash_width = objectsrowWidth / 4;
     mash_height = mash_width;
 
-    calcFontSize(width0Row - 10, height0Row - 8);
+    calcFontSize(static_cast<int>(width0Row) - 10, static_cast<int>(height0Row) - 8);
 
     float k = 5;
     //getquestion14VariantID1();
@@ -2639,7 +2640,7 @@ table3_5::table3_5(Window& w) :WindowLink(w) {
     text[0].setFillColor(sf::Color::Black);
     text[0].setPosition(sf::Vector2f(10 + k, margintop - 3));
     //text[0].setPosition(sf::Vector2f(200,200));
-    text[0].setCharacterSize(fontSize);
+    text[0].setCharacterSize(static_cast<int>(fontSize));
     horizline[0][0].position = sf::Vector2f(10, margintop);
     horizline[0][1].position = sf::Vector2f(width0Row * 3, margintop);
     horizline[0][0].color = sf::Color::Black;
@@ -2677,10 +2678,10 @@ table3_5::table3_5(Window& w) :WindowLink(w) {
     verticalline[1][1].color = sf::Color::Black;
     text[1].setString(CommentsDic[11]);
     text[1].setFont(font);
-    text[1].setCharacterSize(fontSize);
+    text[1].setCharacterSize(static_cast<int>(fontSize));
     text[1].setFillColor(sf::Color::Black);
     text[1].setPosition(sf::Vector2f(width0Row + k, margintop - 3));
-    text[1].setCharacterSize(fontSize);
+    text[1].setCharacterSize(static_cast<int>(fontSize));
     mash_x = width0Row;
     mash_y = margintop + height0Row;
 
@@ -2694,7 +2695,7 @@ table3_5::table3_5(Window& w) :WindowLink(w) {
     text[2].setFont(font);
     text[2].setFillColor(sf::Color::Black);
     text[2].setPosition(sf::Vector2f(width0Row * 2 + k, margintop - 3));
-    text[2].setCharacterSize(fontSize);
+    text[2].setCharacterSize(static_cast<int>(fontSize));
 
 
     verticalline[3][0].position = sf::Vector2f(width0Row * 3, margintop - 3);
@@ -2709,23 +2710,23 @@ table3_5::table3_5(Window& w) :WindowLink(w) {
     text[3].setFont(font);
     text[3].setFillColor(sf::Color::Black);
     text[3].setPosition(sf::Vector2f(10 + k, margintop + height0Row));
-    text[3].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-    text[3].setCharacterSize(fontSize);
+    text[3].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
+    text[3].setCharacterSize(static_cast<int>(fontSize));
 
     text[4].setString(question14TextVariant[w.getquestionVariantID1()][1]);
     text[4].setFont(font);
     text[4].setFillColor(sf::Color::Black);
     text[4].setPosition(sf::Vector2f(10 + k, margintop + 2 * height0Row));
-    text[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-    text[4].setCharacterSize(fontSize);
+    text[4].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
+    text[4].setCharacterSize(static_cast<int>(fontSize));
 
 
     text[5].setString(question14TextVariant[w.getquestionVariantID1()][2]);
     text[5].setFont(font);
     text[5].setFillColor(sf::Color::Black);
     text[5].setPosition(sf::Vector2f(10 + k, margintop - 3 + height0Row * 3));
-    text[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-    text[5].setCharacterSize(fontSize);
+    text[5].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
+    text[5].setCharacterSize(static_cast<int>(fontSize));
     horizline[4].resize(2);
     horizline[4].setPrimitiveType(sf::LineStrip);
     horizline[4][0].position = sf::Vector2f(10, margintop + height0Row * 4);
@@ -2737,43 +2738,43 @@ table3_5::table3_5(Window& w) :WindowLink(w) {
     Celltext[0].setFont(font);
     Celltext[0].setFillColor(sf::Color::Black);
     Celltext[0].setPosition(sf::Vector2f(width0Row + width0Row / 2, margintop - 3 + height0Row));
-    Celltext[0].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-    Celltext[0].setCharacterSize(fontSize);
+    Celltext[0].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
+    Celltext[0].setCharacterSize(static_cast<int>(fontSize));
 
     Celltext[1].setString(question14DigitsInTable[w.getquestionVariantID1()][0][1]);
     Celltext[1].setFont(font);
     Celltext[1].setFillColor(sf::Color::Black);
     Celltext[1].setPosition(sf::Vector2f(width0Row + width0Row / 2, margintop - 3 + 2 * height0Row));
-    Celltext[1].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-    Celltext[1].setCharacterSize(fontSize);
+    Celltext[1].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
+    Celltext[1].setCharacterSize(static_cast<int>(fontSize));
 
     Celltext[2].setString(question14DigitsInTable[w.getquestionVariantID1()][0][2]);
     Celltext[2].setFont(font);
     Celltext[2].setFillColor(sf::Color::Black);
     Celltext[2].setPosition(sf::Vector2f(width0Row + width0Row / 2, margintop - 3 + 3 * height0Row));
-    Celltext[2].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-    Celltext[2].setCharacterSize(fontSize);
+    Celltext[2].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
+    Celltext[2].setCharacterSize(static_cast<int>(fontSize));
 
     Celltext[3].setString(question14DigitsInTable[w.getquestionVariantID1()][1][0]);
     Celltext[3].setFont(font);
     Celltext[3].setFillColor(sf::Color::Black);
     Celltext[3].setPosition(sf::Vector2f(width0Row * 2 + width0Row / 2, margintop - 3 + height0Row));
-    Celltext[3].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-    Celltext[3].setCharacterSize(fontSize);
+    Celltext[3].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
+    Celltext[3].setCharacterSize(static_cast<int>(fontSize));
 
     Celltext[4].setString(question14DigitsInTable[w.getquestionVariantID1()][1][1]);
     Celltext[4].setFont(font);
     Celltext[4].setFillColor(sf::Color::Black);
     Celltext[4].setPosition(sf::Vector2f(width0Row * 2 + width0Row / 2, margintop - 3 + 2 * height0Row));
-    Celltext[4].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-    Celltext[4].setCharacterSize(fontSize);
+    Celltext[4].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
+    Celltext[4].setCharacterSize(static_cast<int>(fontSize));
 
     Celltext[5].setString(question14DigitsInTable[w.getquestionVariantID1()][1][2]);
     Celltext[5].setFont(font);
     Celltext[5].setFillColor(sf::Color::Black);
     Celltext[5].setPosition(sf::Vector2f(width0Row * 2 + width0Row / 2, margintop - 3 + 3 * height0Row));
-    Celltext[5].setCharacterSize(WindowLink.gettextFrame().getSize() - 15);
-    Celltext[5].setCharacterSize(fontSize);
+    Celltext[5].setCharacterSize(static_cast<int>(WindowLink.gettextFrame().getSize()) - 15);
+    Celltext[5].setCharacterSize(static_cast<int>(fontSize));
 
 
 }
@@ -2800,7 +2801,7 @@ void table3_5::draw() {
 
 }
 
-QuestType9::QuestType9(int w, int h, int qtyButtons) :
+QuestType9::QuestType9(float w, float h, int qtyButtons) :
     Window(w, h, ((rand() % 4)), 8),
     Buttons(qtyButtons, *this),
     tab(*this)
@@ -2841,7 +2842,7 @@ QuestType9::QuestType9(int w, int h, int qtyButtons) :
 
             first = false;
 
-            Buttons.CalcucateCoordinate((h - tab.gettablemax_y()) / 1.4);
+            Buttons.CalcucateCoordinate((h - tab.gettablemax_y()) / 1.4f);
             first = false;
             QuestComment.setmargin_top(Buttons.getMarginTop());
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
@@ -2852,38 +2853,38 @@ QuestType9::QuestType9(int w, int h, int qtyButtons) :
                     tab.getmash_width()
                     , tab.getmash_y()));
 
-                BerrySprite[i].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+                BerrySprite[i].setScale(tab.getmash_koeff() + 0.08f, tab.getmash_koeff() + 0.08f);
                 BerrySprite[i].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x() + i *
                     tab.getmash_width()
                     , tab.getmash_y()));
 
-                LeafSprite[i].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+                LeafSprite[i].setScale(tab.getmash_koeff() + 0.041f, tab.getmash_koeff() + 0.041f);
                 LeafSprite[i].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() + i *
                     tab.getmash_width()
                     , tab.getmash_y()));
 
-                LeafSprite[i + 6].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+                LeafSprite[i + 6].setScale(tab.getmash_koeff() + 0.041f, tab.getmash_koeff() + 0.041f);
                 LeafSprite[i + 6].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() + i *
                     tab.getmash_width()
                     , tab.getmash_y() + 3 * tab.getmash_height()));
 
             }
 
-            LeafSprite[4].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+            LeafSprite[4].setScale(tab.getmash_koeff() + 0.041f, tab.getmash_koeff() + 0.041f);
             LeafSprite[4].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x()
                 , tab.getmash_y() + tab.getmash_height()));
 
-            LeafSprite[5].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+            LeafSprite[5].setScale(tab.getmash_koeff() + 0.041f, tab.getmash_koeff() + 0.041f);
             LeafSprite[5].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() +
                 tab.getmash_width()
                 , tab.getmash_y() + tab.getmash_height()));
 
 
-            LeafSprite[10].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+            LeafSprite[10].setScale(tab.getmash_koeff() + 0.041f, tab.getmash_koeff() + 0.041f);
             LeafSprite[10].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x()
                 , tab.getmash_y() + 4 * tab.getmash_height()));
 
-            LeafSprite[11].setScale(tab.getmash_koeff() + 0.041, tab.getmash_koeff() + 0.041);
+            LeafSprite[11].setScale(tab.getmash_koeff() + 0.041f, tab.getmash_koeff() + 0.041f);
             LeafSprite[11].setPosition(sf::Vector2f(8 * tab.getmash_width() + tab.getmash_x() +
                 tab.getmash_width()
                 , tab.getmash_y() + 4 * tab.getmash_height()));
@@ -2895,13 +2896,13 @@ QuestType9::QuestType9(int w, int h, int qtyButtons) :
                     tab.getmash_width()
                     , tab.getmash_y() + tab.getmash_height()));
 
-                BerrySprite[i + 4].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+                BerrySprite[i + 4].setScale(tab.getmash_koeff() + 0.08f, tab.getmash_koeff() + 0.08f);
                 BerrySprite[i + 4].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x() + i *
                     tab.getmash_width()
                     , tab.getmash_y() + tab.getmash_height()));
 
             }
-            BerrySprite[8].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+            BerrySprite[8].setScale(tab.getmash_koeff() + 0.08f, tab.getmash_koeff() + 0.08f);
             BerrySprite[8].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x()
                 , tab.getmash_y() + tab.getmash_height() * 2));
 
@@ -2913,7 +2914,7 @@ QuestType9::QuestType9(int w, int h, int qtyButtons) :
                     , tab.getmash_y() + 3 * tab.getmash_height()));
 
 
-                BerrySprite[i + 9].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+                BerrySprite[i + 9].setScale(tab.getmash_koeff() + 0.08f, tab.getmash_koeff() + 0.08f);
                 BerrySprite[i + 9].setPosition(sf::Vector2f(4 * tab.getmash_width() + tab.getmash_x() + i *
                     tab.getmash_width()
                     , tab.getmash_y() + 3 * tab.getmash_height()));
@@ -2924,7 +2925,7 @@ QuestType9::QuestType9(int w, int h, int qtyButtons) :
             MashSprite[12].setPosition(sf::Vector2f(tab.getmash_x()
                 , tab.getmash_y() + 4 * tab.getmash_height()));
             for (int i = 0; i < 3; i++) {
-                BerrySprite[13 + i].setScale(tab.getmash_koeff() + 0.08, tab.getmash_koeff() + 0.08);
+                BerrySprite[13 + i].setScale(tab.getmash_koeff() + 0.08f, tab.getmash_koeff() + 0.08f);
                 BerrySprite[13 + i].setPosition(sf::Vector2f(
                     4 * tab.getmash_width() + tab.getmash_x() + i *
                     tab.getmash_width()
@@ -2996,7 +2997,7 @@ QuestType9::QuestType9(int w, int h, int qtyButtons) :
         }
     }
 
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(NULL)));
 
 };
 sf::Font& CheckButton::getFont() { return font; }
@@ -3005,7 +3006,7 @@ std::array<sf::Texture, 4>& CheckButton::getquadroTexture() { return quadroTextu
 float CheckButton::getQudroSize() {
     return qudroSize;
 }
-float CheckButton::getTextmarginleft() { return textmarginleft; }
+float CheckButton::getTextmarginleft() { return static_cast<float>(textmarginleft); }
 void CheckButton::setStrValue(int index, std::wstring str1, int SIZE = 28) {
     getFont().loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
     getText()[index] = sf::Text(str1, getFont(), 28);
@@ -3049,7 +3050,7 @@ void CheckButton::setTextValue(int index) {
 
         float x = quadroSprite[i].getPosition().x; // +qudroSize;
         float tmiii = quadroSprite[i].getLocalBounds().width;
-        str[i].setLineSpacing(0.001);
+        str[i].setLineSpacing(0.001f);
         float huuu = str[i].getLineSpacing();
 
         float y = quadroSprite[i].getPosition().y + (qudroSize - getHeightText()) / 2;
@@ -3096,7 +3097,7 @@ std::array<sf::Text, 4>& CheckButton::getText() {
 
 std::string mySpriteCheckButton::getFN() { return fn; };
 bool mySpriteCheckButton::getActive() { return active; }
-QuestType10::QuestType10(int w, int h) :
+QuestType10::QuestType10(float w, float h) :
     Window(w, h, 0, 9),
     checkbutton(*this)
 {
@@ -3120,7 +3121,7 @@ QuestType10::QuestType10(int w, int h) :
         question10Variant2[question10Variant2ID][question10VariantForRandom2[question10Variant3ID][2]]
     );
     std::wstring question = question10Text[getQuestNumber()].questionText;
-    int posn = question.find(replaceFrom);
+    size_t posn = question.find(replaceFrom);
     if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
 
     replaceFrom = L"M";
@@ -3216,7 +3217,7 @@ QuestType10::QuestType10(int w, int h) :
         }
     }
 
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(NULL)));
 
 };
 void CheckButton11::SetSpacing(float space) {
@@ -3234,24 +3235,24 @@ void PicturetoView11::CalcucateCoordinate(float w) {
     using namespace std;
     sf::Texture tmp;
 
-    int button_margin_left = margin_left;
+    float button_margin_left = margin_left;
     tmp.loadFromFile(pictureFilename + ".png");
     sf::Vector2u PICTURESIZE = tmp.getSize();
     if (PICTURESIZE.x > PICTURESIZE.y&& PICTURESIZE.x / PICTURESIZE.y >= 2)  PICTURESIZE.x /= 2;
-    int ButtonSlideHeght = WindowLink.getHeight() / 3;
+    float ButtonSlideHeght = WindowLink.getHeight() / 3;
 
-    float PICTURESIZE_W = PICTURESIZE.x;
-    width = PICTURESIZE.x;
-    float PICTURESIZE_H = PICTURESIZE.y;
+    int PICTURESIZE_W = PICTURESIZE.x;
+    width = static_cast<float>(PICTURESIZE.x);
+    int PICTURESIZE_H = PICTURESIZE.y;
     ////std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
-    scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
+    scale = static_cast<float>(PICTURESIZE_W / (PICTURESIZE_W - 5));
 
     if (ButtonCount < 7)  // 1 row of pictures
     {
         do {
-            scale = scale - 0.01;
-            PICTURESIZE_W = PICTURESIZE.x * scale;
-            PICTURESIZE_H = PICTURESIZE.y * scale;
+            scale = scale - 0.01f;
+            PICTURESIZE_W = static_cast<int>(PICTURESIZE.x * scale);
+            PICTURESIZE_H = static_cast<int>(PICTURESIZE.y * scale);
         } while ((PICTURESIZE_W * round(ButtonCount)) > WindowLink.getWidth() / 2);
 
 
@@ -3269,11 +3270,11 @@ void PicturetoView11::CalcucateCoordinate(float w) {
         }
     }
 
-    height = PICTURESIZE_H;
+    height = static_cast<float>(PICTURESIZE_H);
 
 
 }
-QuestType11::QuestType11(int w, int h) :
+QuestType11::QuestType11(float w, float h) :
     Window(w, h, 0, 10),
     checkbutton(*this),
     picture1(*this),
@@ -3281,7 +3282,7 @@ QuestType11::QuestType11(int w, int h) :
 {
 
     bool first = true;
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(NULL)));
     question11Variant1ID = rand() % 2;
     question11Variant2ID = rand() % (sizeof(question11pictureFN) / sizeof(question11pictureFN[0]));
     question11Variant3ID = rand() % (sizeof(question11ALLVariants) / sizeof(question11ALLVariants[0]));
@@ -3296,7 +3297,7 @@ QuestType11::QuestType11(int w, int h) :
     std::wstring replaceFrom = L"N";
     std::wstring replaceTo = question11Variant1[question11Variant1ID];
 
-    int posn = question.find(replaceFrom);
+    size_t posn = question.find(replaceFrom);
     if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
 
     textFrame.settext(question);
@@ -3432,11 +3433,11 @@ QuestType11::QuestType11(int w, int h) :
         }
     }
 
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(NULL)));
 
 }
 
-QuestType12::QuestType12(int w, int h, int qtyButtons) :
+QuestType12::QuestType12(float w, float h, int qtyButtons) :
     Window(w, h,
 
     (rand() % 6)
@@ -3545,13 +3546,13 @@ QuestType12::QuestType12(int w, int h, int qtyButtons) :
 
             }
         }
-        srand(time(0));
+        srand(static_cast<unsigned int>(time(NULL)));
     }
 }
 float CheckButton::getcoeff() {
     return coeff;
 }
-QuestType13::QuestType13(int w, int h) :
+QuestType13::QuestType13(float w, float h) :
     Window(w, h, 0, 12),
     checkbutton(*this)
 
@@ -3567,15 +3568,15 @@ QuestType13::QuestType13(int w, int h) :
     };
     bool first = true;
     FrameFigure::resetnumber_of_figure();
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(NULL)));
     int SIZE = sizeof(pica) / sizeof(*pica);
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(NULL)));
     questionVariantID1 = rand() % SIZE;
     SIZE = sizeof(question13Variant) / sizeof(*question13Variant);
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(NULL)));
     questionVariantID2 = rand() % SIZE;
     SIZE = sizeof(question13VariantofRandom) / sizeof(*question13VariantofRandom);
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(NULL)));
     questionVariantID3 = rand() % SIZE;
 
     ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
@@ -3598,7 +3599,7 @@ QuestType13::QuestType13(int w, int h) :
 
 
 
-            QuestComment.CalcucateCoordinate(h / 3, w / 2);
+            QuestComment.CalcucateCoordinate(static_cast<float>(h / 3), static_cast<float>(w / 2));
             checkbutton.Set_margitop((h - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y);
 
             QuestComment.setmargin_top(checkbutton.getSprite()[0].getPosition().y - checkbutton.getQudroSize() - 25);
@@ -3714,18 +3715,19 @@ void table3_5::calcFontSize(const int w, const int h) {
 
 
     fontSize = 50;
-    text[0].setCharacterSize(fontSize);
-    int width = text[0].getLocalBounds().width; int height = text[0].getLocalBounds().height;
+    text[0].setCharacterSize(static_cast<int>(fontSize));
+    float width = text[0].getLocalBounds().width; float height = text[0].getLocalBounds().height;
     while (width > w || height > h)
     {
-        if (fontSize > 0) text[0].setCharacterSize(fontSize--); else return;
+        fontSize--;
+        if (fontSize > 0) text[0].setCharacterSize(static_cast<int>(fontSize)); else return;
         width = text[0].getLocalBounds().width;
         height = text[0].getLocalBounds().height;
     }
     fontSize--;
     //margin_top = text[0].getLocalBounds().top;
 }
-QuestType15::QuestType15(int w, int h, int qtyButtons) :
+QuestType15::QuestType15(float w, float h, int qtyButtons) :
     questionVariantID1(rand() % 3),
     questionVariantID2(rand() % 3),
     Window(w, h, 0, 13),
@@ -3742,7 +3744,7 @@ QuestType15::QuestType15(int w, int h, int qtyButtons) :
     textFrame.settext(question14Text[0].questionText + L" " + question14Text1[questionVariantID1] + L"\n" +
         question14Text2[questionVariantID1][1]
     );
-    textFrame.CalcucateCoordinate(w - w * 10 / 100, h / 3);
+    textFrame.CalcucateCoordinate(w - w * 10 / 100.0f, h / 3.0f);
 
 
     while (window->isOpen()) {
@@ -3754,7 +3756,7 @@ QuestType15::QuestType15(int w, int h, int qtyButtons) :
 
             first = false;
 
-            buttons.CalcucateCoordinate((h - 100) / 1.4);
+            buttons.CalcucateCoordinate((h - 100) / 1.4f);
 
             QuestComment.setmargin_top(buttons.getMarginTop());
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
@@ -3827,12 +3829,12 @@ QuestType15::QuestType15(int w, int h, int qtyButtons) :
         }
     }
 
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(NULL)));
 
 
 }
 
-QuestType16::QuestType16(int w, int h, int qtyButtons) :
+QuestType16::QuestType16(float w, float h, int qtyButtons) :
     questionVariantID1(rand() % 3),
     questionVariantID2(rand() % 3),
     Window(w, h, 0, 13),
@@ -3861,7 +3863,7 @@ QuestType16::QuestType16(int w, int h, int qtyButtons) :
 
             first = false;
 
-            buttons.CalcucateCoordinate((h - 100) / 1.4);
+            buttons.CalcucateCoordinate((h - 100) / 1.4f);
 
             QuestComment.setmargin_top(buttons.getMarginTop());
             QuestComment.CalcucateCoordinate(h / 3, w / 2);
@@ -3944,12 +3946,12 @@ QuestType16::QuestType16(int w, int h, int qtyButtons) :
         }
     }
 
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(NULL)));
 
 
 }
 
-QuestType14::QuestType14(int w, int h, int qtyButtons) :
+QuestType14::QuestType14(float w, float h, int qtyButtons) :
     questionVariantID1(rand() % 3),
     questionVariantID2(rand() % 3),
     Window(w, h, 0, 13),
@@ -3966,7 +3968,7 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
     textFrame.settext(question14Text[0].questionText + L" " + question14Text1[questionVariantID1] + L"\n" +
         question14Text2[questionVariantID1][0]
     );
-    textFrame.CalcucateCoordinate(w - w * 10 / 100, h / 3);
+    textFrame.CalcucateCoordinate(w - w * 10 / 100.0f, h / 3.0f);
 
 
     while (window->isOpen()) {
@@ -3984,7 +3986,7 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
             QuestComment.setmargin_top(100);
        
             checkbutton.Set_margitop(tab.getmargintop() + tab.getheight0Row() * 6);
-            QuestComment.CalcucateCoordinate(h / 3, w / 2);
+            QuestComment.CalcucateCoordinate(h / 3.0f, w / 2.0f);
              //QuestComment.
             //checkbutton.SetSpacing(200);
             QuestComment.setmargin_top(tab.getmargintop() + tab.getheight0Row() * 4);
@@ -4074,7 +4076,7 @@ QuestType14::QuestType14(int w, int h, int qtyButtons) :
 
         }
     }
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(NULL)));
 
 
 }

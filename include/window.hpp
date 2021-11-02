@@ -596,7 +596,7 @@ class QuestType7 : public Window {
     sf::Sprite     EraseButtonSprite;
 
 public:
-    QuestType7(int, int);
+    QuestType7(float, float);
     squareBoard& getsB() { return sB; }
     bool IsclearButtonClick();
     int getquestionVariantID1();
@@ -622,7 +622,7 @@ class QuestType8 : public Window {
     
     
 public:
-    QuestType8(int, int);
+    QuestType8(float, float);
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();
@@ -727,7 +727,7 @@ class QuestType9 : public Window {
     std::array<sf::Sprite, 12>  LeafSprite;
     questanswerClass questanswer;
 public:
-    QuestType9(int, int, int);
+    QuestType9(float, float, int);
     std::array<sf::Sprite,13> getMashsprite() { return MashSprite; }
     std::array<sf::Sprite,16> getMBerryprite() { return BerrySprite; }
     std::array<sf::Sprite,12> getLeafsprite() { return LeafSprite; }
@@ -744,7 +744,7 @@ class QuestType10 : public Window {
     int question10Variant2ID;
 
 public:
-    QuestType10(int, int);
+    QuestType10(float, float);
     int getquestion10Variant1ID() { return question10Variant1ID; }
     int getquestion10Variant2ID() { return question10Variant2ID; }
 
@@ -764,7 +764,7 @@ class QuestType11 : public Window {
     int question11Variant3ID;
 
 public:
-    QuestType11(int, int);
+    QuestType11(float, float);
     int getquestion11Variant1ID() { return question11Variant1ID; }
     int getquestion11Variant2ID() { return question11Variant2ID; }
     int getquestionVariantID1();
@@ -778,7 +778,7 @@ class QuestType12 : public Window {
     Buttons Buttons;
     questanswerClass questanswer;
 public:
-    QuestType12(int, int, int);
+    QuestType12(float, float, int);
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();
@@ -792,7 +792,7 @@ class QuestType13 : public Window {
     int questionVariantID2;
     int questionVariantID3;
 public:
-    QuestType13(int, int);
+    QuestType13(float, float);
     QuestType13(int w, int h, int a, int b);
     int getquestionVariantID1() { return questionVariantID1; }
     int getquestionVariantID2() { return questionVariantID2; }
@@ -811,7 +811,7 @@ class QuestType15 : public Window {
     questanswerClass questanswer;
     table3_5 tab;
 public:
-    QuestType15(int , int , int );
+    QuestType15(float , float, int );
     int getquestionVariantID1() { return questionVariantID1; }
     int getquestionVariantID2() { return questionVariantID2; }
     int getquestionVariantID3() { return questionVariantID3; }
@@ -829,7 +829,7 @@ class QuestType16 : public Window {
     questanswerClass questanswer;
     table3_5 tab;
 public:
-    QuestType16(int, int, int);
+    QuestType16(float, float, int);
     int getquestionVariantID1() { return questionVariantID1; }
     int getquestionVariantID2() { return questionVariantID2; }
     int getquestionVariantID3() { return questionVariantID3; }
@@ -848,7 +848,7 @@ class QuestType14 : public Window {
     CheckButton11 checkbutton;
     table3_5 tab;
 public:
-    QuestType14(int, int, int);
+    QuestType14(float, float, int);
     int getquestionVariantID1() { return questionVariantID1; }
     int getquestionVariantID2() { return questionVariantID2; }
     int getquestionVariantID3() { return questionVariantID3; }
