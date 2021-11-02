@@ -157,10 +157,10 @@ protected:
     float scale;
     int ButtonCount;
     int ButtonPressID = -1;
-    int margin_top;
-    int margin_left;
-    int height;
-    int width;
+    float margin_top;
+    float margin_left;
+    float height;
+    float width;
     std::vector<std::shared_ptr<sf::Texture>> MyTexture;
     std::vector<std::unique_ptr<sf::Sprite>> ButtonsList;
         
@@ -172,11 +172,11 @@ public:
   }
   void CalcucateCoordinate();
   void CalcucateCoordinate(float);
-  void setMargin_top(int margin) { 
+  void setMargin_top(float margin) { 
       margin_top = margin; 
   }
 
-  void setMargin_left(int margin) {
+  void setMargin_left(float margin) {
       margin_left = margin;
   }
 
@@ -188,7 +188,7 @@ public:
   std::vector<std::shared_ptr<sf::Texture>>& getButtonTexture() { return MyTexture; }
   int GetButtonsClickID() { return ButtonPressID; }
 
-  int getMarginTop() {
+float getMarginTop() {
       return margin_top; 
   }
   float getScale() {
@@ -198,16 +198,15 @@ public:
   void setScale(float s) {
       scale = s;
   }
-  int getHeight() {
-      std::cout<< "hhhhhhhh=" << height << std::endl;
-      return height;
+ float getHeight() {
+            return height;
   }
 
-  int getWidth() {
+  float getWidth() {
       return width;
   }
 
-  int getMarginLeft() { 
+ float getMarginLeft() { 
       return margin_left; 
   }
 };
@@ -240,33 +239,33 @@ class TextFrameBase {
 
   sf::Text text;
   sf::Font font;
-  int size;
-  int w;
-  int h;
+  float size;
+  float w;
+  float h;
   float margin_top;
   Window& WindowLink;
 protected: 
     int questionNumber;
 
 public: 
-  TextFrameBase(int ,  Window& w ,char); //delegate
-  TextFrameBase(int ,int , int,int, Window& ) ;
-  TextFrameBase(int s, std::wstring str, int w, int h, Window&);
+  TextFrameBase(float ,  Window& winLink,char); //delegate
+  TextFrameBase(float ,int , int,int, Window& ) ;
+  TextFrameBase(float s, std::wstring str, float, float , Window&);
   sf::Text gettext(){ 
       return text; 
   }
  // void setwinLink(Window &w) { WindowLink = w; }
   void settext(std::wstring a) { text.setString(a);}
-  void setmargin_top(int m);
+  void setmargin_top(float m);
   float getmargin_top() {
       return margin_top; 
   }
-  void CalcucateCoordinate(int, int);
+  void CalcucateCoordinate(float, float);
   void setWidth(int);
-  int getHeight();
+  float getHeight();
   void setN_M(int,int);
   void setquestionNumber(int qn) { questionNumber=qn; }
-  int getSize() { 
+  float getSize() { 
       return size; 
   }
 
@@ -287,8 +286,8 @@ class Window {
   
 
   
-   int width;  
-   int height; 
+   float width;  
+   float height; 
   double coef;
   int space;
   int number; 
@@ -297,7 +296,7 @@ class Window {
 
   
 protected:
-    bool badAnswer;
+  bool badAnswer;
   int questNumber;
   TextFrameBase textFrame;
   bool checkandnextQuest(float);
@@ -311,9 +310,9 @@ protected:
 public:
     friend  std::wstring get_wstr(int questvariantIndex);
   
-  Window(int w, int h, int questNumber, int);
-  int getWidth() { return width; }
-  int getHeight() { return height; }
+  Window(float w, float h, int questNumber, int);
+  float getWidth() { return width; }
+  float getHeight() { return height; }
   int getQuestNumber(){ return questNumber; }
   int getordQuestNumber() { return ordQuestNumber; }
   TextFrameBase gettextFrame() { return textFrame; }
@@ -340,12 +339,12 @@ class QuestType1: public Window {
 
   Buttons Buttons;
 
-  int check(int,int,int);
+  float check(float, float, float);
   int questionVariantID1;
   int questionVariantID2;
 public:
-    QuestType1(int w, int h,  int qtyButtons);
-    QuestType1(int fig1, int fig2,  int w, int h,  int qtyButtons);
+    QuestType1(float w, float h,  int qtyButtons);
+    QuestType1(int fig1, int fig2, float w, float h,  int qtyButtons);
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();
@@ -392,7 +391,7 @@ class QuestType2 : public Window {
     int questionVariantID2;
     
 public:
-    QuestType2(int w, int h,  int qtyButtons);
+    QuestType2(float w, float h,  int qtyButtons);
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();
@@ -425,7 +424,7 @@ class QuestType3 : public Window {
     
 
 public:
-    QuestType3(int , int , int );
+    QuestType3(float , float, int);
     int getquestionVariantID1();
         int getquestionVariantID2();
         int getquestionVariantID3();
@@ -448,7 +447,7 @@ class QuestType4 : public Window {
     int questionVariantID2;
 
 public:
-    QuestType4(int, int, int);
+    QuestType4(float, float, int);
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();
@@ -459,7 +458,7 @@ public:
 class QuestType5 : public Window {
     Buttons Buttons;
 public:
-    QuestType5(int, int, int);
+    QuestType5(float, float, int);
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();
@@ -495,7 +494,7 @@ class QuestType6 : public Window {
     PicturetAndFilmtoView coin1;
     PicturetAndFilmtoView coin2;
 public:
-    QuestType6(int, int, int);
+    QuestType6(float, float, int);
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();

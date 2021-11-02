@@ -168,19 +168,19 @@ void FrameFigure::calcKoeff() {
     float step = 0;
     float frameWidth = getxmax() - getxmin();
     float frameHeight = getymax() - getymin();
-    float frameWidthNew = window->getSize().x / 2;
+    float frameWidthNew = static_cast<float>(window->getSize().x) / 2;
     int winHeigt = window->getSize().y;
     int winWidth = window->getSize().x;
     koef = frameWidthNew / frameWidth;
     float frameHeightNew = (getymax() - getymin()) * koef;
     do  {
-        koef = koef - 0.01;
+        koef = koef - 0.01f;
         frameHeightNew = frameWidth * koef;
         frameWidthNew = frameHeight * koef;
     } while (frameHeightNew > (int)((float)winHeigt / 2.8) || frameWidth > winWidth / 2);
      
      margin_left = static_cast<int>(number_of_figure * winWidth / 2 + abs((winWidth / 2 - frameWidthNew) / 2));
-     margin_top = winHeigt / 3;
+     margin_top =  winHeigt / 3 - 50;
 
      std::cout << "picture size :" << frameWidthNew <<"x" << frameWidthNew  << std::endl;
 
@@ -411,10 +411,10 @@ void ThreePicture1::draw() {
         circle1.set_radius(100);
         circle1.set_coords(0, 0);
         //circle1.set_color(color::blue);
-        triangle1.set_coords(120 + x, 200, 250 + x, 0, 400 + x, 200);
-        rectangle1.set_coords(550, 0);
+        triangle1.set_coords(120.0f + x, 200.0f, 250.0f + x, 0.0f, 400.0f + x, 200.0f);
+        rectangle1.set_coords(550.0f, 0.0f);
 
-        rectangle1.set_size(200, 200);
+        rectangle1.set_size(200.0f, 200.0f);
 
     }
     circle1.draw(window);
@@ -440,9 +440,9 @@ void ThreePicture2::draw() {
         int x = -100;
         circle1.set_radius(100);
         circle1.set_coords(290, 0);        
-        triangle1.set_coords(120 + x, 200, 250 + x, 0, 400 + x, 200);
-        rectangle1.set_coords(550, 0);
-        rectangle1.set_size(200, 200);
+        triangle1.set_coords(120.0f + x, 200.0f, 250.0f + x, 0.0f, 400.0f + x, 200.0f);
+        rectangle1.set_coords(550.0f, 0.0f);
+        rectangle1.set_size(200.0f, 200.0f);
 
     }
     circle1.draw(window);
@@ -468,10 +468,10 @@ void ThreePicture3::draw() {
         int y = 20;
         int x = -100;
         circle1.set_radius(100);
-        circle1.set_coords(550, 0);
-        triangle1.set_coords(120 + x, 200, 250 + x, 0, 400 + x, 200);
-        rectangle1.set_coords(330, 0);
-        rectangle1.set_size(200, 200);
+        circle1.set_coords(550.0f, 0.0f);
+        triangle1.set_coords(120.0f + x, 200.0f, 250.0f + x, 0.0f, 400.0f + x, 200.0f);
+        rectangle1.set_coords(330.0f, 0.0f);
+        rectangle1.set_size(200.0f, 200.0f);
 
     }
     circle1.draw(window);
@@ -485,12 +485,12 @@ void ThreePicture0::draw() {
         int y = 20;
         int x = 100;
         circle1.set_radius(100);
-        circle1.set_coords(475, 0);
+        circle1.set_coords(475.0f, 0.0f);
         //circle1.set_color(color::blue);
-        triangle1.set_coords(120+x, 200, 250+x, 0, 400+x, 200);
-        rectangle1.set_coords(0 , 0);
+        triangle1.set_coords(120.0f +x, 200.0f, 250.0f +x, 0.0f, 400.0f +x, 200.0f);
+        rectangle1.set_coords(0.0f, 0.0f);
         
-        rectangle1.set_size(200, 200);
+        rectangle1.set_size(200.0f, 200.0f);
 
     }
     circle1.draw(window);
@@ -534,14 +534,14 @@ void Flower::draw() {
 
         center_circle.set_radius(45);
         int step = 15;
-        circle2.set_coords(25 - x + step, 0 + step);
+        circle2.set_coords(25.0f - x + step, 0.0f + step);
 
-        circle1.set_coords(130 - x + step, 0 + step);
+        circle1.set_coords(130.0f - x + step, 0.0f + step);
         
-        circle3.set_coords(25 - x + step, 90 + step);
-        circle4.set_coords(130 - x + step, 90 + step);
+        circle3.set_coords(25.0f - x + step, 90.0f + step);
+        circle4.set_coords(130.0f - x + step, 90.0f + step);
 
-        center_circle.set_coords(70-x, 17+y);
+        center_circle.set_coords(70.0f -x, 17.0f +y);
 
         circle1.set_color(color::aqua);
         circle2.set_color(color::red);
@@ -551,15 +551,15 @@ void Flower::draw() {
         center_circle.set_color(color::coral);
    
         int step2 = -40;
-        triangle1.set_coords(25-x, 190+y+ step2, 105-x,190+y + step2, 65-x,220+y + step2);
+        triangle1.set_coords(25.0f -x, 190.0f +y+ step2, 105.0f -x,190.0f +y + step2, 65.0f -x,220.0f +y + step2);
         triangle1.set_color(color::lime);
 
-        triangle2.set_coords(125-x, 190+y + step2, 205-x, 190+y + step2, 165-x, 220+y + step2);
+        triangle2.set_coords(125.0f -x, 190.0f +y + step2, 205.0f -x, 190.0f +y + step2, 165.0f -x, 220.0f +y + step2);
         triangle2.set_color(color::lime);
 
-        rectangle.set_coords(110-x, 109+y);
+        rectangle.set_coords(110.0f -x, 109.0f +y);
         rectangle.set_color(color::lightskyblue);
-        rectangle.set_size(10, 80);
+        rectangle.set_size(10.0f, 80.0f);
 
         int indexColor1 = rand() % Colors.size();
         int indexColor2 = rand() % Colors.size();
@@ -633,26 +633,26 @@ void Tower::draw() {
 
         int y = -40;
         int x = -15;
-        triangle1.set_coords(17 + x, 88 + y, 62 + x, 42 + y, 113 + x, 88 + y);
+        triangle1.set_coords(17.0f + x, 88.0f + y, 62.0f + x, 42.0f + y, 113.0f + x, 88.0f + y);
 
         //triangle2.set_coords(112+x, 88, 157+x, 42, 208+x, 88);
-        triangle2.set_coords(126 + x, 88 + y, 171 + x, 42 + y, 222 + x, 88 + y);
+        triangle2.set_coords(126.0f + x, 88.0f + y, 171.0f + x, 42.0f + y, 222.0f + x, 88.0f + y);
 
-        triangle3.set_coords(236 + x, 88 + y, 281 + x, 42 + y, 332 + x, 88 + y);
+        triangle3.set_coords(236.0f + x, 88.0f + y, 281.0f + x, 42.0f + y, 332.0f + x, 88.0f + y);
 
-        circle1.set_coords(145 + x, 110 + y);
-        circle1.set_radius(30);
+        circle1.set_coords(145.0f + x, 110.0f + y);
+        circle1.set_radius(30.0f);
 
-        rectangle1.set_coords(20 + x, 90 + y);
-        rectangle1.set_size(90, 110);
+        rectangle1.set_coords(20.0f + x, 90.0f + y);
+        rectangle1.set_size(90.0f, 110.0f);
         rectangle1.set_color(color::lightskyblue);
 
-        rectangle2.set_coords(130 + x, 90 + y);
-        rectangle2.set_size(90, 110);
+        rectangle2.set_coords(130.0f + x, 90.0f + y);
+        rectangle2.set_size(90.0f, 110.0f);
         rectangle2.set_color(color::lightskyblue);
 
-        rectangle3.set_coords(240 + x, 90 + y);
-        rectangle3.set_size(90, 110);
+        rectangle3.set_coords(240.0f + x, 90.0f + y);
+        rectangle3.set_size(90.0f, 110.0f);
         rectangle3.set_color(color::lightskyblue);
         srand((unsigned int)time(NULL));
 
