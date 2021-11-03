@@ -294,7 +294,7 @@ class Window {
   int ordQuestNumber;
 
 
-  
+ 
 protected:
   bool badAnswer;
   int questNumber;

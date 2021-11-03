@@ -113,7 +113,7 @@ void CheckButton11::resetclickID() { clickID = 0; };
 std::wstring get_wstr(int questvariantIndex, int ordNumber) {
     //    setlocale(LC_ALL, "Russian");
     std::stringstream ss;
-    ss << 1 << ". ";
+    ss << (ordNumber+1) << ". ";
     std::string str = ss.str();
 
     std::wstring ws(str.begin(), str.end());
@@ -493,12 +493,10 @@ Window::Window(float w, float h, int numberQuest, int ord)
     textFrame(Settings::QUESTFONTSIZE, numberQuest, static_cast<unsigned int>(w), static_cast<unsigned int>(h), *this),
     QuestComment(Settings::QUESTFONTSIZE, CommentsDic[0], w, h, *this),
     countofBALL(0)
-
 {
 
     width = w;
     height = h;
-    ////std::cout << "numberQuest="<<numberQuest << std::endl;
     std::string CheckButtonPictureFileName = "resources/images/arrow_disable.png";
     ArrowButtonTexture.loadFromFile(CheckButtonPictureFileName);
     ArrowButtonSprite.setTexture(ArrowButtonTexture);
@@ -516,7 +514,7 @@ Window::Window(float w, float h, int numberQuest, int ord)
 
 
     //if (!first) {
-    std::string comment = std::string("Game ") + std::to_string(w) + "x" + std::to_string(h);
+    std::string comment = std::string("Game ") + std::to_string(static_cast<unsigned int>(w)) + "x" + std::to_string(static_cast<unsigned int>(h));
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
@@ -1287,7 +1285,7 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
             QuestComment.setmargin_top(h - Buttons.getHeight());
 
 
-            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+            QuestComment.CalcucateCoordinate(Buttons.getMarginLeft()-10, Buttons.getMarginTop());
 
 
         }
@@ -1887,7 +1885,8 @@ int setofpictureObject::click(int qty, setofpictureObject& lastpic) {
             sf::Texture ArrowButtonTexture;
             sf::Sprite ArrowButtonSprite(ArrowButtonTexture);
             std::cout << "**" << std::to_string(qty) << std::endl;
-            if (isAdd) qty++; else qty--;
+            if (isAdd && qty<5) qty++; 
+            if (qty > 0 && !isAdd) qty--;
             if (qty >= 0) {
                 fileName = "resources/images/" + filenamesforPicaQuest8[WindowLink.getQuestNumber()] + std::to_string(qty);
                 //WindowLink.setofpic3.loadFromFile(fileName + ".png"); //ButtonPressID = -1;
@@ -2955,7 +2954,8 @@ QuestType9::QuestType9(float w, float h, int qtyButtons) :
 
         if (badAnswer) {
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
-            //sprite.setPosition((w-questanswer.getWidth()) /2 , Buttons.getMarginTop());
+            sprite.setPosition(0, Buttons.getMarginTop()- questanswer.getHeight());
+            
             window->draw(sprite);
 
         }
@@ -2968,7 +2968,7 @@ QuestType9::QuestType9(float w, float h, int qtyButtons) :
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
-                    if (question9AnswersSquare[questNumber] == Buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[1]);
+                    if (question9AnswersSquare[questNumber] == Buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[13]);
                     else {
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
