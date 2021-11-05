@@ -25,7 +25,9 @@
         int circleQTY;
         int triangleQTY;
         int rectengleQTY;
-
+        bool checkMode;
+        int figuraCode; //
+        sf::Clock clock; 
 
 
     public:
@@ -33,9 +35,10 @@
         FrameFigure(std::shared_ptr<sf::RenderWindow>& w, int c,int t, int r) : window(w), alreadyDraw(false),
             circleQTY(c),
             triangleQTY(t),
-            rectengleQTY(r)
+            rectengleQTY(r),
+            checkMode(false), figuraCode(-100)
         {
-            alreadyDraw = alreadyDraw;
+      
     
         }
         static void resetnumber_of_figure() { number_of_figure = 0; }
@@ -43,6 +46,8 @@
         void circleQTYinc() { circleQTY++; }
         void triangleQTYinc() { triangleQTY++; }
         void rectengleQTYinc() { rectengleQTY++; }
+        void setcheckMode() { checkMode=true; }
+        void setfiguraCode(int fc) { figuraCode=fc; }
         float getkoef() { 
             return koef; 
         }

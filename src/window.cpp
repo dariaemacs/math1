@@ -659,18 +659,19 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
 
     const std::vector<FrameFigure*> figures =
     {
-        new Car(window),
-        new Flower(window),
+        new Car(window), //+
+        new Flower(window),//+
         new Tree(window),
         new Butterfly(window),
-        new Plane(window),
-        new Tower(window),
+        new Plane(window), //+
+        new Tower(window), //+
     };
 
      questionVariantID1 = (rand() % figures.size());
-     questionVariantID2 = 0;
+     questionVariantID1 = 1;
+    questionVariantID2 = 0;
     while ((questionVariantID2 = (rand() % figures.size())) == questionVariantID1);
-
+    questionVariantID2 = 0;
     int rectengleQTY = figures[questionVariantID1]->getrectengleQTY() + figures[questionVariantID2]->getrectengleQTY();
     int triangleQTY = figures[questionVariantID1]->gettriangleQTY() + figures[questionVariantID2]->gettriangleQTY();
     int circleQTY = figures[questionVariantID1]->getcircleQTY() + figures[questionVariantID2]->getcircleQTY();
@@ -705,7 +706,7 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
-
+              
                     float rightfigurCount = check(static_cast<float>(circleQTY), static_cast<float>(triangleQTY), static_cast<float>(rectengleQTY));
                     if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
                         QuestComment.settext(CommentsDic[2]);
@@ -716,6 +717,14 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
                         Buttons.getButtonTexture()[static_cast<int>(rightfigurCount) - 1]->loadFromFile(
                             "resources/images/digit" + std::to_string(rightfigurCount) + "_right.jpg"
                         );
+                        figures[questionVariantID1]->setfiguraCode(questNumber);
+                        figures[questionVariantID2]->setfiguraCode(questNumber);
+                        figures[questionVariantID1]->setcheckMode();
+                        figures[questionVariantID2]->setcheckMode();
+
+
+
+
                     }
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
                 }
@@ -726,6 +735,12 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
             }
         }
     }
+}
+
+void viewRightFigure(int questNumber) {
+
+
+
 }
 
 QuestType2::QuestType2(float w, float h, int qtyButtons) :
@@ -3102,6 +3117,7 @@ QuestType10::QuestType10(float w, float h) :
     checkbutton(*this)
 {
 
+
     bool first = true;
     question10Variant1ID = rand() % 2;
     question10Variant2ID = rand() % (sizeof(question10Variant2) / sizeof(question10Variant2[0]));
@@ -3120,7 +3136,7 @@ QuestType10::QuestType10(float w, float h) :
         +
         question10Variant2[question10Variant2ID][question10VariantForRandom2[question10Variant3ID][2]]
     );
-    std::wstring question = question10Text[getQuestNumber()].questionText;
+    std::wstring question = std::to_wstring(getordQuestNumber()+1)+ L". "+ question10Text[getQuestNumber()].questionText;
     size_t posn = question.find(replaceFrom);
     if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
 
@@ -3342,7 +3358,7 @@ QuestType11::QuestType11(float w, float h) :
             checkbutton.SetSpacing(11);
 
             checkbutton.Set_margitop(
-                ((h - (checkbutton.getQudroSize() + 20) * 4) - checkbutton.getSprite()[0].getPosition().y)
+                ((h - (checkbutton.getQudroSize() + 10) * 4) - checkbutton.getSprite()[0].getPosition().y)
             );
             //QuestComment.setmargin_top((h - (checkbutton.getQudroSize() + 20) * 4) - checkbutton.getSprite()[0].getPosition().y - checkbutton.getQudroSize() - 10);
             checkbutton.resetclickID();

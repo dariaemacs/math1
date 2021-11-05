@@ -192,19 +192,41 @@ void FrameFigure::calcKoeff() {
 
 
 void Car::draw() {
+    
+    int indexColor1 = 0;
+    int indexColor2 = 0;
+    int indexColor3 = 0;
+    int indexColor4 = 0;
+    int indexColor5 = 0;
+    int indexColor6 = 0;
+    int indexColor7 = 0;
+    int indexColor8 = 0;
+    static bool indexcheckmodeColor1 = false;
+
 if (!alreadyDraw) {
+   
     calcKoeff();
 
     srand((unsigned int)time(NULL));
-    int indexColor1 = rand() % Colors.size();
-    int indexColor2 = rand() % Colors.size();
-    int indexColor3 = rand() % Colors.size();
-    int indexColor4 = rand() % Colors.size();
-    int indexColor5 = rand() % Colors.size();
-    int indexColor6 = rand() % Colors.size();
-    int indexColor7 = rand() % Colors.size();
-    int indexColor8 = rand() % Colors.size();
-    //int indexColor9 = rand() % Colors.size();
+    indexColor1 = rand() % Colors.size();
+    indexColor2 = rand() % Colors.size();
+    indexColor3 = rand() % Colors.size();
+    indexColor4 = rand() % Colors.size();
+    indexColor5 = rand() % Colors.size();
+    indexColor6 = rand() % Colors.size();
+    indexColor7 = rand() % Colors.size();
+    indexColor8 = rand() % Colors.size();
+    circle1.set_color(*Colors[indexColor1]);
+    circle2.set_color(*Colors[indexColor1]);
+    circle3.set_color(*Colors[indexColor2]);
+    circle4.set_color(*Colors[indexColor2]);
+    rectangle1.set_color(*Colors[indexColor3]);
+    rectangle2.set_color(*Colors[indexColor4]);
+    rectangle3.set_color(*Colors[indexColor5]);
+    circle5.set_color(*Colors[indexColor6]);
+    triangle1.set_color(*Colors[indexColor7]);
+    triangle2.set_color(*Colors[indexColor8]);
+
     circle1.set_radius(35);
     circle2.set_radius(35);
     circle3.set_radius(15);
@@ -212,30 +234,6 @@ if (!alreadyDraw) {
 
     //int colorwheelsSize = sizeof(wheels) / sizeof(wheels*);
     int y = 41;
-
-    circle1.set_color(*Colors[indexColor1]);
-    circle2.set_color(*Colors[indexColor1]);
-
-
-    srand((unsigned int)time(NULL));
-
-    circle3.set_color(*Colors[indexColor2]);
-    circle4.set_color(*Colors[indexColor2]);
-
-
-    rectangle1.set_color(*Colors[indexColor3]);
-    rectangle2.set_color(*Colors[indexColor4]);
-    rectangle3.set_color(*Colors[indexColor5]);
-
-    circle1.set_color(*Colors[indexColor1]);
-    circle2.set_color(*Colors[indexColor1]);
-    circle3.set_color(*Colors[indexColor2]);
-    circle4.set_color(*Colors[indexColor2]);
-
-    circle5.set_color(*Colors[indexColor6]);
-    triangle1.set_color(*Colors[indexColor7]);
-    triangle2.set_color(*Colors[indexColor8]);
-
     circle1.set_coords(190, 101);
     circle2.set_coords(20, 101);
     circle3.set_coords(210, 121);
@@ -252,6 +250,72 @@ if (!alreadyDraw) {
     rectangle3.set_size(30, 30);
 }
 
+
+
+
+
+if (checkMode) {
+    int arr[] = { 47,100 };
+   
+    sf::Time elapsed1 = clock.getElapsedTime();
+    std::cout << indexcheckmodeColor1 <<" "<< elapsed1.asSeconds()<<std::endl;
+    if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1=!indexcheckmodeColor1; clock.restart(); }
+
+
+
+    switch (figuraCode){
+    case 0:
+        circle1.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+        circle2.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+        circle3.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+        circle4.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+        circle5.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+        rectangle1.draw(window);
+        rectangle2.draw(window);
+        rectangle3.draw(window);
+        circle1.draw(window);
+        circle2.draw(window);
+        circle3.draw(window);
+        circle4.draw(window);
+        circle5.draw(window);
+        triangle1.draw(window);
+        triangle2.draw(window);
+        break;
+    case 1:
+        rectangle1.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+        rectangle2.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+        rectangle3.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+        rectangle1.draw(window);
+        rectangle2.draw(window);
+        rectangle3.draw(window);
+        circle1.draw(window);
+        circle2.draw(window);
+        circle3.draw(window);
+        circle4.draw(window);
+        //circle5.draw(window);
+
+        break;
+    case 2:
+        triangle1.set_color(*Colors[arr[indexcheckmodeColor1]]);
+        triangle2.set_color(*Colors[arr[indexcheckmodeColor1]]);
+        rectangle1.draw(window);
+        rectangle2.draw(window);
+        rectangle3.draw(window);
+        circle1.draw(window);
+        circle2.draw(window);
+        circle3.draw(window);
+        circle4.draw(window);
+        circle5.draw(window);
+        triangle1.draw(window);
+        triangle2.draw(window);
+        break;
+
+    }
+        
+
+}
+else
+{
     rectangle1.draw(window);
     rectangle2.draw(window);
     rectangle3.draw(window);
@@ -262,7 +326,7 @@ if (!alreadyDraw) {
     circle5.draw(window);
     triangle1.draw(window);
     triangle2.draw(window);
-
+}
 }
 
 Car::Car(std::shared_ptr<sf::RenderWindow>& win):
@@ -289,25 +353,47 @@ FrameFigure(win,0,0,0)
 }
 
 void Plane::draw() {
+
+    int indexColor1 = 0;
+    int indexColor2 = 0;
+    int indexColor3 = 0;
+    int indexColor4 = 0;
+    int indexColor5 = 0;
+    int indexColor6 = 0;
+    int indexColor7 = 0;
+    int indexColor8 = 0;
+    static bool indexcheckmodeColor1 = false;
+
     if (!alreadyDraw) {
         calcKoeff();
 
-        int indexColor1 = rand() % Colors.size();
-        int indexColor2 = rand() % Colors.size();
-        int indexColor3 = rand() % Colors.size();
-        int indexColor4 = rand() % Colors.size();
-        int indexColor5 = rand() % Colors.size();
-        int indexColor6 = rand() % Colors.size();
-        int indexColor7 = rand() % Colors.size();
-        int indexColor8 = rand() % Colors.size();
+        srand((unsigned int)time(NULL));
+        indexColor1 = rand() % Colors.size();
+        indexColor2 = rand() % Colors.size();
+        indexColor3 = rand() % Colors.size();
+        indexColor4 = rand() % Colors.size();
+        indexColor5 = rand() % Colors.size();
+        indexColor6 = rand() % Colors.size();
+        indexColor7 = rand() % Colors.size();
+        indexColor8 = rand() % Colors.size();
+
+        circle1.set_color(*Colors[indexColor1]);
+        circle2.set_color(*Colors[indexColor1]);
+        circle3.set_color(*Colors[indexColor1]);
+        
+        triangle1.set_color(*Colors[indexColor2]);
+        triangle2.set_color(*Colors[indexColor3]);
+        triangle3.set_color(*Colors[indexColor4]);
+        triangle4.set_color(*Colors[indexColor5]);
+        rectangle1.set_color(*Colors[indexColor6]);
+        rectangle2.set_color(*Colors[indexColor7]);
+        rectangle3.set_color(*Colors[indexColor8]);
 
         circle1.set_radius(15);
         circle2.set_radius(15);
         circle3.set_radius(15);
 
-        circle1.set_color(*Colors[indexColor1]);
-        circle2.set_color(*Colors[indexColor1]);
-        circle3.set_color(*Colors[indexColor1]);
+
 
         circle1.set_coords(155, 145);
         circle2.set_coords(115, 145);
@@ -322,7 +408,6 @@ void Plane::draw() {
         triangle4.set_coords(0, 90, 58, 90, 58, 195);
 
         rectangle1.set_coords(60, 129);
-        rectangle1.set_color(color::lightskyblue);
         rectangle1.set_size(132, 65);
 
         rectangle2.set_coords(145, 0);
@@ -330,29 +415,85 @@ void Plane::draw() {
         rectangle3.set_coords(145, 197);
         rectangle3.set_size(20, 126);
 
-
-        triangle1.set_color(*Colors[indexColor2]);
-        triangle2.set_color(*Colors[indexColor3]);
-        triangle3.set_color(*Colors[indexColor4]);
-        triangle4.set_color(*Colors[indexColor5]);
-        rectangle1.set_color(*Colors[indexColor6]);
-        rectangle2.set_color(*Colors[indexColor7]);
-        rectangle3.set_color(*Colors[indexColor8]);
     }
 
+    if (checkMode) {
+        int arr[] = { 47,100 };
+
+        sf::Time elapsed1 = clock.getElapsedTime();
+        //std::cout << indexcheckmodeColor1 << " " << elapsed1.asSeconds() << std::endl;
+        if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; clock.restart(); }
 
 
-    triangle1.draw(window);
-    triangle2.draw(window);
-    triangle3.draw(window);
-    triangle4.draw(window);
-    rectangle1.draw(window);
-    rectangle2.draw(window);
-    rectangle3.draw(window);
-    circle1.draw(window);
-    circle2.draw(window);
-    circle3.draw(window);
 
+        switch (figuraCode) {
+        case 0:
+            circle1.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+            circle2.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+            circle3.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+            triangle4.draw(window);
+            rectangle1.draw(window);
+            rectangle2.draw(window);
+            rectangle3.draw(window);
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+            break;
+        case 1:
+            rectangle1.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+            rectangle2.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+            rectangle3.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+            triangle4.draw(window);
+            rectangle1.draw(window);
+            rectangle2.draw(window);
+            rectangle3.draw(window);
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+
+            break;
+        case 2:
+            triangle1.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+            triangle2.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+            triangle3.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+            triangle4.set_color(*Colors[arr[indexcheckmodeColor1] ]);
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+            triangle4.draw(window);
+            rectangle1.draw(window);
+            rectangle2.draw(window);
+            rectangle3.draw(window);
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+
+
+            break;
+
+        }
+
+
+    }
+    else
+    {
+        triangle1.draw(window);
+        triangle2.draw(window);
+        triangle3.draw(window);
+        triangle4.draw(window);
+        rectangle1.draw(window);
+        rectangle2.draw(window);
+        rectangle3.draw(window);
+        circle1.draw(window);
+        circle2.draw(window);
+        circle3.draw(window);
+    }
 }
  Plane::Plane(std::shared_ptr<sf::RenderWindow>& win) :
 
@@ -523,6 +664,17 @@ Flower::Flower(std::shared_ptr<sf::RenderWindow>& win)
 }
 
 void Flower::draw() {
+
+    int indexColor1 = 0;
+    int indexColor2 = 0;
+    int indexColor3 = 0;
+    int indexColor4 = 0;
+    int indexColor5 = 0;
+    int indexColor6 = 0;
+    int indexColor7 = 0;
+    int indexColor8 = 0;
+    static bool indexcheckmodeColor1 = false;
+
     if (!alreadyDraw) {
         calcKoeff();
         int y = 20;
@@ -585,6 +737,73 @@ void Flower::draw() {
         rectangle.set_color(*Colors[indexColor8]);
     }
 
+    if (checkMode) {
+        int arr[] = { 47,100 };
+
+        sf::Time elapsed1 = clock.getElapsedTime();
+        std::cout << indexcheckmodeColor1 << " " << elapsed1.asSeconds() << std::endl;
+        if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; clock.restart(); }
+            
+        switch (figuraCode) {
+        case 0:
+            circle1.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            circle2.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            circle3.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            circle4.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            center_circle.set_color(*Colors[arr[indexcheckmodeColor1]]);
+
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+            circle4.draw(window);
+
+            center_circle.draw(window);
+
+            triangle1.draw(window);
+            triangle2.draw(window);
+
+            rectangle.draw(window);
+
+            break;
+        case 1:
+            rectangle.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+            circle4.draw(window);
+
+            center_circle.draw(window);
+
+            triangle1.draw(window);
+            triangle2.draw(window);
+
+            rectangle.draw(window);
+
+            break;
+        case 2:
+
+            triangle1.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            triangle2.set_color(*Colors[arr[indexcheckmodeColor1]]);
+
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+            circle4.draw(window);
+
+            center_circle.draw(window);
+
+            triangle1.draw(window);
+            triangle2.draw(window);
+
+            rectangle.draw(window);
+
+            break;
+
+        }
+
+    }
+
+
   circle1.draw(window);
   circle2.draw(window);
   circle3.draw(window);
@@ -618,6 +837,18 @@ FrameFigure(win,0,0,0)
     
 };
 void Tower::draw() {
+
+    int indexColor1 = 0;
+    int indexColor2 = 0;
+    int indexColor3 = 0;
+    int indexColor4 = 0;
+    int indexColor5 = 0;
+    int indexColor6 = 0;
+    int indexColor7 = 0;
+    int indexColor8 = 0;
+    static bool indexcheckmodeColor1 = false;
+
+
     if (!alreadyDraw) {
         calcKoeff();
 
@@ -668,17 +899,74 @@ void Tower::draw() {
         circle1.set_color(*Colors[indexColor8]);
     }
 
+    if (checkMode) {
+        int arr[] = { 47,100 };
+        sf::Time elapsed1 = clock.getElapsedTime();
+        if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; clock.restart(); }
 
-    triangle1.draw(window);
-    triangle2.draw(window);
-    triangle3.draw(window);
 
-     rectangle1.draw(window);
-     rectangle2.draw(window);
-     rectangle3.draw(window);
 
-    circle1.draw(window);
-    
+        switch (figuraCode) {
+        case 0:
+            circle1.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+
+            rectangle1.draw(window);
+            rectangle2.draw(window);
+            rectangle3.draw(window);
+
+            circle1.draw(window);
+            break;
+        case 1:
+            rectangle1.set_color(*Colors[indexColor4]);
+            rectangle2.set_color(*Colors[indexColor5]);
+            rectangle3.set_color(*Colors[indexColor6]);
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+
+            rectangle1.draw(window);
+            rectangle2.draw(window);
+            rectangle3.draw(window);
+
+            circle1.draw(window);
+
+            break;
+        case 2:
+            triangle1.set_color(*Colors[indexColor1]);
+            triangle2.set_color(*Colors[indexColor2]);
+            triangle3.set_color(*Colors[indexColor3]);
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+
+            rectangle1.draw(window);
+            rectangle2.draw(window);
+            rectangle3.draw(window);
+
+            circle1.draw(window);
+            break;
+
+        }
+
+
+    }
+    else
+    {
+
+
+        triangle1.draw(window);
+        triangle2.draw(window);
+        triangle3.draw(window);
+
+        rectangle1.draw(window);
+        rectangle2.draw(window);
+        rectangle3.draw(window);
+
+        circle1.draw(window);
+    }
     
 }
 
