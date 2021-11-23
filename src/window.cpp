@@ -815,7 +815,13 @@ QuestType2::QuestType2(float w, float h, int qtyButtons) :
             window->draw(*Picture.getButtons()[bc]);
         }
 
+        if (badAnswer) {
+            sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
 
+            window->draw(sprite);
+
+        }
         window->display();
         while (window->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
@@ -830,12 +836,24 @@ QuestType2::QuestType2(float w, float h, int qtyButtons) :
                     ////std::cout << Buttons.GetButtonsClickID()+1 = N- << std::endl;
                     if (Buttons.GetButtonsClickID() + 1 == questionVariantID1 - questionVariantID2)  QuestComment.settext(CommentsDic[1]);    else {
                         QuestComment.settext(CommentsDic[2]);
+
+                        badAnswer = true;
+                        questanswer.setParams(Buttons.getWidth() * 5, Buttons.getHeight(), 5, Buttons.getScale());
+
+                        questanswer[0].loadFromFile(res_path + "digit" + std::to_string(questionVariantID1) + ".jpg");
+                        questanswer[1].loadFromFile(res_path + "digit_minus.jpg");
+                        questanswer[2].loadFromFile(res_path + "digit" + std::to_string(questionVariantID2) + ".jpg");
+                        questanswer[3].loadFromFile(res_path + "digit_equal.jpg");
+                        questanswer[4].loadFromFile(res_path + "digit" + std::to_string(questionVariantID1 - questionVariantID2
+                        ) + ".jpg");
+
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
                         Buttons.getButtonTexture()[questionVariantID1 - questionVariantID2 - 1]->loadFromFile(
                             "resources/images/digit" + std::to_string(questionVariantID1 - questionVariantID2) + "_right.jpg"
                         );
+                        questanswer.draw();
                     }
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
                 }
@@ -1157,6 +1175,14 @@ QuestType3::QuestType3(float w, float h, int qtyButtons) :
     sf::Event event;
     while (window->isOpen()) {
         window->clear();
+
+        if (badAnswer) {
+            sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
+
+            window->draw(sprite);
+
+        }
         window->draw(List);
 
         if (first) {
@@ -1188,6 +1214,14 @@ QuestType3::QuestType3(float w, float h, int qtyButtons) :
         }
         window->draw(PictureAndBasket.getBasketSprite());
 
+        if (badAnswer) {
+            sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
+
+            window->draw(sprite);
+
+        }
+
         window->display();
         while (window->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
@@ -1201,6 +1235,22 @@ QuestType3::QuestType3(float w, float h, int qtyButtons) :
                     int rightfigurCount = 0;
                     ////std::cout << Buttons.GetButtonsClickID()+1 = N- << std::endl;
                     if (Buttons.GetButtonsClickID() + 1 == N + M)  QuestComment.settext(CommentsDic[1]);    else {
+
+                        badAnswer = true;
+                        questanswer.setParams(Buttons.getWidth() * 5, Buttons.getHeight(), 5, Buttons.getScale());
+
+                        questanswer[0].loadFromFile(res_path + "digit" + std::to_string(N) + ".jpg");
+                        questanswer[1].loadFromFile(res_path + "digit_plus.jpg");
+                        questanswer[2].loadFromFile(res_path + "digit" + std::to_string(M) + ".jpg");
+                        questanswer[3].loadFromFile(res_path + "digit_equal.jpg");
+                        questanswer[4].loadFromFile(res_path + "digit" + std::to_string(N +
+                            M
+                        ) + ".jpg");
+
+                        //questanswer[0].setScale(Buttons.getScale(), Buttons.getScale());
+                        questanswer.draw();
+
+
                         QuestComment.settext(CommentsDic[2]);
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");

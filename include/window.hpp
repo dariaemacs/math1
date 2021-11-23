@@ -390,7 +390,7 @@ class QuestType2 : public Window {
     PicturetoView Picture;
     int questionVariantID1;
     int questionVariantID2;
-    
+    questanswerClass questanswer;
 public:
     QuestType2(float w, float h,  int qtyButtons);
     int getquestionVariantID1();
@@ -422,7 +422,7 @@ class QuestType3 : public Window {
 
     Buttons Buttons;
     PicturetoViewQuestWithBasket  PictureAndBasket;
-    
+    questanswerClass questanswer;
 
 public:
     QuestType3(float , float, int);
@@ -446,7 +446,7 @@ class QuestType4 : public Window {
 
     int questionVariantID1;
     int questionVariantID2;
-
+    
 public:
     QuestType4(float, float, int);
     int getquestionVariantID1();
