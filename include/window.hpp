@@ -122,6 +122,7 @@ public:
             quadroSprite.push_back(sf::Sprite());
             quadroSprite[i].setScale(scale,scale);
             quadroSprite[i].setPosition(i * 500 * scale, 0);
+            //quadroSprite[i].setPosition(i * 500 * scale, 0);
         }
     }
     sf::Texture& operator[](int index) { return quadroTexture[index]; }
@@ -446,7 +447,8 @@ class QuestType4 : public Window {
 
     int questionVariantID1;
     int questionVariantID2;
-    
+    questanswerClass questanswer;
+
 public:
     QuestType4(float, float, int);
     int getquestionVariantID1();

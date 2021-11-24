@@ -1292,6 +1292,7 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
     float squareWidth = 0;
     int opennumbaerCount = 0;
     TrainForQuest  TrainForQuest(window);
+    //TrainForQuest  TrainRight(window);
     //sf::CircleShape shape(1);
 
     //shape.setFillColor(sf::Color::Red);
@@ -1326,14 +1327,17 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
 
 
 
+
     for (unsigned int i = 0; i < numSeries[0].size(); i++) {
         numberInTrain.push_back(new Mysf_text(50));
         numberInTrain[i]->setString(std::to_string(numSeries[questionVariantID1][i]));
+
 
         numberInTrain[i]->setFont(font);
 
         numberInTrain[i]->setFillColor(sf::Color::Black);
 
+   
 
     }
 
@@ -1374,7 +1378,7 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
         YnumberInTrain = TrainForQuest.getmargin_top() +
             TrainForQuest.getymin() * TrainForQuest.getkoef();
 
-        // //std::cout << "closeNumber1 " << closeNumber1 << " " << closeNumber2 << " " << closeNumber3 << std::endl;
+       
 
 
         for (unsigned int i = 0; i < numSeries[0].size(); i++) {
@@ -1419,11 +1423,19 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
             squareWidth *
             6 + 3, (float)YnumberInTrain - 185 * scaletrainpicture + squareWidth + 3);
 
-        window->draw(trainpictureSprite);
+      window->draw(trainpictureSprite);
 
+
+
+
+        if (badAnswer) {
+            sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
+
+            window->draw(sprite);
+
+        }
         window->display();
-
-
         while (window->pollEvent(event)) {
 
             if (event.type == sf::Event::Closed) {
@@ -1441,7 +1453,16 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
                         (numSeries[questionVariantID1][closeNumber[1]] == usercloseNumberEnter[1].closeNumber) &&
                         (numSeries[questionVariantID1][closeNumber[2]] == usercloseNumberEnter[2].closeNumber))
                         QuestComment.settext(CommentsDic[1]);
-                    else QuestComment.settext(CommentsDic[2]);
+                    else {
+                        QuestComment.settext(CommentsDic[2]);
+                        badAnswer = true;
+
+                        questanswer.setParams(squareWidth * 6, squareWidth, 6, scaletrainpicture);
+                        for (unsigned int i = 0; i < numSeries[0].size(); i++)
+                            questanswer[i].loadFromFile(res_path + "digit" + std::to_string(numSeries[questionVariantID1][i]) + ".jpg");
+
+                        questanswer.draw();
+                    }
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
                 }
 
