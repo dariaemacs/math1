@@ -1430,7 +1430,10 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
 
         if (badAnswer) {
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
-            sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
+            //sprite.setPosition(TrainForQuest.getxmin()* TrainForQuest.getkoef() + TrainForQuest.getmargin_left(), Buttons.getMarginTop() - questanswer.getHeight());
+            sprite.setPosition(TrainForQuest.getxmin()* TrainForQuest.getkoef() + TrainForQuest.getmargin_left(), YnumberInTrain 
+            + squareWidth * TrainForQuest.getkoef()+10
+            );
 
             window->draw(sprite);
 
@@ -1457,7 +1460,7 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
 
-                        questanswer.setParams(squareWidth * 6, squareWidth, 6, scaletrainpicture);
+                        questanswer.setParams(squareWidth * 6, squareWidth, 6, squareWidth/500.0f);
                         for (unsigned int i = 0; i < numSeries[0].size(); i++)
                             questanswer[i].loadFromFile(res_path + "digit" + std::to_string(numSeries[questionVariantID1][i]) + ".jpg");
 
