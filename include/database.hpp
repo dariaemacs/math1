@@ -59,7 +59,8 @@ extern const std::string question14DigitsInTable[3][2][3];
 extern const int question15Answer[3];
 
 extern const std::wstring question13Variant[4][3];
-
+extern const int question5Variants[6][2];
+extern const char question5Znak[6] ;
 extern const int question15AnswerString[3];
 
 

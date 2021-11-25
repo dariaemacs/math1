@@ -460,6 +460,7 @@ public:
 };
 class QuestType5 : public Window {
     Buttons Buttons;
+    questanswerClass questanswer;
 public:
     QuestType5(float, float, int);
     int getquestionVariantID1();

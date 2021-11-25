@@ -1556,9 +1556,13 @@ QuestType5::QuestType5(float w, float h, int qtyButtons) :
 
         }
 
+        if (badAnswer) {
+            sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
 
+            window->draw(sprite);
 
-
+        }
         window->display();
         while (window->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
@@ -1574,12 +1578,40 @@ QuestType5::QuestType5(float w, float h, int qtyButtons) :
                     if (Buttons.GetButtonsClickID() + 1 == question5Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
                     else { //wrong
                         QuestComment.settext(CommentsDic[2]);
+
+                        badAnswer = true;
+                        questanswer.setParams(Buttons.getWidth() * 5, Buttons.getHeight(), 5, Buttons.getScale());
+
+                        questanswer[0].loadFromFile(res_path + "digit" + std::to_string(question5Variants[questNumber][0]) + ".jpg");
+                        if (question5Znak[questNumber]=='+') questanswer[1].loadFromFile(res_path + "digit_plus.jpg"); else
+                            questanswer[1].loadFromFile(res_path + "digit_minus.jpg");
+                        questanswer[2].loadFromFile(res_path + "digit" + std::to_string(question5Variants[questNumber][1]) + ".jpg");
+                        questanswer[3].loadFromFile(res_path + "digit_equal.jpg");
+                        if (question5Znak[questNumber] == '+')
+                        questanswer[4].loadFromFile(res_path + "digit" + std::to_string( 
+                            question5Variants[questNumber][0]
+                           + 
+                            question5Variants[questNumber][1]
+                            
+                        ) + ".jpg");
+                        else
+                            questanswer[4].loadFromFile(res_path + "digit" + std::to_string(
+                                question5Variants[questNumber][0]
+                                -
+                                question5Variants[questNumber][1]
+                            ) + ".jpg");
+
+                        //questanswer[0].setScale(Buttons.getScale(), Buttons.getScale());
+                        questanswer.draw();
+
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
                         Buttons.getButtonTexture()[question5Answers[questNumber] - 1]->loadFromFile(
                             "resources/images/digit" + std::to_string(question5Answers[questNumber]) + "_right.jpg"
                         );
+
+
                     }
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
                 }

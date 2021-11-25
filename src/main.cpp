@@ -21,7 +21,14 @@ int main() {
 
         srand(static_cast<unsigned int>(time(NULL)));
  
-    width = 1024.0f;  height = 600.0f;
+    width = 1024.0f;  height = 600.0f;   
+    QuestType6(width, height, 25);
+    QuestType6(width, height, 25);
+    QuestType6(width, height, 25);
+    QuestType6(width, height, 25);
+    QuestType6(width, height, 25);
+    QuestType6(width, height, 25);
+
      QuestType1(width, height,25);
     width = 1200.0f; height = 600.0f;
      QuestType2(width, height,25);
@@ -34,29 +41,30 @@ int main() {
     width = 1408.0f; height = 1152.0f;
     QuestType6(width, height, 25);
     width = 1440.0f; height = 900.0f;
-     QuestType15(width, height,25);
+     QuestType7(width, height);
     width = 1400.0f; height = 1050.0f;
-     QuestType15(width, height,25);
+    QuestType8(width, height);
     width = 1440.0f; height = 1080.0f;
-     QuestType15(width, height,25);
+    QuestType9(width, height, 25);
     width = 1536.0f; height = 960.0f;
-     QuestType15(width, height,25);
+    QuestType10(width, height);
     width = 1536.0f; height = 1024.0f;
-     QuestType15(width, height,25);
+    QuestType11(width, height);
     width = 1600.0f; height = 900.0f;
-     QuestType15(width, height,25);
+    QuestType12(width, height, 25);
     width = 1600.0f; height = 1024.0f;
-     QuestType15(width, height,25);
+     QuestType13(width, height);
     width = 1600.0f; height = 1200.0f;
-     QuestType15(width, height,25);
+     QuestType14(width, height,25);
     width = 1680.0f; height = 1050.0f;
      QuestType15(width, height,25);
     width = 1920.0f; height = 1080.0f;
-     QuestType15(width, height,25);
-    width = 1920.0f; height = 1200.0f;;
+     QuestType16(width, height,25);
+/*    width = 1920.0f; height = 1200.0f;;
      QuestType15(width, height,25);
     width = 2048; height = 1080;
-     QuestType15(width, height,25);
+    QuestType15(width, height,25);
+    */
     
     
 

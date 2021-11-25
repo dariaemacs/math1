@@ -57,6 +57,11 @@ figureQestions{L"Арсению 11 лет, а его сестра Катя на 8 лет старше. Сколько лет 
 figureQestions{L"У Полины ленточка длиной 10 см, а у Сони на 10 см длиннее. Какая длина Сониной ленточки?"       ,calc},
 figureQestions{L"Марку 14 лет, а его брат Андрей на 11 лет младше. Сколько лет Андрею?"       ,calc}
 };
+
+extern const int question5Variants[6][2] = { {20,10},{16,5},{6,12},{11,8},{10,10},{14,11} };
+extern const char question5Znak[6] = { '-','-','+','+','+','-' };
+
+
 extern const int question5Answers[] = {10,11,18,19,20,3};
 
 
