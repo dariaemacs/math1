@@ -497,6 +497,7 @@ class QuestType6 : public Window {
     Buttons Buttons;
     PicturetAndFilmtoView coin1;
     PicturetAndFilmtoView coin2;
+    questanswerClass questanswer;
 public:
     QuestType6(float, float, int);
     int getquestionVariantID1();

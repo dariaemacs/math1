@@ -93,7 +93,7 @@ extern const unsigned long long question7AnswersSquare[2];
 extern const unsigned char question12AnswerParts[6][3];
 extern const unsigned char question11BALL[2][16];
 extern const int question9AnswersSquare[];
-
+extern const int question6Variants[];
 struct variantOfLine { int i, j; };
 extern const variantOfLine question7squarevariantOfFirstLine[];
 extern const variantOfLine question7trianglevariantOfFirstLine[];

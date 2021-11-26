@@ -1900,10 +1900,6 @@ QuestType6::QuestType6(float w, float h, int qtyButtons)
     coin2.setMargin_left(coin1.getcoinWidth() + 10);
     coin2.setMargin_top(textFrame.getHeight() * 2);
     coin2.CalcucateCoordinate();
-
-
-
-
     sf::Event event;
     while (window->isOpen()) {
         window->clear();
@@ -1936,6 +1932,15 @@ QuestType6::QuestType6(float w, float h, int qtyButtons)
         window->draw(*coin2.getButtons()[0]);
 
 
+        
+
+        if (badAnswer) {
+            sf::Sprite sprite(questanswer.getminiwindow().getTexture());
+            sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
+
+            window->draw(sprite);
+
+        }
         window->display();
         while (window->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
@@ -1954,9 +1959,26 @@ QuestType6::QuestType6(float w, float h, int qtyButtons)
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
-                        Buttons.getButtonTexture()[question5Answers[questNumber] - 1]->loadFromFile(
-                            "resources/images/digit" + std::to_string(question5Answers[questNumber]) + "_right.jpg"
+                        Buttons.getButtonTexture()[10 - question6Variants[questNumber]-1]->loadFromFile(
+                            "resources/images/digit" + std::to_string(10 - question6Variants[questNumber] ) + "_right.jpg"
                         );
+                        badAnswer = true;
+    /**/
+    
+                        questanswer.setParams(Buttons.getWidth() * 5, Buttons.getHeight(), 5, Buttons.getScale());
+
+                        questanswer[0].loadFromFile(res_path + "digit" + std::to_string(10) + ".jpg");
+                        questanswer[1].loadFromFile(res_path + "digit_minus.jpg");
+                        questanswer[2].loadFromFile(res_path + "digit" + std::to_string(question6Variants[questNumber]) + ".jpg");
+                        questanswer[3].loadFromFile(res_path + "digit_equal.jpg");
+                        questanswer[4].loadFromFile(res_path + "digit" + std::to_string(10- question6Variants[questNumber]) + ".jpg");
+                      
+
+                        //questanswer[0].setScale(Buttons.getScale(), Buttons.getScale());
+                        questanswer.draw();
+    
+    /**/
+
                     }
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
 
