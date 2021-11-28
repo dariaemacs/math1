@@ -22,12 +22,12 @@ int main() {
         srand(static_cast<unsigned int>(time(NULL)));
  
     width = 1024.0f;  height = 600.0f;   
-    QuestType6(width, height, 25);
-    QuestType6(width, height, 25);
-    QuestType6(width, height, 25);
-    QuestType6(width, height, 25);
-    QuestType6(width, height, 25);
-    QuestType6(width, height, 25);
+    QuestType7(width, height);
+    QuestType7(width, height);
+    QuestType7(width, height);
+    QuestType7(width, height);
+    QuestType7(width, height);
+    QuestType7(width, height);
 
      QuestType1(width, height,25);
     width = 1200.0f; height = 600.0f;

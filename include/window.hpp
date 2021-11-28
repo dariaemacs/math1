@@ -546,6 +546,7 @@ class squareBoard {
     std::vector<int> i1;
     Window& WindowLink;
     unsigned long long result;
+    int VARIANT ;
     public:
         squareBoard(float , float , Window&);
        void draw();
@@ -563,7 +564,7 @@ class squareBoard {
        std::array<point, 6>& getCheckPoint() { return CheckPoint; }
        //std::vector<sf::VertexArray>& getUserInputLine() {return  UserInputLine;}
        bool clickPoint(bool);
-       void addLine(float , float, float, float);
+       void addLine(float , float, float, float,sf::Color);
        sf::VertexArray getLastline() {  return line[line.size()-1]; };
        void dellLastline() {
            if (line.size()>5 && (!line[line.size()-1].getHold())) for (int i = 0; i < 5; i++) line.pop_back();
@@ -590,7 +591,9 @@ class squareBoard {
        void eraseLines();
        bool isfigureInputright(const unsigned long long*);
        bool issegmentexsistinFigure(int);
-       
+       int getVariant() { return VARIANT; };
+
+       void viewVariant(const long long figuraCoord);
 };
 
 
@@ -602,7 +605,10 @@ class QuestType7 : public Window {
 
 public:
     QuestType7(float, float);
-    squareBoard& getsB() { return sB; }
+    squareBoard& getsB() { return sB; };
+    int getLinefromVariant(char ln, const long figuraCoord);
+    void ViewRightAnswer(int figura);
+    //int getLinefromVariant(char ln, const long figuraCoord);
     bool IsclearButtonClick();
     int getquestionVariantID1();
     int getquestionVariantID2();

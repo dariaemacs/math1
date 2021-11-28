@@ -1278,6 +1278,8 @@ QuestType3::QuestType3(float w, float h, int qtyButtons) :
     srand(static_cast<unsigned int>(time(0)));
 }
 
+
+
 QuestType4::QuestType4(float w, float h, int qtyButtons) :
     Window(w, h, 0, 3),
     Buttons(qtyButtons, *this) {
@@ -2071,7 +2073,7 @@ WindowLink(wl), CurrentClickpoint(-1)
         VertLine[i].setSize(sf::Vector2f(1, 8 * hh / 9));
         VertLine[i].setFillColor(color::slategray);
     };
-    int VARIANT = 0;
+  
 
     for (unsigned int i = 0; i < CheckPoint.size(); i++)
         CheckPoint[i].setFillColor(sf::Color::Blue);
@@ -2132,20 +2134,39 @@ WindowLink(wl), CurrentClickpoint(-1)
 
 
     }
-    addLine(ax, ay, bx, by);
+    addLine(ax, ay, bx, by, sf::Color::Green);
     addChekpointInput(firstpointInput_i, firstpointInput_j);
 
 };
+//void squareBoard::(float ax, float ay, float bx, float by) {
+void squareBoard::viewVariant(const long long figuraCoord) {
 
-void squareBoard::addLine(float ax, float ay, float bx, float by) {
+
+    int i = 0;
+    long long currentLine = 0;
+    int length = log10(figuraCoord) + 1;
+    long long Tentodegree;
+    float ax, bx;
+    float ay, by;
+    for (int i = 0; (Tentodegree = pow(10, static_cast<int>(log10(figuraCoord) + 1) - 2 * (i + 1))) >= 1; i++) {
+        currentLine = figuraCoord / Tentodegree;
+        currentLine = currentLine - (static_cast<long long>(currentLine / 100)) * 100;
+        ax = CheckPoint[currentLine / 10].getPixelCoord().x + (CheckPoint[currentLine / 10].getSize() / 2);
+        ay = CheckPoint[currentLine / 10].getPixelCoord().y + (CheckPoint[currentLine / 10].getSize() / 2);
+        bx = CheckPoint[(currentLine % 10) ].getPixelCoord().x + (CheckPoint[(currentLine % 10) ].getSize() / 2);
+        by = CheckPoint[(currentLine % 10) ].getPixelCoord().y + (CheckPoint[(currentLine % 10) ].getSize() / 2);
+        addLine(ax, ay, bx, by,sf::Color::Red);
+    }
+}
+void squareBoard::addLine(float ax, float ay, float bx, float by, sf::Color Color) {
     line.push_back(MyVertexArray());
     size_t size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
     line[size].resize(2);
     line[size][0].position = sf::Vector2f(ax, ay);
-    line[size][0].color = sf::Color::Red;
+    line[size][0].color = Color;
     line[size][1].position = sf::Vector2f(bx, by);
-    line[size][1].color = sf::Color::Red;
+    line[size][1].color = Color;
 
 
     line.push_back(MyVertexArray());
@@ -2153,38 +2174,38 @@ void squareBoard::addLine(float ax, float ay, float bx, float by) {
     line[size].setPrimitiveType(sf::LineStrip);
     line[size].resize(2);
     line[size][0].position = sf::Vector2f(ax + 0.5f, ay + 0.5f);
-    line[size][0].color = sf::Color::Red;
+    line[size][0].color = Color;
     line[size][1].position = sf::Vector2f(bx + 0.5f, by + 0.5f);
-    line[size][1].color = sf::Color::Red;
+    line[size][1].color = Color;
 
     line.push_back(MyVertexArray());
     size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
     line[size].resize(2);
     line[size][0].position = sf::Vector2f(ax - 0.5f, ay - 0.5f);
-    line[size][0].color = sf::Color::Red;
+    line[size][0].color = Color;
     line[size][1].position = sf::Vector2f(bx - 0.5f, by - 0.5f);
-    line[size][1].color = sf::Color::Red;
+    line[size][1].color = Color;
 
     line.push_back(MyVertexArray());
     size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
     line[size].resize(2);
     line[size][0].position = sf::Vector2f(ax + 1.0f, ay + 1.0f);
-    line[size][0].color = sf::Color::Red;
+    line[size][0].color = Color;
     line[size][1].position = sf::Vector2f(bx + 1.0f, by + 1.0f);
-    line[size][1].color = sf::Color::Red;
+    line[size][1].color = Color;
 
     line.push_back(MyVertexArray());
     size = line.size() - 1;
     line[size].setPrimitiveType(sf::LineStrip);
     line[size].resize(2);
     line[size][0].position = sf::Vector2f(ax - 1.0f, ay - 1.0f);
-    line[size][0].color = sf::Color::Red;
+    line[size][0].color = Color;
     line[size][1].position = sf::Vector2f(bx - 1.0f, by - 1.0f);
-    line[size][1].color = sf::Color::Red;
+    line[size][1].color = Color;
 
-    ////std::cout << "sz of line="<<line.size() << std::endl;
+
 }
 
 void squareBoard::setMargintop(float mt) {
@@ -2225,7 +2246,7 @@ bool squareBoard::clickPoint(bool trydrawLine) {
                 dellLastline();
                 addLine((getCheckPoint())[getCurrentClickpoint()].getPixelCoord().x + CheckPoint[i].getSize() / 2,
                     (getCheckPoint())[getCurrentClickpoint()].getPixelCoord().y + +CheckPoint[i].getSize() / 2,
-                    x0 + CheckPoint[i].getSize() / 2, y0 + CheckPoint[i].getSize() / 2
+                    x0 + CheckPoint[i].getSize() / 2, y0 + CheckPoint[i].getSize() / 2,sf::Color::Green
                 );
                 line[line.size() - 1].setHold();
                 if (i != CurrentClickpoint) {
@@ -2326,7 +2347,7 @@ void squareBoard::eraseLines() {
     bx = CheckPoint[firstpointInput_j].getPixelCoord().x + (CheckPoint[firstpointInput_i].getSize() / 2);
     by = CheckPoint[firstpointInput_j].getPixelCoord().y + (CheckPoint[firstpointInput_i].getSize() / 2);
 
-    addLine(ax, ay, bx, by);
+    addLine(ax, ay, bx, by,sf::Color::Green);
     addChekpointInput(firstpointInput_i, firstpointInput_j);
 }
 
@@ -2350,6 +2371,75 @@ bool squareBoard::isfigureInputright(const unsigned long long* figureAnswer) {
     return false;
 }
 
+int QuestType7::getLinefromVariant(char ln, const long figuraCoord) {
+    //while (figuraCoord>0)
+    
+    long long currentLine = 0;
+    int length = log10(figuraCoord) + 1;
+    long long Tentodegree;
+
+    for (int i=0; (Tentodegree = pow(10, static_cast<int>(log10(figuraCoord) + 1) - 2 * (i + 1))) >=1;i++){
+  
+    currentLine = figuraCoord / Tentodegree;
+    currentLine = currentLine - (static_cast<long long>(currentLine / 100)) * 100;
+    if (currentLine == ln) return 555;
+    }
+    return 0;
+}
+
+void QuestType7::ViewRightAnswer(int figura) {
+    switch (figura)
+    {
+    case triangle:
+        
+        for (int i = 0; i < sizeof(question7AnswersTriangle) / sizeof(*question7AnswersTriangle); i++)
+            if (getLinefromVariant(question7trianglevariantOfFirstLine[sB.getVariant()].i * 10 +
+                question7trianglevariantOfFirstLine[sB.getVariant()].j
+                , question7AnswersTriangle[i]) > 0) {
+
+                //draw Variant
+                std::cout << question7trianglevariantOfFirstLine[sB.getVariant()].i * 10 +
+                    question7trianglevariantOfFirstLine[sB.getVariant()].j << " draw Variant " << question7AnswersTriangle[i] << std::endl;
+                sB.viewVariant(question7AnswersTriangle[i]);
+                break;
+            }
+        break;
+
+
+    case rectangle:
+        for (int i=0; i<sizeof(question7AnswersRectangle)/ sizeof(*question7AnswersRectangle);i++)
+            if (getLinefromVariant(question7rectanglevariantOfFirstLine[sB.getVariant()].i * 10 +
+                question7rectanglevariantOfFirstLine[sB.getVariant()].j
+                , question7AnswersRectangle[i]) > 0) {
+
+                //draw Variant
+                std::cout << question7rectanglevariantOfFirstLine[sB.getVariant()].i * 10 +
+                    question7rectanglevariantOfFirstLine[sB.getVariant()].j << " draw Variant " << question7AnswersRectangle[i] << std::endl;
+                sB.viewVariant(question7AnswersRectangle[2]);
+                break;
+            }
+        break;
+
+
+    case square:
+        //getLinefromVariant(question7squarevariantOfFirstLine[sB.getVariant()].i * 10 +
+        //    question7squarevariantOfFirstLine[sB.getVariant()].j
+        //    , question7AnswersRectangle[0]);
+
+        for (int i = 0; i < sizeof(question7AnswersSquare) / sizeof(*question7AnswersSquare); i++)
+            if (getLinefromVariant(question7rectanglevariantOfFirstLine[sB.getVariant()].i * 10 +
+                question7rectanglevariantOfFirstLine[sB.getVariant()].j
+                , question7AnswersSquare[i]) > 0) {
+                std::cout << question7rectanglevariantOfFirstLine[sB.getVariant()].i * 10 +
+                    question7rectanglevariantOfFirstLine[sB.getVariant()].j <<" draw Variant " << question7AnswersSquare[0] <<  std::endl;
+                sB.viewVariant(question7AnswersSquare[i]);
+                break;
+                //draw Variant
+            }
+
+        break;
+    }
+}
 
 QuestType7::QuestType7(float w, float h) :
     Window(w, h, ((rand() % 3)), 6),
@@ -2407,19 +2497,21 @@ QuestType7::QuestType7(float w, float h) :
                     {
                     case triangle:
                         if (sB.isfigureInputright(question7AnswersTriangle)) QuestComment.settext(CommentsDic[1]);
-                        else QuestComment.settext(CommentsDic[2]);
+                        else { QuestComment.settext(CommentsDic[2]); ViewRightAnswer(sB.getquestFigure()); }
                         break;
 
 
                     case rectangle:
                         if (sB.isfigureInputright(question7AnswersRectangle)) QuestComment.settext(CommentsDic[1]);
-                        else QuestComment.settext(CommentsDic[2]);
+                        else { QuestComment.settext(CommentsDic[2]); ViewRightAnswer(sB.getquestFigure());
+                        }
                         break;
 
 
                     case square:
                         if (sB.isfigureInputright(question7AnswersSquare)) QuestComment.settext(CommentsDic[1]);
-                        else QuestComment.settext(CommentsDic[2]);
+                        else { QuestComment.settext(CommentsDic[2]); ViewRightAnswer(sB.getquestFigure());
+                        }
                         break;
                     };
                     QuestComment.setmargin_top(h - QuestComment.getHeight() - 50);
@@ -2445,10 +2537,10 @@ QuestType7::QuestType7(float w, float h) :
                 XY = sB.getCheckPoint()[CurrentClickpointID].getPixelCoord();
                 const sf::Vector2i& M = sf::Mouse::getPosition(*window);
                 sf::VertexArray VA = sB.getLastline();
-                ////std::cout << M.x << "x" << M.y << std::endl;
+
                 sB.dellLastline();
                 float szPoint = sB.getCheckPoint()[0].getSize() / 2;
-                sB.addLine(XY.x + szPoint, XY.y + szPoint, M.x + szPoint, M.y + szPoint);
+                sB.addLine(XY.x + szPoint, XY.y + szPoint, M.x + szPoint, M.y + szPoint,sf::Color::Green);
                 trydrawLine = true;
 
             }
