@@ -668,10 +668,11 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
     };
 
      questionVariantID1 = (rand() % figures.size());
-     questionVariantID1 = 1;
-    questionVariantID2 = 0;
+    // questionVariantID1 = 1;
+    //questionVariantID2 = 0;
     while ((questionVariantID2 = (rand() % figures.size())) == questionVariantID1);
-    questionVariantID2 = 0;
+    //std::cout << questionVariantID1 << "x" << questionVariantID2 << std::endl;
+    //questionVariantID2 = 0;
     int rectengleQTY = figures[questionVariantID1]->getrectengleQTY() + figures[questionVariantID2]->getrectengleQTY();
     int triangleQTY = figures[questionVariantID1]->gettriangleQTY() + figures[questionVariantID2]->gettriangleQTY();
     int circleQTY = figures[questionVariantID1]->getcircleQTY() + figures[questionVariantID2]->getcircleQTY();
@@ -681,6 +682,10 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
         window->draw(List);
         figures[questionVariantID1]->draw();
         figures[questionVariantID2]->draw();
+        if (figures[questionVariantID1]->GetisNextQuest() || figures[questionVariantID2]->GetisNextQuest())
+        {
+            return;
+        }
         if (first) {
             margintopSlideButton =
                 (
@@ -735,6 +740,13 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
             }
         }
     }
+    delete(figures[0]);
+    delete(figures[1]);
+    delete(figures[2]);
+    delete(figures[3]);
+    delete(figures[4]);
+    delete(figures[5]);
+
 }
 
 void viewRightFigure(int questNumber) {

@@ -28,7 +28,8 @@
         bool checkMode;
         int figuraCode; //
         sf::Clock clock; 
-
+        int QTYofBLINK; //
+        bool isNextQuest;
 
     public:
         //FrameFigure() {}
@@ -36,7 +37,9 @@
             circleQTY(c),
             triangleQTY(t),
             rectengleQTY(r),
-            checkMode(false), figuraCode(-100)
+            checkMode(false), figuraCode(-100),
+            QTYofBLINK(0),
+            isNextQuest(false)
         {
       
     
@@ -73,9 +76,12 @@
         }
         //int getheght() { return ymax - ymin; }
         int getmargin_left() { return margin_left; }
-
+        bool GetisNextQuest() {return isNextQuest;}
         virtual void draw() {}
-
+        ~FrameFigure() {
+            
+            //int k = 190 + 10;
+        }
     };
 
 

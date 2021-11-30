@@ -259,8 +259,11 @@ if (checkMode) {
    
     sf::Time elapsed1 = clock.getElapsedTime();
     std::cout << indexcheckmodeColor1 <<" "<< elapsed1.asSeconds()<<std::endl;
-    if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1=!indexcheckmodeColor1; clock.restart(); }
-
+    if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; QTYofBLINK++; clock.restart(); }
+    if (QTYofBLINK > 3) {
+        isNextQuest = true;
+        return;
+    }
 
 
     switch (figuraCode){
@@ -421,8 +424,11 @@ void Plane::draw() {
         int arr[] = { 47,100 };
 
         sf::Time elapsed1 = clock.getElapsedTime();
-        //std::cout << indexcheckmodeColor1 << " " << elapsed1.asSeconds() << std::endl;
-        if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; clock.restart(); }
+        if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; QTYofBLINK++; clock.restart(); }
+        if (QTYofBLINK > 3) { 
+            isNextQuest = true;
+            return; 
+        }
 
 
 
@@ -742,7 +748,10 @@ void Flower::draw() {
 
         sf::Time elapsed1 = clock.getElapsedTime();
         std::cout << indexcheckmodeColor1 << " " << elapsed1.asSeconds() << std::endl;
-        if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; clock.restart(); }
+        if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; QTYofBLINK++; clock.restart(); }
+        if (QTYofBLINK > 3) {
+            isNextQuest = true; return;
+        }
             
         switch (figuraCode) {
         case 0:
@@ -902,7 +911,10 @@ void Tower::draw() {
     if (checkMode) {
         int arr[] = { 47,100 };
         sf::Time elapsed1 = clock.getElapsedTime();
-        if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; clock.restart(); }
+        if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; QTYofBLINK++; clock.restart(); }
+        if (QTYofBLINK > 3) {
+            isNextQuest = true; return;
+        }
 
 
 
@@ -920,9 +932,9 @@ void Tower::draw() {
             circle1.draw(window);
             break;
         case 1:
-            rectangle1.set_color(*Colors[indexColor4]);
-            rectangle2.set_color(*Colors[indexColor5]);
-            rectangle3.set_color(*Colors[indexColor6]);
+            rectangle1.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            rectangle2.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            rectangle3.set_color(*Colors[arr[indexcheckmodeColor1]]);
             triangle1.draw(window);
             triangle2.draw(window);
             triangle3.draw(window);
@@ -935,9 +947,9 @@ void Tower::draw() {
 
             break;
         case 2:
-            triangle1.set_color(*Colors[indexColor1]);
-            triangle2.set_color(*Colors[indexColor2]);
-            triangle3.set_color(*Colors[indexColor3]);
+            triangle1.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            triangle2.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            triangle3.set_color(*Colors[arr[indexcheckmodeColor1]]);
             triangle1.draw(window);
             triangle2.draw(window);
             triangle3.draw(window);
@@ -994,6 +1006,7 @@ Tree::Tree(std::shared_ptr<sf::RenderWindow>& win):
 }
 
 void Tree::draw() {
+    static bool indexcheckmodeColor1 = false;
     if (!alreadyDraw) {
         int indexColor1 = rand() % Colors.size();
         int indexColor2 = rand() % Colors.size();
@@ -1042,18 +1055,81 @@ void Tree::draw() {
         circle3.set_color(*Colors[indexColor3]);
         circle4.set_color(*Colors[indexColor4]);
     }
-    circle1.draw(window);
-    circle2.draw(window);
-    circle3.draw(window);
-    circle4.draw(window);
 
-    center_circle.draw(window);
+    if (checkMode) {
+        int arr[] = { 47,100 };
+        sf::Time elapsed1 = clock.getElapsedTime();
+        if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; QTYofBLINK++; clock.restart(); }
+        if (QTYofBLINK > 3) {isNextQuest = true; return;
+    }
+        switch (figuraCode) {
+        case 0:
+            circle1.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            circle2.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            circle3.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            circle4.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+            circle4.draw(window);
 
-    triangle1.draw(window);
-    triangle2.draw(window);
-    triangle3.draw(window);
+            center_circle.draw(window);
 
-    rectangle.draw(window);
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+
+            rectangle.draw(window);
+            break;
+        case 1:
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+            circle4.draw(window);
+
+            center_circle.draw(window);
+
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+            rectangle.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            rectangle.draw(window);
+
+            break;
+        case 2:
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+            circle4.draw(window);
+
+            center_circle.draw(window);
+            triangle1.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            triangle2.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            triangle3.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+
+            rectangle.draw(window);
+            break;
+
+        }
+    }
+        else
+        {
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+            circle4.draw(window);
+
+            center_circle.draw(window);
+
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+
+            rectangle.draw(window);
+        }
 }
 
 
@@ -1116,6 +1192,7 @@ void TrainForQuest::SetSquareColor(int index , bool _switch) {
 
 
 void TrainForQuest::draw() {
+    static bool indexcheckmodeColor1 = false;
     if (!alreadyDraw) {
         calcKoeff();
         rectangle[0]->set_coords(0, 0);  
@@ -1138,6 +1215,8 @@ void TrainForQuest::draw() {
 
 
     }
+
+
     rectangle[0]->draw(window);
     rectangle[1]->draw(window);
     rectangle[2]->draw(window);
@@ -1149,6 +1228,7 @@ void TrainForQuest::draw() {
 }
 
 void Butterfly::draw() {
+    static bool indexcheckmodeColor1 = false;
     if (!alreadyDraw) {
         calcKoeff();
 
@@ -1233,24 +1313,125 @@ void Butterfly::draw() {
         circle4.set_color(*Colors[indexColor15]);
         circle5.set_color(*Colors[indexColor16]);
     }
-   circle1.draw(window);
-   triangle4.draw(window);
-   triangle5.draw(window);
-   rectangle1.draw(window);
-   rectangle2.draw(window);
-   rectangle3.draw(window);
-   rectangle4.draw(window);
-   rectangle5.draw(window);
-   triangle1.draw(window);
-   triangle2.draw(window);
-   triangle3.draw(window);
-   circle1.draw(window);
-   circle2.draw(window);
-   circle3.draw(window);
-   circle4.draw(window);
-   circle5.draw(window);
+
+    if (checkMode) {
+        int arr[] = { 47,100 };
+        sf::Time elapsed1 = clock.getElapsedTime();
+        if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; QTYofBLINK++; clock.restart(); }
+        if (QTYofBLINK > 3)
+        {
+            isNextQuest = true;
+            return;
+        }
+        switch (figuraCode) {
+        case 0:
+            circle1.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            circle2.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            circle3.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            circle4.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            circle5.set_color(*Colors[arr[indexcheckmodeColor1]]);
+
+            circle1.draw(window);
+            triangle4.draw(window);
+            triangle5.draw(window);
+            rectangle1.draw(window);
+            rectangle2.draw(window);
+            rectangle3.draw(window);
+            rectangle4.draw(window);
+            rectangle5.draw(window);
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+            circle4.draw(window);
+            circle5.draw(window);
+
+            break;
+        case 1:
+            circle1.draw(window);
+            triangle4.draw(window);
+            triangle5.draw(window);
+
+            rectangle1.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            rectangle2.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            rectangle3.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            rectangle4.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            rectangle5.set_color(*Colors[arr[indexcheckmodeColor1]]);
+
+            rectangle1.draw(window);
+            rectangle2.draw(window);
+            rectangle3.draw(window);
+            rectangle4.draw(window);
+            rectangle5.draw(window);
+
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+            circle4.draw(window);
+            circle5.draw(window);
+
+            break;
+        case 2:
+      
+            circle1.draw(window);
+            
+            triangle1.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            triangle2.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            triangle3.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            triangle4.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            triangle5.set_color(*Colors[arr[indexcheckmodeColor1]]);
 
 
+
+            rectangle1.draw(window);
+            rectangle2.draw(window);
+            rectangle3.draw(window);
+            rectangle4.draw(window);
+            rectangle5.draw(window);
+
+            triangle1.draw(window);
+            triangle2.draw(window);
+            triangle3.draw(window);
+            triangle4.draw(window);
+            triangle5.draw(window);
+
+            circle1.draw(window);
+            circle2.draw(window);
+            circle3.draw(window);
+            circle4.draw(window);
+            circle5.draw(window);
+
+            break;
+
+        }
+    }
+    else
+    {
+
+
+        circle1.draw(window);
+        triangle4.draw(window);
+        triangle5.draw(window);
+        rectangle1.draw(window);
+        rectangle2.draw(window);
+        rectangle3.draw(window);
+        rectangle4.draw(window);
+        rectangle5.draw(window);
+        triangle1.draw(window);
+        triangle2.draw(window);
+        triangle3.draw(window);
+        circle1.draw(window);
+        circle2.draw(window);
+        circle3.draw(window);
+        circle4.draw(window);
+        circle5.draw(window);
+
+    }
     
 
 }
