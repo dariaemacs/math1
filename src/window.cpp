@@ -2029,13 +2029,13 @@ int setofpictureObject::click(int qty, setofpictureObject& lastpic) {
             std::string fileName = "";
             sf::Texture ArrowButtonTexture;
             sf::Sprite ArrowButtonSprite(ArrowButtonTexture);
-            std::cout << "**" << std::to_string(qty) << std::endl;
+            //std::cout << "**" << std::to_string(qty) << std::endl;
             if (isAdd && qty<5) qty++; 
             if (qty > 0 && !isAdd) qty--;
             if (qty >= 0) {
                 fileName = "resources/images/" + filenamesforPicaQuest8[WindowLink.getQuestNumber()] + std::to_string(qty);
                 //WindowLink.setofpic3.loadFromFile(fileName + ".png"); //ButtonPressID = -1;
-                std::cout << std::to_string(qty) << std::endl;
+                // std::cout << std::to_string(qty) << std::endl;
                 (lastpic.getButtonTexture()[0])->loadFromFile(fileName + ".png"); //ButtonPressID = -1;;
 
             }
@@ -2640,11 +2640,16 @@ QuestType8::QuestType8(float w, float h)
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
-                if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
+                if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
                     if (thingsCount == 4) QuestComment.settext(CommentsDic[1]);
-                    else QuestComment.settext(CommentsDic[2]);
-
-
+                    else //wrong
+                    {
+                        QuestComment.settext(CommentsDic[2]);
+                        setofpic3.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "4");
+                        (setofpic3.getButtonTexture()[0])->loadFromFile("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "4" + ".png");
+                    }
+                    return;
+                }
                 int thingsCounttmp = thingsCount;
                 thingsCount = minus.click(thingsCount, setofpic3);
 

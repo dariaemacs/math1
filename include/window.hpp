@@ -326,7 +326,13 @@ public:
   virtual   int getquestionVariantID5() = 0;
 
   ~Window() {
-      int yyy = 0;
+      sf::Time t3 = sf::seconds(5.0f);
+      int a=0;
+      std::cout << "here" << std::endl;
+      while (a == a) {
+          //std::cout << result << ",";
+          std::cout << t3.asMilliseconds() << std::endl;
+      }
   }
   friend Buttons;
   friend TextFrameBase;
