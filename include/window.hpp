@@ -17,6 +17,8 @@
 #define three_minimal(a, b, c) minimal(minimal(a, b), c)
 
 class Window;
+
+
 class mySpriteCheckButton : public sf::Sprite {
     float top;
     float left;
@@ -176,6 +178,8 @@ public:
   void setMargin_top(float margin) { 
       margin_top = margin; 
   }
+
+
 
   void setMargin_left(float margin) {
       margin_left = margin;
@@ -338,29 +342,12 @@ public:
 
 
 
-class QuestType1: public Window { 
-   
-
-  Buttons Buttons;
-  float check(float, float, float);
-  int questionVariantID1;
-  int questionVariantID2;
-
-public:
-    QuestType1(float w, float h,  int qtyButtons);
-    QuestType1(int fig1, int fig2, float w, float h,  int qtyButtons);
-    
-    int getquestionVariantID1();
-    int getquestionVariantID2();
-    int getquestionVariantID3();
-    int getquestionVariantID4();
-    int getquestionVariantID5();
-};
 
 
 class QuestionBase {
   TextFrameBase txt;
 };
+
 
 class QuestType2;
 class PicturetoView : public Buttons {
@@ -369,12 +356,13 @@ protected:
     std::vector<bool> isblackSide;
 
 public:
-    PicturetoView(Window& w) :  Buttons(0, w) {}
+    PicturetoView(Window& w) : Buttons(0, w) {}
     PicturetoView(QuestType2&, std::string);
     void CalcucateCoordinate();
     void setpictureFilename(std::string fn) { pictureFilename = fn; }
     bool click();
 };
+
 
 class PicturetoView11 : public PicturetoView {
 
@@ -386,24 +374,6 @@ public:
     bool click();
 };
 
-
-class QuestType2 : public Window {
-
-
-    Buttons Buttons;   
-    PicturetoView Picture;
-    int questionVariantID1;
-    int questionVariantID2;
-    questanswerClass questanswer;
-public:
-    QuestType2(float w, float h,  int qtyButtons);
-    int getquestionVariantID1();
-    int getquestionVariantID2();
-    int getquestionVariantID3();
-    int getquestionVariantID4();
-    int getquestionVariantID5();
-
-};
 
 class PicturetoViewQuestWithBasket : public  PicturetoView {
     sf::Texture basketTexture;
@@ -421,21 +391,7 @@ public:
 
 };
 
-class QuestType3 : public Window {
 
-
-    Buttons Buttons;
-    PicturetoViewQuestWithBasket  PictureAndBasket;
-    questanswerClass questanswer;
-
-public:
-    QuestType3(float , float, int);
-    int getquestionVariantID1();
-        int getquestionVariantID2();
-        int getquestionVariantID3();
-        int getquestionVariantID4();
-        int getquestionVariantID5();
-};
 
 class TrainContainer {
 
@@ -443,35 +399,8 @@ class TrainContainer {
 };
 
 
-class QuestType4 : public Window {
 
 
-    Buttons Buttons;
-
-    int questionVariantID1;
-    int questionVariantID2;
-    questanswerClass questanswer;
-
-public:
-    QuestType4(float, float, int);
-    int getquestionVariantID1();
-    int getquestionVariantID2();
-    int getquestionVariantID3();
-    int getquestionVariantID4();
-    int getquestionVariantID5();
-
-};
-class QuestType5 : public Window {
-    Buttons Buttons;
-    questanswerClass questanswer;
-public:
-    QuestType5(float, float, int);
-    int getquestionVariantID1();
-    int getquestionVariantID2();
-    int getquestionVariantID3();
-    int getquestionVariantID4();
-    int getquestionVariantID5();
-};
 //class QuestType6;
 class PicturetAndFilmtoView : public PicturetoView {
     float coinWidth;
@@ -496,20 +425,7 @@ public:
     
 };
 
-class QuestType6 : public Window {
-    Buttons Buttons;
-    PicturetAndFilmtoView coin1;
-    PicturetAndFilmtoView coin2;
-    questanswerClass questanswer;
-public:
-    QuestType6(float, float, int);
-    int getquestionVariantID1();
-    int getquestionVariantID2();
-    int getquestionVariantID3();
-    int getquestionVariantID4();
-    int getquestionVariantID5();
 
-};
 class squareBoard;
 struct coord { float x, y; coord(float xx, float yy) :x(xx), y(yy) {}; coord() :x(0), y(0) {}; };
 class point : public sf::RectangleShape {
@@ -601,48 +517,10 @@ class squareBoard {
 
 
 
-class QuestType7 : public Window {
-    squareBoard sB;
-    sf::Texture    EraseButtonTexture;
-    sf::Sprite     EraseButtonSprite;
-
-public:
-    QuestType7(float, float);
-    squareBoard& getsB() { return sB; };
-    int getLinefromVariant(char ln, const long figuraCoord);
-    void ViewRightAnswer(int figura);
-    //int getLinefromVariant(char ln, const long figuraCoord);
-    bool IsclearButtonClick();
-    int getquestionVariantID1();
-    int getquestionVariantID2();
-    int getquestionVariantID3();
-    int getquestionVariantID4();
-    int getquestionVariantID5();
-};
 
 
-class QuestType8 : public Window {
-    setofpictureObject setofpic0;
-    setofpictureObject setofpic1;
-    setofpictureObject setofpic2;
-    setofpictureObject setofpic3;
 
-    setofpictureObject plus;
-    setofpictureObject minus;
-    int thingsCount;
 
-    //setofpictureObject setofpic4;
-    //setofpictureObject setofpic5;
-    
-    
-public:
-    QuestType8(float, float);
-    int getquestionVariantID1();
-    int getquestionVariantID2();
-    int getquestionVariantID3();
-    int getquestionVariantID4();
-    int getquestionVariantID5();
-};
 class table {
 
     float mash_koeff;
@@ -726,147 +604,5 @@ public:
         void calcFontSize(const int w, const int h);
         void draw();
 
-};
-
-class QuestType9 : public Window {
-    table tab;
-    Buttons Buttons;
-    std::array<sf::Texture,13> MashTexture;
-    std::array<sf::Sprite,13>  MashSprite;
-
-    std::array<sf::Texture, 16> BerryTexture;
-    std::array<sf::Sprite, 16>  BerrySprite;
-
-    std::array<sf::Texture, 12> LeafTexture;
-    std::array<sf::Sprite, 12>  LeafSprite;
-    questanswerClass questanswer;
-public:
-    QuestType9(float, float, int);
-    std::array<sf::Sprite,13> getMashsprite() { return MashSprite; }
-    std::array<sf::Sprite,16> getMBerryprite() { return BerrySprite; }
-    std::array<sf::Sprite,12> getLeafsprite() { return LeafSprite; }
-    int getquestionVariantID1();
-    int getquestionVariantID2();
-    int getquestionVariantID3();
-    int getquestionVariantID4();
-    int getquestionVariantID5();
-};
-
-class QuestType10 : public Window {
-    CheckButton checkbutton;
-    int question10Variant1ID;
-    int question10Variant2ID;
-
-public:
-    QuestType10(float, float);
-    int getquestion10Variant1ID() { return question10Variant1ID; }
-    int getquestion10Variant2ID() { return question10Variant2ID; }
-
-    int getquestionVariantID1();
-    int getquestionVariantID2();
-    int getquestionVariantID3();
-    int getquestionVariantID4();
-    int getquestionVariantID5();
-};
-
-class QuestType11 : public Window {
-    CheckButton11 checkbutton;
-    PicturetoView11 picture1;
-    PicturetoView11 picture2;
-    int question11Variant1ID;
-    int question11Variant2ID;
-    int question11Variant3ID;
-
-public:
-    QuestType11(float, float);
-    int getquestion11Variant1ID() { return question11Variant1ID; }
-    int getquestion11Variant2ID() { return question11Variant2ID; }
-    int getquestionVariantID1();
-    int getquestionVariantID2();
-    int getquestionVariantID3();
-    int getquestionVariantID4();
-    int getquestionVariantID5();
-};
-
-class QuestType12 : public Window {
-    Buttons Buttons;
-    questanswerClass questanswer;
-public:
-    QuestType12(float, float, int);
-    int getquestionVariantID1();
-    int getquestionVariantID2();
-    int getquestionVariantID3();
-    int getquestionVariantID4();
-    int getquestionVariantID5();
-};
-
-class QuestType13 : public Window {
-    CheckButton11 checkbutton;
-    int questionVariantID1;
-    int questionVariantID2;
-    int questionVariantID3;
-public:
-    QuestType13(float, float);
-    QuestType13(int w, int h, int a, int b);
-    int getquestionVariantID1() { return questionVariantID1; }
-    int getquestionVariantID2() { return questionVariantID2; }
-    int getquestionVariantID3() { return questionVariantID3; }
-    int getquestionVariantID4() { return 0; }
-    int getquestionVariantID5() { return 0; }
-};
-
-class QuestType15 : public Window {
-    Buttons buttons;
-    int questionVariantID1;
-    int questionVariantID2;
-    int questionVariantID3;
-    int questionVariantID4;
-    int questionVariantID5;
-    questanswerClass questanswer;
-    table3_5 tab;
-public:
-    QuestType15(float , float, int );
-    int getquestionVariantID1() { return questionVariantID1; }
-    int getquestionVariantID2() { return questionVariantID2; }
-    int getquestionVariantID3() { return questionVariantID3; }
-    int getquestionVariantID4() { return questionVariantID4; }
-    int getquestionVariantID5() { return questionVariantID5; }
-};
-
-class QuestType16 : public Window {
-    Buttons buttons;
-    int questionVariantID1;
-    int questionVariantID2;
-    int questionVariantID3;
-    int questionVariantID4;
-    int questionVariantID5;
-    questanswerClass questanswer;
-    table3_5 tab;
-public:
-    QuestType16(float, float, int);
-    int getquestionVariantID1() { return questionVariantID1; }
-    int getquestionVariantID2() { return questionVariantID2; }
-    int getquestionVariantID3() { return questionVariantID3; }
-    int getquestionVariantID4() { return questionVariantID4; }
-    int getquestionVariantID5() { return questionVariantID5; }
-};
-
-class QuestType14 : public Window {
-
-    int questionVariantID1;
-    int questionVariantID2;
-    int questionVariantID3;
-    int questionVariantID4;
-    int questionVariantID5;
-    questanswerClass questanswer;
-    CheckButton11 checkbutton;
-    table3_5 tab;
-public:
-    QuestType14(float, float, int);
-    int getquestionVariantID1() { return questionVariantID1; }
-    int getquestionVariantID2() { return questionVariantID2; }
-    int getquestionVariantID3() { return questionVariantID3; }
-    int getquestionVariantID4() { return questionVariantID4; }
-    int getquestionVariantID5() { return questionVariantID5; }
 };
 #endif 

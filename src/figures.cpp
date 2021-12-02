@@ -1068,6 +1068,7 @@ void Tree::draw() {
             circle2.set_color(*Colors[arr[indexcheckmodeColor1]]);
             circle3.set_color(*Colors[arr[indexcheckmodeColor1]]);
             circle4.set_color(*Colors[arr[indexcheckmodeColor1]]);
+            center_circle.set_color(*Colors[arr[indexcheckmodeColor1]]);
             circle1.draw(window);
             circle2.draw(window);
             circle3.draw(window);
