@@ -19,68 +19,8 @@
 class Window;
 
 
-class mySpriteCheckButton : public sf::Sprite {
-    float top;
-    float left;
-    std::string fn;
-    bool active;
-public:
-    mySpriteCheckButton() : fn("empty.jpg"), active(false) {};
-    void setActive() {
-        if (!active) fn = "select.png"; else fn = "empty.jpg";
-        active = !active;
-    };
-    void setPicturefnm(std::string fnn) {
-        fn = fnn;
-        };
 
-    std::string getFN();
-    bool getActive();
-    void setTop(float t);
-    void setLeft(float l);
-};
-class CheckButton {
-    int qty;
- 
- 
-    sf::Font font;
-    std::array<sf::Text, 4> str;
-    std::array<sf::Texture,4>   quadroTexture;
-    std::array<mySpriteCheckButton,4>   quadroSprite;
-protected:
-    int textmarginleft;
-    int clickID;
-    Window& wLnk;
-    
-    float margin_top;
-    int rightQuestNum;
-    protected:
-    float qudroSize;
-    float coeff;
-    public:
 
-    CheckButton(Window&);
-    int GenerateRandomSetNumber();
-    
-    //int GenerateRandomSet();
-    void setTextValue(int);    
-    std::array<mySpriteCheckButton, 4>& getSprite();
-    std::array<sf::Text, 4>& getText();
-    float getTextmarginleft();
-    float getHeightText();
-    float getWidthText(int);
-    bool  click();
-    sf::Font& getFont();
-    float getQudroSize();
-    float getcoeff();
-    void Set_margitop(float);
-    void SetqudroSize(float);
-    void setStrValue(int, std::wstring,int);
-    int getrightQuestNum() { return rightQuestNum; }
-    int getClickID() { return clickID; }
-    std::array<sf::Texture, 4>& getquadroTexture();
-
-};
 class CheckButton11 : public CheckButton {
 protected :
     float spacing; 
@@ -239,51 +179,9 @@ public:
 };
 
 
-class TextFrameBase {
-  
-
-  sf::Text text;
-  sf::Font font;
-  float size;
-  float w;
-  float h;
-  float margin_top;
-  Window& WindowLink;
-protected: 
-    int questionNumber;
-
-public: 
-  TextFrameBase(float ,  Window& winLink,char); //delegate
-  TextFrameBase(float ,int , int,int, Window& ) ;
-  TextFrameBase(float s, std::wstring str, float, float , Window&);
-  sf::Text gettext(){ 
-      return text; 
-  }
- // void setwinLink(Window &w) { WindowLink = w; }
-  void settext(std::wstring a) { text.setString(a);}
-  void setmargin_top(float m);
-  float getmargin_top() {
-      return margin_top; 
-  }
-  void CalcucateCoordinate(float, float);
-  void setWidth(int);
-  float getHeight();
-  void setN_M(int,int);
-  void setquestionNumber(int qn) { questionNumber=qn; }
-  float getSize() { 
-      return size; 
-  }
 
 
-};
 
-class Mysf_text : public  sf::Text {
-    int size;
-    public:
-        Mysf_text(int s) : size(s) {}
-    void CalcucateCoordinate(float,float);
-    int getSize() {return size;}
-};
 
 
 class Window {
@@ -344,9 +242,7 @@ public:
 
 
 
-class QuestionBase {
-  TextFrameBase txt;
-};
+
 
 
 class QuestType2;
@@ -393,10 +289,7 @@ public:
 
 
 
-class TrainContainer {
 
-
-};
 
 
 

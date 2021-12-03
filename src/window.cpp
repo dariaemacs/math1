@@ -32,86 +32,10 @@ inline void delay(clock_t sec)
     while (clock() != end_time);
 }
 
-void mySpriteCheckButton::setTop(float t) { top = t; }
-void mySpriteCheckButton::setLeft(float l) { left = l; }
 
 
-int CheckButton::GenerateRandomSetNumber() {
-    int SIZE = sizeof(question10VariantForRandom1) / sizeof(*question10VariantForRandom1);
-    return rand() % SIZE;
-}
-float CheckButton::getHeightText() {
-    return str[0].getLocalBounds().height;
-}
-float CheckButton::getWidthText(int index) {
-    return str[index].getLocalBounds().width;
-}
 
-bool CheckButton::click() {
-    for (int i = 0; i < 4; ++i) {
-        const sf::Vector2f& position = quadroSprite[i].getPosition();
-        const sf::IntRect& rect = quadroSprite[i].getTextureRect();
-        float x0 = position.x;
-        float y0 = position.y;
-        float x1 = (float)x0 + (float)rect.width * coeff;
-        float y1 = (float)y0 + (float)rect.height * coeff;
-        const sf::Vector2i& M = sf::Mouse::getPosition(*wLnk.getWindow());
-        if (M.x >= x0 && M.x <= x1 + getWidthText(i) + textmarginleft && M.y >= y0 && M.y <= y1) {
-            std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
-            if (clickID >= 0) {
-                quadroSprite[clickID].setActive();
-                quadroTexture[clickID].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + quadroSprite[i].getFN());
-            }
-            clickID = i;
-            quadroSprite[i].setActive();
-            quadroTexture[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + quadroSprite[i].getFN());
-            if (!quadroSprite[i].getActive()) clickID = -1;
 
-            return true;
-        }
-    }
-
-    return false;
-}
-unsigned char CheckButton11::getanswerNUMBER() {
-    return answerNUMBER;
-};
-bool CheckButton11::isAnswerRight(int i, int question11Variant3ID, int question11Variant1ID) {
-
-    if (question11Variant1ID == 0)  //увеличение
-    {
-        if (question11ALLVariants[question11Variant3ID][i] == 0 || question11ALLVariants[question11Variant3ID][i] == 3) return true;
-    }
-    else {
-        if (question11ALLVariants[question11Variant3ID][i] == 1 || question11ALLVariants[question11Variant3ID][i] == 2) return true;
-    }
-
-    return false;
-}
-
-bool CheckButton11::click(int question11Variant3ID) {
-    for (int i = 0; i < 4; ++i) {
-        const sf::Vector2f& position = getSprite()[i].getPosition();
-        const sf::IntRect& rect = getSprite()[i].getTextureRect();
-        float x0 = position.x;
-        float y0 = position.y;
-        float x1 = (float)x0 + (float)rect.width * coeff;
-        float y1 = (float)y0 + (float)rect.height * coeff;
-        const sf::Vector2i& M = sf::Mouse::getPosition(*wLnk.getWindow());
-        if (M.x >= x0 && M.x <= x1 + getWidthText(i) + textmarginleft && M.y >= y0 && M.y <= y1) {
-            getSprite()[i].setActive();
-            getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + getSprite()[i].getFN());
-            unsigned char tmp = question11ALLVariants[question11Variant3ID][i];
-            answerNUMBER = ((1 << tmp)) ^ answerNUMBER;
-            clickID = ((1 << i)) ^ clickID;
-           std::cout << "clickID=" << clickID << std::endl;
-            return true;
-        }
-    };
-
-    return false;
-};
-void CheckButton11::resetclickID() { clickID = 0; };
 std::wstring get_wstr(int questvariantIndex, int ordNumber) {
     //    setlocale(LC_ALL, "Russian");
     std::stringstream ss;
@@ -123,10 +47,7 @@ std::wstring get_wstr(int questvariantIndex, int ordNumber) {
 
     return ws;
 }
-float TextFrameBase::getHeight() {
-    std::cout << "h=" << text.getLocalBounds().height << std::endl;
-    return text.getLocalBounds().height;
-}
+
 
 
 void PicturetoView::CalcucateCoordinate() {
@@ -302,41 +223,11 @@ Buttons::Buttons(int qtyButton, Window& w) :WindowLink(w), ButtonCount(qtyButton
 }
 Buttons::Buttons(Window& w) : WindowLink(w) {}
 
-void TextFrameBase::setWidth(int) {
-    //text.se
-}
 
-void Mysf_text::CalcucateCoordinate(float w, float h) {
 
-    sf::String  tmp = getString();
-    setString("99");
-    setCharacterSize(size);
-    float width = getLocalBounds().width;
-    float height = getLocalBounds().height;
-    while (width >= w || height >= h)
-    {
-        if (size > 0) setCharacterSize(size--); else return;
-        width = getLocalBounds().width;
-        height = getLocalBounds().height;
-    }
 
-    ////std::cout << "text size=" << width << "x" << height << " size=" << size <<std::endl;
-    setString(tmp);
-}
 
-void TextFrameBase::CalcucateCoordinate(const float w, const float h) {
-    size = 50;
-    text.setCharacterSize(static_cast<unsigned int>(size));
-    float width = text.getLocalBounds().width; float height = text.getLocalBounds().height;
-    while (width > w || height > h){
-        if (size > 0) { size--;  text.setCharacterSize(static_cast<unsigned int>(size)); }
-        else return;
-        width =  text.getLocalBounds().width;
-        height = text.getLocalBounds().height;
-    }
-  
-    margin_top = text.getLocalBounds().top;
-}
+
 
 PicturetoView::PicturetoView(QuestType2& qtl, std::string fn) : Buttons(0, qtl), pictureFilename(fn) {};
 //PicturetoView(QuestType2&, std::string)
@@ -381,109 +272,10 @@ void Buttons::CalcucateCoordinate(float hieght) {
     height = ButtonSize;
     width = ButtonSize;
 }
-void Buttons::CalcucateCoordinate() {
-    using namespace std;
-   float ButtonSlideHeght = WindowLink.getHeight() / 3;
-    float step = 0;
-    float  ButtonSize = (WindowLink.getWidth() / 11) * 2 / 3;
-    height = ButtonSize;
-    while (ButtonSize + 10 > ButtonSlideHeght / 2) ButtonSize--;
-    step = ButtonSize / 5;
-    if (ButtonCount > 11) margin_top = WindowLink.getHeight() - (ButtonSize + step) * 2; else margin_top = WindowLink.getHeight() - (ButtonSize + step);
-    margin_left = WindowLink.getWidth() - 11 * (ButtonSize + step);
-    float margin_left_button = margin_left;
-    float margin_top_button = margin_top;
-    //heght = 
-    for (int i = 0; i < ButtonCount; i++) {
-        ////std::cout << "here2" << std::endl;
-        std::string pictureFilename = "resources/images/digit" + std::to_string(i + 1) + ".jpg";
-        //if (pictureFilename == "") std::string pictureFilename = picaFilename;
-
-        std::shared_ptr<sf::Texture> txt = std::make_shared<sf::Texture>();
-        txt->loadFromFile(pictureFilename);
-        static sf::Vector2u PICTURESIZE = txt->getSize();
-        std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
-        sprite->setTexture(*txt.get());
-        scale = (float)ButtonSize / PICTURESIZE.y;
-        sprite->setScale(scale, scale);
-        cout << i % 10 << std::endl;
-        sprite->move(margin_left_button, margin_top_button);
-        if (i % 10 == 0 && i > 0) {
-            //cout << "here***rr" << ButtonCount << std::endl;
-            margin_top_button = margin_top_button + ButtonSize + 10; margin_left_button = WindowLink.getWidth() - 11 * (ButtonSize + step);
-        }
-        else margin_left_button = margin_left_button + ButtonSize + step;
-        MyTexture.emplace_back(std::move(txt));
-        ButtonsList.emplace_back(std::move(sprite));
-    };
-    height = ButtonSize;
-    width = ButtonSize;
-
-}
-
-
-TextFrameBase::TextFrameBase(float s, Window& winLink, char) :size(s), WindowLink(winLink) { //delegate
-    ////std::cout << Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf" << std::endl;
-    font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-
-    text = sf::Text("", font, static_cast<unsigned int>(s));
-    text.setFillColor(sf::Color::Black);
-    text.setPosition(Settings::PADDING, Settings::PADDING);
-}
-
-TextFrameBase::TextFrameBase(float s, std::wstring str, float w1, float h1, Window& winLink) :TextFrameBase(s, winLink, 'c') {
-    w = w1;
-    h = h1;
-    text.setString(str);
-}
-
-void TextFrameBase::setmargin_top(float m) {
-    sf::Vector2f pos = text.getPosition();
-    text.setPosition(pos.x, m);
-    margin_top = m;
-}
-
-TextFrameBase::TextFrameBase(float s, int quest, int w, int h, Window& winLink)
-    :TextFrameBase(s, winLink, 'c') {
-    questionNumber = quest;
-    text.setString(get_wstr(quest, winLink.getordQuestNumber()));
-
-
-    CalcucateCoordinate(static_cast<float>(w) * 18 / 19, static_cast<float>(h));
 
 
 
-}
 
-void TextFrameBase::setN_M(int N, int M) {
-
-
-    size_t posn;
-    std::wstring question = text.getString();
-
-    std::wstring replaceFrom = L"N";
-    std::wstring replaceTo = std::to_wstring(N);
-    posn = question.find(replaceFrom);
-    if (posn < question.length()) question.replace(posn, replaceFrom.length(), replaceTo);
-
-
-    replaceFrom = L"M";
-    replaceTo = std::to_wstring(M);
-    posn = question.find(replaceFrom);
-    if (posn < question.length()) question.replace(posn, replaceFrom.length(), replaceTo);
-    text.setString(question);
-    ////std::cout << questionNumber << " "<< beginQuestion2Index << std::endl;
-    for (int x = 0; x < X - 1; x++) {
-        replaceFrom = phrasestoReplace[questionNumber][x].find;
-        replaceTo = phrasestoReplace[questionNumber][x].replace;
-        posn = question.find(replaceFrom);
-        if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
-
-    }
-
-    text.setString(question);
-
-}
 
 Window::Window(float w, float h, int numberQuest, int ord)
 
@@ -1742,27 +1534,11 @@ CheckButton::CheckButton(Window& wl) :wLnk(wl), textmarginleft(10), clickID(-1),
 
 
 }
-std::array<mySpriteCheckButton, 4>& CheckButton::getSprite() {
-    return quadroSprite;
-}
-std::array<sf::Text, 4>& CheckButton::getText() {
-    std::wstring tmp = str[3].getString();
-    return str;
-};
 
-std::string mySpriteCheckButton::getFN() { return fn; };
-bool mySpriteCheckButton::getActive() { return active; }
 
-void CheckButton11::SetSpacing(float space) {
-    for (int i = 1; i < 4; i++)
-    {
-        float left = getSprite()[i].getPosition().x;;
-        float wi = getSprite()[i].getLocalBounds().width;
-        float top = getSprite()[i - 1].getPosition().y + qudroSize + space;
 
-        getSprite()[i].setPosition(left, top - space);
-    }
-}
+
+
 void PicturetoView11::CalcucateCoordinate(float w) {
 
     using namespace std;
@@ -1810,9 +1586,7 @@ void PicturetoView11::CalcucateCoordinate(float w) {
 
 
 
-float CheckButton::getcoeff() {
-    return coeff;
-}
+
 
 
 void table3_5::calcFontSize(const int w, const int h) {
