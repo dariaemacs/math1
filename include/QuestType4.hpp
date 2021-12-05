@@ -3,7 +3,7 @@
 class QuestType4 : public Window {
 
 
-    Buttons Buttons;
+    SimpleButtons Buttons;
 
     int questionVariantID1;
     int questionVariantID2;

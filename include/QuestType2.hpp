@@ -1,9 +1,18 @@
+#ifndef QuestType2_H
+#define QuestType2_H
+
 #include "window.hpp"
+
+
+
+#include "PicturetoView.hpp";
+#include "SimpleButtons.hpp";
+#include "questanswerClass.hpp";
 
 class QuestType2 : public Window {
 
 
-    Buttons Buttons;
+    SimpleButtons Buttons;
     PicturetoView Picture;
     int questionVariantID1;
     int questionVariantID2;
@@ -17,3 +26,4 @@ public:
     int getquestionVariantID5();
 
 };
+#endif //QuestType2_H

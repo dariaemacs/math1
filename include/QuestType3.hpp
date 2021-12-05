@@ -1,8 +1,12 @@
 #include "window.hpp"
+#include "SimpleButtons.hpp"
+#include "PicturetoViewQuestWithBasket.hpp"
+#include "questanswerClass.hpp"
+
 class QuestType3 : public Window {
 
 
-    Buttons Buttons;
+    SimpleButtons Buttons;
     PicturetoViewQuestWithBasket  PictureAndBasket;
     questanswerClass questanswer;
 

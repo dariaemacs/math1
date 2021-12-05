@@ -1,8 +1,9 @@
 #include "window.hpp"
+#include "SimpleButtons.hpp"
 class QuestType1 : public Window {
 
 
-    Buttons Buttons;
+    SimpleButtons Buttons;
     float check(float, float, float);
     int questionVariantID1;
     int questionVariantID2;

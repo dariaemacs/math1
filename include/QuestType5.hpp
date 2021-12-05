@@ -1,6 +1,6 @@
 #include "window.hpp"
 class QuestType5 : public Window {
-    Buttons Buttons;
+    SimpleButtons Buttons;
     questanswerClass questanswer;
 public:
     QuestType5(float, float, int);

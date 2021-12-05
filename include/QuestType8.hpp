@@ -1,4 +1,9 @@
+#ifndef setofpictureObject_H
+#define setofpictureObject_H
+
 #include "window.hpp"
+#include "setofpictureObject.hpp"
+
 class QuestType8 : public Window {
     setofpictureObject setofpic0;
     setofpictureObject setofpic1;
@@ -21,3 +26,4 @@ public:
     int getquestionVariantID4();
     int getquestionVariantID5();
 };
+#endif

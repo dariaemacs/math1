@@ -1,4 +1,7 @@
+#ifndef QuestType7_H
+#define QuestType7_H
 #include "window.hpp"
+#include "squareBoard.hpp"
 class QuestType7 : public Window {
     squareBoard sB;
     sf::Texture    EraseButtonTexture;
@@ -17,3 +20,5 @@ public:
     int getquestionVariantID4();
     int getquestionVariantID5();
 };
+
+#endif //QuestType7_H

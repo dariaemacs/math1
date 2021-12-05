@@ -1,3 +1,8 @@
+#ifndef CheckButton_H
+#define CheckButton_H
+
+
+
 #include <SFML/Graphics.hpp>
 #include "mySpriteCheckButton.hpp"
 #include <array>
@@ -46,3 +51,4 @@ public:
     std::array<sf::Texture, 4>& getquadroTexture();
 
 };
+#endif //CheckButton_H

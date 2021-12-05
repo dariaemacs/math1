@@ -1,3 +1,5 @@
+#ifndef MyVertexArray_H
+#define MyVertexArray_H
 #include <SFML/Graphics.hpp>
 
 class MyVertexArray : public sf::VertexArray {
@@ -7,3 +9,4 @@ public:
     void setHold();
     bool getHold();
 };
+#endif 

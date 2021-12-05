@@ -1,3 +1,7 @@
+#ifndef questanswerClass_H
+#define questanswerClass_H
+// здесь идет собственно тело h-ника
+
 #include <SFML/Graphics.hpp>
 #include "CheckButton11.hpp"
 
@@ -21,3 +25,4 @@ float getWidth();
 float getScale();
 
 };
+#endif //questanswerClass_H

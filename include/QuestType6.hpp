@@ -1,6 +1,7 @@
 #include "window.hpp"
+#include "PicturetAndFilmtoView.hpp"
 class QuestType6 : public Window {
-    Buttons Buttons;
+    SimpleButtons Buttons;
     PicturetAndFilmtoView coin1;
     PicturetAndFilmtoView coin2;
     questanswerClass questanswer;

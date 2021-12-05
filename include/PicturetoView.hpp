@@ -1,18 +1,18 @@
-#include "Buttons.hpp"
+#ifndef PicturetoView_H
+#define PicturetoView_H
+
+#include "SimpleButtons.hpp"
 #include "QuestType2.hpp"
 
-class Window;
 
-
-class PicturetoView : public Buttons {
+class PicturetoView : public SimpleButtons {
+public:    
+    //PicturetoView(QuestType2& , std::string);
+    PicturetoView(Window& w);
+    void CalcucateCoordinate();
+    bool click();
 protected:
     std::string pictureFilename;
     std::vector<bool> isblackSide;
-
-public:
-    PicturetoView(Window& w);
-    PicturetoView(QuestType2&, std::string);
-    void CalcucateCoordinate();
-    void setpictureFilename(std::string fn);
-    bool click();
 };
+#endif //PicturetoView_H
