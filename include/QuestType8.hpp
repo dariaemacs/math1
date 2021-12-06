@@ -1,5 +1,5 @@
-#ifndef setofpictureObject_H
-#define setofpictureObject_H
+#ifndef QuestType8_H
+#define QuestType8_H
 
 #include "window.hpp"
 #include "setofpictureObject.hpp"

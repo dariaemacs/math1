@@ -1,6 +1,10 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
+#include "settings.hpp"
+#include "pica.hpp"
+#include "figures.hpp"
+#include "TextFrameBase.hpp"
 
 #include <iostream>
 #include <memory>
@@ -8,10 +12,8 @@
 #include <array>
 #include <SFML/Graphics.hpp>
 
-#include "settings.hpp"
-#include "pica.hpp"
-#include "figures.hpp"
-#include "TextFrameBase.hpp"
+
+
 
 
 

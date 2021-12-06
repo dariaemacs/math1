@@ -21,8 +21,6 @@ void setofpictureObject::CalcucateCoordinate(int where) {
         scale = scale - 0.01f;
         PICTURESIZE_W = PICTURESIZE.x * scale;
         PICTURESIZE_H = PICTURESIZE.y * scale;
-        ////std::cout << "k=" << scale << std::endl;
-        ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
     } while (((PICTURESIZE_W * 6 + 6 * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
 
 
@@ -52,8 +50,8 @@ int setofpictureObject::click(int qty, setofpictureObject& lastpic) {
         const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
         float x0 = position.x;
         float y0 = position.y;
-        float x1 = (float)x0 + (float)rect.width * scale;
-        float y1 = (float)y0 + (float)rect.height * scale;
+        float x1 = static_cast<float>(x0) + static_cast<float>(rect.width )* scale;
+        float y1 = static_cast<float>(y0) + static_cast<float>(rect.height) * scale;
 
         const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
         x1 = x1;

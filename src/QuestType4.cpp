@@ -113,8 +113,8 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
 
         for (unsigned int i = 0; i < numSeries[0].size(); i++) {
 
-            squareWidth = (float)(TrainForQuest.getxmax() - TrainForQuest.getxmin()) * (float)TrainForQuest.getkoef()
-                / (float)TrainForQuest.getrectengleQTY();
+            squareWidth = static_cast<float>((TrainForQuest.getxmax() - TrainForQuest.getxmin())) * static_cast<float>(TrainForQuest.getkoef())
+                / static_cast<float>(TrainForQuest.getrectengleQTY());
             numberInTrain[i]->setPosition(
                 TrainForQuest.getxmin() * TrainForQuest.getkoef() + TrainForQuest.getmargin_left() +
 
@@ -151,7 +151,7 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
 
 
             squareWidth *
-            6 + 3, (float)YnumberInTrain - 185 * scaletrainpicture + squareWidth + 3);
+            6 + 3, static_cast<float>(YnumberInTrain) - 185 * scaletrainpicture + squareWidth + 3);
 
         win->draw(trainpictureSprite);
 

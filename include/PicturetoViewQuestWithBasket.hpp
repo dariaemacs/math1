@@ -1,3 +1,6 @@
+#ifndef PicturetoViewQuestWithBasket_H
+#define PicturetoViewQuestWithBasket_H
+
 #include "PicturetoView.hpp"
 class PicturetoViewQuestWithBasket : public  PicturetoView {
     sf::Texture basketTexture;
@@ -14,3 +17,5 @@ public:
 
 
 };
+
+#endif 

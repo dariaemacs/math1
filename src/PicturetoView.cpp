@@ -28,7 +28,7 @@ void SimpleButtons::CalcucateCoordinate(float hieght) {
         static sf::Vector2u PICTURESIZE = txt->getSize();
         std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
         sprite->setTexture(*txt.get());
-        if (i == 0) scale = (float)ButtonSize / PICTURESIZE.y;
+        if (i == 0) scale = static_cast<float>(ButtonSize) / PICTURESIZE.y;
         sprite->setScale(scale, scale);
 
         sprite->move(margin_left_button, margin_top_button);
@@ -68,8 +68,8 @@ void PicturetoView::CalcucateCoordinate() {
             scale = scale - 0.01f;
             PICTURESIZE_W = static_cast<unsigned int>(PICTURESIZE.x * scale);
             PICTURESIZE_H = static_cast<unsigned int>(PICTURESIZE.y * scale);
-            ////std::cout << "k=" << scale << std::endl;
-            ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
+            
+            
         } while (((PICTURESIZE_W * round(ButtonCount) + round((ButtonCount)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
 
         for (int i = 0; i < ButtonCount; i++) {
@@ -99,9 +99,7 @@ void PicturetoView::CalcucateCoordinate() {
             scale = scale - 0.01f;
             PICTURESIZE_W = static_cast<unsigned int>(PICTURESIZE.x * scale);
             PICTURESIZE_H = static_cast<unsigned int>(PICTURESIZE.y * scale);
-            ////std::cout << "k=" << scale << std::endl;
-            ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
-        } while (((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
+        } while (((PICTURESIZE_W * round(static_cast<float>(ButtonCount) / 2) + round((static_cast<float>(ButtonCount)) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
 
 
         for (int i = 0; i < ButtonCount; i++) {
@@ -116,7 +114,7 @@ void PicturetoView::CalcucateCoordinate() {
             button_margin_left = button_margin_left + 5 + PICTURESIZE.x * scale;
 
 
-            if (i + 1 == (int)(ButtonCount / 2)) {
+            if (i + 1 == static_cast<int>((ButtonCount / 2))) {
                 button_margin_left = 0; ButtonSlideHeght = ButtonSlideHeght + PICTURESIZE.y * scale + 5;
             }
             MyTexture.emplace_back(std::move(txt));
@@ -141,8 +139,8 @@ bool PicturetoView::click() {
         const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
         float x0 = position.x;
         float y0 = position.y;
-        float x1 = (float)x0 + (float)rect.width * scale;
-        float y1 = (float)y0 + (float)rect.height * scale;
+        float x1 = static_cast<float>(x0) + static_cast<float>(rect.width )* scale;
+        float y1 = static_cast<float>(y0) + static_cast<float>(rect.height) * scale;
 
 
         const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());

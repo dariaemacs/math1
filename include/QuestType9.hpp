@@ -1,5 +1,5 @@
 #ifndef QuestType9_H1
-#define QuestType9t_H1
+#define QuestType9_H1
 #include "window.hpp"
 #include "table.hpp"
 #include "SimpleButtons.hpp"

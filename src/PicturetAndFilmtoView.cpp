@@ -22,8 +22,6 @@ void PicturetAndFilmtoView::CalcucateCoordinate() {
             scale = scale - 0.01f;
             PICTURESIZE_W = PICTURESIZE.x * scale;
             PICTURESIZE_H = PICTURESIZE.y * scale;
-            ////std::cout << "k=" << scale << std::endl;
-            ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
         } while (((PICTURESIZE_W * round(ButtonCount) + round((ButtonCount)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
 
         for (int i = 0; i < ButtonCount; i++) {
@@ -41,21 +39,16 @@ void PicturetAndFilmtoView::CalcucateCoordinate() {
     }
     else
     {
-        ////std::cout<<"here"<<std::endl;
-        //2 rows
 
         float PICTURESIZE_W = static_cast<float>(PICTURESIZE.x);
         float PICTURESIZE_H = static_cast<float>(PICTURESIZE.y);
-        ////std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
         scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
         cout << "scale = " << scale << endl;
         do {
             scale = scale - 0.01f;
             PICTURESIZE_W = PICTURESIZE.x * scale;
             PICTURESIZE_H = PICTURESIZE.y * scale;
-            ////std::cout << "k=" << scale << std::endl;
-            ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
-        } while (((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
+        } while (((PICTURESIZE_W * round(static_cast<float>(ButtonCount) / 2) + round((static_cast<float>(ButtonCount)) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
 
 
         for (int i = 0; i < ButtonCount; i++) {
@@ -82,8 +75,8 @@ bool PicturetAndFilmtoView::click() {
         const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
         float x0 = position.x;
         float y0 = position.y;
-        float x1 = (float)x0 + (float)rect.width * scale;
-        float y1 = (float)y0 + (float)rect.height * scale;
+        float x1 = static_cast<float>(x0) + static_cast<float>(rect.width) * scale;
+        float y1 = static_cast<float>(y0) + static_cast<float>(rect.height) * scale;
 
         const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
         x1 = x1;

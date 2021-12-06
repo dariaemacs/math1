@@ -24,8 +24,8 @@ bool CheckButton11::click(int question11Variant3ID) {
         const sf::IntRect& rect = getSprite()[i].getTextureRect();
         float x0 = position.x;
         float y0 = position.y;
-        float x1 = (float)x0 + (float)rect.width * coeff;
-        float y1 = (float)y0 + (float)rect.height * coeff;
+        float x1 = static_cast<float>(x0) + static_cast<float>(rect.width) * coeff;
+        float y1 = static_cast<float>(y0) + static_cast<float>(rect.height) * coeff;
         const sf::Vector2i& M = sf::Mouse::getPosition(*wLnk.getWindow());
         if (M.x >= x0 && M.x <= x1 + getWidthText(i) + textmarginleft && M.y >= y0 && M.y <= y1) {
             getSprite()[i].setActive();

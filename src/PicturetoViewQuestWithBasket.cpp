@@ -14,7 +14,7 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
 
     ////std::cout << PICTURESIZE.x << std::endl;
     float PICTURESIZEy = static_cast<float>(PICTURESIZE.y);
-    if (PICTURESIZE.x > PICTURESIZE.y && ((float)PICTURESIZE.x / (float)PICTURESIZE.y) >= 1.5) {
+    if (PICTURESIZE.x > PICTURESIZE.y && (static_cast<float>(PICTURESIZE.x) / static_cast<float>(PICTURESIZE.y)) >= 1.5) {
         PICTURESIZE.x /= 2;
     }
 
@@ -35,8 +35,6 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
             scale = scale - 0.01f;
             PICTURESIZE_W = PICTURESIZE.x * scale;
             PICTURESIZE_H = PICTURESIZE.y * scale;
-            ////std::cout << "k=" << scale << std::endl;
-            ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
         } while (((PICTURESIZE_W * round(ButtonCount + 2) + round((ButtonCount + 2)) * 5)) > WindowLink.getWidth() || PICTURESIZE_H + 5 > ButtonSlideHeght);
 
         for (int i = 0; i < ButtonCount; i++) {
@@ -51,21 +49,6 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
             ButtonsList.emplace_back(std::move(sprite));
             isblackSide.push_back(true);
         }
-        //calc for basket
-        //basketTexture.loadFromFile(pictureFilename + "_basket.png");
-        //sf::Vector2u BASKETPICTURESIZE = basketTexture.getSize();
-        //do {
-        //    BASKETSCALE = BASKETSCALE - 0.01;
-        //    BASKETPICTURESIZE_W = BASKETPICTURESIZE.x * BASKETSCALE;
-        //    BASKETPICTURESIZE_H = BASKETPICTURESIZE.y * BASKETSCALE;
-        //    ////std::cout << "k=" << scale << std::endl;
-        //    ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
-        //} while (((BASKETPICTURESIZE_W *  +  5)) > WindowLink.getWidth() || BASKETPICTURESIZE_H + 5 > ButtonSlideHeght);
-        //
-
-        //basketSprite.setTexture(basketTexture);
-        //basketSprite.setScale(BASKETSCALE, BASKETSCALE);
-        //basketSprite.move(button_margin_left , ButtonSlideHeght);
     }
     else
     {
@@ -74,16 +57,13 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
 
         float PICTURESIZE_W = static_cast<float>(PICTURESIZE.x);
         float PICTURESIZE_H = static_cast<float>(PICTURESIZE.y);
-        ////std::cout << PICTURESIZE_W << "x" << PICTURESIZE_H << std::endl;
         scale = PICTURESIZE_W / (PICTURESIZE_W - 5);
 
         do {
             scale = scale - 0.01f;
             PICTURESIZE_W = PICTURESIZE.x * scale;
             PICTURESIZE_H = PICTURESIZE.y * scale;
-            ////std::cout << "k=" << scale << std::endl;
-            ////std::cout << "L="<< ((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) << " QTY="<< round((float)ButtonCount / 2) << std::endl;
-        } while (((PICTURESIZE_W * round((float)ButtonCount / 2) + round(((float)ButtonCount) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
+        } while (((PICTURESIZE_W * round(static_cast<float>(ButtonCount) / 2) + round((static_cast<float>(ButtonCount)) / 2) * 5)) > WindowLink.getWidth() || 2 * PICTURESIZE_H + 5 > ButtonSlideHeght);
 
 
         for (int i = 0; i < ButtonCount; i++) {
@@ -99,7 +79,7 @@ void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
 
             //const sf::Vector2f& position = ButtonsList[i]->getPosition();
             //const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
-            if (i + 1 == (int)(ButtonCount / 2)) {
+            if (i + 1 == static_cast<int>((ButtonCount / 2))) {
                 button_margin_left = 0; ButtonSlideHeght = ButtonSlideHeght + PICTURESIZE.y * scale + 5;
             }
             MyTexture.emplace_back(std::move(txt));

@@ -26,7 +26,7 @@ void SimpleButtons::CalcucateCoordinate() {
         static sf::Vector2u PICTURESIZE = txt->getSize();
         std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
         sprite->setTexture(*txt.get());
-        scale = (float)ButtonSize / PICTURESIZE.y;
+        scale = static_cast<float>(ButtonSize) / PICTURESIZE.y;
         sprite->setScale(scale, scale);
         cout << i % 10 << std::endl;
         sprite->move(margin_left_button, margin_top_button);
@@ -100,8 +100,8 @@ bool SimpleButtons::click() {
         const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
         float x0 = position.x;
         float y0 = position.y;
-        float x1 = (float)x0 + (float)rect.width * scale;
-        float y1 = (float)y0 + (float)rect.height * scale;
+        float x1 = static_cast<float>(x0) + static_cast<float>(rect.width )* scale;
+        float y1 = static_cast<float>(y0) + static_cast<float>(rect.height) * scale;
 
 
 

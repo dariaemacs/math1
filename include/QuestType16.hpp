@@ -1,3 +1,5 @@
+#ifndef QuestType16_H
+#define QuestType16_H
 #include "window.hpp"
 #include "SimpleButtons.hpp"
 #include "questanswerClass.hpp"
@@ -20,3 +22,4 @@ public:
     int getquestionVariantID4() { return questionVariantID4; }
     int getquestionVariantID5() { return questionVariantID5; }
 };
+#endif 

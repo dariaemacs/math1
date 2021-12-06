@@ -1,3 +1,5 @@
+#ifndef QuestType3_H
+#define QuestType3_H
 #include "window.hpp"
 #include "SimpleButtons.hpp"
 #include "PicturetoViewQuestWithBasket.hpp"
@@ -18,3 +20,4 @@ public:
     int getquestionVariantID4();
     int getquestionVariantID5();
 };
+#endif 

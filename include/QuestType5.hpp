@@ -1,3 +1,5 @@
+#ifndef QuestType5_H
+#define QuestType5_H
 #include "window.hpp"
 #include "SimpleButtons.hpp"
 #include "questanswerClass.hpp"
@@ -12,3 +14,5 @@ public:
     int getquestionVariantID4();
     int getquestionVariantID5();
 };
+
+#endif 

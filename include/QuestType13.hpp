@@ -1,3 +1,5 @@
+#ifndef QuestType13_H
+#define QuestType13_H
 #include "window.hpp"
 #include "CheckButton11.hpp"
 
@@ -15,3 +17,4 @@ public:
     int getquestionVariantID4() { return 0; }
     int getquestionVariantID5() { return 0; }
 };
+#endif 

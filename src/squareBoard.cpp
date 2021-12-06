@@ -56,7 +56,6 @@ WindowLink(wl), CurrentClickpoint(-1)
 
         ax = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().x + (CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
         ay = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getPixelCoord().y + (CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
-        //(int)(getSize() / 2)
         bx = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().x + (CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
         by = CheckPoint[question7trianglevariantOfFirstLine[VARIANT].j].getPixelCoord().y + (CheckPoint[question7trianglevariantOfFirstLine[VARIANT].i].getSize() / 2);
         firstpointInput_i = question7trianglevariantOfFirstLine[VARIANT].i;
@@ -208,8 +207,8 @@ bool squareBoard::clickPoint(bool trydrawLine) {
         coord  position = CheckPoint[i].getPixelCoord();
         float x0 = position.x;
         float y0 = position.y;
-        float x1 = (float)x0 + CheckPoint[i].getSize();
-        float y1 = (float)y0 + CheckPoint[i].getSize();
+        float x1 = static_cast<float>(x0) + CheckPoint[i].getSize();
+        float y1 = static_cast<float>(y0) + CheckPoint[i].getSize();
 
 
 

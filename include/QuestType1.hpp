@@ -1,3 +1,6 @@
+#ifndef QuestType1_H
+#define QuestType1_H
+
 #include "window.hpp"
 #include "SimpleButtons.hpp"
 class QuestType1 : public window {
@@ -16,3 +19,4 @@ public:
     int getquestionVariantID4();
     int getquestionVariantID5();
 };
+#endif 

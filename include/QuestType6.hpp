@@ -1,3 +1,5 @@
+#ifndef QuestType6_H
+#define QuestType6_H
 #include "window.hpp"
 #include "PicturetAndFilmtoView.hpp"
 class QuestType6 : public window {
@@ -14,3 +16,4 @@ public:
     int getquestionVariantID5();
 
 };
+#endif 

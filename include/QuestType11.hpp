@@ -1,3 +1,5 @@
+#ifndef QuestType11_H
+#define QuestType11_H
 #include "window.hpp"
 #include "PicturetoView11.hpp"
 #include "CheckButton11.hpp"
@@ -20,3 +22,4 @@ public:
     int getquestionVariantID4();
     int getquestionVariantID5();
 };
+#endif 

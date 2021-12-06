@@ -1,3 +1,5 @@
+#ifndef SimpleImage_H
+#define SimpleImage_H
 #include <vector>
 #include <SFML/Graphics.hpp>
 
@@ -21,3 +23,4 @@ public:
     std::vector<sf::ConvexShape>& GetTriangleFigure()       ;
 
 };
+#endif 

@@ -104,7 +104,7 @@ QuestType13::QuestType13(float w, float h) :
                     for (int i = 0; i < result.size(); i++)
                     {
                         result_int = result_int | (1 << result[i]);
-                        //std::cout << "i=" << i << " " <<(int)(1 << result[i]) << " " << (question13Answers[question13VariantID1][question13VariantID2] & (1 << i)) << std::endl;
+
 
                     }
                     std::cout << std::endl;
