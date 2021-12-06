@@ -1,5 +1,5 @@
 #include "PicturetAndFilmtoView.hpp"
-PicturetAndFilmtoView::PicturetAndFilmtoView(Window& w) : PicturetoView(w) {}
+PicturetAndFilmtoView::PicturetAndFilmtoView(window& w) : PicturetoView(w) {}
 
 void PicturetAndFilmtoView::CalcucateCoordinate() {
     using namespace std;

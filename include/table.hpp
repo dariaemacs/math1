@@ -1,3 +1,9 @@
+#ifndef table_H
+#define table_H
+#include <array>
+#include <SFML/Graphics.hpp>
+#include "window.hpp"
+
 class table {
 
     float mash_koeff;
@@ -13,16 +19,17 @@ protected:
     std::array < sf::VertexArray, 5> horizline;
     std::array < sf::Text, 6> text;
     sf::Font font;
-    Window& WindowLink;
+    window& WindowLink;
 public:
-    table(Window&);
+    table(window&);
     void draw();
-    float table::getmash_koeff();
-    float table::getmash_width();
-    float table::getmash_height();
-    float table::gettablemax_y();
-    float table::getmash_x();
-    float table::getmash_y();
+    float getmash_koeff();
+    float getmash_width();
+    float getmash_height();
+    float gettablemax_y();
+    float getmash_x();
+    float getmash_y();
 
 };
 
+#endif

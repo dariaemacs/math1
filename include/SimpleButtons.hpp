@@ -12,7 +12,7 @@ class SimpleButtons {
     bool released{ true };
 
 protected:
-    Window& WindowLink;
+    window& WindowLink;
     float scale;
     int ButtonCount;
     int ButtonPressID = -1;
@@ -24,8 +24,8 @@ protected:
     std::vector<std::unique_ptr<sf::Sprite>> ButtonsList;
 
 public:
-    SimpleButtons(int, Window&);
-    SimpleButtons(Window&);
+    SimpleButtons(int, window&);
+    SimpleButtons(window&);
     void setButtonCount(int bc);
     void CalcucateCoordinate();
     void CalcucateCoordinate(float);
@@ -50,6 +50,7 @@ public:
     float getWidth();
 
     float getMarginLeft();
+    bool  click();
 };
 
 #endif 

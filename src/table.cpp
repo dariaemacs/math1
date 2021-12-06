@@ -1,4 +1,8 @@
 #include "table.hpp"
+#include "window.hpp"
+#include "database.hpp"
+
+
 float table::getmash_koeff() {
     return mash_koeff;
 };
@@ -15,7 +19,7 @@ float table::gettablemax_y() {
 float table::getmash_x() { return  mash_x; }
 float table::getmash_y() { return  mash_y; }
 
-table::table(Window& wlink) :WindowLink(wlink) {
+table::table(window& wlink) :WindowLink(wlink) {
     for (int i = 0; i < 6; i++)
     {
 

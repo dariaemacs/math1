@@ -1,6 +1,6 @@
 #include "CheckButton11.hpp"
 #include "database.hpp"
-CheckButton11::CheckButton11(Window& w) :CheckButton(w), answerNUMBER(0) {}
+CheckButton11::CheckButton11(window& w) :CheckButton(w), answerNUMBER(0) {}
 
 unsigned char CheckButton11::getanswerNUMBER() {
     return answerNUMBER;

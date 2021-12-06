@@ -1,5 +1,7 @@
 #include "window.hpp"
-class QuestType5 : public Window {
+#include "SimpleButtons.hpp"
+#include "questanswerClass.hpp"
+class QuestType5 : public window {
     SimpleButtons Buttons;
     questanswerClass questanswer;
 public:

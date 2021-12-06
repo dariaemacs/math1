@@ -4,7 +4,7 @@
 QuestType15::QuestType15(float w, float h, int qtyButtons) :
     questionVariantID1(rand() % 3),
     questionVariantID2(rand() % 3),
-    Window(w, h, 0, 13),
+    window(w, h, 0, 13),
     buttons(qtyButtons, *this),
     tab(*this) {
 
@@ -21,10 +21,10 @@ QuestType15::QuestType15(float w, float h, int qtyButtons) :
     textFrame.CalcucateCoordinate(w - w * 10 / 100.0f, h / 3.0f);
 
 
-    while (window->isOpen()) {
-        window->clear();
+    while (win->isOpen()) {
+        win->clear();
 
-        window->draw(List);
+        win->draw(List);
 
         if (first) {
 
@@ -45,23 +45,23 @@ QuestType15::QuestType15(float w, float h, int qtyButtons) :
         }
 
         tab.draw();
-        window->draw(QuestComment.gettext());
-        window->draw(textFrame.gettext());
+        win->draw(QuestComment.gettext());
+        win->draw(textFrame.gettext());
         for (int bc = 0; bc < buttons.getButtonCount(); bc++)
-            window->draw(*buttons.getButtons()[bc]);
-        window->draw(ArrowButtonSprite);
+            win->draw(*buttons.getButtons()[bc]);
+        win->draw(ArrowButtonSprite);
 
 
         if (badAnswer) {
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
             sprite.setPosition((w - questanswer.getWidth()) / 2, buttons.getMarginTop() - 2 * questanswer.getWidth() * questanswer.getScale());
-            window->draw(sprite);
+            win->draw(sprite);
 
         }
-        window->display();
-        while (window->pollEvent(event)) {
+        win->display();
+        while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
-                window->close();
+                win->close();
             }
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {

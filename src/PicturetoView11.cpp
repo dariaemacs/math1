@@ -1,5 +1,5 @@
 #include  "PicturetoView11.hpp"
-PicturetoView11::PicturetoView11(Window& w) : PicturetoView(w) {
+PicturetoView11::PicturetoView11(window& w) : PicturetoView(w) {
 
 }
 

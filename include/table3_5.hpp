@@ -1,4 +1,8 @@
-#pragma once
+#ifndef table3_5_H1
+#define table3_5_H1
+#include <array>
+#include <SFML/Graphics.hpp>
+class window;
 class table3_5 {
     std::array < sf::Text, 6> Celltext;
     float mash_koeff;
@@ -16,7 +20,7 @@ protected:
     std::array < sf::VertexArray, 5> horizline;
     std::array < sf::Text, 6> text;
     sf::Font font;
-    Window& WindowLink;
+    window& WindowLink;
 public:
     float getheight0Row();
     float getmash_koeff();
@@ -26,7 +30,8 @@ public:
     float gettablemax_y();
     float getmash_x();
     float getmash_y();
-    table3_5(Window&);
+    table3_5(window&);
     void calcFontSize(const int w, const int h);
     void draw();
 };
+#endif

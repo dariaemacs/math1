@@ -1,4 +1,10 @@
-table3_5::table3_5(Window& w) :WindowLink(w) {
+#include "table3_5.hpp"
+#include "window.hpp"
+#include "database.hpp"
+
+
+
+table3_5::table3_5(window& w) :WindowLink(w) {
 
     for (int i = 0; i < 6; i++)
     {
@@ -223,3 +229,21 @@ float table3_5::gettablemax_y() {
 };
 float table3_5::getmash_x() { return  mash_x; }
 float table3_5::getmash_y() { return  mash_y; }
+
+
+void table3_5::calcFontSize(const int w, const int h) {
+
+
+    fontSize = 50;
+    text[0].setCharacterSize(static_cast<int>(fontSize));
+    float width = text[0].getLocalBounds().width; float height = text[0].getLocalBounds().height;
+    while (width > w || height > h)
+    {
+        fontSize--;
+        if (fontSize > 0) text[0].setCharacterSize(static_cast<int>(fontSize)); else return;
+        width = text[0].getLocalBounds().width;
+        height = text[0].getLocalBounds().height;
+    }
+    fontSize--;
+    //margin_top = text[0].getLocalBounds().top;
+}

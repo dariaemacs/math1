@@ -1,6 +1,10 @@
 #include "window.hpp"
-class QuestType16 : public Window {
-    Buttons buttons;
+#include "SimpleButtons.hpp"
+#include "questanswerClass.hpp"
+#include "table3_5.hpp"
+
+class QuestType16 : public window {
+    SimpleButtons buttons;
     int questionVariantID1;
     int questionVariantID2;
     int questionVariantID3;

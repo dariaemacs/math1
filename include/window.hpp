@@ -1,24 +1,27 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
-#include "settings.hpp"
-#include "pica.hpp"
-#include "figures.hpp"
 
 #include <iostream>
 #include <memory>
 #include <vector>
 #include <array>
-
 #include <SFML/Graphics.hpp>
-#include "TextFrameBase.hpp";
+
+#include "settings.hpp"
+#include "pica.hpp"
+#include "figures.hpp"
+#include "TextFrameBase.hpp"
+
+
 
 #define maximal(a, b) (((a)>(b))?(a):(b))
 #define minimal(a, b) (((a)<(b))?(a):(b))
 #define three_minimal(a, b, c) minimal(minimal(a, b), c)
 
+std::wstring get_wstr(int, int);
 
-class Window {
+class window {
    bool first;
   
 
@@ -37,7 +40,7 @@ protected:
   int questNumber;
   TextFrameBase textFrame;
   bool checkandnextQuest(float);
-  std::shared_ptr<sf::RenderWindow> window; 
+  std::shared_ptr<sf::RenderWindow> win; 
   sf::Texture ArrowButtonTexture;
   sf::Sprite ArrowButtonSprite;
   sf::RectangleShape List;
@@ -47,13 +50,13 @@ protected:
 public:
     //friend  std::wstring get_wstr(int questvariantIndex);
   
-  Window(float w, float h, int questNumber, int);
+  window(float w, float h, int questNumber, int);
   float getWidth() { return width; }
   float getHeight() { return height; }
   int getQuestNumber(){ return questNumber; }
   int getordQuestNumber() { return ordQuestNumber; }
   TextFrameBase gettextFrame() { return textFrame; }
-  std::shared_ptr<sf::RenderWindow> getWindow() { return window; }
+  std::shared_ptr<sf::RenderWindow> getWindow() { return win; }
 
   virtual   int getquestionVariantID1() = 0;
   virtual   int getquestionVariantID2() = 0;

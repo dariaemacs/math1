@@ -2,7 +2,7 @@
 #define QuestType7_H
 #include "window.hpp"
 #include "squareBoard.hpp"
-class QuestType7 : public Window {
+class QuestType7 : public window {
     squareBoard sB;
     sf::Texture    EraseButtonTexture;
     sf::Sprite     EraseButtonSprite;

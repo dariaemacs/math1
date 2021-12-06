@@ -1,7 +1,7 @@
 #include "QuestType13.hpp"
 #include "database.hpp"
 QuestType13::QuestType13(float w, float h) :
-    Window(w, h, 0, 12),
+    window(w, h, 0, 12),
     checkbutton(*this)
 
 
@@ -9,10 +9,10 @@ QuestType13::QuestType13(float w, float h) :
 
 
     std::shared_ptr<FrameFigure> pica[] =
-    { std::make_shared<ThreePicture0>(window) ,
-        std::make_shared<ThreePicture1>(window),
-        std::make_shared<ThreePicture2>(window),
-        std::make_shared<ThreePicture3>(window)
+    { std::make_shared<ThreePicture0>(win) ,
+        std::make_shared<ThreePicture1>(win),
+        std::make_shared<ThreePicture2>(win),
+        std::make_shared<ThreePicture3>(win)
     };
     bool first = true;
     FrameFigure::resetnumber_of_figure();
@@ -35,11 +35,11 @@ QuestType13::QuestType13(float w, float h) :
     QuestComment.settext(CommentsDic[0]);
 
 
-    while (window->isOpen()) {
-        window->clear();
+    while (win->isOpen()) {
+        win->clear();
 
-        window->draw(List);
-        window->draw(ArrowButtonSprite);
+        win->draw(List);
+        win->draw(ArrowButtonSprite);
         if (first) {
 
             first = false;
@@ -61,28 +61,28 @@ QuestType13::QuestType13(float w, float h) :
 
 
         for (int i = 0; i < 3; i++) {
-            window->draw(checkbutton.getSprite()[i]);
+            win->draw(checkbutton.getSprite()[i]);
             std::wstring tmpStr = question13Variant[questionVariantID2][question13VariantofRandom[questionVariantID3][i]];
             checkbutton.setStrValue(i, tmpStr,28);
             tmpStr = checkbutton.getText()[i].getString();
-            window->draw(checkbutton.getText()[i]);
+            win->draw(checkbutton.getText()[i]);
         }
 
 
 
-        window->draw(QuestComment.gettext());
+        win->draw(QuestComment.gettext());
         pica[questionVariantID1]->draw();
-        window->draw(textFrame.gettext());
+        win->draw(textFrame.gettext());
 
 
 
         if (badAnswer) {
 
         }
-        window->display();
-        while (window->pollEvent(event)) {
+        win->display();
+        while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
-                window->close();
+                win->close();
             }
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {

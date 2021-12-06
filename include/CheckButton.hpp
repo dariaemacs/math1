@@ -10,7 +10,7 @@
 
 
 
-class Window;
+class window;
 class CheckButton {
     int qty;
     sf::Font font;
@@ -20,7 +20,7 @@ class CheckButton {
 protected:
     int textmarginleft;
     int clickID;
-    Window& wLnk;
+    window& wLnk;
 
     float margin_top;
     int rightQuestNum;
@@ -29,7 +29,7 @@ protected:
     float coeff;
 public:
 
-    CheckButton(Window&);
+    CheckButton(window&);
     int GenerateRandomSetNumber();
 
     //int GenerateRandomSet();

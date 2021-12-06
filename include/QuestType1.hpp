@@ -1,6 +1,6 @@
 #include "window.hpp"
 #include "SimpleButtons.hpp"
-class QuestType1 : public Window {
+class QuestType1 : public window {
 
 
     SimpleButtons Buttons;

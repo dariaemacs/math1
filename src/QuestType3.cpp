@@ -11,7 +11,7 @@ int QuestType3::getquestionVariantID5() { return 0; }
 
 QuestType3::QuestType3(float w, float h, int qtyButtons) :
 
-    Window(w, h,
+    window(w, h,
 
         ((rand() % 6))
 
@@ -53,17 +53,17 @@ QuestType3::QuestType3(float w, float h, int qtyButtons) :
     //Buttons.setButtonCount(N);
 
     sf::Event event;
-    while (window->isOpen()) {
-        window->clear();
+    while (win->isOpen()) {
+        win->clear();
 
         if (badAnswer) {
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
             sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
 
-            window->draw(sprite);
+            win->draw(sprite);
 
         }
-        window->draw(List);
+        win->draw(List);
 
         if (first) {
             Buttons.CalcucateCoordinate(); first = false;
@@ -79,33 +79,33 @@ QuestType3::QuestType3(float w, float h, int qtyButtons) :
 
 
         }
-        window->draw(QuestComment.gettext());
-        window->draw(textFrame.gettext());
-        window->draw(ArrowButtonSprite);
+        win->draw(QuestComment.gettext());
+        win->draw(textFrame.gettext());
+        win->draw(ArrowButtonSprite);
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
         {
-            window->draw(*Buttons.getButtons()[bc]);
+            win->draw(*Buttons.getButtons()[bc]);
 
         }
 
         for (int bc = 0; bc < PictureAndBasket.getButtonCount(); bc++) {
 
-            window->draw(*PictureAndBasket.getButtons()[bc]);
+            win->draw(*PictureAndBasket.getButtons()[bc]);
         }
-        window->draw(PictureAndBasket.getBasketSprite());
+        win->draw(PictureAndBasket.getBasketSprite());
 
         if (badAnswer) {
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
             sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
 
-            window->draw(sprite);
+            win->draw(sprite);
 
         }
 
-        window->display();
-        while (window->pollEvent(event)) {
+        win->display();
+        while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
-                window->close();
+                win->close();
             }
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {

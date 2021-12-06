@@ -1,6 +1,7 @@
 #include "window.hpp"
+#include "CheckButton11.hpp"
 
-class QuestType13 : public Window {
+class QuestType13 : public window {
     CheckButton11 checkbutton;
     int questionVariantID1;
     int questionVariantID2;

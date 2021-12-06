@@ -84,7 +84,54 @@ float SimpleButtons::getMarginLeft() {
     return margin_left;
 }
 
-SimpleButtons::SimpleButtons(int qtyButton, Window& w) :WindowLink(w), ButtonCount(qtyButton) {
+SimpleButtons::SimpleButtons(int qtyButton, window& w) :WindowLink(w), ButtonCount(qtyButton) {
 
 }
-SimpleButtons::SimpleButtons(Window& w) : WindowLink(w) {}
+SimpleButtons::SimpleButtons(window& w) : WindowLink(w) {}
+
+bool SimpleButtons::click() {
+
+
+
+
+
+    for (int i = 0; i < ButtonCount; ++i) {
+        const sf::Vector2f& position = ButtonsList[i]->getPosition();
+        const sf::IntRect& rect = ButtonsList[i]->getTextureRect();
+        float x0 = position.x;
+        float y0 = position.y;
+        float x1 = (float)x0 + (float)rect.width * scale;
+        float y1 = (float)y0 + (float)rect.height * scale;
+
+
+
+        const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
+        x1 = x1;
+        ////std::cout << "scale" <<scale << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
+        if (M.x >= x0 && M.x <= x1 && M.y >= y0 && M.y <= y1) {
+            std::string fileName = "";
+            ////std::cout << "i=" << i<<" M.x="<< M.x << " M.y=" << M.y<< " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 <<std::endl;
+            sf::Texture ArrowButtonTexture;
+            sf::Sprite ArrowButtonSprite(ArrowButtonTexture);
+
+            if (ButtonPressID >= 0) {
+                fileName = "resources/images/digit" + std::to_string(ButtonPressID + 1) + ".jpg";
+                MyTexture[ButtonPressID]->loadFromFile(fileName); ButtonPressID = -1;
+            }
+            fileName = "resources/images/digit" + std::to_string(i + 1) + "_select.jpg";
+            ButtonPressID = i;
+
+            MyTexture[i]->loadFromFile(fileName);
+
+            //w->draw(*Buttons[i]);
+            //w->display();
+            return true;
+
+        } //else //std::cout << "i=" << i << " M.x=" << M.x << " M.y=" << M.y << " x0=" << x0 << " y0=" << y0 << " x1=" << x1 << " y1=" << y1 << std::endl;
+        //Buttons = Buttons.get()+1;
+
+    }
+    return false;
+
+}
+

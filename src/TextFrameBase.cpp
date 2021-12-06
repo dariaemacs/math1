@@ -1,8 +1,10 @@
 #include "TextFrameBase.hpp"
+#include "settings.hpp"
+#include "database.hpp"
 
 
 
-TextFrameBase::TextFrameBase(float s, Window& winLink, char) :size(s), WindowLink(winLink) { //delegate
+TextFrameBase::TextFrameBase(float s, window& winLink, char) :size(s), WindowLink(winLink) { //delegate
     ////std::cout << Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf" << std::endl;
     font.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
 
@@ -11,19 +13,15 @@ TextFrameBase::TextFrameBase(float s, Window& winLink, char) :size(s), WindowLin
     text.setPosition(Settings::PADDING, Settings::PADDING);
 }
 
-TextFrameBase::TextFrameBase(float s, std::wstring str, float w1, float h1, Window& winLink) :TextFrameBase(s, winLink, 'c') {
+TextFrameBase::TextFrameBase(float s, std::wstring str, float w1, float h1, window& winLink) :TextFrameBase(s, winLink, 'c') {
     w = w1;
     h = h1;
     text.setString(str);
 }
 
-void TextFrameBase::setmargin_top(float m) {
-    sf::Vector2f pos = text.getPosition();
-    text.setPosition(pos.x, m);
-    margin_top = m;
-}
 
-TextFrameBase::TextFrameBase(float s, int quest, int w, int h, Window& winLink)
+
+TextFrameBase::TextFrameBase(float s, int quest, int w, int h, window& winLink)
     :TextFrameBase(s, winLink, 'c') {
     questionNumber = quest;
     text.setString(get_wstr(quest, winLink.getordQuestNumber()));
@@ -52,7 +50,7 @@ void TextFrameBase::setN_M(int N, int M) {
     posn = question.find(replaceFrom);
     if (posn < question.length()) question.replace(posn, replaceFrom.length(), replaceTo);
     text.setString(question);
-    ////std::cout << questionNumber << " "<< beginQuestion2Index << std::endl;
+
     for (int x = 0; x < X - 1; x++) {
         replaceFrom = phrasestoReplace[questionNumber][x].find;
         replaceTo = phrasestoReplace[questionNumber][x].replace;
@@ -66,17 +64,16 @@ void TextFrameBase::setN_M(int N, int M) {
 }
 
 
-void TextFrameBase::settext(std::wstring a) { text.setString(a); }
+
 
 sf::Text TextFrameBase::gettext() {
     return text;
 }
 
-sf::Text TextFrameBase::gettext() {
-    return text;
-};
+
 
 void TextFrameBase::settext(std::wstring a) { text.setString(a); }
+
 
 void TextFrameBase::setmargin_top(float m) {
     sf::Vector2f pos = text.getPosition();

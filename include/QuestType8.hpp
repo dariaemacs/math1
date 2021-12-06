@@ -4,7 +4,7 @@
 #include "window.hpp"
 #include "setofpictureObject.hpp"
 
-class QuestType8 : public Window {
+class QuestType8 : public window {
     setofpictureObject setofpic0;
     setofpictureObject setofpic1;
     setofpictureObject setofpic2;

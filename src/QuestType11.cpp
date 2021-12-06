@@ -12,7 +12,7 @@ int QuestType11::getquestionVariantID5() { return 0; }
 
 
 QuestType11::QuestType11(float w, float h) :
-    Window(w, h, 0, 10),
+    window(w, h, 0, 10),
     checkbutton(*this),
     picture1(*this),
     picture2(*this)
@@ -58,11 +58,11 @@ QuestType11::QuestType11(float w, float h) :
     picture1.setMargin_top(h / 3);
 
 
-    while (window->isOpen()) {
-        window->clear();
+    while (win->isOpen()) {
+        win->clear();
 
-        window->draw(List);
-        window->draw(ArrowButtonSprite);
+        win->draw(List);
+        win->draw(ArrowButtonSprite);
         if (first) {
 
             first = false;
@@ -87,7 +87,7 @@ QuestType11::QuestType11(float w, float h) :
 
 
         for (int i = 0; i < 4; i++) {
-            window->draw(checkbutton.getSprite()[i]);
+            win->draw(checkbutton.getSprite()[i]);
 
             std::wstring tmpStr = question11Variant2[question11Variant2ID][question11Variant1ID][question11ALLVariants[question11Variant3ID][i]];
             checkbutton.setStrValue(i, tmpStr,28);
@@ -95,22 +95,22 @@ QuestType11::QuestType11(float w, float h) :
 
             tmpStr = checkbutton.getText()[i].getString();
 
-            window->draw(checkbutton.getText()[i]);
+            win->draw(checkbutton.getText()[i]);
 
         }
         //QuestComment.setmargin_top(h - (checkbutton.getQudroSize() + 20) * 4);
         QuestComment.setmargin_top(textFrame.getHeight() + 15);
-        window->draw(QuestComment.gettext());
+        win->draw(QuestComment.gettext());
 
 
-        window->draw(textFrame.gettext());
+        win->draw(textFrame.gettext());
         for (int bc = 0; bc < picture1.getButtonCount(); bc++) {
 
-            window->draw(*picture1.getButtons()[bc]);
+            win->draw(*picture1.getButtons()[bc]);
         }
         for (int bc = 0; bc < picture2.getButtonCount(); bc++) {
 
-            window->draw(*picture2.getButtons()[bc]);
+            win->draw(*picture2.getButtons()[bc]);
         }
 
 
@@ -120,10 +120,10 @@ QuestType11::QuestType11(float w, float h) :
             //window->draw(sprite);
 
         }
-        window->display();
-        while (window->pollEvent(event)) {
+        win->display();
+        while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
-                window->close();
+                win->close();
             }
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {

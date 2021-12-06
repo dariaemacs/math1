@@ -3,7 +3,7 @@
 #include "PicturetoViewQuestWithBasket.hpp"
 #include "questanswerClass.hpp"
 
-class QuestType3 : public Window {
+class QuestType3 : public window {
 
 
     SimpleButtons Buttons;

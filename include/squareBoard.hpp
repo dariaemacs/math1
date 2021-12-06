@@ -1,8 +1,8 @@
 #ifndef squareBoard_H
 #define squareBoard_H
 #include "MyVertexArray.hpp"
-#include "point.hpp";
-
+#include "window.hpp"
+#include "point.hpp"
 class squareBoard {
     const float NN = 30;//qty of horiz lines
     float MM; // this is qty of vert lines will calculate later
@@ -20,11 +20,11 @@ class squareBoard {
     int firstpointInput_i;
     int firstpointInput_j;
     std::vector<int> i1;
-    Window& WindowLink;
+    window& WindowLink;
     unsigned long long result;
     int VARIANT;
 public:
-    squareBoard(float, float, Window&);
+    squareBoard(float, float, window&);
     void draw();
     void setMargintop(float);
     float getMargintop();
@@ -35,7 +35,7 @@ public:
     void setquestFigure(int);
     float getwidthsqareBord();
     int getCurrentClickpoint();
-    std::array<point, 6>& getCheckPoint() { return CheckPoint; }
+    std::array<point, 6>& getCheckPoint();
     bool clickPoint(bool);
     void addLine(float, float, float, float, sf::Color);
     sf::VertexArray getLastline();

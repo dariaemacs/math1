@@ -2,15 +2,16 @@
 #define PicturetoView_H
 
 #include "SimpleButtons.hpp"
-#include "QuestType2.hpp"
+class QuestType2;
 
 
 class PicturetoView : public SimpleButtons {
 public:    
-    //PicturetoView(QuestType2& , std::string);
-    PicturetoView(Window& w);
+    PicturetoView(window& , std::string);
+    PicturetoView(window&);
     void CalcucateCoordinate();
     bool click();
+    void setpictureFilename(std::string);
 protected:
     std::string pictureFilename;
     std::vector<bool> isblackSide;

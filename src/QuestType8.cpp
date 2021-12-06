@@ -9,7 +9,7 @@ int QuestType8::getquestionVariantID5() { return 0; }
 
 
 QuestType8::QuestType8(float w, float h)
-    :Window(w, h, ((rand() % 4)), 7),
+    :window(w, h, ((rand() % 4)), 7),
     setofpic0(*this),
     setofpic1(*this),
     setofpic2(*this),
@@ -66,9 +66,9 @@ QuestType8::QuestType8(float w, float h)
     minus.CalcucateCoordinate(2);
 
     sf::Event event;
-    while (window->isOpen()) {
-        window->clear();
-        window->draw(List);
+    while (win->isOpen()) {
+        win->clear();
+        win->draw(List);
 
         if (first) {
 
@@ -80,19 +80,19 @@ QuestType8::QuestType8(float w, float h)
             first = false;
             QuestComment.setmargin_top(h - minus.getHeight());
         }
-        window->draw(QuestComment.gettext());
-        window->draw(textFrame.gettext());
-        window->draw(*setofpic0.getButtons()[0]);
-        window->draw(*setofpic1.getButtons()[0]);
-        window->draw(*setofpic2.getButtons()[0]);
-        window->draw(*setofpic3.getButtons()[0]);
-        window->draw(*plus.getButtons()[0]);
-        window->draw(*minus.getButtons()[0]);
-        window->draw(ArrowButtonSprite);
-        window->display();
-        while (window->pollEvent(event)) {
+        win->draw(QuestComment.gettext());
+        win->draw(textFrame.gettext());
+        win->draw(*setofpic0.getButtons()[0]);
+        win->draw(*setofpic1.getButtons()[0]);
+        win->draw(*setofpic2.getButtons()[0]);
+        win->draw(*setofpic3.getButtons()[0]);
+        win->draw(*plus.getButtons()[0]);
+        win->draw(*minus.getButtons()[0]);
+        win->draw(ArrowButtonSprite);
+        win->display();
+        while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
-                window->close();
+                win->close();
             }
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -117,7 +117,7 @@ QuestType8::QuestType8(float w, float h)
                     readyforCheck = true;
                 }
 
-                window->draw(*setofpic3.getButtons()[0]);
+                win->draw(*setofpic3.getButtons()[0]);
 
 
             }

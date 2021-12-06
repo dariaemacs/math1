@@ -5,11 +5,11 @@
 
 
 
-#include "PicturetoView.hpp";
-#include "SimpleButtons.hpp";
-#include "questanswerClass.hpp";
+#include "PicturetoView.hpp"
+#include "SimpleButtons.hpp"
+#include "questanswerClass.hpp"
 
-class QuestType2 : public Window {
+class QuestType2 : public window {
 
 
     SimpleButtons Buttons;

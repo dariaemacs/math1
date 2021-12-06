@@ -1,5 +1,7 @@
+#ifndef TextFrameBase_H1
+#define TextFrameBase_H1
 #include <SFML/Graphics.hpp>
-class Window;
+class window;
 class TextFrameBase {
 
 
@@ -9,29 +11,26 @@ class TextFrameBase {
     float w;
     float h;
     float margin_top;
-    Window& WindowLink;
+    window& WindowLink;
 protected:
     int questionNumber;
 
 public:
-    TextFrameBase(float, Window& winLink, char); //delegate
-    TextFrameBase(float, int, int, int, Window&);
-    TextFrameBase(float s, std::wstring str, float, float, Window&);
+    TextFrameBase(float, window& winLink, char); //delegate
+    TextFrameBase(float, int, int, int, window&);
+    TextFrameBase(float s, std::wstring str, float, float, window&);
     sf::Text gettext();
-    // void setwinLink(Window &w) { WindowLink = w; }
     void settext(std::wstring a);
     void setmargin_top(float m);
-    float getmargin_top() {
-        return margin_top;
-    }
+    float getmargin_top();
     void CalcucateCoordinate(float, float);
 
     float getHeight();
     void setN_M(int, int);
-    void setquestionNumber(int qn) { questionNumber = qn; }
-    float getSize() {
-        return size;
-    }
+    void setquestionNumber(int qn);
+    float getSize();
 
 
 };
+
+#endif

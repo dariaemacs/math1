@@ -1,7 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
+#include "window.hpp"
 
 class Buttons {
     bool touched{ false };
@@ -9,7 +9,7 @@ class Buttons {
     bool released{ true };
 
 protected:
-    Window& WindowLink;
+    window& WindowLink;
     float scale;
     int ButtonCount;
     int ButtonPressID = -1;
@@ -21,51 +21,30 @@ protected:
     std::vector<std::unique_ptr<sf::Sprite>> ButtonsList;
 
 public:
-    Buttons(int, Window&);
-    Buttons(Window&);
-    void setButtonCount(int bc) {
-        ButtonCount = bc;
-    }
+    Buttons(int, window&);
+    Buttons(window&);
+    void setButtonCount(int bc);
     void CalcucateCoordinate();
     void CalcucateCoordinate(float);
-    void setMargin_top(float margin) {
-        margin_top = margin;
-    }
+    void setMargin_top(float);
 
 
 
-    void setMargin_left(float margin) {
-        margin_left = margin;
-    }
+    void setMargin_left(float);
 
-    std::vector<std::unique_ptr<sf::Sprite>>& getButtons() {
-        return
-            ButtonsList;
-    }
+    std::vector<std::unique_ptr<sf::Sprite>>& getButtons();
     bool  click();
-    int getButtonCount() { return ButtonCount; }
-    std::vector<std::shared_ptr<sf::Texture>>& getButtonTexture() { return MyTexture; }
-    int GetButtonsClickID() { return ButtonPressID; }
+    int getButtonCount();
+    std::vector<std::shared_ptr<sf::Texture>>& getButtonTexture();
+    int GetButtonsClickID();
 
-    float getMarginTop() {
-        return margin_top;
-    }
-    float getScale() {
-        return scale;
-    }
+    float getMarginTop();
+    float getScale();
 
-    void setScale(float s) {
-        scale = s;
-    }
-    float getHeight() {
-        return height;
-    }
+    void setScale(float );
+    float getHeight();
 
-    float getWidth() {
-        return width;
-    }
+    float getWidth();
 
-    float getMarginLeft() {
-        return margin_left;
-    }
+    float getMarginLeft();
 };

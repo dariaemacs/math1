@@ -28,7 +28,7 @@ float QuestType1::check(float c, float t, float r) {
 
 QuestType1::QuestType1(float w, float h, int qtyButtons) :
 
-    Window(w, h, (rand() % 3), 0),
+    window(w, h, (rand() % 3), 0),
     Buttons(qtyButtons, *this)
 {
     bool first = true;
@@ -39,12 +39,12 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
 
     const std::vector<FrameFigure*> figures =
     {
-        new Car(window), //+
-        new Flower(window),//+
-        new Tree(window),
-        new Butterfly(window),
-        new Plane(window), //+
-        new Tower(window), //+
+        new Car(win), //+
+        new Flower(win),//+
+        new Tree(win),
+        new Butterfly(win),
+        new Plane(win), //+
+        new Tower(win), //+
     };
 
     questionVariantID1 = (rand() % figures.size());
@@ -57,9 +57,9 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
     int triangleQTY = figures[questionVariantID1]->gettriangleQTY() + figures[questionVariantID2]->gettriangleQTY();
     int circleQTY = figures[questionVariantID1]->getcircleQTY() + figures[questionVariantID2]->getcircleQTY();
     sf::Event event;
-    while (window->isOpen()) {
-        window->clear();
-        window->draw(List);
+    while (win->isOpen()) {
+        win->clear();
+        win->draw(List);
         figures[questionVariantID1]->draw();
         figures[questionVariantID2]->draw();
         if (figures[questionVariantID1]->GetisNextQuest() || figures[questionVariantID2]->GetisNextQuest())
@@ -76,17 +76,17 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
             QuestComment.setmargin_top(h - Buttons.getHeight());
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
         }
-        window->draw(QuestComment.gettext());
-        window->draw(textFrame.gettext());
-        window->draw(ArrowButtonSprite);
+        win->draw(QuestComment.gettext());
+        win->draw(textFrame.gettext());
+        win->draw(ArrowButtonSprite);
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
-            window->draw(*Buttons.getButtons()[bc]);
+            win->draw(*Buttons.getButtons()[bc]);
         }
-        window->display();
+        win->display();
         //*Buttons.
-        while (window->pollEvent(event)) {
+        while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
-                window->close();
+                win->close();
             }
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 

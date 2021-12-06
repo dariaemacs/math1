@@ -10,7 +10,7 @@ int QuestType10::getquestionVariantID5() { return 0; }
 
 
 QuestType10::QuestType10(float w, float h) :
-    Window(w, h, 0, 9),
+    window(w, h, 0, 9),
     checkbutton(*this)
 {
 
@@ -55,11 +55,11 @@ QuestType10::QuestType10(float w, float h) :
 
 
 
-    while (window->isOpen()) {
-        window->clear();
+    while (win->isOpen()) {
+        win->clear();
 
-        window->draw(List);
-        window->draw(ArrowButtonSprite);
+        win->draw(List);
+        win->draw(ArrowButtonSprite);
         if (first) {
             first = false;
 
@@ -79,16 +79,16 @@ QuestType10::QuestType10(float w, float h) :
         //}
 
         for (int i = 0; i < 4; i++) {
-            window->draw(checkbutton.getSprite()[i]);
+            win->draw(checkbutton.getSprite()[i]);
             sf::Text tmp1 = checkbutton.getText()[i];
             std::wstring tmpStr = tmp1.getString();
             checkbutton.setStrValue(i, tmpStr, 28);
-            window->draw(checkbutton.getText()[i]);
+            win->draw(checkbutton.getText()[i]);
         }
 
-        window->draw(QuestComment.gettext());
+        win->draw(QuestComment.gettext());
 
-        window->draw(textFrame.gettext());
+        win->draw(textFrame.gettext());
 
 
 
@@ -101,10 +101,10 @@ QuestType10::QuestType10(float w, float h) :
 
             //checkbutton.getClickID()
         }
-        window->display();
-        while (window->pollEvent(event)) {
+        win->display();
+        while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
-                window->close();
+                win->close();
             }
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {

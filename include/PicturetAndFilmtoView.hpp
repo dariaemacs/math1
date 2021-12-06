@@ -6,9 +6,9 @@ class PicturetAndFilmtoView : public PicturetoView {
     float coinHeight;
 
 public:
-    PicturetAndFilmtoView(Window& w) : PicturetoView(w) {}
+    PicturetAndFilmtoView(window& w);
     void CalcucateCoordinate();
     bool click();
-    float getcoinWidth() { return coinWidth; }
+    float getcoinWidth();
     //protected: std::string pictureFilename;
 };

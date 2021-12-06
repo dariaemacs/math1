@@ -1,6 +1,6 @@
 #include "PicturetoViewQuestWithBasket.hpp"
 
-PicturetoViewQuestWithBasket::PicturetoViewQuestWithBasket(Window& w) : PicturetoView(w) {};
+PicturetoViewQuestWithBasket::PicturetoViewQuestWithBasket(window& w) : PicturetoView(w) {};
 
 void PicturetoViewQuestWithBasket::CalcucateCoordinate() {
 

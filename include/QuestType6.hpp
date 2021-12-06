@@ -1,6 +1,6 @@
 #include "window.hpp"
 #include "PicturetAndFilmtoView.hpp"
-class QuestType6 : public Window {
+class QuestType6 : public window {
     SimpleButtons Buttons;
     PicturetAndFilmtoView coin1;
     PicturetAndFilmtoView coin2;

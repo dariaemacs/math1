@@ -2,6 +2,6 @@
 class PicturetoView11 : public PicturetoView {
 
 public:
-    PicturetoView11(Window& w);
+    PicturetoView11(window& w);
     void CalcucateCoordinate(float w);
 };

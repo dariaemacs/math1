@@ -1,5 +1,6 @@
 #include "QuestType4.hpp"
 #include "database.hpp"
+#include "Mysf_text.hpp"
 
 int QuestType4::getquestionVariantID1() { return 0; }
 int QuestType4::getquestionVariantID2() { return 0; }
@@ -8,7 +9,7 @@ int QuestType4::getquestionVariantID4() { return 0; }
 int QuestType4::getquestionVariantID5() { return 0; }
 
 QuestType4::QuestType4(float w, float h, int qtyButtons) :
-    Window(w, h, 0, 3),
+    window(w, h, 0, 3),
     Buttons(qtyButtons, *this) {
 
     bool first = true;
@@ -20,7 +21,7 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
     ArrowButtonSprite.setTexture(ArrowButtonTexture);
     float squareWidth = 0;
     int opennumbaerCount = 0;
-    TrainForQuest  TrainForQuest(window);
+    TrainForQuest  TrainForQuest(win);
     //TrainForQuest  TrainRight(window);
     //sf::CircleShape shape(1);
 
@@ -71,9 +72,9 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
     }
 
     sf::Event event;
-    while (window->isOpen()) {
-        window->clear();
-        window->draw(List);
+    while (win->isOpen()) {
+        win->clear();
+        win->draw(List);
         if (first) {
             margintopSlideButton = 20;
             Buttons.setMargin_top(static_cast<float>(margintopSlideButton) + 10);
@@ -87,9 +88,9 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
 
 
         }
-        window->draw(QuestComment.gettext());
-        window->draw(textFrame.gettext());
-        window->draw(ArrowButtonSprite);
+        win->draw(QuestComment.gettext());
+        win->draw(textFrame.gettext());
+        win->draw(ArrowButtonSprite);
 
 
 
@@ -98,7 +99,7 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
 
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
 
-            window->draw(*Buttons.getButtons()[bc]);
+            win->draw(*Buttons.getButtons()[bc]);
         }
 
         TrainForQuest.draw();
@@ -134,7 +135,7 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
                 }
                 firstPrintTrain = false;
                 numberInTrain[i]->setCharacterSize(numberInTrainCharactersize);
-                window->draw(*numberInTrain[i]);
+                win->draw(*numberInTrain[i]);
             };
 
 
@@ -152,7 +153,7 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
             squareWidth *
             6 + 3, (float)YnumberInTrain - 185 * scaletrainpicture + squareWidth + 3);
 
-        window->draw(trainpictureSprite);
+        win->draw(trainpictureSprite);
 
 
 
@@ -164,15 +165,15 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
                 + squareWidth * TrainForQuest.getkoef() + 10
             );
 
-            window->draw(sprite);
+            win->draw(sprite);
 
         }
-        window->display();
-        while (window->pollEvent(event)) {
+        win->display();
+        while (win->pollEvent(event)) {
 
             if (event.type == sf::Event::Closed) {
 
-                window->close();
+                win->close();
 
             }
 

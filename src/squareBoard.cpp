@@ -1,4 +1,10 @@
-squareBoard::squareBoard(float ww, float hh, Window& wl) : w(ww), h(hh), questFigure(wl.getQuestNumber()), squareWidth(0), alreadyDraw(false),
+#include "window.hpp"
+#include "squareBoard.hpp"
+#include "database.hpp"
+
+
+
+squareBoard::squareBoard(float ww, float hh, window& wl) : w(ww), h(hh), questFigure(wl.getQuestNumber()), squareWidth(0), alreadyDraw(false),
 CheckPoint{ 10,10,10,10,10,10 },
 WindowLink(wl), CurrentClickpoint(-1)
 
@@ -168,6 +174,115 @@ float squareBoard::getMargintop() { return marginTop; }
 float squareBoard::getMarginLeft() { return marginLeft; }
 float squareBoard::getsquareWidth() { return squareWidth; }
 void squareBoard::setquestFigure(int qf) { questFigure = qf; }
+
+void squareBoard::draw() {
+    for (int i = 0; i < NN; i++) {
+        if (!alreadyDraw) HorizLine[i].move(marginLeft, marginTop + i * squareWidth);
+        WindowLink.getWindow()->draw(HorizLine[i]);
+
+    }
+    for (int i = 0; i < MM; i++) {
+        if (!alreadyDraw) VertLine[i].move(marginLeft + i * squareWidth, marginTop);
+        WindowLink.getWindow()->draw(VertLine[i]);
+
+    }
+    for (unsigned int i = 0; i < CheckPoint.size(); i++)
+        WindowLink.getWindow()->draw(CheckPoint[i]);
+
+    for (unsigned int i = 0; i < line.size(); i++)
+    {
+        ////std::cout << "drawline " << line[i].getVertexCount() << std::endl;
+        WindowLink.getWindow()->draw(line[i]);
+
+    }
+
+
+
+
+    alreadyDraw = true;
+}
+
+bool squareBoard::clickPoint(bool trydrawLine) {
+
+    for (int i = 0; i < 6; ++i) {
+        coord  position = CheckPoint[i].getPixelCoord();
+        float x0 = position.x;
+        float y0 = position.y;
+        float x1 = (float)x0 + CheckPoint[i].getSize();
+        float y1 = (float)y0 + CheckPoint[i].getSize();
+
+
+
+        const sf::Vector2i& M = sf::Mouse::getPosition(*WindowLink.getWindow());
+        x1 = x1;
+
+        if (M.x >= x0 - 25 && M.x <= x1 + 25 && M.y >= y0 - 25 && M.y <= y1 + 25) {
+
+
+            ////std::cout << "clickPoint #" << CurrentClickpoint << std::endl;
+            if (trydrawLine) {
+                //std::cout << "line "<< i<<"->"<< getCurrentClickpoint() <<  std::endl;
+                dellLastline();
+                addLine((getCheckPoint())[getCurrentClickpoint()].getPixelCoord().x + CheckPoint[i].getSize() / 2,
+                    (getCheckPoint())[getCurrentClickpoint()].getPixelCoord().y + +CheckPoint[i].getSize() / 2,
+                    x0 + CheckPoint[i].getSize() / 2, y0 + CheckPoint[i].getSize() / 2, sf::Color::Green
+                );
+                line[line.size() - 1].setHold();
+                if (i != CurrentClickpoint) {
+                    addChekpointInput(i, CurrentClickpoint);
+                    CurrentClickpoint = -1;
+                }
+
+            }
+            else CurrentClickpoint = i;
+
+
+            return true;
+
+        }
+
+    }
+    return false;
+
+}
+
+void squareBoard::eraseLines() {
+    ChekpointInput.clear();
+    line.clear();
+
+    float ax, bx;
+    float ay, by;
+
+    ax = CheckPoint[firstpointInput_i].getPixelCoord().x + (CheckPoint[firstpointInput_i].getSize() / 2);
+    ay = CheckPoint[firstpointInput_i].getPixelCoord().y + (CheckPoint[firstpointInput_i].getSize() / 2);
+
+    bx = CheckPoint[firstpointInput_j].getPixelCoord().x + (CheckPoint[firstpointInput_i].getSize() / 2);
+    by = CheckPoint[firstpointInput_j].getPixelCoord().y + (CheckPoint[firstpointInput_i].getSize() / 2);
+
+    addLine(ax, ay, bx, by, sf::Color::Green);
+    addChekpointInput(firstpointInput_i, firstpointInput_j);
+}
+
+bool squareBoard::issegmentexsistinFigure(int segment) {
+    unsigned long long tmp = result;
+    while (tmp > 0) {
+        if ((tmp % 100) == segment) return true;
+        //std::cout << tmp << std::end;
+        tmp = tmp / 100;
+    }
+
+    return false;
+}
+
+bool squareBoard::isfigureInputright(const unsigned long long* figureAnswer) {
+    if (!issegmentexsistinFigure(firstpointInput_i * 10 + firstpointInput_j)) return false;
+    int size = sizeof(question7AnswersTriangle) / sizeof(*question7AnswersTriangle);
+    for (int i = 0; i < size; i++)
+        if (figureAnswer[i] == result) return true;
+
+    return false;
+}
+
 
 
 int squareBoard::getquestFigure() {

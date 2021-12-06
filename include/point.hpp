@@ -2,8 +2,9 @@
 #define point_H
 
 #include <SFML/Graphics.hpp>
-struct coord { float x, y; coord(float xx, float yy) :x(xx), y(yy) {}; coord() :x(0), y(0) {}; };
 class squareBoard;
+struct coord { float x, y; coord(float xx, float yy) :x(xx), y(yy) {}; coord() :x(0), y(0) {}; };
+
 class point : public sf::RectangleShape {
 
     float x, y; //coord in pixel

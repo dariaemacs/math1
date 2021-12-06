@@ -81,7 +81,7 @@ void QuestType7::ViewRightAnswer(int figura) {
 }
 
 QuestType7::QuestType7(float w, float h) :
-    Window(w, h, ((rand() % 3)), 6),
+    window(w, h, ((rand() % 3)), 6),
     sB(w, h, *this) {
     bool first = true;
     int margintopSlideButton = 0;
@@ -99,19 +99,19 @@ QuestType7::QuestType7(float w, float h) :
 
     sf::Event event;
     bool trydrawLine = false;
-    while (window->isOpen()) {
+    while (win->isOpen()) {
 
-        window->clear();
-
-
-
-        window->draw(List);
+        win->clear();
 
 
-        window->draw(textFrame.gettext());
-        window->draw(ArrowButtonSprite);
-        window->draw(EraseButtonSprite);
-        window->draw(QuestComment.gettext());
+
+        win->draw(List);
+
+
+        win->draw(textFrame.gettext());
+        win->draw(ArrowButtonSprite);
+        win->draw(EraseButtonSprite);
+        win->draw(QuestComment.gettext());
         sB.draw();
 
 
@@ -119,12 +119,12 @@ QuestType7::QuestType7(float w, float h) :
 
 
 
-        window->display();
+        win->display();
 
-        while (window->pollEvent(event)) {
+        while (win->pollEvent(event)) {
 
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
-                window->close();
+                win->close();
             }
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -176,7 +176,7 @@ QuestType7::QuestType7(float w, float h) :
             if (CurrentClickpointID >= 0) {
                 coord XY;
                 XY = sB.getCheckPoint()[CurrentClickpointID].getPixelCoord();
-                const sf::Vector2i& M = sf::Mouse::getPosition(*window);
+                const sf::Vector2i& M = sf::Mouse::getPosition(*win);
                 sf::VertexArray VA = sB.getLastline();
 
                 sB.dellLastline();

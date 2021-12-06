@@ -1,4 +1,6 @@
 #include "point.hpp"
+#include "squareBoard.hpp"
+
 point::point(float sz) :x(0), y(0), i(0), j(0), Sb(0), size(sz), sf::RectangleShape() {
     sf::RectangleShape::setPosition(0, 0);
     sf::RectangleShape::setSize(sf::Vector2f(sz, sz));

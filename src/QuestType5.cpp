@@ -9,7 +9,7 @@ int QuestType5::getquestionVariantID5() { return 0; }
 
 
 QuestType5::QuestType5(float w, float h, int qtyButtons) :
-    Window(w, h,
+    window(w, h,
 
         ((rand() % 6))
 
@@ -32,9 +32,9 @@ QuestType5::QuestType5(float w, float h, int qtyButtons) :
 
 
     sf::Event event;
-    while (window->isOpen()) {
-        window->clear();
-        window->draw(List);
+    while (win->isOpen()) {
+        win->clear();
+        win->draw(List);
 
         if (first) {
             Buttons.CalcucateCoordinate(); first = false;
@@ -50,12 +50,12 @@ QuestType5::QuestType5(float w, float h, int qtyButtons) :
 
 
         }
-        window->draw(QuestComment.gettext());
-        window->draw(textFrame.gettext());
-        window->draw(ArrowButtonSprite);
+        win->draw(QuestComment.gettext());
+        win->draw(textFrame.gettext());
+        win->draw(ArrowButtonSprite);
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
         {
-            window->draw(*Buttons.getButtons()[bc]);
+            win->draw(*Buttons.getButtons()[bc]);
 
         }
 
@@ -63,13 +63,13 @@ QuestType5::QuestType5(float w, float h, int qtyButtons) :
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
             sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
 
-            window->draw(sprite);
+            win->draw(sprite);
 
         }
-        window->display();
-        while (window->pollEvent(event)) {
+        win->display();
+        while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
-                window->close();
+                win->close();
             }
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {

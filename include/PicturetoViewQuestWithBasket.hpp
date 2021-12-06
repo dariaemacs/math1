@@ -3,7 +3,7 @@ class PicturetoViewQuestWithBasket : public  PicturetoView {
     sf::Texture basketTexture;
     sf::Sprite basketSprite;
 public:
-    PicturetoViewQuestWithBasket(Window&);
+    PicturetoViewQuestWithBasket(window&);
     void CalcucateCoordinate();
     sf::Texture getBasketTexture() {
         return basketTexture;

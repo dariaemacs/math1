@@ -1,7 +1,13 @@
+#ifndef QuestType9_H1
+#define QuestType9t_H1
 #include "window.hpp"
-class QuestType9 : public Window {
+#include "table.hpp"
+#include "SimpleButtons.hpp"
+#include "questanswerClass.hpp"
+
+class QuestType9 : public window {
     table tab;
-    Buttons Buttons;
+    SimpleButtons Buttons;
     std::array<sf::Texture, 13> MashTexture;
     std::array<sf::Sprite, 13>  MashSprite;
 
@@ -22,3 +28,4 @@ public:
     int getquestionVariantID4();
     int getquestionVariantID5();
 };
+#endif

@@ -8,7 +8,7 @@ int QuestType6::getquestionVariantID4() { return 0; }
 int QuestType6::getquestionVariantID5() { return 0; }
 
 QuestType6::QuestType6(float w, float h, int qtyButtons)
-    :Window(w, h, ((rand() % 4)), 5),
+    :window(w, h, ((rand() % 4)), 5),
     Buttons(qtyButtons, *this),
     coin1(*this),
     coin2(*this) {
@@ -58,9 +58,9 @@ QuestType6::QuestType6(float w, float h, int qtyButtons)
     coin2.setMargin_top(textFrame.getHeight() * 2);
     coin2.CalcucateCoordinate();
     sf::Event event;
-    while (window->isOpen()) {
-        window->clear();
-        window->draw(List);
+    while (win->isOpen()) {
+        win->clear();
+        win->draw(List);
 
         if (first) {
             Buttons.CalcucateCoordinate(); first = false;
@@ -76,17 +76,17 @@ QuestType6::QuestType6(float w, float h, int qtyButtons)
 
 
         }
-        window->draw(QuestComment.gettext());
-        window->draw(textFrame.gettext());
-        window->draw(ArrowButtonSprite);
+        win->draw(QuestComment.gettext());
+        win->draw(textFrame.gettext());
+        win->draw(ArrowButtonSprite);
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++)
         {
-            window->draw(*Buttons.getButtons()[bc]);
+            win->draw(*Buttons.getButtons()[bc]);
 
         }
 
-        window->draw(*coin1.getButtons()[0]);
-        window->draw(*coin2.getButtons()[0]);
+        win->draw(*coin1.getButtons()[0]);
+        win->draw(*coin2.getButtons()[0]);
 
 
 
@@ -95,13 +95,13 @@ QuestType6::QuestType6(float w, float h, int qtyButtons)
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
             sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
 
-            window->draw(sprite);
+            win->draw(sprite);
 
         }
-        window->display();
-        while (window->pollEvent(event)) {
+        win->display();
+        while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
-                window->close();
+                win->close();
             }
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {

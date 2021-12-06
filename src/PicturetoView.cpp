@@ -1,9 +1,9 @@
 #include "PicturetoView.hpp"
 
-PicturetoView::PicturetoView(Window& w) : Buttons(0, w) {};
-PicturetoView::PicturetoView(QuestType2& qtl, std::string fn) : Buttons(0, qtl), pictureFilename(fn) {};
-
-void Buttons::CalcucateCoordinate(float hieght) {
+PicturetoView::PicturetoView(window& w) : SimpleButtons(0, w) {};
+PicturetoView::PicturetoView(window& qtl, std::string fn) : SimpleButtons(0, qtl), pictureFilename(fn) {};
+void PicturetoView::setpictureFilename(std::string fn) { pictureFilename = fn; }
+void SimpleButtons::CalcucateCoordinate(float hieght) {
     float ButtonSize = (WindowLink.getWidth() * 2 / 3 - 50) / 10;
     float step = 5;
     float margin_left_button;

@@ -1,6 +1,8 @@
 #include "window.hpp"
+#include "PicturetoView11.hpp"
+#include "CheckButton11.hpp"
 
-class QuestType11 : public Window {
+class QuestType11 : public window {
     CheckButton11 checkbutton;
     PicturetoView11 picture1;
     PicturetoView11 picture2;
