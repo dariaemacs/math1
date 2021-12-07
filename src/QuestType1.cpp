@@ -48,11 +48,8 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
     };
 
     questionVariantID1 = (rand() % figures.size());
-    // questionVariantID1 = 1;
-    //questionVariantID2 = 0;
     while ((questionVariantID2 = (rand() % figures.size())) == questionVariantID1);
-    //std::cout << questionVariantID1 << "x" << questionVariantID2 << std::endl;
-    //questionVariantID2 = 0;
+
     int rectengleQTY = figures[questionVariantID1]->getrectengleQTY() + figures[questionVariantID2]->getrectengleQTY();
     int triangleQTY = figures[questionVariantID1]->gettriangleQTY() + figures[questionVariantID2]->gettriangleQTY();
     int circleQTY = figures[questionVariantID1]->getcircleQTY() + figures[questionVariantID2]->getcircleQTY();
@@ -83,7 +80,6 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
             win->draw(*Buttons.getButtons()[bc]);
         }
         win->display();
-        //*Buttons.
         while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 win->close();
@@ -95,7 +91,6 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
                     float rightfigurCount = check(static_cast<float>(circleQTY), static_cast<float>(triangleQTY), static_cast<float>(rectengleQTY));
                     if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
                         QuestComment.settext(CommentsDic[2]);
-                        ////std::cout << Buttons.GetButtonsClickID() << std::endl;
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 

@@ -260,7 +260,7 @@ if (checkMode) {
     sf::Time elapsed1 = clock.getElapsedTime();
     std::cout << indexcheckmodeColor1 <<" "<< elapsed1.asSeconds()<<std::endl;
     if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; QTYofBLINK++; clock.restart(); }
-    if (QTYofBLINK > 3) {
+    if (QTYofBLINK > 8) {
         isNextQuest = true;
         return;
     }
@@ -425,7 +425,7 @@ void Plane::draw() {
 
         sf::Time elapsed1 = clock.getElapsedTime();
         if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; QTYofBLINK++; clock.restart(); }
-        if (QTYofBLINK > 3) { 
+        if (QTYofBLINK > 8) { 
             isNextQuest = true;
             return; 
         }
@@ -749,7 +749,7 @@ void Flower::draw() {
         sf::Time elapsed1 = clock.getElapsedTime();
         std::cout << indexcheckmodeColor1 << " " << elapsed1.asSeconds() << std::endl;
         if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; QTYofBLINK++; clock.restart(); }
-        if (QTYofBLINK > 3) {
+        if (QTYofBLINK > 8) {
             isNextQuest = true; return;
         }
             
@@ -912,7 +912,7 @@ void Tower::draw() {
         int arr[] = { 47,100 };
         sf::Time elapsed1 = clock.getElapsedTime();
         if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; QTYofBLINK++; clock.restart(); }
-        if (QTYofBLINK > 3) {
+        if (QTYofBLINK > 8) {
             isNextQuest = true; return;
         }
 
@@ -1060,7 +1060,7 @@ void Tree::draw() {
         int arr[] = { 47,100 };
         sf::Time elapsed1 = clock.getElapsedTime();
         if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; QTYofBLINK++; clock.restart(); }
-        if (QTYofBLINK > 3) {isNextQuest = true; return;
+        if (QTYofBLINK > 8) {isNextQuest = true; return;
     }
         switch (figuraCode) {
         case 0:
@@ -1319,7 +1319,7 @@ void Butterfly::draw() {
         int arr[] = { 47,100 };
         sf::Time elapsed1 = clock.getElapsedTime();
         if (elapsed1.asSeconds() >= 1) { indexcheckmodeColor1 = !indexcheckmodeColor1; QTYofBLINK++; clock.restart(); }
-        if (QTYofBLINK > 3)
+        if (QTYofBLINK > 8)
         {
             isNextQuest = true;
             return;
