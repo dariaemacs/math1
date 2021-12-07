@@ -72,7 +72,7 @@ QuestType14::QuestType14(float w, float h, int qtyButtons) :
             }
 
 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
                 {
@@ -102,21 +102,8 @@ QuestType14::QuestType14(float w, float h, int qtyButtons) :
                         }
 
                     };
+                    wasAnswer = true;
                 }
-                //for (int i = 0; i < 3; i++)
-                //{
-                //    int ismustClick = (question14AnswerString[questionVariantID1][questionVariantID2] & (1 << question13VariantofRandom[questionVariantID4][i]));
-                //    std::cout << checkbutton.getSprite()[i].getActive() << question14AnswerString[questionVariantID1] << std::endl;
-                //    checkbutton.getquadroTexture()[i].loadFromFile(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + "select_right.png");
-                //    
-                //    {
-                //        std::cout << "ok" << std::endl;
-                //        
-                //    }
-
-                //}
-
-
                 if (checkbutton.click(0)) {
                     ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
                     ArrowButtonSprite.setTexture(ArrowButtonTexture);
@@ -125,6 +112,7 @@ QuestType14::QuestType14(float w, float h, int qtyButtons) :
             }
 
         }
+        if (wasAnswer && afterAsk()) return;
     }
     srand(static_cast<unsigned int>(time(NULL)));
 

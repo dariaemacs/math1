@@ -95,7 +95,7 @@ QuestType8::QuestType8(float w, float h)
                 win->close();
             }
 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
                     if (thingsCount == 4) QuestComment.settext(CommentsDic[1]);
@@ -105,7 +105,7 @@ QuestType8::QuestType8(float w, float h)
                         setofpic3.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "4");
                         (setofpic3.getButtonTexture()[0])->loadFromFile("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "4" + ".png");
                     }
-                    return;
+                    wasAnswer = true;
                 }
                 int thingsCounttmp = thingsCount;
                 thingsCount = minus.click(thingsCount, setofpic3);
@@ -122,6 +122,7 @@ QuestType8::QuestType8(float w, float h)
 
             }
         }
+        if (wasAnswer && afterAsk()) return;
     }
 
     srand(static_cast<unsigned int>(time(NULL)));

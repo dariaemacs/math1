@@ -36,6 +36,22 @@ inline void delay(clock_t sec)
 
 
 
+float window::getWidth() { return width; }
+float window::getHeight() { return height; }
+int window::getQuestNumber() { return questNumber; }
+int window::getordQuestNumber() { return ordQuestNumber; }
+TextFrameBase window::gettextFrame() { return textFrame; }
+std::shared_ptr<sf::RenderWindow> window::getWindow() { return win; }
+
+bool window::afterAsk() {
+    sf::Time elapsed1 = clock.getElapsedTime();
+    if (elapsed1.asSeconds() >= 1) { QTYofBLINK++; clock.restart(); }
+    std::cout << QTYofBLINK << std::endl;
+       
+        return  (QTYofBLINK > 8);
+   
+}
+
 
 
 std::wstring get_wstr(int questvariantIndex, int ordNumber) {
@@ -58,7 +74,11 @@ window::window(float w, float h, int numberQuest, int ord)
     first(true),
     textFrame(Settings::QUESTFONTSIZE, numberQuest, static_cast<unsigned int>(w), static_cast<unsigned int>(h), *this),
     QuestComment(Settings::QUESTFONTSIZE, CommentsDic[0], w, h, *this),
-    countofBALL(0)
+    countofBALL(0),
+    wasAnswer(false),
+    QTYofBLINK(0),
+    isNextQuest(false)
+
 {
 
     width = w;

@@ -92,7 +92,7 @@ QuestType2::QuestType2(float w, float h, int qtyButtons) :
                 win->close();
             }
 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
 
@@ -120,6 +120,7 @@ QuestType2::QuestType2(float w, float h, int qtyButtons) :
                         questanswer.draw();
                     }
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
+                    wasAnswer = true;
                 }
                 if (Buttons.click()) {
                     ////std::cout << "Button.click" << std::endl;
@@ -132,7 +133,9 @@ QuestType2::QuestType2(float w, float h, int qtyButtons) :
 
 
             }
+            
         }
+        if (wasAnswer && afterAsk()) return;
     }
 
     srand(static_cast<unsigned int>(time(0)));

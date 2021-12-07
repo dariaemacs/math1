@@ -174,9 +174,9 @@ QuestType9::QuestType9(float w, float h, int qtyButtons) :
                 win->close();
             }
 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
-                if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
+                if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
                     if (question9AnswersSquare[questNumber] == Buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[13]);
                     else {
                         QuestComment.settext(CommentsDic[2]);
@@ -194,7 +194,8 @@ QuestType9::QuestType9(float w, float h, int qtyButtons) :
                         //questanswer[0].setScale(Buttons.getScale(), Buttons.getScale());
                         questanswer.draw();
                     }
-
+                    wasAnswer = true;
+                }
                 if (Buttons.click()) {
                     ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
                     ArrowButtonSprite.setTexture(ArrowButtonTexture);
@@ -204,6 +205,7 @@ QuestType9::QuestType9(float w, float h, int qtyButtons) :
 
 
         }
+        if (wasAnswer && afterAsk()) return;
     }
 
     srand(static_cast<unsigned int>(time(NULL)));

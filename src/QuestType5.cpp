@@ -72,7 +72,7 @@ QuestType5::QuestType5(float w, float h, int qtyButtons) :
                 win->close();
             }
 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
 
@@ -116,6 +116,7 @@ QuestType5::QuestType5(float w, float h, int qtyButtons) :
 
 
                     }
+                    wasAnswer = true;
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
                 }
                 if (Buttons.click()) {
@@ -129,5 +130,6 @@ QuestType5::QuestType5(float w, float h, int qtyButtons) :
             }
         }
         srand(static_cast<unsigned int>(time(0)));
+        if (wasAnswer && afterAsk()) return;
     }
 }

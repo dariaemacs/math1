@@ -61,6 +61,12 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
         figures[questionVariantID2]->draw();
         if (figures[questionVariantID1]->GetisNextQuest() || figures[questionVariantID2]->GetisNextQuest())
         {
+            delete(figures[0]);
+            delete(figures[1]);
+            delete(figures[2]);
+            delete(figures[3]);
+            delete(figures[4]);
+            delete(figures[5]);
             return;
         }
         if (first) {
@@ -84,7 +90,7 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
             if (event.type == sf::Event::Closed) {
                 win->close();
             }
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
 
@@ -101,7 +107,7 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
                         figures[questionVariantID2]->setfiguraCode(questNumber);
                         figures[questionVariantID1]->setcheckMode();
                         figures[questionVariantID2]->setcheckMode();
-
+                        wasAnswer = true;
 
 
 
@@ -115,12 +121,7 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
             }
         }
     }
-    delete(figures[0]);
-    delete(figures[1]);
-    delete(figures[2]);
-    delete(figures[3]);
-    delete(figures[4]);
-    delete(figures[5]);
+
 
 }
 

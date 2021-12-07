@@ -108,7 +108,7 @@ QuestType3::QuestType3(float w, float h, int qtyButtons) :
                 win->close();
             }
 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
 
@@ -139,6 +139,7 @@ QuestType3::QuestType3(float w, float h, int qtyButtons) :
                             "resources/images/digit" + std::to_string(N + M) + "_right.jpg"
                         );
                     }
+                    wasAnswer = true;
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
                 }
                 if (Buttons.click()) {
@@ -153,6 +154,7 @@ QuestType3::QuestType3(float w, float h, int qtyButtons) :
 
             }
         }
+        if (wasAnswer && afterAsk()) return;
     }
 
     srand(static_cast<unsigned int>(time(0)));

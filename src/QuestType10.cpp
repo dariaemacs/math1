@@ -107,7 +107,7 @@ QuestType10::QuestType10(float w, float h) :
                 win->close();
             }
 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
                     if (checkbutton.getrightQuestNum() == checkbutton.getClickID())
@@ -116,6 +116,7 @@ QuestType10::QuestType10(float w, float h) :
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
                     }
+                    wasAnswer = true;
                 }
 
                 if (checkbutton.click()) {
@@ -128,6 +129,7 @@ QuestType10::QuestType10(float w, float h) :
 
 
         }
+        if (wasAnswer && afterAsk()) return;
     }
 
     srand(static_cast<unsigned int>(time(NULL)));

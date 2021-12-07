@@ -126,7 +126,7 @@ QuestType11::QuestType11(float w, float h) :
                 win->close();
             }
 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
                 {
@@ -151,10 +151,7 @@ QuestType11::QuestType11(float w, float h) :
                     }
 
 
-                    //   badAnswer = true;
-                       //countofrightAnswer = 0;
-                       //unsigned char tmp;
-                       //if (question10Variant1ID==0) unsigned char tmp = 
+                    wasAnswer = true;
                 }
 
                 if (checkbutton.click(question11Variant3ID)) {
@@ -168,6 +165,7 @@ QuestType11::QuestType11(float w, float h) :
 
 
         }
+        if (wasAnswer && afterAsk()) return;
     }
 
     srand(static_cast<unsigned int>(time(NULL)));

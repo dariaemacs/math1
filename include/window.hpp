@@ -35,6 +35,9 @@ class window {
   int number; 
   int ordQuestNumber;
 
+  sf::Clock clock;
+  int QTYofBLINK; 
+  bool isNextQuest;
 
  
 protected:
@@ -48,17 +51,19 @@ protected:
   sf::RectangleShape List;
   TextFrameBase QuestComment;
   int countofBALL;
-  bool readyforCheck; 
+  bool readyforCheck;
+  bool wasAnswer;
 public:
     //friend  std::wstring get_wstr(int questvariantIndex);
   
   window(float w, float h, int questNumber, int);
-  float getWidth() { return width; }
-  float getHeight() { return height; }
-  int getQuestNumber(){ return questNumber; }
-  int getordQuestNumber() { return ordQuestNumber; }
-  TextFrameBase gettextFrame() { return textFrame; }
-  std::shared_ptr<sf::RenderWindow> getWindow() { return win; }
+  float getWidth();
+  float getHeight();
+  int getQuestNumber();
+  int getordQuestNumber();
+  TextFrameBase gettextFrame();
+  std::shared_ptr<sf::RenderWindow> getWindow();
+  bool afterAsk();
 
   virtual   int getquestionVariantID1() = 0;
   virtual   int getquestionVariantID2() = 0;

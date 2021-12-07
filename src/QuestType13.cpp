@@ -85,7 +85,7 @@ QuestType13::QuestType13(float w, float h) :
                 win->close();
             }
 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor))
                 {
@@ -140,7 +140,7 @@ QuestType13::QuestType13(float w, float h) :
 
 
 
-
+                    wasAnswer = true;
 
                 }
 
@@ -151,8 +151,9 @@ QuestType13::QuestType13(float w, float h) :
 
             }
 
-
+         
         }
+        if (wasAnswer && afterAsk()) return;
     }
 
 
