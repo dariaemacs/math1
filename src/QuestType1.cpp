@@ -79,14 +79,19 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
             QuestComment.setmargin_top(h - Buttons.getHeight());
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
         }
+        win->draw(TimeRect);
+        win->draw(timestringView);
         win->draw(QuestComment.gettext());
         win->draw(textFrame.gettext());
         win->draw(ArrowButtonSprite);
+
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
             win->draw(*Buttons.getButtons()[bc]);
         }
         win->display();
+        
         while (win->pollEvent(event)) {
+            
             if (event.type == sf::Event::Closed) {
                 win->close();
             }

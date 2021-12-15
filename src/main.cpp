@@ -1,9 +1,9 @@
-#include "game.hpp" 
 #include "window.hpp"
 #include "database.hpp"
 
 #include <iostream>
 #include <fstream>
+
 #include "QuestType1.hpp"
 #include "QuestType2.hpp"
 #include "QuestType3.hpp"
@@ -22,19 +22,24 @@
 #include "QuestType16.hpp"
 
 
+#include "timerClass.hpp"
 
-using namespace sf; // подключаем пространство имен sf
 
 
 int main() {
+    timerClass::get_time();
     std::string filename{ "settings.yml" };
     try {
     srand(static_cast<unsigned int>(time(NULL)));
     float width = 1024.0f;  float  height = 600.0f;
-     QuestType14(width, height,25);     
-     QuestType15(width, height,25);
-    QuestType16(width, height, 25);    
+     QuestType1(width, height,25);     
+     std::cout << "time=" << (int)timerClass::get_time() << std::endl;
+     QuestType2(width, height,25);
+     std::cout << "time=" << (int)timerClass::get_time() << std::endl;
+    QuestType3(width, height, 25);    
+    std::cout << "time=" << (int)timerClass::get_time() << std::endl;
     QuestType4(width, height, 25);    
+    std::cout << "time=" << (int)timerClass::get_time() << std::endl;
     QuestType5(width, height, 25);    
     QuestType6(width, height, 25);    
      QuestType7(width, height);    

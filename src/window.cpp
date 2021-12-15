@@ -81,6 +81,19 @@ window::window(float w, float h, int numberQuest, int ord)
 
 {
 
+    TimeRect.setSize(sf::Vector2f(120, 50));
+    TimeRect.setFillColor(sf::Color(255, 255, 255, 128));
+    timestringView.setString("test");
+    timestringViewFont.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
+    timestringView.setFont(timestringViewFont);
+    timestringView.setCharacterSize(10);
+    timestringView.setColor(sf::Color(255, 255, 255, 128));
+
+
+    TimeRect.setOutlineColor(sf::Color::Red);
+    TimeRect.setOutlineThickness(5);
+    TimeRect.setPosition(10, 20);
+
     width = w;
     height = h;
     std::string CheckButtonPictureFileName = "resources/images/arrow_disable.png";

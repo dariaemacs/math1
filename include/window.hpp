@@ -50,6 +50,10 @@ protected:
   sf::Sprite ArrowButtonSprite;
   sf::RectangleShape List;
   TextFrameBase QuestComment;
+  sf::RectangleShape TimeRect;
+  sf::Text timestringView;
+  sf::Font timestringViewFont;
+
   int countofBALL;
   bool readyforCheck;
   bool wasAnswer;
