@@ -16,6 +16,7 @@
 #include <math.h>
 #include "figures.hpp"
 #include "QuestType2.hpp"
+#include "timerClass.hpp"
 
 
 
@@ -81,18 +82,24 @@ window::window(float w, float h, int numberQuest, int ord)
 
 {
 
-    TimeRect.setSize(sf::Vector2f(120, 50));
-    TimeRect.setFillColor(sf::Color(255, 255, 255, 128));
-    timestringView.setString("test");
+    //TimeRect.setSize(sf::Vector2f(120, 50));
+    
+    //TimeRect.setFillColor(sf::Color(156, 22, 181, 0.5));
+        //sf::Color(192, 192, 192, 128));
+    TimeSpriteRect.setColor(sf::Color(255, 255, 255, 128));
+    TimeTextureRect.loadFromFile(Settings::RESOURCE_PATH+"/images/qudro.jpg");
+    TimeSpriteRect.setTexture(TimeTextureRect);
+    TimeSpriteRect.setScale(310/29, h/31/10);
+    TimeSpriteRect.setPosition((w-29*(w / 29 / 5))/2, (h-h / 31 / 10)/4);
+    timestringView.setString(CommentsDic[14] + std::to_wstring(40-(static_cast<int>(timerClass::get_time()))/60)+ CommentsDic[15]);
     timestringViewFont.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
     timestringView.setFont(timestringViewFont);
-    timestringView.setCharacterSize(10);
-    timestringView.setColor(sf::Color(255, 255, 255, 128));
+    timestringView.setCharacterSize(25);
+    timestringView.setPosition((w - 29 * (w / 29 / 5)) / 2, (h - h / 31 / 10) / 4);
+    //timestringView.setPosition((w - 29 * (w / 29 / 5)) / 2, 240);
+    timestringView.setFillColor(sf::Color::Black);
 
 
-    TimeRect.setOutlineColor(sf::Color::Red);
-    TimeRect.setOutlineThickness(5);
-    TimeRect.setPosition(10, 20);
 
     width = w;
     height = h;

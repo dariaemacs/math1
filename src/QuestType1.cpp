@@ -57,8 +57,12 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
     while (win->isOpen()) {
         win->clear();
         win->draw(List);
+        //win->draw(TimeSpriteRect);
+        
         figures[questionVariantID1]->draw();
         figures[questionVariantID2]->draw();
+        win->draw(timestringView);
+
         if (figures[questionVariantID1]->GetisNextQuest() || figures[questionVariantID2]->GetisNextQuest())
         {
             delete(figures[0]);
@@ -79,8 +83,8 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
             QuestComment.setmargin_top(h - Buttons.getHeight());
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
         }
-        win->draw(TimeRect);
-        win->draw(timestringView);
+       
+        
         win->draw(QuestComment.gettext());
         win->draw(textFrame.gettext());
         win->draw(ArrowButtonSprite);

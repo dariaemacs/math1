@@ -50,7 +50,8 @@ protected:
   sf::Sprite ArrowButtonSprite;
   sf::RectangleShape List;
   TextFrameBase QuestComment;
-  sf::RectangleShape TimeRect;
+  sf::Sprite  TimeSpriteRect;
+  sf::Texture TimeTextureRect;
   sf::Text timestringView;
   sf::Font timestringViewFont;
 
