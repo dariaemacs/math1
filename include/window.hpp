@@ -68,6 +68,7 @@ public:
   int getordQuestNumber();
   TextFrameBase gettextFrame();
   std::shared_ptr<sf::RenderWindow> getWindow();
+  void refreshGameTime();
   bool afterAsk();
 
   virtual   int getquestionVariantID1() = 0;

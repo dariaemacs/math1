@@ -53,7 +53,9 @@ bool window::afterAsk() {
    
 }
 
-
+void window::refreshGameTime() {
+    timestringView.setString(CommentsDic[14] + std::to_wstring(40 - (static_cast<int>(timerClass::get_time())) / 60) + CommentsDic[15]);
+}
 
 std::wstring get_wstr(int questvariantIndex, int ordNumber) {
     //    setlocale(LC_ALL, "Russian");
@@ -82,25 +84,20 @@ window::window(float w, float h, int numberQuest, int ord)
 
 {
 
-    //TimeRect.setSize(sf::Vector2f(120, 50));
-    
-    //TimeRect.setFillColor(sf::Color(156, 22, 181, 0.5));
-        //sf::Color(192, 192, 192, 128));
-    TimeSpriteRect.setColor(sf::Color(255, 255, 255, 128));
-    TimeTextureRect.loadFromFile(Settings::RESOURCE_PATH+"/images/qudro.jpg");
+    TimeTextureRect.loadFromFile(Settings::RESOURCE_PATH+"images/qudro.png");
     TimeSpriteRect.setTexture(TimeTextureRect);
-    TimeSpriteRect.setScale(310/29, h/31/10);
-    TimeSpriteRect.setPosition((w-29*(w / 29 / 5))/2, (h-h / 31 / 10)/4);
-    timestringView.setString(CommentsDic[14] + std::to_wstring(40-(static_cast<int>(timerClass::get_time()))/60)+ CommentsDic[15]);
+    TimeSpriteRect.setColor(sf::Color(255, 255, 255, 190));
+    TimeSpriteRect.setPosition((w-29*(w / 29 / 5))/2-20, (h-h / 31 / 10)/4-20);
+
+    
     timestringViewFont.loadFromFile(Settings::RESOURCE_PATH + Settings::FONTS_PATH + "standart_tt.ttf");
-    timestringView.setFont(timestringViewFont);
+        timestringView.setFont(timestringViewFont);
     timestringView.setCharacterSize(25);
-    timestringView.setPosition((w - 29 * (w / 29 / 5)) / 2, (h - h / 31 / 10) / 4);
-    //timestringView.setPosition((w - 29 * (w / 29 / 5)) / 2, 240);
-    timestringView.setFillColor(sf::Color::Black);
+    timestringView.setPosition(static_cast<float>(static_cast<int>(((w - 29.0f * (w / 29.0f / 5.0f)) / 2.0f))) +40, static_cast<float>(static_cast<int>(((h - h / 31.0f / 10.0f) / 4.0f))));
+    timestringView.setFillColor(color::black);
 
 
-
+                                              
     width = w;
     height = h;
     std::string CheckButtonPictureFileName = "resources/images/arrow_disable.png";

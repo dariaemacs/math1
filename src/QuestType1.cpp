@@ -55,14 +55,17 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
     int circleQTY = figures[questionVariantID1]->getcircleQTY() + figures[questionVariantID2]->getcircleQTY();
     sf::Event event;
     while (win->isOpen()) {
-        win->clear();
-        win->draw(List);
-        //win->draw(TimeSpriteRect);
+        win->clear(color::white);
         
+        
+        
+        win->draw(List);
         figures[questionVariantID1]->draw();
         figures[questionVariantID2]->draw();
+        
+        win->draw(TimeSpriteRect);
         win->draw(timestringView);
-
+        refreshGameTime();
         if (figures[questionVariantID1]->GetisNextQuest() || figures[questionVariantID2]->GetisNextQuest())
         {
             delete(figures[0]);
