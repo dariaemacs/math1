@@ -79,6 +79,7 @@ QuestType13::QuestType13(float w, float h) :
         if (badAnswer) {
 
         }
+        DrawGameTime();
         win->display();
         while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {

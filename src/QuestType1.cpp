@@ -1,4 +1,5 @@
 #include "QuestType1.hpp"
+#include "window.hpp"
 #include "database.hpp"
 
 float QuestType1::check(float c, float t, float r) {
@@ -56,16 +57,15 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
     sf::Event event;
     while (win->isOpen()) {
         win->clear(color::white);
-        
+      
         
         
         win->draw(List);
         figures[questionVariantID1]->draw();
         figures[questionVariantID2]->draw();
-        
-        win->draw(TimeSpriteRect);
-        win->draw(timestringView);
-        refreshGameTime();
+
+
+
         if (figures[questionVariantID1]->GetisNextQuest() || figures[questionVariantID2]->GetisNextQuest())
         {
             delete(figures[0]);
@@ -95,6 +95,7 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
         for (int bc = 0; bc < Buttons.getButtonCount(); bc++) {
             win->draw(*Buttons.getButtons()[bc]);
         }
+        DrawGameTime();
         win->display();
         
         while (win->pollEvent(event)) {
@@ -107,7 +108,8 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
 
                     float rightfigurCount = check(static_cast<float>(circleQTY), static_cast<float>(triangleQTY), static_cast<float>(rectengleQTY));
-                    if (rightfigurCount < 0)  QuestComment.settext(CommentsDic[1]);    else {
+                    if (rightfigurCount < 0) { QuestComment.settext(CommentsDic[1]);  }
+                    else {
                         QuestComment.settext(CommentsDic[2]);
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
@@ -119,12 +121,13 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
                         figures[questionVariantID2]->setfiguraCode(questNumber);
                         figures[questionVariantID1]->setcheckMode();
                         figures[questionVariantID2]->setcheckMode();
-                        wasAnswer = true;
+                        
 
 
 
                     }
                     QuestComment.CalcucateCoordinate(Buttons.getMarginLeft(), Buttons.getMarginTop());
+                    wasAnswer = true;
                 }
                 if (Buttons.click()) {
                     ArrowButtonTexture.loadFromFile("resources/images/arrow_up.png"); readyforCheck = true;
@@ -132,6 +135,7 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
                 }
             }
         }
+        if (wasAnswer && afterAsk()) return;
     }
 
 

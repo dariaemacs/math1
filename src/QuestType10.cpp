@@ -101,6 +101,7 @@ QuestType10::QuestType10(float w, float h) :
 
             //checkbutton.getClickID()
         }
+        DrawGameTime();
         win->display();
         while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {

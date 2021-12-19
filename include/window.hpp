@@ -11,15 +11,14 @@
 #include <vector>
 #include <array>
 #include <SFML/Graphics.hpp>
+#include "gameClass.hpp"
 
 
 
 
-
-
-#define maximal(a, b) (((a)>(b))?(a):(b))
-#define minimal(a, b) (((a)<(b))?(a):(b))
-#define three_minimal(a, b, c) minimal(minimal(a, b), c)
+float maximal(float , float );
+float minimal(float , float );
+float three_minimal(float , float , float );
 
 std::wstring get_wstr(int, int);
 
@@ -70,6 +69,7 @@ public:
   std::shared_ptr<sf::RenderWindow> getWindow();
   void refreshGameTime();
   bool afterAsk();
+  void DrawGameTime();
 
   virtual   int getquestionVariantID1() = 0;
   virtual   int getquestionVariantID2() = 0;

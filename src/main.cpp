@@ -22,25 +22,27 @@
 #include "QuestType16.hpp"
 
 
-#include "timerClass.hpp"
+//#include "gameClass.hpp"
 
 
 
 int main() {
-    timerClass::get_time();
+    gameClass::get_time();
     std::string filename{ "settings.yml" };
     try {
     srand(static_cast<unsigned int>(time(NULL)));
     float width = 1024.0f;  float  height = 600.0f;
+
+
      QuestType1(width, height,25);     
-     std::cout << "time=" << (int)timerClass::get_time() << std::endl;
+  
      QuestType2(width, height,25);
-     std::cout << "time=" << (int)timerClass::get_time() << std::endl;
+  
     QuestType3(width, height, 25);    
-    std::cout << "time=" << (int)timerClass::get_time() << std::endl;
+  
     QuestType4(width, height, 25);    
-    std::cout << "time=" << (int)timerClass::get_time() << std::endl;
-    QuestType5(width, height, 25);    
+  
+ 
     QuestType6(width, height, 25);    
      QuestType7(width, height);    
     QuestType8(width, height);    

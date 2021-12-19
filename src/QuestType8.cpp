@@ -89,6 +89,7 @@ QuestType8::QuestType8(float w, float h)
         win->draw(*plus.getButtons()[0]);
         win->draw(*minus.getButtons()[0]);
         win->draw(ArrowButtonSprite);
+        DrawGameTime();
         win->display();
         while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {

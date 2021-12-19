@@ -130,5 +130,8 @@ struct  mystruct { std::wstring len1; std::wstring len2; std::wstring len3; };
 extern  const std::wstring  question10Variant2[6][3];
 extern  const int  question10VariantForRandom2[4][3];
 
+extern const int qtyofminutesmessageRepeating ;
+extern const int qtyofsecondsmessageShowing;
+
 #endif //DATABASE_H
 

@@ -15,16 +15,14 @@
 #include <algorithm>
 #include <math.h>
 #include "figures.hpp"
-#include "QuestType2.hpp"
-#include "timerClass.hpp"
 
 
 
-#define maximal(a, b) (((a)>(b))?(a):(b))
-#define minimal(a, b) (((a)<(b))?(a):(b))
-#define three_minimal(a, b, c) minimal(minimal(a, b), c)
 
-//int QuestType1::QTY = 1;
+float maximal(float a, float b) { return ((a) > (b)) ? (a) : (b); }
+float minimal(float a, float b) { return ((a) < (b)) ? (a) : (b); }
+float three_minimal(float a, float b, float c) { return minimal(minimal(a, b), c); }
+
 extern const int ELAPSED_TIME;
 extern std::vector< std::vector<int>> numSeries;
 
@@ -52,9 +50,20 @@ bool window::afterAsk() {
         return  (QTYofBLINK > 8);
    
 }
+void window::DrawGameTime() {
+    if ((qtyofminutesmessageRepeating==0 || (static_cast<int>(gameClass::get_time()) / 10 * 10) % (qtyofminutesmessageRepeating*60) == 0) &&
+        static_cast<int>(gameClass::get_time()) >= (static_cast<int>(gameClass::get_time()) / 10 * 10) and
+        static_cast<int>(gameClass::get_time()) <= (static_cast<int>(gameClass::get_time()) / 10 * 10) + qtyofsecondsmessageShowing
+        ) {
 
+        refreshGameTime();
+        win->draw(TimeSpriteRect);
+        win->draw(timestringView);
+    }
+}
 void window::refreshGameTime() {
-    timestringView.setString(CommentsDic[14] + std::to_wstring(40 - (static_cast<int>(timerClass::get_time())) / 60) + CommentsDic[15]);
+    
+    timestringView.setString(CommentsDic[14] + std::to_wstring(40 - (static_cast<int>(gameClass::get_time())) / 60) + CommentsDic[15]);
 }
 
 std::wstring get_wstr(int questvariantIndex, int ordNumber) {

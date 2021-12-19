@@ -58,6 +58,7 @@ QuestType15::QuestType15(float w, float h, int qtyButtons) :
             win->draw(sprite);
 
         }
+        DrawGameTime();
         win->display();
         while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {

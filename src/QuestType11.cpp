@@ -120,6 +120,7 @@ QuestType11::QuestType11(float w, float h) :
             //window->draw(sprite);
 
         }
+        DrawGameTime();
         win->display();
         while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {

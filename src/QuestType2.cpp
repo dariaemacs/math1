@@ -50,7 +50,7 @@ QuestType2::QuestType2(float w, float h, int qtyButtons) :
     while (win->isOpen()) {
         win->clear();
         win->draw(List);
-
+        
         if (first) {
             Buttons.CalcucateCoordinate(); first = false;
 
@@ -86,6 +86,7 @@ QuestType2::QuestType2(float w, float h, int qtyButtons) :
             win->draw(sprite);
 
         }
+        DrawGameTime();
         win->display();
         while (win->pollEvent(event)) {
             if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed) {
@@ -135,6 +136,7 @@ QuestType2::QuestType2(float w, float h, int qtyButtons) :
             }
             
         }
+        
         if (wasAnswer && afterAsk()) return;
     }
 

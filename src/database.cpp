@@ -482,6 +482,9 @@ extern const int question16AnswerString[3] = { 2,2,0 };
 
 extern const std::wstring question14TextVariant[3][3];
 
+extern const int qtyofminutesmessageRepeating = 5;
+extern const int qtyofsecondsmessageShowing = 1;
+
 const std::wstring CommentsDic[] =
 {
     {L"Выбери ответ" },

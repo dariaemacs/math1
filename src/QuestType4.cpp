@@ -164,10 +164,11 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
             sprite.setPosition(TrainForQuest.getxmin() * TrainForQuest.getkoef() + TrainForQuest.getmargin_left(), YnumberInTrain
                 + squareWidth * TrainForQuest.getkoef() + 10
             );
-
+            DrawGameTime();
             win->draw(sprite);
 
         }
+        DrawGameTime();
         win->display();
         while (win->pollEvent(event)) {
 

@@ -118,7 +118,7 @@ QuestType7::QuestType7(float w, float h) :
 
 
 
-
+        DrawGameTime();
         win->display();
 
         while (win->pollEvent(event)) {
