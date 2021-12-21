@@ -18,7 +18,7 @@ QuestType5::QuestType5(float w, float h, int qtyButtons) :
         4),
     Buttons(qtyButtons, *this)
 {
-
+    gameClass::setmarks(4, 1);
 
     bool first = true;
     int margintopSlideButton = 0;

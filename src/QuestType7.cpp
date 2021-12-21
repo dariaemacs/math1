@@ -95,7 +95,7 @@ QuestType7::QuestType7(float w, float h) :
     sB.setquestFigure(question7Text[getQuestNumber()].key);
     QuestComment.settext(L"");
 
-
+    gameClass::setmarks(6, 1);
 
     sf::Event event;
     bool trydrawLine = false;
@@ -136,7 +136,7 @@ QuestType7::QuestType7(float w, float h) :
                     {
                     case triangle:
                         if (sB.isfigureInputright(question7AnswersTriangle)) QuestComment.settext(CommentsDic[1]);
-                        else { QuestComment.settext(CommentsDic[2]); ViewRightAnswer(sB.getquestFigure()); }
+                        else { QuestComment.settext(CommentsDic[2]); ViewRightAnswer(sB.getquestFigure()); gameClass::setmarks(6, 0); }
                         break;
 
 
@@ -144,6 +144,7 @@ QuestType7::QuestType7(float w, float h) :
                         if (sB.isfigureInputright(question7AnswersRectangle)) QuestComment.settext(CommentsDic[1]);
                         else {
                             QuestComment.settext(CommentsDic[2]); ViewRightAnswer(sB.getquestFigure());
+                            gameClass::setmarks(6, 0);
                         }
                         break;
 
@@ -152,6 +153,7 @@ QuestType7::QuestType7(float w, float h) :
                         if (sB.isfigureInputright(question7AnswersSquare)) QuestComment.settext(CommentsDic[1]);
                         else {
                             QuestComment.settext(CommentsDic[2]); ViewRightAnswer(sB.getquestFigure());
+                            gameClass::setmarks(6, 0);
                         }
                         break;
                     };

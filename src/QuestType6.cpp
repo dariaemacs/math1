@@ -14,7 +14,7 @@ QuestType6::QuestType6(float w, float h, int qtyButtons)
     coin2(*this) {
 
 
-
+    gameClass::setmarks(5, 1);
     bool first = true;
     int margintopSlideButton = 0;
 
@@ -113,6 +113,7 @@ QuestType6::QuestType6(float w, float h, int qtyButtons)
 
                     if (Buttons.GetButtonsClickID() + 1 == question6Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
                     else { //wrong
+                        gameClass::setmarks(5, 0);
                         QuestComment.settext(CommentsDic[2]);
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");

@@ -14,7 +14,7 @@ QuestType10::QuestType10(float w, float h) :
     checkbutton(*this)
 {
 
-
+    gameClass::setmarks(9, 1);
     bool first = true;
     question10Variant1ID = rand() % 2;
     question10Variant2ID = rand() % (sizeof(question10Variant2) / sizeof(question10Variant2[0]));
@@ -93,6 +93,7 @@ QuestType10::QuestType10(float w, float h) :
 
 
         if (badAnswer) {
+            gameClass::setmarks(9, 0);
             checkbutton.getquadroTexture()[checkbutton.getClickID()].loadFromFile(
                 "resources/images/select_wrong.png");
 

@@ -20,7 +20,7 @@ QuestType8::QuestType8(float w, float h)
     thingsCount(0)
 {
 
-
+    gameClass::setmarks(7, 1);
 
 
     bool first = true;
@@ -102,6 +102,7 @@ QuestType8::QuestType8(float w, float h)
                     if (thingsCount == 4) QuestComment.settext(CommentsDic[1]);
                     else //wrong
                     {
+                        gameClass::setmarks(7, 0);
                         QuestComment.settext(CommentsDic[2]);
                         setofpic3.setpictureFilename("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "4");
                         (setofpic3.getButtonTexture()[0])->loadFromFile("resources/images/" + filenamesforPicaQuest8[getQuestNumber()] + "4" + ".png");

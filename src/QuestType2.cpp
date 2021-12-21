@@ -23,7 +23,7 @@ QuestType2::QuestType2(float w, float h, int qtyButtons) :
 
     bool first = true;
     int margintopSlideButton = 0;
-
+    gameClass::setmarks(1, 1);
     ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     ArrowButtonSprite.setTexture(ArrowButtonTexture);
 
@@ -100,6 +100,7 @@ QuestType2::QuestType2(float w, float h, int qtyButtons) :
                     int rightfigurCount = 0;
                     ////std::cout << Buttons.GetButtonsClickID()+1 = N- << std::endl;
                     if (Buttons.GetButtonsClickID() + 1 == questionVariantID1 - questionVariantID2)  QuestComment.settext(CommentsDic[1]);    else {
+                        gameClass::setmarks(1, 0);
                         QuestComment.settext(CommentsDic[2]);
 
                         badAnswer = true;

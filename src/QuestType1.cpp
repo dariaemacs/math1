@@ -1,7 +1,7 @@
 #include "QuestType1.hpp"
 #include "window.hpp"
 #include "database.hpp"
-
+#include "gameClass.hpp"
 float QuestType1::check(float c, float t, float r) {
     switch (question1Text[questNumber].key)
     {
@@ -32,6 +32,7 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
     window(w, h, (rand() % 3), 0),
     Buttons(qtyButtons, *this)
 {
+    gameClass::setmarks(0, 1);
     bool first = true;
     float margintopSlideButton = 0;
     FrameFigure::resetnumber_of_figure();
@@ -108,8 +109,10 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
 
                     float rightfigurCount = check(static_cast<float>(circleQTY), static_cast<float>(triangleQTY), static_cast<float>(rectengleQTY));
-                    if (rightfigurCount < 0) { QuestComment.settext(CommentsDic[1]);  }
+                    if (rightfigurCount < 0) { QuestComment.settext(CommentsDic[1]); 
+                    }
                     else {
+                        gameClass::setmarks(0,0) ;
                         QuestComment.settext(CommentsDic[2]);
                         Buttons.getButtonTexture()[Buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(Buttons.GetButtonsClickID() + 1) + "_wrong.jpg");

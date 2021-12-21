@@ -11,7 +11,7 @@ int QuestType4::getquestionVariantID5() { return 0; }
 QuestType4::QuestType4(float w, float h, int qtyButtons) :
     window(w, h, 0, 3),
     Buttons(qtyButtons, *this) {
-
+    gameClass::setmarks(3, 1);
     bool first = true;
     bool firstPrintTrain = true;
     int margintopSlideButton = 0;
@@ -159,6 +159,7 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
 
 
         if (badAnswer) {
+            gameClass::setmarks(3, 0);
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
             //sprite.setPosition(TrainForQuest.getxmin()* TrainForQuest.getkoef() + TrainForQuest.getmargin_left(), Buttons.getMarginTop() - questanswer.getHeight());
             sprite.setPosition(TrainForQuest.getxmin() * TrainForQuest.getkoef() + TrainForQuest.getmargin_left(), YnumberInTrain

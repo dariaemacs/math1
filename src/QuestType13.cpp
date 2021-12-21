@@ -7,7 +7,7 @@ QuestType13::QuestType13(float w, float h) :
 
 {
 
-
+    gameClass::setmarks(12, 1);
     std::shared_ptr<FrameFigure> pica[] =
     { std::make_shared<ThreePicture0>(win) ,
         std::make_shared<ThreePicture1>(win),
@@ -77,7 +77,7 @@ QuestType13::QuestType13(float w, float h) :
 
 
         if (badAnswer) {
-
+            gameClass::setmarks(12, 0);
         }
         DrawGameTime();
         win->display();

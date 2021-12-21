@@ -16,7 +16,7 @@ QuestType9::QuestType9(float w, float h, int qtyButtons) :
 {
 
     bool first = true;
-
+    gameClass::setmarks(8, 1);
     ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     ArrowButtonSprite.setTexture(ArrowButtonTexture);
     sf::Event event;
@@ -162,6 +162,7 @@ QuestType9::QuestType9(float w, float h, int qtyButtons) :
 
 
         if (badAnswer) {
+            gameClass::setmarks(8, 0);
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
             sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
 
@@ -180,6 +181,7 @@ QuestType9::QuestType9(float w, float h, int qtyButtons) :
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
                     if (question9AnswersSquare[questNumber] == Buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[13]);
                     else {
+                        gameClass::setmarks(8, 0);
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
                         questanswer.setParams(Buttons.getWidth() * 5, Buttons.getHeight(), 5, Buttons.getScale());

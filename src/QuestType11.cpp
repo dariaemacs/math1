@@ -17,7 +17,7 @@ QuestType11::QuestType11(float w, float h) :
     picture1(*this),
     picture2(*this)
 {
-
+    gameClass::setmarks(10, 1);
     bool first = true;
     srand(static_cast<unsigned int>(time(NULL)));
     question11Variant1ID = rand() % 2;
@@ -114,12 +114,8 @@ QuestType11::QuestType11(float w, float h) :
         }
 
 
-        if (badAnswer) {
-            //sf::Sprite sprite(questanswer.getminiwindow().getTexture());
-            //sprite.setPosition((w - questanswer.getWidth()) / 2, (h - questanswer.getHeight()) / 2);
-            //window->draw(sprite);
 
-        }
+
         DrawGameTime();
         win->display();
         while (win->pollEvent(event)) {
@@ -146,9 +142,9 @@ QuestType11::QuestType11(float w, float h) :
                     }
                     //std::cout << checkbutton.isAnswerRight(i, question11Variant3ID, question11Variant1ID);
                     switch (countofBALL) {
-                    case 0: QuestComment.settext(CommentsDic[11]); break; //L"Ошибка. Баллы не засчитаны :(" 
-                    case 1: QuestComment.settext(CommentsDic[10]); break; //
-                    case 2: QuestComment.settext(CommentsDic[9]);  break;  //
+                    case 0: QuestComment.settext(CommentsDic[11]); gameClass::setmarks(10, 0); break; //L"Ошибка. Баллы не засчитаны :(" 
+                    case 1: QuestComment.settext(CommentsDic[10]); gameClass::setmarks(10, 1); break; //
+                    case 2: QuestComment.settext(CommentsDic[9]);  gameClass::setmarks(10, 2); break;  //
                     }
 
 

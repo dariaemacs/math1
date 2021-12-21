@@ -10,7 +10,7 @@ QuestType14::QuestType14(float w, float h, int qtyButtons) :
 {
 
     bool first = true;
-
+    gameClass::setmarks(13, 1);
 
     sf::Event event;
     checkbutton.SetqudroSize(35);
@@ -64,6 +64,7 @@ QuestType14::QuestType14(float w, float h, int qtyButtons) :
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
             sprite.setPosition(0, 0);
             win->draw(sprite);
+            gameClass::setmarks(13, 1);
         }
         DrawGameTime();
         win->display();

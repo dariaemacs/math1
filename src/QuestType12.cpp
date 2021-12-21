@@ -17,7 +17,7 @@ QuestType12::QuestType12(float w, float h, int qtyButtons) :
         11),
     Buttons(qtyButtons, *this)
 {
-
+    gameClass::setmarks(11, 1);
 
     bool first = true;
     int margintopSlideButton = 0;
@@ -82,7 +82,7 @@ QuestType12::QuestType12(float w, float h, int qtyButtons) :
 
                     if (Buttons.GetButtonsClickID() + 1 == question12Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
                     else { //wrong
-
+                        gameClass::setmarks(11, 0);
                         badAnswer = true;
                         //std::cout << "badAnswer" << std::endl;
                         questanswer.setParams(Buttons.getWidth() * 7, Buttons.getHeight(), 7, Buttons.getScale());

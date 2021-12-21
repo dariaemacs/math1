@@ -32,7 +32,7 @@ QuestType3::QuestType3(float w, float h, int qtyButtons) :
     ////std::cout << qtyButtons << std::endl;
     ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     ArrowButtonSprite.setTexture(ArrowButtonTexture);
-
+    gameClass::setmarks(2, 0);
 
     int N = (rand() % 10);
     int M = 0;
@@ -115,7 +115,7 @@ QuestType3::QuestType3(float w, float h, int qtyButtons) :
                     int rightfigurCount = 0;
                     ////std::cout << Buttons.GetButtonsClickID()+1 = N- << std::endl;
                     if (Buttons.GetButtonsClickID() + 1 == N + M)  QuestComment.settext(CommentsDic[1]);    else {
-
+                        gameClass::setmarks(2, 1);
                         badAnswer = true;
                         questanswer.setParams(Buttons.getWidth() * 5, Buttons.getHeight(), 5, Buttons.getScale());
 

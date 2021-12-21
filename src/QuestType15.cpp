@@ -7,7 +7,7 @@ QuestType15::QuestType15(float w, float h, int qtyButtons) :
     window(w, h, 0, 13),
     buttons(qtyButtons, *this),
     tab(*this) {
-
+    gameClass::setmarks(14, 1);
     bool first = true;
 
     ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
@@ -56,7 +56,7 @@ QuestType15::QuestType15(float w, float h, int qtyButtons) :
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
             sprite.setPosition((w - questanswer.getWidth()) / 2, buttons.getMarginTop() - 2 * questanswer.getWidth() * questanswer.getScale());
             win->draw(sprite);
-
+            gameClass::setmarks(14, 0);
         }
         DrawGameTime();
         win->display();
