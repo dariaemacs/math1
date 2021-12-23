@@ -33,7 +33,6 @@ int main() {
     srand(static_cast<unsigned int>(time(NULL)));
     float width = 1024.0f;  float  height = 600.0f;
 
-
      QuestType1(width, height,25);     
   
      QuestType2(width, height,25);
@@ -41,7 +40,7 @@ int main() {
     QuestType3(width, height, 25);    
   
     QuestType4(width, height, 25);    
-  
+    QuestType5(width, height, 25);
  
     QuestType6(width, height, 25);    
      QuestType7(width, height);    
@@ -52,8 +51,15 @@ int main() {
     QuestType12(width, height, 25);    
      QuestType13(width, height);    
      QuestType14(width, height,25);    
-     QuestType15(width, height,25);    
+     QuestType15(width, height,25);     
      QuestType16(width, height,25);
+     /*QuestType16(width, height, 25);
+     QuestType16(width, height, 25);
+     QuestType16(width, height, 25);
+     QuestType16(width, height, 25);
+     QuestType16(width, height, 25);*/
+
+ 
      }
     catch (const std::exception& exc) {
         std::cerr << "EXCEPTION [" << exc.what() << "]" << std::endl;

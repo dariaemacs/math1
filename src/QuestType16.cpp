@@ -68,7 +68,7 @@ QuestType16::QuestType16(float w, float h, int qtyButtons) :
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
-                    if (question15Answer[questionVariantID1] == buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[13]);
+                    if (question16Answer[questionVariantID1] == buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[13]);
                     else {
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
@@ -96,8 +96,8 @@ QuestType16::QuestType16(float w, float h, int qtyButtons) :
                         buttons.getButtonTexture()[buttons.GetButtonsClickID()]->loadFromFile(
                             "resources/images/digit" + std::to_string(buttons.GetButtonsClickID() + 1) + "_wrong.jpg");
 
-                        buttons.getButtonTexture()[question15Answer[questionVariantID1] - 1]->loadFromFile(
-                            "resources/images/digit" + std::to_string(question15Answer[questionVariantID1]) + "_right.jpg"
+                        buttons.getButtonTexture()[question16Answer[questionVariantID1] - 1]->loadFromFile(
+                            "resources/images/digit" + std::to_string(question16Answer[questionVariantID1]) + "_right.jpg"
                         );
 
                         questanswer.draw();
