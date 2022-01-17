@@ -27,9 +27,9 @@ float QuestType1::check(float c, float t, float r) {
     return -1;
 }
 
-QuestType1::QuestType1(float w, float h, int qtyButtons) :
+QuestType1::QuestType1( int qtyButtons) :
 
-    window(w, h, (rand() % 3), 0),
+    window(gameClass::getWidth(), gameClass::getHeight(), (rand() % 3), 0),
     Buttons(qtyButtons, *this)
 {
     gameClass::setmarks(0, 1);
@@ -84,7 +84,7 @@ QuestType1::QuestType1(float w, float h, int qtyButtons) :
                     ) + (figures[questionVariantID1]->getmargin_top() > figures[questionVariantID2]->getmargin_top() ? figures[questionVariantID1]->getmargin_top() : figures[questionVariantID2]->getmargin_top());
             Buttons.setMargin_top(margintopSlideButton + 10);
             Buttons.CalcucateCoordinate(); first = false;
-            QuestComment.setmargin_top(h - Buttons.getHeight());
+            QuestComment.setmargin_top(height - Buttons.getHeight());
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());
         }
        

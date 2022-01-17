@@ -8,8 +8,8 @@ int QuestType4::getquestionVariantID3() { return 0; }
 int QuestType4::getquestionVariantID4() { return 0; }
 int QuestType4::getquestionVariantID5() { return 0; }
 
-QuestType4::QuestType4(float w, float h, int qtyButtons) :
-    window(w, h, 0, 3),
+QuestType4::QuestType4( int qtyButtons) :
+    window(gameClass::getWidth(), gameClass::getHeight(), 0, 3),
     Buttons(qtyButtons, *this) {
     gameClass::setmarks(3, 1);
     bool first = true;
@@ -81,7 +81,7 @@ QuestType4::QuestType4(float w, float h, int qtyButtons) :
 
             Buttons.CalcucateCoordinate(); first = false;
 
-            QuestComment.setmargin_top(h - Buttons.getHeight());
+            QuestComment.setmargin_top(height - Buttons.getHeight());
 
 
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getMarginTop());

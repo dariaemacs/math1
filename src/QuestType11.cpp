@@ -11,8 +11,8 @@ int QuestType11::getquestionVariantID5() { return 0; }
 
 
 
-QuestType11::QuestType11(float w, float h) :
-    window(w, h, 0, 10),
+QuestType11::QuestType11() :
+    window(gameClass::getWidth(), gameClass::getHeight(), 0, 10),
     checkbutton(*this),
     picture1(*this),
     picture2(*this)
@@ -38,7 +38,7 @@ QuestType11::QuestType11(float w, float h) :
     if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
 
     textFrame.settext(question);
-    textFrame.CalcucateCoordinate(w - w * 5 / 100, textFrame.getHeight());
+    textFrame.CalcucateCoordinate(width - width * 5 / 100, textFrame.getHeight());
 
 
     std::cout << question11Variant1ID << std::endl;
@@ -55,7 +55,7 @@ QuestType11::QuestType11(float w, float h) :
     picture2.setpictureFilename(Settings::RESOURCE_PATH + Settings::IMAGES_PATH + question11pictureFN[question11Variant2ID][1]);
     picture2.setMargin_left(10);
 
-    picture1.setMargin_top(h / 3);
+    picture1.setMargin_top(height / 3);
 
 
     while (win->isOpen()) {
@@ -67,19 +67,19 @@ QuestType11::QuestType11(float w, float h) :
 
             first = false;
             picture1.CalcucateCoordinate(2);
-            picture2.setMargin_top(h / 3 + picture1.getHeight()
+            picture2.setMargin_top(height / 3 + picture1.getHeight()
                 //    textFrame.getHeight() + 15 + picture1.getHeight()+h/10
             );
             picture2.CalcucateCoordinate(12);
 
 
 
-            QuestComment.CalcucateCoordinate(h / 3, w / 2);
+            QuestComment.CalcucateCoordinate(height / 3, width / 2);
             QuestComment.settext(L"");
             checkbutton.SetSpacing(11);
 
             checkbutton.Set_margitop(
-                ((h - (checkbutton.getQudroSize() + 10) * 4) - checkbutton.getSprite()[0].getPosition().y)
+                ((height - (checkbutton.getQudroSize() + 10) * 4) - checkbutton.getSprite()[0].getPosition().y)
             );
             //QuestComment.setmargin_top((h - (checkbutton.getQudroSize() + 20) * 4) - checkbutton.getSprite()[0].getPosition().y - checkbutton.getQudroSize() - 10);
             checkbutton.resetclickID();

@@ -9,8 +9,8 @@ int QuestType10::getquestionVariantID5() { return 0; }
 
 
 
-QuestType10::QuestType10(float w, float h) :
-    window(w, h, 0, 9),
+QuestType10::QuestType10() :
+    window(gameClass::getWidth(), gameClass::getHeight(), 0, 9),
     checkbutton(*this)
 {
 
@@ -44,7 +44,7 @@ QuestType10::QuestType10(float w, float h) :
     if (posn < question.length()) { question.replace(posn, replaceFrom.length(), replaceTo); }
     checkbutton.SetqudroSize(40);
     textFrame.settext(question);
-    textFrame.CalcucateCoordinate(w - w * 5 / 100, textFrame.getHeight());
+    textFrame.CalcucateCoordinate(width - width * 5 / 100, textFrame.getHeight());
 
 
     std::cout << question10Variant1ID << std::endl;
@@ -63,10 +63,10 @@ QuestType10::QuestType10(float w, float h) :
         if (first) {
             first = false;
 
-            QuestComment.CalcucateCoordinate(h / 3, w / 2);
-            QuestComment.setmargin_top((h - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y - checkbutton.getQudroSize() - 10);
+            QuestComment.CalcucateCoordinate(height / 3, width / 2);
+            QuestComment.setmargin_top((height - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y - checkbutton.getQudroSize() - 10);
             //QuestComment.setmargin_top(0);
-            checkbutton.Set_margitop((h - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y);
+            checkbutton.Set_margitop((height - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y);
         }
 
         //for (int i = 0; i < 3; i++) {

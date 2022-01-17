@@ -7,8 +7,8 @@ int QuestType12::getquestionVariantID3() { return 0; }
 int QuestType12::getquestionVariantID4() { return 0; }
 int QuestType12::getquestionVariantID5() { return 0; }
 
-QuestType12::QuestType12(float w, float h, int qtyButtons) :
-    window(w, h,
+QuestType12::QuestType12( int qtyButtons) :
+    window(gameClass::getWidth(), gameClass::getHeight(),
 
         (rand() % 6)
 
@@ -39,7 +39,7 @@ QuestType12::QuestType12(float w, float h, int qtyButtons) :
         if (first) {
             Buttons.CalcucateCoordinate(); first = false;
 
-            QuestComment.setmargin_top(h - Buttons.getHeight());
+            QuestComment.setmargin_top(height - Buttons.getHeight());
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getHeight());
 
 
@@ -62,7 +62,7 @@ QuestType12::QuestType12(float w, float h, int qtyButtons) :
         if (badAnswer) {
 
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
-            sprite.setPosition((w - questanswer.getWidth()) / 2, (h - questanswer.getHeight()) / 2);
+            sprite.setPosition((width - questanswer.getWidth()) / 2, (height - questanswer.getHeight()) / 2);
             win->draw(sprite);
         }
 

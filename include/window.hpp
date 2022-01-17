@@ -26,9 +26,7 @@ class window {
    bool first;
   
 
-  
-   float width;  
-   float height; 
+
   double coef;
   int space;
   int number; 
@@ -40,6 +38,9 @@ class window {
 
  
 protected:
+
+    float width;
+    float height;
   bool badAnswer;
   int questNumber;
   TextFrameBase textFrame;

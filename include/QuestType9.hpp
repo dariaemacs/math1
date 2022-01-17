@@ -18,7 +18,7 @@ class QuestType9 : public window {
     std::array<sf::Sprite, 12>  LeafSprite;
     questanswerClass questanswer;
 public:
-    QuestType9(float, float, int);
+    QuestType9( int);
     std::array<sf::Sprite, 13> getMashsprite() { return MashSprite; }
     std::array<sf::Sprite, 16> getMBerryprite() { return BerrySprite; }
     std::array<sf::Sprite, 12> getLeafsprite() { return LeafSprite; }

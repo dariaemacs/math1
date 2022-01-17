@@ -8,7 +8,7 @@ class QuestType7 : public window {
     sf::Sprite     EraseButtonSprite;
 
 public:
-    QuestType7(float, float);
+    QuestType7();
     squareBoard& getsB() { return sB; };
     int getLinefromVariant(char ln, const long figuraCoord);
     void ViewRightAnswer(int figura);

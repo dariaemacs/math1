@@ -1,10 +1,10 @@
 #include "QuestType15.hpp"
 #include "database.hpp"
 
-QuestType15::QuestType15(float w, float h, int qtyButtons) :
+QuestType15::QuestType15( int qtyButtons) :
     questionVariantID1(rand() % 3),
     questionVariantID2(rand() % 3),
-    window(w, h, 0, 13),
+    window(gameClass::getWidth(), gameClass::getHeight(), 0, 13),
     buttons(qtyButtons, *this),
     tab(*this) {
     gameClass::setmarks(14, 1);
@@ -18,7 +18,7 @@ QuestType15::QuestType15(float w, float h, int qtyButtons) :
     textFrame.settext(question14Text[0].questionText + L" " + question14Text1[questionVariantID1] + L"\n" +
         question14Text2[questionVariantID1][1]
     );
-    textFrame.CalcucateCoordinate(w - w * 10 / 100.0f, h / 3.0f);
+    textFrame.CalcucateCoordinate(width - width * 10 / 100.0f, height / 3.0f);
 
 
     while (win->isOpen()) {
@@ -30,10 +30,10 @@ QuestType15::QuestType15(float w, float h, int qtyButtons) :
 
             first = false;
 
-            buttons.CalcucateCoordinate((h - 100) / 1.4f);
+            buttons.CalcucateCoordinate((height - 100) / 1.4f);
 
             QuestComment.setmargin_top(buttons.getMarginTop());
-            QuestComment.CalcucateCoordinate(h / 3, w / 2);
+            QuestComment.CalcucateCoordinate(height / 3, width / 2);
 
 
 
@@ -54,7 +54,7 @@ QuestType15::QuestType15(float w, float h, int qtyButtons) :
 
         if (badAnswer) {
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
-            sprite.setPosition((w - questanswer.getWidth()) / 2, buttons.getMarginTop() - 2 * questanswer.getWidth() * questanswer.getScale());
+            sprite.setPosition((width - questanswer.getWidth()) / 2, buttons.getMarginTop() - 2 * questanswer.getWidth() * questanswer.getScale());
             win->draw(sprite);
             gameClass::setmarks(14, 0);
         }

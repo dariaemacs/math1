@@ -7,8 +7,9 @@ class gameClass {
 private:
     sf::Clock clock;
     std::array<char, 16> marks;
-    int yy;
-
+    //int yy;
+    float width;
+    float  height ;
     gameClass();
     gameClass(const gameClass&) = default;
     gameClass(gameClass&&) = default;
@@ -19,10 +20,13 @@ private:
 
 public:
     static float  get_time();
-    //char& operator[](const char);
     static char getMarks(int);
     static void setmarks(int, char);
+    static void setwinParams(float, float);
+    static void clockRestart();
+
     static gameClass* get_instance();
-    
+    static float getHeight();
+    static float getWidth();
 };
 #endif 

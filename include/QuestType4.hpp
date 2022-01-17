@@ -14,7 +14,7 @@ class QuestType4 : public window {
     questanswerClass questanswer;
 
 public:
-    QuestType4(float, float, int);
+    QuestType4(int);
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();

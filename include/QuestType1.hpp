@@ -12,7 +12,7 @@ class QuestType1 : public window {
     int questionVariantID2;
 
 public:
-    QuestType1(float w, float h, int qtyButtons);
+    QuestType1( int qtyButtons);
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();

@@ -7,7 +7,7 @@ class QuestType5 : public window {
     SimpleButtons Buttons;
     questanswerClass questanswer;
 public:
-    QuestType5(float, float, int);
+    QuestType5( int);
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();

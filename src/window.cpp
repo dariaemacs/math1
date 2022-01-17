@@ -122,10 +122,6 @@ window::window(float w, float h, int numberQuest, int ord)
     List.setFillColor(sf::Color::White);
     sf::Clock clock;
 
-
-
-
-    //if (!first) {
     std::string comment = std::string("Game ") + std::to_string(static_cast<unsigned int>(w)) + "x" + std::to_string(static_cast<unsigned int>(h));
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;

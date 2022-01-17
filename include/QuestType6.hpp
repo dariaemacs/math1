@@ -8,7 +8,7 @@ class QuestType6 : public window {
     PicturetAndFilmtoView coin2;
     questanswerClass questanswer;
 public:
-    QuestType6(float, float, int);
+    QuestType6(int);
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();

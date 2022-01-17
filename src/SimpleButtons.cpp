@@ -59,7 +59,9 @@ std::vector<std::unique_ptr<sf::Sprite>>& SimpleButtons::getButtons() {
 }
 
 int SimpleButtons::getButtonCount() { return ButtonCount; }
-std::vector<std::shared_ptr<sf::Texture>>& SimpleButtons::getButtonTexture() { return MyTexture; }
+std::vector<std::shared_ptr<sf::Texture>>& SimpleButtons::getButtonTexture() { 
+    return MyTexture; 
+}
 int SimpleButtons::GetButtonsClickID() { return ButtonPressID; }
 
 float SimpleButtons::getMarginTop() {

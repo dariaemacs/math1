@@ -1,10 +1,10 @@
 #include "QuestType14.hpp"
 #include "database.hpp"
 
-QuestType14::QuestType14(float w, float h, int qtyButtons) :
+QuestType14::QuestType14( int qtyButtons) :
     questionVariantID1(rand() % 3),
     questionVariantID2(rand() % 3),
-    window(w, h, 0, 13),
+    window(gameClass::getWidth(), gameClass::getHeight(), 0, 13),
     tab(*this),
     checkbutton(*this)
 {
@@ -18,7 +18,7 @@ QuestType14::QuestType14(float w, float h, int qtyButtons) :
     textFrame.settext(question14Text[0].questionText + L" " + question14Text1[questionVariantID1] + L"\n" +
         question14Text2[questionVariantID1][0]
     );
-    textFrame.CalcucateCoordinate(w - w * 10 / 100.0f, h / 3.0f);
+    textFrame.CalcucateCoordinate(width - width * 10 / 100.0f, height / 3.0f);
 
 
     while (win->isOpen()) {
@@ -36,7 +36,7 @@ QuestType14::QuestType14(float w, float h, int qtyButtons) :
             QuestComment.setmargin_top(100);
 
             checkbutton.Set_margitop(tab.getmargintop() + tab.getheight0Row() * 6);
-            QuestComment.CalcucateCoordinate(h / 3.0f, w / 2.0f);
+            QuestComment.CalcucateCoordinate(height / 3.0f, width / 2.0f);
             //QuestComment.
            //checkbutton.SetSpacing(200);
             QuestComment.setmargin_top(tab.getmargintop() + tab.getheight0Row() * 4);

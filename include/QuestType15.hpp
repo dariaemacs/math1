@@ -14,7 +14,7 @@ class QuestType15 : public window {
     questanswerClass questanswer;
     table3_5 tab;
 public:
-    QuestType15(float, float, int);
+    QuestType15(int);
     int getquestionVariantID1() { return questionVariantID1; }
     int getquestionVariantID2() { return questionVariantID2; }
     int getquestionVariantID3() { return questionVariantID3; }

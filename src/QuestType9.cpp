@@ -9,8 +9,8 @@ int QuestType9::getquestionVariantID5() { return 0; }
 
 
 
-QuestType9::QuestType9(float w, float h, int qtyButtons) :
-    window(w, h, ((rand() % 4)), 8),
+QuestType9::QuestType9(int qtyButtons) :
+    window(gameClass::getWidth(), gameClass::getHeight(), ((rand() % 4)), 8),
     Buttons(qtyButtons, *this),
     tab(*this)
 {
@@ -50,10 +50,10 @@ QuestType9::QuestType9(float w, float h, int qtyButtons) :
 
             first = false;
 
-            Buttons.CalcucateCoordinate((h - tab.gettablemax_y()) / 1.4f);
+            Buttons.CalcucateCoordinate((height - tab.gettablemax_y()) / 1.4f);
             first = false;
             QuestComment.setmargin_top(Buttons.getMarginTop());
-            QuestComment.CalcucateCoordinate(h / 3, w / 2);
+            QuestComment.CalcucateCoordinate(height / 3, width / 2);
             first = false;
             for (int i = 0; i < 4; i++) {
                 MashSprite[i].setScale(tab.getmash_koeff(), tab.getmash_koeff());

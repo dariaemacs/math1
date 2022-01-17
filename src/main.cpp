@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <fstream>
-
+#include "infoWin.hpp"
 #include "QuestType1.hpp"
 #include "QuestType2.hpp"
 #include "QuestType3.hpp"
@@ -20,6 +20,7 @@
 #include "QuestType14.hpp"
 #include "QuestType15.hpp"
 #include "QuestType16.hpp"
+#include "endGame.hpp"
 
 
 //#include "gameClass.hpp"
@@ -27,32 +28,36 @@
 
 
 int main() {
-    gameClass::get_time();
+    
     std::string filename{ "settings.yml" };
     try {
     srand(static_cast<unsigned int>(time(NULL)));
-    float width = 1024.0f;  float  height = 600.0f;
-
-     QuestType1(width, height,25);     
+    
+    gameClass::setwinParams(1024.0f, 600.0f);
+    endGame();
+    infoWin();
+    gameClass::clockRestart();
+    gameClass::get_time();
+    
+   QuestType1(25);
+   QuestType2(25);  
+    QuestType3(25);    
   
-     QuestType2(width, height,25);
-  
-    QuestType3(width, height, 25);    
-  
-    QuestType4(width, height, 25);    
-    QuestType5(width, height, 25);
+    QuestType4(25);    
+    QuestType5(25);
  
-    QuestType6(width, height, 25);    
-     QuestType7(width, height);    
-    QuestType8(width, height);    
-    QuestType9(width, height, 25);    
-    QuestType10(width, height);    
-    QuestType11(width, height);    
-    QuestType12(width, height, 25);    
-     QuestType13(width, height);    
-     QuestType14(width, height,25);    
-     QuestType15(width, height,25);     
-     QuestType16(width, height,25);
+    QuestType6(25);    
+     QuestType7();    
+    QuestType8();    
+    QuestType9(25);    
+    QuestType10();    
+    QuestType11();    
+    QuestType12(25);    
+     QuestType13();    
+     QuestType14(25);    
+     QuestType15(25);     
+     QuestType16(25);
+   
      /*QuestType16(width, height, 25);
      QuestType16(width, height, 25);
      QuestType16(width, height, 25);

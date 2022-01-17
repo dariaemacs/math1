@@ -80,9 +80,9 @@ void QuestType7::ViewRightAnswer(int figura) {
     }
 }
 
-QuestType7::QuestType7(float w, float h) :
-    window(w, h, ((rand() % 3)), 6),
-    sB(w, h, *this) {
+QuestType7::QuestType7() :
+    window(gameClass::getWidth(), gameClass::getHeight(), ((rand() % 3)), 6),
+    sB(gameClass::getWidth(), gameClass::getHeight(), *this) {
     bool first = true;
     int margintopSlideButton = 0;
     ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
@@ -90,7 +90,7 @@ QuestType7::QuestType7(float w, float h) :
 
     EraseButtonTexture.loadFromFile("resources/images/clear.png");
     EraseButtonSprite.setTexture(EraseButtonTexture);
-    EraseButtonSprite.setPosition(sf::Vector2f(w - 128, h - 128));
+    EraseButtonSprite.setPosition(sf::Vector2f(width - 128, height - 128));
 
     sB.setquestFigure(question7Text[getQuestNumber()].key);
     QuestComment.settext(L"");
@@ -157,7 +157,7 @@ QuestType7::QuestType7(float w, float h) :
                         }
                         break;
                     };
-                    QuestComment.setmargin_top(h - QuestComment.getHeight() - 50);
+                    QuestComment.setmargin_top(height - QuestComment.getHeight() - 50);
 
                     wasAnswer = true;
                 }

@@ -19,7 +19,7 @@ class QuestType8 : public window {
 
 
 public:
-    QuestType8(float, float);
+    QuestType8();
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();

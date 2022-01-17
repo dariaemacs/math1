@@ -9,7 +9,7 @@ class QuestType13 : public window {
     int questionVariantID2;
     int questionVariantID3;
 public:
-    QuestType13(float, float);
+    QuestType13();
     QuestType13(int w, int h, int a, int b);
     int getquestionVariantID1() { return questionVariantID1; }
     int getquestionVariantID2() { return questionVariantID2; }

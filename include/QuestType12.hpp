@@ -8,7 +8,7 @@ class QuestType12 : public window {
     SimpleButtons Buttons;
     questanswerClass questanswer;
 public:
-    QuestType12(float, float, int);
+    QuestType12(int);
     int getquestionVariantID1();
     int getquestionVariantID2();
     int getquestionVariantID3();

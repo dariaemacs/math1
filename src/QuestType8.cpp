@@ -8,8 +8,8 @@ int QuestType8::getquestionVariantID5() { return 0; }
 
 
 
-QuestType8::QuestType8(float w, float h)
-    :window(w, h, ((rand() % 4)), 7),
+QuestType8::QuestType8()
+    :window(gameClass::getWidth(), gameClass::getHeight(), ((rand() % 4)), 7),
     setofpic0(*this),
     setofpic1(*this),
     setofpic2(*this),
@@ -75,10 +75,10 @@ QuestType8::QuestType8(float w, float h)
             first = false;
 
 
-            QuestComment.CalcucateCoordinate(h / 3, w / 2);
+            QuestComment.CalcucateCoordinate(height / 3, width / 2);
             QuestComment.settext(L"");
             first = false;
-            QuestComment.setmargin_top(h - minus.getHeight());
+            QuestComment.setmargin_top(height - minus.getHeight());
         }
         win->draw(QuestComment.gettext());
         win->draw(textFrame.gettext());

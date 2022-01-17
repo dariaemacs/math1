@@ -1,7 +1,7 @@
 #include "QuestType13.hpp"
 #include "database.hpp"
-QuestType13::QuestType13(float w, float h) :
-    window(w, h, 0, 12),
+QuestType13::QuestType13() :
+    window(gameClass::getWidth(), gameClass::getHeight(), 0, 12),
     checkbutton(*this)
 
 
@@ -47,8 +47,8 @@ QuestType13::QuestType13(float w, float h) :
 
 
 
-            QuestComment.CalcucateCoordinate(static_cast<float>(h / 3), static_cast<float>(w / 2));
-            checkbutton.Set_margitop((h - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y);
+            QuestComment.CalcucateCoordinate(static_cast<float>(height / 3), static_cast<float>(width / 2));
+            checkbutton.Set_margitop((height - (checkbutton.getQudroSize() + 20) * 3) - checkbutton.getSprite()[0].getPosition().y);
 
             QuestComment.setmargin_top(checkbutton.getSprite()[0].getPosition().y - checkbutton.getQudroSize() - 25);
             checkbutton.SetSpacing(11);

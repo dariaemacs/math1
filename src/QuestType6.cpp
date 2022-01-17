@@ -7,8 +7,8 @@ int QuestType6::getquestionVariantID3() { return 0; }
 int QuestType6::getquestionVariantID4() { return 0; }
 int QuestType6::getquestionVariantID5() { return 0; }
 
-QuestType6::QuestType6(float w, float h, int qtyButtons)
-    :window(w, h, ((rand() % 4)), 5),
+QuestType6::QuestType6(int qtyButtons)
+    :window(gameClass::getWidth(), gameClass::getHeight(), ((rand() % 4)), 5),
     Buttons(qtyButtons, *this),
     coin1(*this),
     coin2(*this) {
@@ -65,7 +65,7 @@ QuestType6::QuestType6(float w, float h, int qtyButtons)
         if (first) {
             Buttons.CalcucateCoordinate(); first = false;
 
-            QuestComment.setmargin_top(h - Buttons.getHeight());
+            QuestComment.setmargin_top(height - Buttons.getHeight());
             QuestComment.CalcucateCoordinate(Buttons.getMarginLeft() - 10, Buttons.getHeight());
             //Buttons.setMargin_top(100);
 
