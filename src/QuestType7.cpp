@@ -95,7 +95,7 @@ QuestType7::QuestType7() :
     sB.setquestFigure(question7Text[getQuestNumber()].key);
     QuestComment.settext(L"");
 
-    gameClass::setmarks(6, 1);
+    gameClass::setmarks(6, 0);
 
     sf::Event event;
     bool trydrawLine = false;
@@ -135,7 +135,7 @@ QuestType7::QuestType7() :
                     switch (sB.getquestFigure())
                     {
                     case triangle:
-                        if (sB.isfigureInputright(question7AnswersTriangle)) QuestComment.settext(CommentsDic[1]);
+                        if (sB.isfigureInputright(question7AnswersTriangle)) { QuestComment.settext(CommentsDic[1]);  gameClass::setmarks(6, 1); }
                         else { QuestComment.settext(CommentsDic[2]); ViewRightAnswer(sB.getquestFigure()); gameClass::setmarks(6, 0); }
                         break;
 

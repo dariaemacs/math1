@@ -17,7 +17,7 @@ QuestType12::QuestType12( int qtyButtons) :
         11),
     Buttons(qtyButtons, *this)
 {
-    gameClass::setmarks(11, 1);
+    gameClass::setmarks(11, 0);
 
     bool first = true;
     int margintopSlideButton = 0;
@@ -80,7 +80,10 @@ QuestType12::QuestType12( int qtyButtons) :
 
 
 
-                    if (Buttons.GetButtonsClickID() + 1 == question12Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
+                    if (Buttons.GetButtonsClickID() + 1 == question12Answers[questNumber]) {
+                        QuestComment.settext(CommentsDic[1]); //right
+                        gameClass::setmarks(11, 1);
+                    }
                     else { //wrong
                         gameClass::setmarks(11, 0);
                         badAnswer = true;

@@ -10,7 +10,7 @@ QuestType14::QuestType14( int qtyButtons) :
 {
 
     bool first = true;
-    gameClass::setmarks(13, 1);
+    gameClass::setmarks(13, 0);
 
     sf::Event event;
     checkbutton.SetqudroSize(35);
@@ -85,9 +85,9 @@ QuestType14::QuestType14( int qtyButtons) :
                     int dec = 1;
                     //std::cout << std::endl;
                     //std::cout << " getClickID="<<checkbutton.getClickID()<< " questionVariantID1="<<questionVariantID1 << " questionVariantID=" << questionVariantID2 << std::endl;
-                    if (question14AnswerString[questionVariantID1] == checkbutton.getClickID()) { QuestComment.settext(CommentsDic[1]); }
+                    if (question14AnswerString[questionVariantID1] == checkbutton.getClickID()) { gameClass::setmarks(13, 1);  QuestComment.settext(CommentsDic[1]); }
                     else {
-
+                        gameClass::setmarks(13, 0);
                         QuestComment.settext(CommentsDic[2]);
                         for (int i = 0; i < 3; i++) {
 

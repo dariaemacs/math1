@@ -20,7 +20,7 @@ QuestType8::QuestType8()
     thingsCount(0)
 {
 
-    gameClass::setmarks(7, 1);
+    gameClass::setmarks(7, 0);
 
 
     bool first = true;
@@ -99,7 +99,8 @@ QuestType8::QuestType8()
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
-                    if (thingsCount == 4) QuestComment.settext(CommentsDic[1]);
+                    if (thingsCount == 4) { QuestComment.settext(CommentsDic[1]); gameClass::setmarks(7, 1);
+                    }
                     else //wrong
                     {
                         gameClass::setmarks(7, 0);

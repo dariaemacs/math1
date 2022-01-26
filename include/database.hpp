@@ -133,5 +133,6 @@ extern  const int  question10VariantForRandom2[4][3];
 extern const int qtyofminutesmessageRepeating ;
 extern const int qtyofsecondsmessageShowing;
 
+extern const std::array<variantOfLine, 16 > questLabelBall;
 #endif //DATABASE_H
 

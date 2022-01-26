@@ -7,7 +7,7 @@ class gameClass {
 private:
     sf::Clock clock;
     std::array<char, 16> marks;
-    //int yy;
+    bool quit;
     float width;
     float  height ;
     gameClass();
@@ -25,6 +25,8 @@ public:
     static void setwinParams(float, float);
     static void clockRestart();
 
+    static void setquit();
+    static bool getquit();
     static gameClass* get_instance();
     static float getHeight();
     static float getWidth();

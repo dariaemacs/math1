@@ -18,7 +18,7 @@ QuestType5::QuestType5( int qtyButtons) :
         4),
     Buttons(qtyButtons, *this)
 {
-    gameClass::setmarks(4, 1);
+    gameClass::setmarks(4, 0);
 
     bool first = true;
     int margintopSlideButton = 0;
@@ -60,6 +60,7 @@ QuestType5::QuestType5( int qtyButtons) :
         }
 
         if (badAnswer) {
+    
             sf::Sprite sprite(questanswer.getminiwindow().getTexture());
             sprite.setPosition(0, Buttons.getMarginTop() - questanswer.getHeight());
 
@@ -79,10 +80,13 @@ QuestType5::QuestType5( int qtyButtons) :
 
 
 
-                    if (Buttons.GetButtonsClickID() + 1 == question5Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
+                    if (Buttons.GetButtonsClickID() + 1 == question5Answers[questNumber]) {
+                        QuestComment.settext(CommentsDic[1]);        gameClass::setmarks(4, 1);
+                    }
+                    //right
                     else { //wrong
                         QuestComment.settext(CommentsDic[2]);
-
+                        gameClass::setmarks(4, 0);
                         badAnswer = true;
                         questanswer.setParams(Buttons.getWidth() * 5, Buttons.getHeight(), 5, Buttons.getScale());
 

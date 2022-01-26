@@ -16,7 +16,7 @@ QuestType9::QuestType9(int qtyButtons) :
 {
 
     bool first = true;
-    gameClass::setmarks(8, 1);
+    gameClass::setmarks(8, 0);
     ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
     ArrowButtonSprite.setTexture(ArrowButtonTexture);
     sf::Event event;
@@ -179,7 +179,7 @@ QuestType9::QuestType9(int qtyButtons) :
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
-                    if (question9AnswersSquare[questNumber] == Buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[13]);
+                    if (question9AnswersSquare[questNumber] == Buttons.GetButtonsClickID() + 1) { QuestComment.settext(CommentsDic[13]); gameClass::setmarks(8, 1);}
                     else {
                         gameClass::setmarks(8, 0);
                         QuestComment.settext(CommentsDic[2]);

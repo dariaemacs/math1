@@ -113,9 +113,10 @@ QuestType3::QuestType3( int qtyButtons) :
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
 
                     int rightfigurCount = 0;
-                    ////std::cout << Buttons.GetButtonsClickID()+1 = N- << std::endl;
-                    if (Buttons.GetButtonsClickID() + 1 == N + M)  QuestComment.settext(CommentsDic[1]);    else {
-                        gameClass::setmarks(2, 1);
+                    
+                    if (Buttons.GetButtonsClickID() + 1 == N + M) {gameClass::setmarks(2, 1); QuestComment.settext(CommentsDic[1]);}
+                    else {
+                        gameClass::setmarks(2, 0);
                         badAnswer = true;
                         questanswer.setParams(Buttons.getWidth() * 5, Buttons.getHeight(), 5, Buttons.getScale());
 

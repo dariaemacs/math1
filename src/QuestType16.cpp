@@ -68,8 +68,12 @@ QuestType16::QuestType16(int qtyButtons) :
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
-                    if (question16Answer[questionVariantID1] == buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[13]);
+                    if (question16Answer[questionVariantID1] == buttons.GetButtonsClickID() + 1) {
+                        QuestComment.settext(CommentsDic[13]);
+                        gameClass::setmarks(15, 1);
+                    }
                     else {
+                        gameClass::setmarks(15, 0);
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
                         questanswer.setParams(buttons.getWidth() * 5, buttons.getHeight(), 5, buttons.getScale());

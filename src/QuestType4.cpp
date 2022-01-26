@@ -11,7 +11,7 @@ int QuestType4::getquestionVariantID5() { return 0; }
 QuestType4::QuestType4( int qtyButtons) :
     window(gameClass::getWidth(), gameClass::getHeight(), 0, 3),
     Buttons(qtyButtons, *this) {
-    gameClass::setmarks(3, 1);
+    gameClass::setmarks(3, 0);
     bool first = true;
     bool firstPrintTrain = true;
     int margintopSlideButton = 0;
@@ -187,7 +187,10 @@ QuestType4::QuestType4( int qtyButtons) :
                     if ((numSeries[questionVariantID1][closeNumber[0]] == usercloseNumberEnter[0].closeNumber) &&
                         (numSeries[questionVariantID1][closeNumber[1]] == usercloseNumberEnter[1].closeNumber) &&
                         (numSeries[questionVariantID1][closeNumber[2]] == usercloseNumberEnter[2].closeNumber))
+                    {
                         QuestComment.settext(CommentsDic[1]);
+                        gameClass::setmarks(3, 1);
+                    }
                     else {
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;

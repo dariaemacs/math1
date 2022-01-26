@@ -7,7 +7,7 @@ QuestType15::QuestType15( int qtyButtons) :
     window(gameClass::getWidth(), gameClass::getHeight(), 0, 13),
     buttons(qtyButtons, *this),
     tab(*this) {
-    gameClass::setmarks(14, 1);
+    gameClass::setmarks(14, 0);
     bool first = true;
 
     ArrowButtonTexture.loadFromFile("resources/images/arrow_disable.png");
@@ -68,8 +68,10 @@ QuestType15::QuestType15( int qtyButtons) :
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !wasAnswer) {
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)){
-                    if (question15Answer[questionVariantID1] == buttons.GetButtonsClickID() + 1) QuestComment.settext(CommentsDic[13]);
+                    if (question15Answer[questionVariantID1] == buttons.GetButtonsClickID() + 1) { QuestComment.settext(CommentsDic[13]); gameClass::setmarks(14, 1);
+                    }
                     else {
+                        gameClass::setmarks(14, 0);
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
                         questanswer.setParams(buttons.getWidth() * 5, buttons.getHeight(), 5, buttons.getScale());

@@ -1,11 +1,40 @@
 #include "endGame.hpp"
 #include "database.hpp"
 
+
+int ballWord(int ballQty) {
+    switch (ballQty) {
+    case 0: return 31;
+    case 1: return 29;
+    case 2: return 30;
+    case 3: return 30;
+    case 4: return 30;
+    }
+    if (ballQty>4) return 31;
+}
+
+int qtyofBall() {
+    int sum(0);
+    for (int i = 0; i < 15; i++)
+        sum = sum + gameClass::getMarks(i);
+
+    return sum;
+}
+
 endGame::endGame():
 	window(gameClass::getWidth(), gameClass::getHeight(), -1, 0),
-	againButton(*this){
+    againButton(*this),
+    exitButton(*this) {
 
-    float time(4);
+    againButton.setpictureFilename("resources/images/again");
+    againButton.setButtonCount(1);
+    againButton.CalcucateCoordinate(0);
+
+    exitButton.setpictureFilename("resources/images/exit");    
+    exitButton.setButtonCount(1);
+    exitButton.CalcucateCoordinate(1);
+    
+    float time(gameClass::get_time());
     long long min = static_cast<long long>(time / 60);
     long long sec = (static_cast<long long>(time - (static_cast<long long>(time / 60)) * 60));
     int minindexText(0);
@@ -30,19 +59,57 @@ endGame::endGame():
     
     labels[0].setmargin_top(0);
     labels[0].setmargin_left(10 );
+    int charSize = labels[0].getCharacterSize();
+    int stepX = 0;
+    int stepY = 0;
 
-    labels[1].setmargin_top(labels[0].getheight() +10);
+    labels[1].setString(CommentsDic[22]);
+    labels[1].ñalcucateCoordinate(gameClass::getWidth() / 3, gameClass::getHeight() / 2);
+    
+    
+    labels[1].setString(
+        CommentsDic[32] + L" "+ std::to_wstring(qtyofBall()) + L" " + CommentsDic[ballWord(qtyofBall()%10)]);
+
+    /*labels[1].setString(
+        CommentsDic[32] + L" " + std::to_wstring(10) + L" " + CommentsDic[ballWord(10 % 10)]);*/
+
+
+    labels[1].setmargin_top(labels[0].getheight()+10);
     labels[1].setmargin_left(10);
-    labels[1].setString(CommentsDic[28]);
-    labels[1].ñalcucateCoordinate(gameClass::getWidth() / 10, gameClass::getHeight() / 2);
-    while (win->isOpen()) {
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) ) return;
-        win->clear(color::white);
+    for (int i = 2; i < 18; i++) {
+        labels[i].setmargin_left(10);
+        labels[i].setString(CommentsDic[28]+L" "+ std::to_wstring(i-1));
+        labels[i].setCharacterSize(charSize - 6);
+        if (i == 2) {
+            stepX = labels[i].getwidth();
+            stepY = labels[i].getheight();
+        }
+        labels[i].setmargin_left(questLabelBall[i-2].i* (stepX+50));
+        labels[i].setmargin_top(questLabelBall[i-2].j * (stepY+50)+50);
+        labels[i + 16].setCharacterSize(charSize - 6);
+        labels[i+16].setmargin_left(questLabelBall[i - 2].i * (stepX + 50));
+        labels[i+16].setString(std::to_wstring(gameClass::getMarks(i - 2)) + L" "+CommentsDic[ballWord(gameClass::getMarks(i - 2))]);
+        labels[i+16].setmargin_top((questLabelBall[i - 2].j )* (stepY+50)+ stepY+50);
 
-        win->draw(labels[1]);
+    }
+
+    while (win->isOpen()) {
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { 
+            if (againButton.click()) return; 
+            if (exitButton.click()) { gameClass::setquit(); return; }
+        }
+        win->clear(color::white);
         win->draw(labels[0]);
+        win->draw(labels[1]);
+        win->draw(*againButton.getButtons()[0]);
+        win->draw(*exitButton.getButtons()[0]);
+        for (int i = 2; i < 18; i++) {
+            win->draw(labels[i]);
+            win->draw(labels[i + 16]);
+        }
         win->display();
-       
+      
+     
         while (win->pollEvent(event)) {
 
             if (event.type == sf::Event::Closed) {

@@ -32,7 +32,7 @@ QuestType1::QuestType1( int qtyButtons) :
     window(gameClass::getWidth(), gameClass::getHeight(), (rand() % 3), 0),
     Buttons(qtyButtons, *this)
 {
-    gameClass::setmarks(0, 1);
+    gameClass::setmarks(0, 0);
     bool first = true;
     float margintopSlideButton = 0;
     FrameFigure::resetnumber_of_figure();
@@ -109,7 +109,7 @@ QuestType1::QuestType1( int qtyButtons) :
                 if (readyforCheck && checkandnextQuest(Buttons.getScale())) {
 
                     float rightfigurCount = check(static_cast<float>(circleQTY), static_cast<float>(triangleQTY), static_cast<float>(rectengleQTY));
-                    if (rightfigurCount < 0) { QuestComment.settext(CommentsDic[1]); 
+                    if (rightfigurCount < 0) { QuestComment.settext(CommentsDic[1]); gameClass::setmarks(0, 1);
                     }
                     else {
                         gameClass::setmarks(0,0) ;

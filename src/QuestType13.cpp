@@ -7,7 +7,7 @@ QuestType13::QuestType13() :
 
 {
 
-    gameClass::setmarks(12, 1);
+    gameClass::setmarks(12, 0);
     std::shared_ptr<FrameFigure> pica[] =
     { std::make_shared<ThreePicture0>(win) ,
         std::make_shared<ThreePicture1>(win),
@@ -110,9 +110,9 @@ QuestType13::QuestType13() :
                     }
                     std::cout << std::endl;
 
-                    if (question13Answers[questionVariantID1][questionVariantID2] == result_int) { QuestComment.settext(CommentsDic[1]); }
+                    if (question13Answers[questionVariantID1][questionVariantID2] == result_int) { gameClass::setmarks(12, 1); QuestComment.settext(CommentsDic[1]); }
                     else {
-
+                        gameClass::setmarks(12, 0);
                         QuestComment.settext(CommentsDic[2]);
 
                     };

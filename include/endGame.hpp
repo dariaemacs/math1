@@ -10,6 +10,9 @@
 class endGame : public window {
 
     menuButton  againButton;
+    menuButton  exitButton;
+    
+
     //std::array <std::shared_ptr<SimpleText>, 34> labels;
     std::array <SimpleText, 34> labels;
     

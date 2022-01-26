@@ -14,7 +14,7 @@ QuestType10::QuestType10() :
     checkbutton(*this)
 {
 
-    gameClass::setmarks(9, 1);
+    gameClass::setmarks(9, 0);
     bool first = true;
     question10Variant1ID = rand() % 2;
     question10Variant2ID = rand() % (sizeof(question10Variant2) / sizeof(question10Variant2[0]));
@@ -93,7 +93,7 @@ QuestType10::QuestType10() :
 
 
         if (badAnswer) {
-            gameClass::setmarks(9, 0);
+           
             checkbutton.getquadroTexture()[checkbutton.getClickID()].loadFromFile(
                 "resources/images/select_wrong.png");
 
@@ -113,10 +113,14 @@ QuestType10::QuestType10() :
 
                 if (readyforCheck && checkandnextQuest(Settings::ButtonFactor)) {
                     if (checkbutton.getrightQuestNum() == checkbutton.getClickID())
+                    {
                         QuestComment.settext(CommentsDic[1]);
+                        gameClass::setmarks(9, 1);
+                    }
                     else {
                         QuestComment.settext(CommentsDic[2]);
                         badAnswer = true;
+                        gameClass::setmarks(9, 0);
                     }
                     wasAnswer = true;
                 }

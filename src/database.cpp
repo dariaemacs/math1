@@ -487,6 +487,16 @@ extern const int qtyofsecondsmessageShowing = 1;
 
 const std::wstring CommentsDic[] =
 {
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     {L"Выбери ответ" },
     {L"Верно. Молодец, +1 балл" },
     {L"Неверно. Ошибка :(" },
@@ -515,9 +525,11 @@ const std::wstring CommentsDic[] =
     {L" секунд " },
     {L" секунды " },
     {L" секунд" },
-    {L"Задание №" },
+    {L"Задание " },
+    {L" балл" },
+    {L" балла" },
     {L" баллов" },
-    {L" балла" }
+    {L"Ты набрал " }
 
 
 
@@ -527,7 +539,12 @@ const std::wstring CommentsDic[] =
 
 
 };
-
+extern const std::array<variantOfLine, 16 > questLabelBall =
+{ 1,1,2,1,3,1,4,1,
+  1,2,2,2,3,2,4,2,
+  1,3,2,3,3,3,4,3,
+  1,4,2,4,3,4,4,4
+};
 
 
 

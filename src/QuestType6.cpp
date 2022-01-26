@@ -14,7 +14,7 @@ QuestType6::QuestType6(int qtyButtons)
     coin2(*this) {
 
 
-    gameClass::setmarks(5, 1);
+    gameClass::setmarks(5, 0);
     bool first = true;
     int margintopSlideButton = 0;
 
@@ -111,7 +111,9 @@ QuestType6::QuestType6(int qtyButtons)
 
 
 
-                    if (Buttons.GetButtonsClickID() + 1 == question6Answers[questNumber])  QuestComment.settext(CommentsDic[1]); //right
+                    if (Buttons.GetButtonsClickID() + 1 == question6Answers[questNumber]) {
+                        gameClass::setmarks(5, 1); QuestComment.settext(CommentsDic[1]); //right
+                    }
                     else { //wrong
                         gameClass::setmarks(5, 0);
                         QuestComment.settext(CommentsDic[2]);

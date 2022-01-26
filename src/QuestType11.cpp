@@ -17,7 +17,7 @@ QuestType11::QuestType11() :
     picture1(*this),
     picture2(*this)
 {
-    gameClass::setmarks(10, 1);
+    gameClass::setmarks(10, 0);
     bool first = true;
     srand(static_cast<unsigned int>(time(NULL)));
     question11Variant1ID = rand() % 2;
