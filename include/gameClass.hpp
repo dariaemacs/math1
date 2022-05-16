@@ -10,6 +10,7 @@ private:
     bool quit;
     float width;
     float  height ;
+    bool   isGame; //game or graphic
     gameClass();
     gameClass(const gameClass&) = default;
     gameClass(gameClass&&) = default;
@@ -24,11 +25,13 @@ public:
     static void setmarks(int, char);
     static void setwinParams(float, float);
     static void clockRestart();
-
+    static void setisGame(bool);
     static void setquit();
+
     static bool getquit();
     static gameClass* get_instance();
     static float getHeight();
     static float getWidth();
+    static bool getisGame();
 };
 #endif 

@@ -11,7 +11,10 @@ float gameClass::get_time() {
 }
 gameClass::gameClass() { 
     quit = false;
+    isGame = false;
 }
+void gameClass::setisGame(bool b) { get_instance()->isGame = b; }
+bool gameClass::getisGame() { return get_instance()->isGame; }
 
 void gameClass::clockRestart() {
     get_instance()->clock.restart();

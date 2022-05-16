@@ -65,7 +65,15 @@ infoWin::infoWin() :
     resultButton.CalcucateCoordinate(1);
 
     while (win->isOpen()) {
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && startButton.click()) return;
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && startButton.click()) {
+            gameClass::setisGame(true);
+            return;
+        } else 
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && resultButton.click()) {
+                gameClass::setisGame(false);
+                return;
+            }
+
         win->clear(color::white);
         
         win->draw(rectangleLeft);
