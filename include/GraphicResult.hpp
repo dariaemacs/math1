@@ -5,16 +5,12 @@
 #include "window.hpp"
 #include "menuButton.hpp"
 #include "SimpleText.hpp"
+#include "filesSave.hpp"
 
-struct dataPoint {
-    int nomer;
-    char day;
-    char month;
-    int year;
-    int qtyBall;
-};
 
-extern std::vector <dataPoint> DATA;
+
+
+
 
 
 class GraphicResult : public window {
@@ -30,8 +26,7 @@ class GraphicResult : public window {
     std::vector <sf::CircleShape> pointS;
     sf::Text comment;
     sf::RectangleShape rectangleComment;
-    //sf::RectangleShape rectangleLeft;
-    //sf::RectangleShape rectangleRight;
+    filescontrol filesSaveData;
 public:
     GraphicResult();
     int getquestionVariantID1();

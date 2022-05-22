@@ -2,24 +2,62 @@
 #include "database.hpp"
 
 
+
 const int Quest_N = 16;
 const int commentWidth = 180;
-extern std::vector <dataPoint> DATA = 
+
+std::vector <dataPoint> DATA;
+
+std::vector <dataPoint> testDATA =
 {
-  {1,1,6,1981,15},
-  {2,1,6,1981,11},
-  {3,1,6,1981,9},
-  {4,1,6,1981,16},
+  {1,6,1981,15},
+  {1,6,1981,11},
+  {1,6,1981,9},
+  {1,6,1981,16},
 
-  {5,12,6,1981,15},
-  {6,12,6,1981,11},
-  {7,14,6,1981,9},
-  {8,25,6,1981,16},
+  {12,6,1981,15},
+  {12,6,1981,11},
+  {14,6,1981,9},
+  {25,6,1981,16},
 
-  {9, 1,7,1981,15},
-  {10,5,7,1981,11},
-  {11,14,7,1981,9},
-  {12,3,4,2022,16}
+  { 1,7,1981,15},
+  {5,7,1981,11},
+  {14,7,1981,9},
+  {3,4,2022,16},
+  {3,4,2022,16},
+  {3,4,2022,16},
+  {3,4,2022,1},
+  {3,4,2022,2},
+  {3,4,2022,1},
+  {3,4,2022,1},
+  {3,4,2022,5},
+  {3,4,2022,6},
+  {3,4,2022,6},
+  {3,4,2022,12},
+  {3,4,2022,8},
+  {3,4,2022,6},
+  {3,4,2022,10},
+  {3,4,2022,1},
+
+  { 1,7,1981,12},
+  {5,7,1981,8},
+  {14,7,1981,1},
+  {3,4,2022,1},
+  {3,4,2022,1},
+  {3,4,2022,10},
+  {3,4,2022,7},
+  {3,4,2022,12},
+  {3,4,2022,11},
+  {3,4,2022,14},
+  {3,4,2022,13},
+  {3,4,2022,12},
+  {3,4,2022,5},
+  {3,4,2022,2},
+  {3,4,2022,7},
+  {3,4,2022,8},
+  {3,4,2022,1},
+  {3,4,2022,2}
+
 };
 
 int priceofDiv(std::vector<dataPoint>& da, int l) { //cena deleniay po x
@@ -28,18 +66,24 @@ int priceofDiv(std::vector<dataPoint>& da, int l) { //cena deleniay po x
 
 GraphicResult::GraphicResult():
 	window(gameClass::getWidth(), gameClass::getHeight(), (rand() % 3), 0),
-	BackButton(*this)
+	BackButton(*this),
+	filesSaveData("data.dat")
 {
-
-	int priceH = priceofDiv(DATA, gameClass::getWidth());
+	//filesSaveData.savetoFile(testDATA);
 	
-	int priceV = gameClass::getHeight()/ (Quest_N);
+
+
+
+	filesSaveData.readVector(DATA);
+	sf::VertexArray lines(sf::LinesStrip, DATA.size());
+	int priceH = priceofDiv(DATA, gameClass::getWidth());
+
+	int priceV = gameClass::getHeight() / (Quest_N);
 	std::vector <sf::CircleShape> pointS;
 
-	sf::VertexArray lines(sf::LinesStrip, DATA.size());
-
-
-		
+	/*for (int i = 0; i < DATA.size(); i++) {
+		filesSaveData.savetoFile(DATA[i].nomer, DATA[i].day, DATA[i].month, DATA[i].year, DATA[i].qtyBall);
+	}*/
 
 	rectangleComment.setSize(sf::Vector2f(commentWidth, 20));
 	//rectangleComment.setOutlineColor(sf::Color::White);
@@ -109,6 +153,7 @@ GraphicResult::GraphicResult():
 			win->draw(vertDigit[i]);
 			win->draw(horizLabels[i]);
 		}
+
 
 		for (int i = 0; i < DATA.size(); i++) {
 			const sf::Vector2i& M = sf::Mouse::getPosition(*win);

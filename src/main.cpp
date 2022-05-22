@@ -36,6 +36,7 @@ int main() {
     
     gameClass::setwinParams(2000.0f, 1200.0f);
     while (!gameClass::getquit()) {
+       // endGame();
         infoWin();
 
 

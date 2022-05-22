@@ -1,5 +1,7 @@
+#include <ctime>
 #include "endGame.hpp"
 #include "database.hpp"
+#include "filesSave.hpp"
 
 
 int ballWord(int ballQty) {
@@ -26,6 +28,20 @@ endGame::endGame():
     againButton(*this),
     exitButton(*this) {
 
+    filescontrol filetoSave("data.dat");
+    //std::tm now_time1 = std::chrono::system_clock::now();
+    time_t now_time1 = time(NULL);
+    tm ltm;
+    localtime_s(&ltm, &now_time1);
+    dataPoint currentgameData;
+
+    currentgameData.day = ltm.tm_mday;
+    currentgameData.month = 1 + ltm.tm_mon;
+    currentgameData.year = 1900 + ltm.tm_year;
+    currentgameData.qtyBall = qtyofBall();
+    //currentgameData.qtyBall = 10;
+    filetoSave.addoneRecordtoFile(currentgameData);
+
     againButton.setpictureFilename("resources/images/again");
     againButton.setButtonCount(1);
     againButton.CalcucateCoordinate(0);
@@ -34,9 +50,9 @@ endGame::endGame():
     exitButton.setButtonCount(1);
     exitButton.CalcucateCoordinate(1);
     
-    float time(gameClass::get_time());
-    long long min = static_cast<long long>(time / 60);
-    long long sec = (static_cast<long long>(time - (static_cast<long long>(time / 60)) * 60));
+    float mytime(gameClass::get_time());
+    long long min = static_cast<long long>(mytime / 60);
+    long long sec = (static_cast<long long>(mytime - (static_cast<long long>(mytime / 60)) * 60));
     int minindexText(0);
     int secindexText(0);
     if ((min % 10) == 0 || (min % 10) == 5 || (min % 10) == 0 || (min % 10) == 6 || (min % 10) == 7 || (min % 10) == 8
@@ -120,6 +136,7 @@ endGame::endGame():
 
     }
 
+    
 }
 
 
